@@ -24,12 +24,15 @@ public class DungeonController {
 
 	private Player player;
 
+	private Image playerImage;
+
 	private Dungeon dungeon;
 
-	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
+	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Image playerImage) {
 		this.dungeon = dungeon;
 		this.player = dungeon.getPlayer();
 		this.initialEntities = new ArrayList<>(initialEntities);
+		this.playerImage = playerImage;
 	}
 
 	@FXML
@@ -43,9 +46,17 @@ public class DungeonController {
 			}
 		}
 
-		for (ImageView entity : initialEntities)
-			squares.getChildren().add(entity);
+		for (ImageView entity : initialEntities) {
+			if (entity.getImage() != playerImage) {
+				squares.getChildren().add(entity);
+			}
+		}
 
+		for (ImageView entity : initialEntities) {
+			if (entity.getImage() == playerImage) {
+				squares.getChildren().add(entity);
+			}
+		}
 	}
 
 	@FXML
@@ -53,19 +64,15 @@ public class DungeonController {
 
 		switch (event.getCode()) {
 		case UP:
-			System.out.println("Up");
 			player.moveUp();
 			break;
 		case DOWN:
-			System.out.println("Down");
 			player.moveDown();
 			break;
 		case LEFT:
-			System.out.println("Left");
 			player.moveLeft();
 			break;
 		case RIGHT:
-			System.out.println("Right");
 			player.moveRight();
 			break;
 		default:
