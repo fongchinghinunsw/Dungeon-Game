@@ -10,5 +10,4 @@ public class Wall extends Entity {
 	public String getClassName() {
 		return "Wall";
 	}
-
 }

@@ -67,7 +67,7 @@ public abstract class DungeonLoader {
 			entity = exit;
 			break;
 		case "boulder":
-			Boulder boulder = new Boulder(x,y);
+			Boulder boulder = new Boulder(x, y);
 			onLoad(boulder);
 			entity = boulder;
 			break;
@@ -81,7 +81,7 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Wall wall);
 
 	public abstract void onLoad(Exit exit);
-	
+
 	public abstract void onLoad(Boulder boulder);
 
 	// TODO Create additional abstract methods for the other entities

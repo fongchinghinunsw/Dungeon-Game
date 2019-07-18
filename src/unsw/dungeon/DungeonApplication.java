@@ -14,7 +14,7 @@ public class DungeonApplication extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		primaryStage.setTitle("Dungeon");
 		// Temporarily changed to the boulder map to test boulder functionality
-		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("boulders.json");
+		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json");
 
 		DungeonController controller = dungeonLoader.loadController();
 
