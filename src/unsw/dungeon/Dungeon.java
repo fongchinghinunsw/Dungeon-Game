@@ -48,22 +48,13 @@ public class Dungeon {
 		entities.add(entity);
 	}
 
-	public boolean isWall(int x, int y) {
+	public boolean sameClass(int x, int y, String... className) {
 		for (Entity entity : entities) {
-			if (entity instanceof Wall) {
-				if (entity.getX() == x && entity.getY() == y) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean isPlayer(int x, int y) {
-		for (Entity entity : entities) {
-			if (entity instanceof Player) {
-				if (entity.getX() == x && entity.getY() == y) {
-					return true;
+			if (entity.getX() == x && entity.getY() == y) {
+				for (String name : className) {
+					if (name == entity.getClassName()) {
+						return true;
+					}
 				}
 			}
 		}

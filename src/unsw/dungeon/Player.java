@@ -21,4 +21,9 @@ public class Player extends Character {
 		this.dungeon = dungeon;
 	}
 
+	@Override
+	public String getClassName() {
+		return "Player";
+	}
+
 }
