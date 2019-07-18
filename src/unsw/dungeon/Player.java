@@ -23,11 +23,6 @@ public class Player extends Character {
 		this.backpack = new Backpack();
 	}
 
-	@Override
-	public String getClassName() {
-		return "Player";
-	}
-
 	// Here for now, open to modification/deletion
 	public Backpack getBackpack() {
 		return this.backpack;
@@ -36,4 +31,10 @@ public class Player extends Character {
 	public void equipItem(Equipable item) {
 		this.backpack.addItem(item);
 	}
+
+	@Override
+	public String getClassName() {
+		return "Player";
+	}
+
 }
