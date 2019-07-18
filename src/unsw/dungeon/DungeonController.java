@@ -28,6 +28,10 @@ public class DungeonController {
 
 	private Dungeon dungeon;
 
+	private static final long THRESHOLD = 100_000_000L;
+
+	private long lastMoveNanos;
+
 	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Image playerImage) {
 		this.dungeon = dungeon;
 		this.player = dungeon.getPlayer();
@@ -62,21 +66,29 @@ public class DungeonController {
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
 
-		switch (event.getCode()) {
-		case UP:
-			player.moveUp();
-			break;
-		case DOWN:
-			player.moveDown();
-			break;
-		case LEFT:
-			player.moveLeft();
-			break;
-		case RIGHT:
-			player.moveRight();
-			break;
-		default:
-			break;
+		long now = System.nanoTime();
+		if (event.getCode().isArrowKey()) {
+			event.consume();
+			if (lastMoveNanos <= 0L || now - lastMoveNanos >= THRESHOLD) {
+
+				switch (event.getCode()) {
+				case UP:
+					player.moveUp();
+					break;
+				case DOWN:
+					player.moveDown();
+					break;
+				case LEFT:
+					player.moveLeft();
+					break;
+				case RIGHT:
+					player.moveRight();
+					break;
+				default:
+					break;
+				}
+				lastMoveNanos = now;
+			}
 		}
 	}
 
