@@ -23,5 +23,9 @@ public class Player extends Character {
 		this.backpack = new Backpack();
 		
 	}
+	// Here for now, open to modification/deletion
+	public Backpack getBackpack() {
+		return this.backpack;
+	}
 
 }
