@@ -21,11 +21,16 @@ public class Player extends Character {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
-		
+
 	}
+
 	// Here for now, open to modification/deletion
 	public Backpack getBackpack() {
 		return this.backpack;
+	}
+
+	public void equipItem(Equipable item) {
+		this.backpack.addItem(item);
 	}
 
 }
