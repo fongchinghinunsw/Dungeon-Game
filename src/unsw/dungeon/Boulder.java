@@ -7,4 +7,9 @@ public class Boulder extends Entity {
 		super(x, y);
 	}
 
+	@Override
+	public String getClassName() {
+		return "Boulder";
+	}
+
 }

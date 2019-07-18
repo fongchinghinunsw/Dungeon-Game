@@ -15,13 +15,17 @@ public class Player extends Character {
 	 * Create a player positioned in square (x,y)
 	 * 
 	 * @param x x-coordinate of the player
-	 * @param y y-coordinatee of the player
+	 * @param y y-coordinate of the player
 	 */
 	public Player(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
+	}
 
+	@Override
+	public String getClassName() {
+		return "Player";
 	}
 
 	// Here for now, open to modification/deletion
@@ -32,5 +36,4 @@ public class Player extends Character {
 	public void equipItem(Equipable item) {
 		this.backpack.addItem(item);
 	}
-
 }

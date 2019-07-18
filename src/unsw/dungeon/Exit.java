@@ -6,4 +6,9 @@ public class Exit extends Entity {
 		super(x, y);
 	}
 
+	@Override
+	public String getClassName() {
+		return "Exit";
+	}
+
 }
