@@ -33,4 +33,9 @@ public class Player extends Character {
 		this.backpack.addItem(item);
 	}
 
+	@Override
+	public String getClassName() {
+		return "Player";
+	}
+
 }
