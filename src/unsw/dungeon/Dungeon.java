@@ -48,7 +48,7 @@ public class Dungeon {
 		entities.add(entity);
 	}
 
-	public boolean isWall(int x, int y) {
+	public boolean hasWall(int x, int y) {
 		for (Entity entity : entities) {
 			if (entity instanceof Wall) {
 				if (entity.getX() == x && entity.getY() == y) {
@@ -59,14 +59,4 @@ public class Dungeon {
 		return false;
 	}
 
-	public boolean isPlayer(int x, int y) {
-		for (Entity entity : entities) {
-			if (entity instanceof Player) {
-				if (entity.getX() == x && entity.getY() == y) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 }
