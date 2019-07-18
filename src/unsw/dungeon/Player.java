@@ -9,6 +9,7 @@ package unsw.dungeon;
 public class Player extends Character {
 
 	private Dungeon dungeon;
+	private Backpack backpack;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -19,6 +20,8 @@ public class Player extends Character {
 	public Player(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
+		this.backpack = new Backpack();
+		
 	}
 
 }

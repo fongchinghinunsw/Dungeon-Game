@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-// Extends Entity for now, might change inheritance later.
+// Extends Character class for now, open to modification later.
 public class Boulder extends Entity{
 
 	public Boulder(int x, int y) {
