@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Exit extends Entity {
+public class Exit extends Entity implements Observer {
 
 	public Exit(int x, int y) {
 		super(x, y);
@@ -9,6 +9,11 @@ public class Exit extends Entity {
 	@Override
 	public String getClassName() {
 		return "Exit";
+	}
+
+	@Override
+	public void update(Subject obj) {
+		System.out.println("You may now leave");
 	}
 
 }

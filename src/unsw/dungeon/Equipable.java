@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Equipable extends Entity {
+public abstract class Equipable extends Entity {
 
 	EquipState equippedState;
 
@@ -29,6 +29,8 @@ public class Equipable extends Entity {
 	public EquipState getUnequippedState() {
 		return unEquippedState;
 	}
-	// TODO: Add a method to use an item
+
+	@Override
+	public abstract String getClassName();
 
 }

@@ -10,8 +10,7 @@ public class UnequippedState implements EquipState {
 
 	@Override
 	public void unequip() {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 }

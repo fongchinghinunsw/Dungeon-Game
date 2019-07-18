@@ -48,6 +48,14 @@ public class Dungeon {
 		entities.add(entity);
 	}
 
+	public void addObservers() {
+		for (Entity entity : entities) {
+			if (!(sameClass(entity.getX(), entity.getY(), "Wall", "Player"))) {
+				player.attach((Observer) entity);
+			}
+		}
+	}
+
 	public boolean sameClass(int x, int y, String... className) {
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {

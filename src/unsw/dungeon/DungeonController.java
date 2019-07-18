@@ -87,6 +87,7 @@ public class DungeonController {
 				default:
 					break;
 				}
+				player.notifyObservers();
 				lastMoveNanos = now;
 			}
 		}
