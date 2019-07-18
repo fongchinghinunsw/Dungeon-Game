@@ -41,4 +41,5 @@ public class Entity {
 	public int getY() {
 		return y().get();
 	}
+
 }
