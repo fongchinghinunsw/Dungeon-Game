@@ -1,10 +1,10 @@
 package unsw.dungeon;
 
 public class Fast implements MoveSpeed {
-	private int speed = 4;
+	private long speed = 10;
 
 	@Override
-	public int getSpeed() {
+	public long getSpeed() {
 		return this.speed;
 	}
 

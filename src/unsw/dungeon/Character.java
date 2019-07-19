@@ -3,7 +3,6 @@ package unsw.dungeon;
 public abstract class Character extends Entity {
 
 	private Dungeon dungeon;
-	private MoveSpeed speed;
 
 	/**
 	 * Create a player positioned in square (x,y)

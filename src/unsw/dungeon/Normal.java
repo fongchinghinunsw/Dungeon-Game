@@ -1,10 +1,10 @@
 package unsw.dungeon;
 
 public class Normal implements MoveSpeed {
-	private int speed = 2;
+	private long speed = 5;
 
 	@Override
-	public int getSpeed() {
+	public long getSpeed() {
 		return this.speed;
 	}
 
