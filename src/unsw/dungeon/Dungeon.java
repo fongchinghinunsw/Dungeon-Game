@@ -48,6 +48,14 @@ public class Dungeon {
 		entities.add(entity);
 	}
 
+	public boolean killPlayer() {
+		if (this.player.isInvincible()) {
+			return false;
+		}
+		this.player = null;
+		return true;
+	}
+
 	public void addObservers() {
 		for (Entity entity : entities) {
 			if (!(sameClass(entity.getX(), entity.getY(), "Wall", "Player"))) {

@@ -32,11 +32,14 @@ public class Player extends Character implements Subject {
 		this.potionEffect = false;
 	}
 
-	// Here for now, open to modification/deletion
 	public Backpack getBackpack() {
 		return this.backpack;
 	}
-
+	// here for now, open for modification
+	public boolean isInvincible() {
+		return this.potionEffect;
+	}
+	
 	public boolean equipItem() {
 		ArrayList<Entity> entities = dungeon.getEntity(getX(), getY());
 		for (Entity entity : entities) {
