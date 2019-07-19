@@ -79,6 +79,11 @@ public abstract class DungeonLoader {
 			onLoad(key);
 			entity = key;
 			break;
+		case "potion":
+			Potion potion = new Potion(x, y);
+			onLoad(potion);
+			entity = potion;
+			break;
 		// TODO Handle other possible entities
 		}
 		dungeon.addEntity(entity);
@@ -93,6 +98,8 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Boulder boulder);
 
 	public abstract void onLoad(Key key);
+
+	public abstract void onLoad(Potion potion);
 
 	// TODO Create additional abstract methods for the other entities
 
