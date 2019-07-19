@@ -99,7 +99,7 @@ public class DungeonController {
 			}
 		} else if (event.getCode().isLetterKey()) {
 			switch (event.getCode()) {
-			case J:
+			case G:
 				player.useItem("Potion");
 				break;
 			default:
