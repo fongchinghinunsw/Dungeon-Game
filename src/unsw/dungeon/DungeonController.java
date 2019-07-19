@@ -62,6 +62,7 @@ public class DungeonController {
 				squares.getChildren().add(entity);
 			}
 		}
+
 	}
 
 	@FXML
