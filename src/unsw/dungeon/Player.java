@@ -9,7 +9,7 @@ import java.util.Timer;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Character implements Subject {
+public class Player extends Character implements Subject, Observer {
 
 	private Dungeon dungeon;
 	private Backpack backpack;
@@ -148,5 +148,16 @@ public class Player extends Character implements Subject {
 
 	public void setMoveSpeed(MoveSpeed moveSpeed) {
 		this.moveSpeed = moveSpeed;
+	}
+
+	@Override
+	public void update(Subject obj, Dungeon dungeon) {
+		if (obj instanceof Enemy) {
+			Enemy enemy = (Enemy) obj;
+			if (countSwordInBackPack() > 0) {
+				enemy.die();
+			}
+		}
+
 	}
 }

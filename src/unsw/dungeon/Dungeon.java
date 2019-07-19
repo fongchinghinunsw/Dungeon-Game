@@ -58,6 +58,9 @@ public class Dungeon {
 			if (!(sameClass(entity.getX(), entity.getY(), "Wall", "Player"))) {
 				player.attach((Observer) entity);
 			}
+			if (sameClass(entity.getX(), entity.getY(), "Player")) {
+
+			}
 		}
 	}
 

@@ -1,11 +1,13 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
-public class Enemy extends Character implements Observer {
+public class Enemy extends Character implements Subject, Observer {
 
 	private MoveSpeed moveSpeed;
 	private Dungeon dungeon;
+	private ArrayList<Observer> observers;
 	private boolean alive;
 
 	public Enemy(Dungeon dungeon, int x, int y) {
@@ -20,6 +22,11 @@ public class Enemy extends Character implements Observer {
 
 	public boolean isAlive() {
 		return this.alive;
+	}
+
+	public void die() {
+		this.alive = false;
+		System.out.println("Enemy is dead");
 	}
 
 	public long getSpeed() {
@@ -72,6 +79,28 @@ public class Enemy extends Character implements Observer {
 	@Override
 	public void update(Subject obj, Dungeon dungeon) {
 		System.out.println("Enemy is doing something");
-		
+
+	}
+
+	@Override
+	public void attach(Observer o) {
+		if (!(observers.contains(o))) {
+			observers.add(o);
+		}
+	}
+
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		if (dungeon.sameClass(getX(), getY(), "Player")) {
+			for (Observer o : observers) {
+				Entity entity = (Entity) o;
+				o.update(this, dungeon);
+			}
+		}
 	}
 }
