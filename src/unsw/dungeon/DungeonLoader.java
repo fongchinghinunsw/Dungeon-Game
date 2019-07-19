@@ -37,6 +37,11 @@ public abstract class DungeonLoader {
 
 		JSONArray jsonEntities = json.getJSONArray("entities");
 
+		JSONObject goal = json.getJSONObject("goal-condition");
+		if (goal.getString("goal").equals("exit")) {
+			dungeon.setGoalExpression(new SingleOperand("exit"));
+		}
+
 		for (int i = 0; i < jsonEntities.length(); i++) {
 			loadEntity(dungeon, jsonEntities.getJSONObject(i));
 		}
@@ -79,6 +84,11 @@ public abstract class DungeonLoader {
 			onLoad(key);
 			entity = key;
 			break;
+		case "treasure":
+			Treasure treasure = new Treasure(x, y);
+			onLoad(treasure);
+			entity = treasure;
+			break;
 		case "potion":
 			Potion potion = new Potion(x, y);
 			onLoad(potion);
@@ -93,6 +103,11 @@ public abstract class DungeonLoader {
 			Enemy enemy = new Enemy(dungeon, x, y);
 			onLoad(enemy);
 			entity = enemy;
+			break;
+		case "sword":
+			Sword sword = new Sword(x, y);
+			onLoad(sword);
+			entity = sword;
 			break;
 		// TODO Handle other possible entities
 		}
@@ -110,6 +125,10 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Key key);
 
 	public abstract void onLoad(Bomb bomb);
+
+	public abstract void onLoad(Treasure treasure);
+
+	public abstract void onLoad(Sword sword);
 
 	public abstract void onLoad(Potion potion);
 

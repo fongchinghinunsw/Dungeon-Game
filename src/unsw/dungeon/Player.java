@@ -48,6 +48,12 @@ public class Player extends Character implements Subject {
 		for (Entity entity : entities) {
 			if (entity instanceof Equipable) {
 				Equipable e = (Equipable) entity;
+				// player can only equip one sword at a time.
+				if (entity instanceof Sword) {
+					if (countSwordInBackPack() != 0) {
+						return false;
+					}
+				}
 				if (e.equip()) {
 					backpack.addItem(e);
 					System.out.println("Added item into the backpack");
@@ -95,11 +101,11 @@ public class Player extends Character implements Subject {
 
 	@Override
 	public void notifyObservers() {
-		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Enemy")) {
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy")) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
-					o.update(this);
+					o.update(this, dungeon);
 				}
 			}
 		}
@@ -111,7 +117,7 @@ public class Player extends Character implements Subject {
 	}
 
 	public boolean die() {
-		if(this.isInvincible()) {
+		if (this.isInvincible()) {
 			return false;
 		}
 		this.alive = false;
@@ -122,7 +128,11 @@ public class Player extends Character implements Subject {
 	public boolean isAlive() {
 		return this.alive;
 	}
-	
+
+	public int countSwordInBackPack() {
+		return backpack.countSword();
+	}
+
 	public long getSpeed() {
 		return moveSpeed.getSpeed();
 	}

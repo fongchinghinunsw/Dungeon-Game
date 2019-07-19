@@ -22,11 +22,6 @@ public class Enemy extends Character implements Observer {
 		return this.alive;
 	}
 
-	@Override
-	public void update(Subject obj) {
-		System.out.println("Attempting to attack the player......");
-	}
-
 	public long getSpeed() {
 		return moveSpeed.getSpeed();
 	}
@@ -72,5 +67,11 @@ public class Enemy extends Character implements Observer {
 		if (this.getX() == playerX && this.getY() == playerY) {
 			this.dungeon.killPlayer();
 		}
+	}
+
+	@Override
+	public void update(Subject obj, Dungeon dungeon) {
+		System.out.println("Enemy is doing something");
+		
 	}
 }

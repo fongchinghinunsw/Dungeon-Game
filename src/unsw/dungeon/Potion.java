@@ -19,8 +19,9 @@ public class Potion extends Equipable implements Observer {
 	}
 
 	@Override
-	public void update(Subject obj) {
+	public void update(Subject obj, Dungeon dungeon) {
 		System.out.println("Player standing on a potion");
+
 	}
 
 }

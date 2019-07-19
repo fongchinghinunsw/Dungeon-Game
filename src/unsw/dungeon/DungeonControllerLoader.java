@@ -28,9 +28,11 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image exitImage;
 	private Image boulderImage;
 	private Image keyImage;
+	private Image treasureImage;
 	private Image potionImage;
 	private Image bombImage;
 	private Image enemyImage;
+	private Image swordImage;
 
 	public DungeonControllerLoader(String filename) throws FileNotFoundException {
 		super(filename);
@@ -40,9 +42,11 @@ public class DungeonControllerLoader extends DungeonLoader {
 		exitImage = new Image("/exit.png");
 		boulderImage = new Image("/boulder.png");
 		keyImage = new Image("/key.png");
+		treasureImage = new Image("/gold_pile.png");
 		potionImage = new Image("/brilliant_blue_new.png");
 		bombImage = new Image("/bomb_unlit.png");
 		enemyImage = new Image("/hound.png");
+		swordImage = new Image("/greatsword_1_new.png");
 	}
 
 	@Override
@@ -76,6 +80,11 @@ public class DungeonControllerLoader extends DungeonLoader {
 	}
 
 	@Override
+	public void onLoad(Treasure treasure) {
+		ImageView view = new ImageView(treasureImage);
+		addEntity(treasure, view);
+	}
+
 	public void onLoad(Potion potion) {
 		ImageView view = new ImageView(potionImage);
 		addEntity(potion, view);
@@ -91,6 +100,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 	public void onLoad(Enemy enemy) {
 		ImageView view = new ImageView(enemyImage);
 		addEntity(enemy, view);
+	}
+
+	@Override
+	public void onLoad(Sword sword) {
+		ImageView view = new ImageView(swordImage);
+		addEntity(sword, view);
 	}
 
 	private void addEntity(Entity entity, ImageView view) {

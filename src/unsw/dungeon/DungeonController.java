@@ -67,6 +67,7 @@ public class DungeonController {
 
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
+
 		long now = System.nanoTime();
 		if (event.getCode().isArrowKey()) {
 			event.consume();
@@ -97,15 +98,6 @@ public class DungeonController {
 				removeNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.addEquippedEntity(player.getX(), player.getY());
 			}
-		} else if (event.getCode().isLetterKey()) {
-			switch (event.getCode()) {
-			case G:
-				player.useItem("Potion");
-				break;
-			default:
-				break;
-			}
-
 		}
 	}
 

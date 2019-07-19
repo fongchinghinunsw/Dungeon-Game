@@ -380,12 +380,22 @@
     {
       "x": 2,
       "y": 3,
-      "type": "key"
+      "type": "sword"
     },
     {
       "x": 3,
       "y": 3,
       "type": "key"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "type": "treasure"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "type": "sword"
     },
     {
       "x": 2,
