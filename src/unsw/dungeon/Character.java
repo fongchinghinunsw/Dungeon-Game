@@ -35,6 +35,8 @@ public abstract class Character extends Entity {
 			x().set(getX() + 1);
 	}
 
+	public abstract long getSpeed();
+
 	@Override
 	public abstract String getClassName();
 }
