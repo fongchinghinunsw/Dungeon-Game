@@ -55,6 +55,10 @@ public class Player extends Character implements Subject {
 		return false;
 	}
 
+	public Entity removeBackPackItem(String className) {
+		return backpack.removeItem(className);
+	}
+
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {

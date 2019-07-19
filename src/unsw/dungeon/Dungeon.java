@@ -92,6 +92,13 @@ public class Dungeon {
 		}
 	}
 
+	public void removeEquippedEntity(int x, int y, String className) {
+		Entity entity = player.removeBackPackItem(className);
+		entity.setX(x);
+		entity.setY(y);
+		entities.add(entity);
+	}
+
 	public GoalExpression getGoalExpression() {
 		return goalExpression;
 	}

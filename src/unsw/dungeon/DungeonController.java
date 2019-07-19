@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
@@ -23,21 +24,29 @@ public class DungeonController {
 
 	private List<ImageView> initialEntities;
 
+	private List<ImageView> deletedEntities;
+
 	private Player player;
 
 	private Image playerImage;
 
+	private Image swordImage;
+
 	private Dungeon dungeon;
+
+	DungeonControllerLoader loader;
 
 	private static final long THRESHOLD = 100_000_000L;
 
 	private long lastMoveNanos;
 
-	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Image playerImage) {
+	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Image playerImage, Image swordImage) {
 		this.dungeon = dungeon;
 		this.player = dungeon.getPlayer();
 		this.initialEntities = new ArrayList<>(initialEntities);
+		this.deletedEntities = new ArrayList<>();
 		this.playerImage = playerImage;
+		this.swordImage = swordImage;
 	}
 
 	@FXML
@@ -98,6 +107,13 @@ public class DungeonController {
 				removeNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.addEquippedEntity(player.getX(), player.getY());
 			}
+		} else if (event.getCode() == KeyCode.G) {
+			if (player.countSwordInBackPack() != 0) {
+				System.out.println("Hey");
+				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+				dungeon.removeEquippedEntity(player.getX(), player.getY(), "Sword");
+
+			}
 		}
 	}
 
@@ -107,10 +123,28 @@ public class DungeonController {
 			if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
 				ImageView imageView = (ImageView) node;
 				if (imageView.getImage() != playerImage) {
+					deletedEntities.add(imageView);
 					gridPane.getChildren().remove(imageView);
 					return true;
 				}
 
+			}
+		}
+		return false;
+	}
+
+	public boolean addNodeByRowColumnIndex(int column, int row, GridPane gridPane) {
+		for (ImageView imageView : deletedEntities) {
+			System.out.println(".");
+			if (imageView.getImage() == swordImage) {
+				System.out.println("...");
+				Node node = (Node) imageView;
+				GridPane.setColumnIndex(node, player.getX());
+				GridPane.setRowIndex(node, player.getY());
+				initialEntities.add(imageView);
+				deletedEntities.remove(imageView);
+				squares.getChildren().add(node);
+				return true;
 			}
 		}
 		return false;
