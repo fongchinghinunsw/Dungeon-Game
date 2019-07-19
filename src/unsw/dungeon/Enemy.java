@@ -15,6 +15,7 @@ public class Enemy extends Character implements Subject, Observer {
 		this.dungeon = dungeon;
 		this.moveSpeed = new Slow();
 		this.alive = true;
+		this.observers = new ArrayList<>();
 		Timer timer = new Timer();
 		EnemyTimer task = new EnemyTimer(this, dungeon.getPlayer());
 		timer.schedule(task, 0, 1000 / moveSpeed.getSpeed());
@@ -74,11 +75,12 @@ public class Enemy extends Character implements Subject, Observer {
 		if (this.getX() == playerX && this.getY() == playerY) {
 			this.dungeon.killPlayer();
 		}
+
 	}
 
 	@Override
 	public void update(Subject obj, Dungeon dungeon) {
-		System.out.println("Enemy is doing something");
+		System.out.println("Enemy meets u");
 
 	}
 
@@ -98,7 +100,6 @@ public class Enemy extends Character implements Subject, Observer {
 	public void notifyObservers() {
 		if (dungeon.sameClass(getX(), getY(), "Player")) {
 			for (Observer o : observers) {
-				Entity entity = (Entity) o;
 				o.update(this, dungeon);
 			}
 		}

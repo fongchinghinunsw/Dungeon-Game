@@ -101,6 +101,7 @@ public abstract class DungeonLoader {
 			break;
 		case "enemy":
 			Enemy enemy = new Enemy(dungeon, x, y);
+			dungeon.addEnemy(enemy);
 			onLoad(enemy);
 			entity = enemy;
 			break;

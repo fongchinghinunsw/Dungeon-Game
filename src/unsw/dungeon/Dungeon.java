@@ -21,12 +21,14 @@ public class Dungeon {
 	private List<Entity> entities;
 	private GoalExpression goalExpression;
 	private Player player;
+	private List<Enemy> enemies;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.entities = new ArrayList<>();
 		this.player = null;
+		this.enemies = new ArrayList<>();
 	}
 
 	public int getWidth() {
@@ -49,6 +51,10 @@ public class Dungeon {
 		entities.add(entity);
 	}
 
+	public void addEnemy(Enemy enemy) {
+		enemies.add(enemy);
+	}
+
 	public boolean killPlayer() {
 		return player.die();
 	}
@@ -59,7 +65,9 @@ public class Dungeon {
 				player.attach((Observer) entity);
 			}
 			if (sameClass(entity.getX(), entity.getY(), "Player")) {
-
+				for (Enemy enemy : enemies) {
+					enemy.attach((Observer) entity);
+				}
 			}
 		}
 	}

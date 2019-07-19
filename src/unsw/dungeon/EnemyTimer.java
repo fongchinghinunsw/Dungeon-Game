@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import java.util.TimerTask;
 
+import javafx.application.Platform;
+
 public class EnemyTimer extends TimerTask {
 	private Enemy self;
 
@@ -24,5 +26,7 @@ public class EnemyTimer extends TimerTask {
 			System.out.println("I die.");
 			cancel();
 		}
+		// Prevent the ConcurrentModificationException
+		Platform.runLater(() -> self.notifyObservers());
 	}
 }
