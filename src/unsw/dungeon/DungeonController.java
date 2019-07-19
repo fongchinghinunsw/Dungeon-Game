@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
@@ -98,6 +99,8 @@ public class DungeonController {
 				removeNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.addEquippedEntity(player.getX(), player.getY());
 			}
+		} else if (event.getCode() == KeyCode.G) {
+			player.useItem("Potion");
 		}
 	}
 
