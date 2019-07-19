@@ -12,9 +12,7 @@ public class Player extends Character implements Subject {
 
 	private Dungeon dungeon;
 	private Backpack backpack;
-
 	private ArrayList<Observer> observers;
-
 	private MoveSpeed moveSpeed;
 
 	/**
@@ -28,8 +26,7 @@ public class Player extends Character implements Subject {
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
 		this.observers = new ArrayList<Observer>();
-		this.moveSpeed = new Fast();
-
+		this.moveSpeed = new Normal();
 	}
 
 	// Here for now, open to modification/deletion
@@ -66,7 +63,11 @@ public class Player extends Character implements Subject {
 
 	@Override
 	public void notifyObservers() {
+<<<<<<< HEAD
 		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Potion")) {
+=======
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb")) {
+>>>>>>> master
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
