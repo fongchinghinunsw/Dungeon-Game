@@ -1,15 +1,18 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 /**
  * The player entity
  * 
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Character {
+public class Player extends Character implements Subject {
 
 	private Dungeon dungeon;
 	private Backpack backpack;
+	private ArrayList<Observer> observers;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -21,6 +24,7 @@ public class Player extends Character {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
+		this.observers = new ArrayList<Observer>();
 	}
 
 	// Here for now, open to modification/deletion
@@ -28,8 +32,43 @@ public class Player extends Character {
 		return this.backpack;
 	}
 
-	public void equipItem(Equipable item) {
-		this.backpack.addItem(item);
+	public boolean equipItem() {
+		ArrayList<Entity> entities = dungeon.getEntity(getX(), getY());
+		for (Entity entity : entities) {
+			if (entity instanceof Equipable) {
+				Equipable e = (Equipable) entity;
+				if (e.equip()) {
+					backpack.addItem(e);
+					System.out.println("Added item into the backpack");
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void attach(Observer o) {
+		if (!(observers.contains(o))) {
+			observers.add(o);
+		}
+	}
+
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit")) {
+			for (Observer o : observers) {
+				Entity entity = (Entity) o;
+				if (entity.getX() == getX() && entity.getY() == getY()) {
+					o.update(this);
+				}
+			}
+		}
 	}
 
 	@Override

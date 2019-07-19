@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -87,9 +88,29 @@ public class DungeonController {
 				default:
 					break;
 				}
+				player.notifyObservers();
 				lastMoveNanos = now;
 			}
+		} else if (event.getCode().isWhitespaceKey()) {
+			if (player.equipItem()) {
+				removeNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+			}
 		}
+	}
+
+	public boolean removeNodeByRowColumnIndex(int column, int row, GridPane gridPane) {
+
+		for (Node node : initialEntities) {
+			if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+				ImageView imageView = (ImageView) node;
+				if (imageView.getImage() != playerImage) {
+					gridPane.getChildren().remove(imageView);
+					return true;
+				}
+
+			}
+		}
+		return false;
 	}
 
 }
