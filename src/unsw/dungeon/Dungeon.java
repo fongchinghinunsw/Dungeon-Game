@@ -104,7 +104,7 @@ public class Dungeon {
 	}
 
 	public void removeEquippedEntity(int x, int y, String className) {
-		Entity entity = player.removeBackPackItem(className);
+		Entity entity = player.removeSwordInBackPack();
 		entity.setX(x);
 		entity.setY(y);
 		entities.add(entity);

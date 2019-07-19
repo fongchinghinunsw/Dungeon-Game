@@ -19,9 +19,11 @@ public class Backpack {
 		return true;
 	}
 
-	public Entity removeItem(String className) {
+	public Entity removeSword() {
 		for (Entity entity : items) {
-			if (entity.getClassName().equals(className)) {
+			if (entity.getClassName().equals("Sword")) {
+				Equipable e = (Equipable) entity;
+				e.unequip();
 				Entity tmp = entity;
 				items.remove(entity);
 				return tmp;

@@ -55,8 +55,8 @@ public class Player extends Character implements Subject {
 		return false;
 	}
 
-	public Entity removeBackPackItem(String className) {
-		return backpack.removeItem(className);
+	public Entity removeSwordInBackPack() {
+		return backpack.removeSword();
 	}
 
 	@Override

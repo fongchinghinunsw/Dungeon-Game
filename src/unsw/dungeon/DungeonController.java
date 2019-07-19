@@ -32,6 +32,8 @@ public class DungeonController {
 
 	private Image swordImage;
 
+	private ImageView playerImageView;
+
 	private Dungeon dungeon;
 
 	DungeonControllerLoader loader;
@@ -68,6 +70,7 @@ public class DungeonController {
 
 		for (ImageView entity : initialEntities) {
 			if (entity.getImage() == playerImage) {
+				playerImageView = entity;
 				squares.getChildren().add(entity);
 			}
 		}
@@ -109,7 +112,6 @@ public class DungeonController {
 			}
 		} else if (event.getCode() == KeyCode.G) {
 			if (player.countSwordInBackPack() != 0 && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
-				System.out.println("Hey");
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.removeEquippedEntity(player.getX(), player.getY(), "Sword");
 
@@ -135,15 +137,14 @@ public class DungeonController {
 
 	public boolean addNodeByRowColumnIndex(int column, int row, GridPane gridPane) {
 		for (ImageView imageView : deletedEntities) {
-			System.out.println(".");
 			if (imageView.getImage() == swordImage) {
-				System.out.println("...");
 				Node node = (Node) imageView;
 				GridPane.setColumnIndex(node, player.getX());
 				GridPane.setRowIndex(node, player.getY());
 				initialEntities.add(imageView);
 				deletedEntities.remove(imageView);
-				squares.getChildren().add(node);
+				gridPane.getChildren().add(node);
+				playerImageView.toFront();
 				return true;
 			}
 		}
