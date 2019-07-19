@@ -12,7 +12,10 @@ public class Player extends Character implements Subject {
 
 	private Dungeon dungeon;
 	private Backpack backpack;
+
 	private ArrayList<Observer> observers;
+
+	private MoveSpeed speed;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -25,6 +28,7 @@ public class Player extends Character implements Subject {
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
 		this.observers = new ArrayList<Observer>();
+
 	}
 
 	// Here for now, open to modification/deletion
@@ -76,4 +80,7 @@ public class Player extends Character implements Subject {
 		return "Player";
 	}
 
+	public int getSpeed() {
+		return this.speed.getSpeed();
+	}
 }
