@@ -57,6 +57,9 @@ public class Enemy extends Character implements Observer {
 				tried = true;
 			}
 		}
+		if (this.getX() == playerX && this.getY() == playerY) {
+			this.dungeon.killPlayer();
+		}
 		if (tried)
 			System.out.println("Trying to move towards the player.");
 	}

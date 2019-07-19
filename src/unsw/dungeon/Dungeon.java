@@ -49,11 +49,7 @@ public class Dungeon {
 	}
 
 	public boolean killPlayer() {
-		if (this.player.isInvincible()) {
-			return false;
-		}
-		this.player = null;
-		return true;
+		return this.getPlayer().die();
 	}
 
 	public void addObservers() {

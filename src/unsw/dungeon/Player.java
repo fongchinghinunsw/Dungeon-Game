@@ -16,6 +16,7 @@ public class Player extends Character implements Subject {
 	private ArrayList<Observer> observers;
 	private MoveSpeed moveSpeed;
 	private boolean potionEffect;
+	private boolean alive;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -30,16 +31,18 @@ public class Player extends Character implements Subject {
 		this.observers = new ArrayList<Observer>();
 		this.moveSpeed = new Normal();
 		this.potionEffect = false;
+		this.alive = true;
 	}
 
 	public Backpack getBackpack() {
 		return this.backpack;
 	}
+
 	// here for now, open for modification
 	public boolean isInvincible() {
 		return this.potionEffect;
 	}
-	
+
 	public boolean equipItem() {
 		ArrayList<Entity> entities = dungeon.getEntity(getX(), getY());
 		for (Entity entity : entities) {
@@ -55,7 +58,6 @@ public class Player extends Character implements Subject {
 		return false;
 	}
 
-	// TODO: add useItem logic, now it just discards the item
 	public boolean useItem(String type) {
 		if (type.equals("Potion") && this.potionEffect) {
 			System.out.println("A potion is already in use!");
@@ -106,6 +108,15 @@ public class Player extends Character implements Subject {
 	@Override
 	public String getClassName() {
 		return "Player";
+	}
+
+	public boolean die() {
+		if(this.isInvincible()) {
+			return false;
+		}
+		this.alive = false;
+		System.out.println("You're dead lol");
+		return true;
 	}
 
 	public long getSpeed() {
