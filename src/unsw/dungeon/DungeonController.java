@@ -97,6 +97,15 @@ public class DungeonController {
 				removeNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.addEquippedEntity(player.getX(), player.getY());
 			}
+		} else if (event.getCode().isLetterKey()) {
+			switch (event.getCode()) {
+			case J:
+				player.useItem("Potion");
+				break;
+			default:
+				break;
+			}
+
 		}
 	}
 

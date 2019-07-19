@@ -103,7 +103,7 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Boulder boulder);
 
 	public abstract void onLoad(Key key);
-	
+
 	public abstract void onLoad(Bomb bomb);
 
 	public abstract void onLoad(Potion potion);

@@ -49,6 +49,17 @@ public class Player extends Character implements Subject {
 		return false;
 	}
 
+	// TODO: add useItem logic, now it just discards the item
+	public boolean useItem(String type) {
+		if (backpack.getItem(type) == null) {
+			return false;
+		}
+		// Temporary solution, open to modification
+		String message = "An item of type " + type + " is used.";
+		System.out.println(message);
+		return true;
+	}
+
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {
@@ -63,7 +74,7 @@ public class Player extends Character implements Subject {
 
 	@Override
 	public void notifyObservers() {
-		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb","Potion")) {
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion")) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
