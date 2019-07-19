@@ -18,7 +18,6 @@ public class EnemyTimer extends TimerTask {
 	@Override
 	public void run() {
 		if (self.isAlive()) {
-			System.out.println("Trying to move towards the player.");
 			this.self.findPlayer();
 		} else {
 			// stop the timer

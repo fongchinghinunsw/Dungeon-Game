@@ -15,7 +15,7 @@ public class Enemy extends Character implements Observer {
 		this.alive = true;
 		Timer timer = new Timer();
 		EnemyTimer task = new EnemyTimer(this, dungeon.getPlayer());
-		timer.schedule(task, 0, 1000);
+		timer.schedule(task, 0, 1000 / moveSpeed.getSpeed());
 	}
 
 	public boolean isAlive() {
@@ -39,18 +39,25 @@ public class Enemy extends Character implements Observer {
 	public void findPlayer() {
 		int playerX = this.dungeon.getPlayer().getX();
 		int playerY = this.dungeon.getPlayer().getY();
+		boolean tried = false;
 		if (this.getY() == playerY) {
 			if (this.getX() > playerX) {
 				this.moveLeft();
+				tried = true;
 			} else if (this.getX() < playerX) {
 				this.moveRight();
+				tried = true;
 			}
 		} else if (this.getX() == playerX) {
 			if (this.getY() > playerY) {
 				this.moveUp();
+				tried = true;
 			} else if (this.getY() < playerY) {
 				this.moveDown();
+				tried = true;
 			}
 		}
+		if (tried)
+			System.out.println("Trying to move towards the player.");
 	}
 }
