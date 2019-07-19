@@ -22,7 +22,6 @@ public class Player extends Character {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
-		this.speed = new Fast();
 
 	}
 
