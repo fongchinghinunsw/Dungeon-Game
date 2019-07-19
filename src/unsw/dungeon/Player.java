@@ -13,6 +13,7 @@ public class Player extends Character implements Subject {
 	private Dungeon dungeon;
 	private Backpack backpack;
 	private ArrayList<Observer> observers;
+	private MoveSpeed moveSpeed;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -25,11 +26,7 @@ public class Player extends Character implements Subject {
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
 		this.observers = new ArrayList<Observer>();
-	}
-
-	@Override
-	public String getClassName() {
-		return "Player";
+		this.moveSpeed = new Normal();
 	}
 
 	// Here for now, open to modification/deletion
@@ -66,11 +63,26 @@ public class Player extends Character implements Subject {
 
 	@Override
 	public void notifyObservers() {
-		for (Observer o : observers) {
-			Entity entity = (Entity) o;
-			if (entity.getX() == getX() && entity.getY() == getY()) {
-				o.update(this);
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb")) {
+			for (Observer o : observers) {
+				Entity entity = (Entity) o;
+				if (entity.getX() == getX() && entity.getY() == getY()) {
+					o.update(this);
+				}
 			}
 		}
+	}
+
+	@Override
+	public String getClassName() {
+		return "Player";
+	}
+
+	public long getSpeed() {
+		return moveSpeed.getSpeed();
+	}
+
+	public void setMoveSpeed(MoveSpeed moveSpeed) {
+		this.moveSpeed = moveSpeed;
 	}
 }

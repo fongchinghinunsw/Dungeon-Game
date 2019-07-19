@@ -84,6 +84,11 @@ public abstract class DungeonLoader {
 			onLoad(treasure);
 			entity = treasure;
 			break;
+		case "bomb":
+			Bomb bomb = new Bomb(x, y);
+			onLoad(bomb);
+			entity = bomb;
+			break;
 		// TODO Handle other possible entities
 		}
 		dungeon.addEntity(entity);
@@ -98,6 +103,8 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Boulder boulder);
 
 	public abstract void onLoad(Key key);
+
+	public abstract void onLoad(Bomb bomb);
 
 	public abstract void onLoad(Treasure treasure);
 

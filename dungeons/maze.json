@@ -378,6 +378,11 @@
       "type": "treasure"
     },
     {
+      "x": 2,
+      "y": 6,
+      "type": "bomb"
+    },
+    {
       "x": 19,
       "y": 5,
       "type": "wall"
