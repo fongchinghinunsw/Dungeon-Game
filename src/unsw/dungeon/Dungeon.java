@@ -19,14 +19,12 @@ public class Dungeon {
 
 	private int width, height;
 	private List<Entity> entities;
-	private List<Entity> equippedEntities;
 	private Player player;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.entities = new ArrayList<>();
-		this.equippedEntities = new ArrayList<>();
 		this.player = null;
 	}
 
@@ -88,7 +86,6 @@ public class Dungeon {
 		ArrayList<Entity> entityList = getEntity(x, y);
 		for (Entity entity : entityList) {
 			if (entity instanceof Equipable) {
-				equippedEntities.add(entity);
 				entities.remove(entity);
 			}
 		}
