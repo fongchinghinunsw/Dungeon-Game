@@ -1,15 +1,46 @@
 package unsw.dungeon;
 
 public class Equipable extends Entity {
-	// Does it need to have a name?
-	private String name;
 
-	public Equipable(int x, int y, String name) {
+	EquipState equippedState;
+
+	EquipState unEquippedState;
+
+	EquipState state;
+
+	public Equipable(int x, int y) {
 		super(x, y);
-		this.name = name;
+		equippedState = new EquippedState();
+		unEquippedState = new UnequippedState();
+		state = unEquippedState;
 	}
 
+	public EquipState getState() {
+		return state;
+	}
 
-	// TODO: Add a method to use an item
+	public void setState(EquipState state) {
+		this.state = state;
+	}
+
+	public EquipState getEquippedState() {
+		return equippedState;
+	}
+
+	public EquipState getUnequippedState() {
+		return unEquippedState;
+	}
+
+	public boolean equip() {
+		if (state.equip()) {
+			setState(equippedState);
+			return true;
+		}
+		return false;
+	}
+
+	public String getClassName() {
+		return "Equipable";
+	}
 
 }
