@@ -108,7 +108,7 @@ public class DungeonController {
 				dungeon.addEquippedEntity(player.getX(), player.getY());
 			}
 		} else if (event.getCode() == KeyCode.G) {
-			if (player.countSwordInBackPack() != 0) {
+			if (player.countSwordInBackPack() != 0 && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
 				System.out.println("Hey");
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.removeEquippedEntity(player.getX(), player.getY(), "Sword");

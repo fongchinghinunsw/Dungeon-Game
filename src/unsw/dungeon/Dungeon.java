@@ -70,6 +70,17 @@ public class Dungeon {
 		return false;
 	}
 
+	public boolean hasEquipable(int x, int y) {
+		for (Entity entity : entities) {
+			if (entity.getX() == x && entity.getY() == y) {
+				if (entity instanceof Equipable) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	/*
 	 * Returns a list which stores all entities in a grid.
 	 */
