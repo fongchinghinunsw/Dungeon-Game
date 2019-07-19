@@ -110,6 +110,8 @@ public class DungeonController {
 				removeNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.addEquippedEntity(player.getX(), player.getY());
 			}
+		} else if (event.getCode() == KeyCode.G) {
+			player.useItem("Potion");
 		} else if (event.getCode() == KeyCode.F) {
 			if (player.countSwordInBackPack() != 0 && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
