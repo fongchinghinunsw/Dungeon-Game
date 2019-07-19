@@ -95,6 +95,7 @@ public class DungeonController {
 		} else if (event.getCode().isWhitespaceKey()) {
 			if (player.equipItem()) {
 				removeNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+				dungeon.addEquippedEntity(player.getX(), player.getY());
 			}
 		}
 	}
