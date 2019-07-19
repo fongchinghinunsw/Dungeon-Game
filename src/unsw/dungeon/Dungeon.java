@@ -19,12 +19,14 @@ public class Dungeon {
 
 	private int width, height;
 	private List<Entity> entities;
+	private List<Entity> equippedEntities;
 	private Player player;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.entities = new ArrayList<>();
+		this.equippedEntities = new ArrayList<>();
 		this.player = null;
 	}
 
@@ -69,6 +71,9 @@ public class Dungeon {
 		return false;
 	}
 
+	/*
+	 * Returns a list which stores all entities in a grid.
+	 */
 	public ArrayList<Entity> getEntity(int x, int y) {
 		ArrayList<Entity> entitieList = new ArrayList<>();
 		for (Entity entity : entities) {
@@ -77,5 +82,16 @@ public class Dungeon {
 			}
 		}
 		return entitieList;
+	}
+
+	public void addEquippedEntity(int x, int y) {
+		ArrayList<Entity> entityList = getEntity(x, y);
+		for (Entity entity : entityList) {
+			if (entity instanceof Equipable) {
+				equippedEntities.add(entity);
+				entities.remove(entity);
+			}
+		}
+
 	}
 }
