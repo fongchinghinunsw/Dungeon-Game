@@ -12,6 +12,16 @@ public class Backpack {
 		this.max_size = 9;
 	}
 
+	public Equipable getItem(String type) {
+		for (Equipable item : this.items) {
+			if (item.getClassName().equals(type)) {
+				this.items.remove(item);
+				return item;
+			}
+		}
+		return null;
+	}
+
 	public boolean addItem(Equipable item) {
 		if (this.items.size() == max_size)
 			return false;

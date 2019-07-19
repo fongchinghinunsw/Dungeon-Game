@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * The player entity
@@ -14,6 +15,7 @@ public class Player extends Character implements Subject {
 	private Backpack backpack;
 	private ArrayList<Observer> observers;
 	private MoveSpeed moveSpeed;
+	private boolean potionEffect;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -27,6 +29,7 @@ public class Player extends Character implements Subject {
 		this.backpack = new Backpack();
 		this.observers = new ArrayList<Observer>();
 		this.moveSpeed = new Normal();
+		this.potionEffect = false;
 	}
 
 	// Here for now, open to modification/deletion
@@ -55,6 +58,30 @@ public class Player extends Character implements Subject {
 		return false;
 	}
 
+	// TODO: add useItem logic, now it just discards the item
+	public boolean useItem(String type) {
+		if (type.equals("Potion") && this.potionEffect) {
+			System.out.println("A potion is already in use!");
+			return false;
+		}
+		Equipable item = backpack.getItem(type);
+		if (item == null) {
+			String message = "You don't have an item of " + type + " kind!";
+			System.out.println(message);
+			return false;
+		}
+		// Temporary solution, open to modification
+		if (type.equals("Potion")) {
+			this.potionEffect = true;
+			Timer timer = new Timer();
+			PotionTimer task = new PotionTimer((Potion) item, this);
+			timer.schedule(task, 0, 1000);
+		}
+		String message = "An item of type " + type + " is used.";
+		System.out.println(message);
+		return true;
+	}
+
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {
@@ -69,7 +96,7 @@ public class Player extends Character implements Subject {
 
 	@Override
 	public void notifyObservers() {
-		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Treasure", "Sword")) {
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Treasure", "Sword", "Potion")) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
@@ -90,6 +117,10 @@ public class Player extends Character implements Subject {
 
 	public long getSpeed() {
 		return moveSpeed.getSpeed();
+	}
+
+	public void disablePotion() {
+		this.potionEffect = false;
 	}
 
 	public void setMoveSpeed(MoveSpeed moveSpeed) {

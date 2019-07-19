@@ -13,7 +13,6 @@ public class DungeonApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		primaryStage.setTitle("Dungeon");
-		// Temporarily changed to the boulder map to test boulder functionality
 		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json");
 
 		DungeonController controller = dungeonLoader.loadController();
@@ -23,10 +22,8 @@ public class DungeonApplication extends Application {
 		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		root.requestFocus();
-
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
 	}
 
 	public static void main(String[] args) {

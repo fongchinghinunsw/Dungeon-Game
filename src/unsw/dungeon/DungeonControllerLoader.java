@@ -29,6 +29,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image boulderImage;
 	private Image keyImage;
 	private Image treasureImage;
+	private Image potionImage;
 	private Image bombImage;
 	private Image swordImage;
 
@@ -41,6 +42,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 		boulderImage = new Image("/boulder.png");
 		keyImage = new Image("/key.png");
 		treasureImage = new Image("/gold_pile.png");
+		potionImage = new Image("/brilliant_blue_new.png");
 		bombImage = new Image("/bomb_unlit.png");
 		swordImage = new Image("/greatsword_1_new.png");
 	}
@@ -79,7 +81,11 @@ public class DungeonControllerLoader extends DungeonLoader {
 	public void onLoad(Treasure treasure) {
 		ImageView view = new ImageView(treasureImage);
 		addEntity(treasure, view);
+	}
 
+	public void onLoad(Potion potion) {
+		ImageView view = new ImageView(potionImage);
+		addEntity(potion, view);
 	}
 
 	@Override

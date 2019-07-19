@@ -74,13 +74,13 @@ public class Dungeon {
 	 * Returns a list which stores all entities in a grid.
 	 */
 	public ArrayList<Entity> getEntity(int x, int y) {
-		ArrayList<Entity> entitieList = new ArrayList<>();
+		ArrayList<Entity> entityList = new ArrayList<>();
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
-				entitieList.add(entity);
+				entityList.add(entity);
 			}
 		}
-		return entitieList;
+		return entityList;
 	}
 
 	public void addEquippedEntity(int x, int y) {
@@ -90,6 +90,16 @@ public class Dungeon {
 				entities.remove(entity);
 			}
 		}
+	}
+
+	public boolean hasEquipable(int x, int y) {
+		ArrayList<Entity> entityList = getEntity(x, y);
+		for (Entity entity : entityList) {
+			if (entity instanceof Equipable) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public GoalExpression getGoalExpression() {
