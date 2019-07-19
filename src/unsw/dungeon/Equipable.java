@@ -9,6 +9,10 @@ public class Equipable extends Entity {
 		this.name = name;
 	}
 
+	@Override
+	public String getClassName() {
+		return null;
+	}
 
 	// TODO: Add a method to use an item
 

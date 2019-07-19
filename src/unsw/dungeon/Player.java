@@ -10,6 +10,7 @@ public class Player extends Character {
 
 	private Dungeon dungeon;
 	private Backpack backpack;
+	private MoveSpeed speed;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -21,6 +22,7 @@ public class Player extends Character {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
+		this.speed = new Fast();
 
 	}
 
@@ -38,4 +40,7 @@ public class Player extends Character {
 		return "Player";
 	}
 
+	public int getSpeed() {
+		return this.speed.getSpeed();
+	}
 }

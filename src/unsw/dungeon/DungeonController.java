@@ -69,7 +69,8 @@ public class DungeonController {
 		long now = System.nanoTime();
 		if (event.getCode().isArrowKey()) {
 			event.consume();
-			if (lastMoveNanos <= 0L || now - lastMoveNanos >= THRESHOLD) {
+
+			if (lastMoveNanos <= 0L || now - lastMoveNanos >= (THRESHOLD / player.getSpeed())) {
 
 				switch (event.getCode()) {
 				case UP:
