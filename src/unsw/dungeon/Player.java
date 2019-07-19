@@ -87,6 +87,11 @@ public class Player extends Character implements Subject {
 		return true;
 	}
 
+	public Entity removeSwordInBackPack() {
+		return backpack.removeSword();
+
+	}
+
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {

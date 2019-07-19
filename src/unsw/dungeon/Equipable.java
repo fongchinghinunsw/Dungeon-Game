@@ -39,6 +39,14 @@ public class Equipable extends Entity {
 		return false;
 	}
 
+	public boolean unequip() {
+		if (state.unequip()) {
+			setState(unEquippedState);
+			return true;
+		}
+		return false;
+	}
+
 	public String getClassName() {
 		return "Equipable";
 	}

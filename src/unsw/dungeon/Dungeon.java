@@ -74,6 +74,17 @@ public class Dungeon {
 		return false;
 	}
 
+	public boolean hasEquipable(int x, int y) {
+		for (Entity entity : entities) {
+			if (entity.getX() == x && entity.getY() == y) {
+				if (entity instanceof Equipable) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	/*
 	 * Returns a list which stores all entities in a grid.
 	 */
@@ -96,14 +107,12 @@ public class Dungeon {
 		}
 	}
 
-	public boolean hasEquipable(int x, int y) {
-		ArrayList<Entity> entityList = getEntity(x, y);
-		for (Entity entity : entityList) {
-			if (entity instanceof Equipable) {
-				return true;
-			}
-		}
-		return false;
+	public void removeEquippedEntity(int x, int y, String className) {
+		Entity entity = player.removeSwordInBackPack();
+		entity.setX(x);
+		entity.setY(y);
+		entities.add(entity);
+
 	}
 
 	public GoalExpression getGoalExpression() {
