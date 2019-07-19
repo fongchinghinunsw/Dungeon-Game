@@ -11,7 +11,7 @@ public class Treasure extends Equipable implements Observer {
 	}
 
 	@Override
-	public void update(Subject obj) {
+	public void update(Subject obj, Dungeon dungeon) {
 		System.out.println("You are standing on a treasure");
 	}
 }

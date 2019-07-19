@@ -67,7 +67,7 @@ public class Player extends Character implements Subject {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
-					o.update(this);
+					o.update(this, dungeon);
 				}
 			}
 		}

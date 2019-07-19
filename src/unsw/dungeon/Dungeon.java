@@ -19,6 +19,7 @@ public class Dungeon {
 
 	private int width, height;
 	private List<Entity> entities;
+	private GoalExpression goalExpression;
 	private Player player;
 
 	public Dungeon(int width, int height) {
@@ -89,6 +90,17 @@ public class Dungeon {
 				entities.remove(entity);
 			}
 		}
+	}
 
+	public GoalExpression getGoalExpression() {
+		return goalExpression;
+	}
+
+	public void setGoalExpression(GoalExpression goalExpression) {
+		this.goalExpression = goalExpression;
+	}
+
+	public boolean hasWin() {
+		return goalExpression.evaluate();
 	}
 }

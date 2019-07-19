@@ -12,8 +12,9 @@ public class Exit extends Entity implements Observer {
 	}
 
 	@Override
-	public void update(Subject obj) {
-		System.out.println("You may now leave");
+	public void update(Subject obj, Dungeon dungeon) {
+		System.out.println("You are standing on the exit.");
+
 	}
 
 }
