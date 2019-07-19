@@ -19,4 +19,13 @@ public class Backpack {
 		return true;
 	}
 
+	public int countSword() {
+		int count = 0;
+		for (Equipable item : items) {
+			if (item instanceof Sword) {
+				count++;
+			}
+		}
+		return count;
+	}
 }

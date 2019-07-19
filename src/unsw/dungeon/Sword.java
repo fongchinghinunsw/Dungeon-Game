@@ -7,6 +7,15 @@ public class Sword extends Equipable implements Observer {
 	}
 
 	@Override
+	public boolean equip() {
+		if (state.equip()) {
+			setState(equippedState);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public String getClassName() {
 		return "Sword";
 	}

@@ -39,6 +39,12 @@ public class Player extends Character implements Subject {
 		for (Entity entity : entities) {
 			if (entity instanceof Equipable) {
 				Equipable e = (Equipable) entity;
+				// player can only equip one sword at a time.
+				if (entity instanceof Sword) {
+					if (countSwordInBackPack() != 0) {
+						return false;
+					}
+				}
 				if (e.equip()) {
 					backpack.addItem(e);
 					System.out.println("Added item into the backpack");
@@ -76,6 +82,10 @@ public class Player extends Character implements Subject {
 	@Override
 	public String getClassName() {
 		return "Player";
+	}
+
+	public int countSwordInBackPack() {
+		return backpack.countSword();
 	}
 
 	public long getSpeed() {
