@@ -50,7 +50,7 @@ public class Dungeon {
 	}
 
 	public boolean killPlayer() {
-		return this.getPlayer().die();
+		return player.die();
 	}
 
 	public void addObservers() {
