@@ -34,8 +34,9 @@ public class Equipable extends Entity {
 	public boolean equip() {
 		if (state.equip()) {
 			setState(equippedState);
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public String getClassName() {

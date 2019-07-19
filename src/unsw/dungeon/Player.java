@@ -37,7 +37,7 @@ public class Player extends Character implements Subject {
 		return this.backpack;
 	}
 
-	public void equipItem() {
+	public boolean equipItem() {
 		ArrayList<Entity> entities = dungeon.getEntity(getX(), getY());
 		for (Entity entity : entities) {
 			if (entity instanceof Equipable) {
@@ -45,9 +45,11 @@ public class Player extends Character implements Subject {
 				if (e.equip()) {
 					backpack.addItem(e);
 					System.out.println("Added item into the backpack");
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	@Override

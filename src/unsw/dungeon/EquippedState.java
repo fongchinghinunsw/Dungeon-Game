@@ -4,12 +4,12 @@ public class EquippedState implements EquipState {
 
 	@Override
 	public boolean equip() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean unequip() {
-		return false;
+		return true;
 	}
 
 }
