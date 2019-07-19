@@ -21,11 +21,10 @@ public class PotionTimer extends TimerTask {
 	@Override
 	public void run() {
 		if (seconds < MAX_SECONDS) {
-			System.out.println("Seconds = " + seconds);
 			seconds++;
 		} else {
 			// stop the timer
-			System.out.println("Effect of potion should wear off by now");
+			System.out.println("You're not invincible anymore");
 			this.player.disablePotion();
 			cancel();
 		}

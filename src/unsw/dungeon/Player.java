@@ -119,6 +119,10 @@ public class Player extends Character implements Subject {
 		return true;
 	}
 
+	public boolean isAlive() {
+		return this.alive;
+	}
+	
 	public long getSpeed() {
 		return moveSpeed.getSpeed();
 	}

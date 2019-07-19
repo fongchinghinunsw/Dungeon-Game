@@ -37,30 +37,40 @@ public class Enemy extends Character implements Observer {
 	}
 
 	public void findPlayer() {
-		int playerX = this.dungeon.getPlayer().getX();
-		int playerY = this.dungeon.getPlayer().getY();
-		boolean tried = false;
+		Player player = this.dungeon.getPlayer();
+		int playerX = player.getX();
+		int playerY = player.getY();
 		if (this.getY() == playerY) {
 			if (this.getX() > playerX) {
-				this.moveLeft();
-				tried = true;
+				if (player.isInvincible()) {
+					this.moveRight();
+				} else {
+					this.moveLeft();
+				}
 			} else if (this.getX() < playerX) {
-				this.moveRight();
-				tried = true;
+				if (player.isInvincible()) {
+					this.moveLeft();
+				} else {
+					this.moveRight();
+				}
 			}
 		} else if (this.getX() == playerX) {
 			if (this.getY() > playerY) {
-				this.moveUp();
-				tried = true;
+				if (player.isInvincible()) {
+					this.moveDown();
+				} else {
+					this.moveUp();
+				}
 			} else if (this.getY() < playerY) {
-				this.moveDown();
-				tried = true;
+				if (player.isInvincible()) {
+					this.moveUp();
+				} else {
+					this.moveDown();
+				}
 			}
 		}
 		if (this.getX() == playerX && this.getY() == playerY) {
 			this.dungeon.killPlayer();
 		}
-		if (tried)
-			System.out.println("Trying to move towards the player.");
 	}
 }
