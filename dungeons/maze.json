@@ -378,6 +378,11 @@
       "type": "treasure"
     },
     {
+      "x": 5,
+      "y": 3,
+      "type": "sword"
+    },
+    {
       "x": 2,
       "y": 6,
       "type": "bomb"

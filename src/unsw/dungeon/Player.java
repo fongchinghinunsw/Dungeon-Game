@@ -63,7 +63,7 @@ public class Player extends Character implements Subject {
 
 	@Override
 	public void notifyObservers() {
-		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb")) {
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Treasure", "Sword")) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {

@@ -9,10 +9,6 @@ public class SingleOperand implements GoalExpression {
 
 	@Override
 	public boolean evaluate() {
-		switch (goal) {
-		case "exit":
-			return true;
-
-		}
+		return true;
 	}
 }
