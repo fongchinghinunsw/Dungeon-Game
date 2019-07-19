@@ -1,11 +1,11 @@
 package unsw.dungeon;
 
-public class Bomb extends Equipable implements Observer{
-	
+public class Bomb extends Equipable implements Observer {
+
 	public Bomb(int x, int y) {
 		super(x, y);
 	}
-	
+
 	@Override
 	public String getClassName() {
 		return "Bomb";
