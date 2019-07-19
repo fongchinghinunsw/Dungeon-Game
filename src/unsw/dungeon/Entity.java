@@ -34,6 +34,14 @@ public abstract class Entity {
 		return y;
 	}
 
+	public void setX(int x) {
+		this.x.setValue(x);
+	}
+
+	public void setY(int y) {
+		this.y.setValue(y);
+	}
+
 	public int getX() {
 		return x().get();
 	}
