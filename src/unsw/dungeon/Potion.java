@@ -1,14 +1,18 @@
 package unsw.dungeon;
 
 public class Potion extends Equipable implements Observer {
-
-	private boolean inEffect;
-
+	
+	private int countdownTime;
+	
 	public Potion(int x, int y) {
 		super(x, y);
-		this.inEffect = false;
+		countdownTime = 5;
 	}
 
+	public int getTime() {
+		return this.countdownTime;
+	}
+	
 	@Override
 	public String getClassName() {
 		return "Potion";

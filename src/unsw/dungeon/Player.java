@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * The player entity
@@ -53,18 +55,22 @@ public class Player extends Character implements Subject {
 
 	// TODO: add useItem logic, now it just discards the item
 	public boolean useItem(String type) {
-		if(type.equals("Potion") && this.potionEffect) {
+		if (type.equals("Potion") && this.potionEffect) {
 			System.out.println("A potion is already in use!");
 			return false;
 		}
-		if (backpack.getItem(type) == null) {
-			String message = "You don't have an item of "+type+" kind!";
+		Equipable item = backpack.getItem(type);
+		if (item == null) {
+			String message = "You don't have an item of " + type + " kind!";
 			System.out.println(message);
 			return false;
 		}
 		// Temporary solution, open to modification
-		if(type.equals("Potion")) {
+		if (type.equals("Potion")) {
 			this.potionEffect = true;
+			Timer timer = new Timer();
+			PotionTimer task = new PotionTimer((Potion) item,this);
+		    timer.schedule(task, 0, 1000);
 		}
 		String message = "An item of type " + type + " is used.";
 		System.out.println(message);
@@ -104,6 +110,10 @@ public class Player extends Character implements Subject {
 		return moveSpeed.getSpeed();
 	}
 
+	public void disablePotion() {
+		this.potionEffect = false;
+	}
+	
 	public void setMoveSpeed(MoveSpeed moveSpeed) {
 		this.moveSpeed = moveSpeed;
 	}
