@@ -26,6 +26,7 @@ public class Player extends Character implements Subject {
 		this.dungeon = dungeon;
 		this.backpack = new Backpack();
 		this.observers = new ArrayList<Observer>();
+		this.speed = new Normal();
 	}
 
 	@Override
