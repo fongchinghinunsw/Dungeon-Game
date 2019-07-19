@@ -13,6 +13,7 @@ public class Player extends Character implements Subject {
 	private Dungeon dungeon;
 	private Backpack backpack;
 	private ArrayList<Observer> observers;
+	MoveSpeed speed;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -30,6 +31,7 @@ public class Player extends Character implements Subject {
 	@Override
 	public String getClassName() {
 		return "Player";
+
 	}
 
 	// Here for now, open to modification/deletion
@@ -74,5 +76,8 @@ public class Player extends Character implements Subject {
 				}
 			}
 		}
+	}
+	public int getSpeed() {
+		return this.speed.getSpeed();
 	}
 }

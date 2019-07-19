@@ -17,6 +17,7 @@ public class Equipable extends Entity {
 
 	public EquipState getState() {
 		return state;
+
 	}
 
 	public void setState(EquipState state) {
