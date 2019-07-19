@@ -3,14 +3,13 @@ package unsw.dungeon;
 public class UnequippedState implements EquipState {
 
 	@Override
-	public void equip() {
-		// TODO Auto-generated method stub
-
+	public boolean equip() {
+		return true;
 	}
 
 	@Override
-	public void unequip() {
-		throw new UnsupportedOperationException();
+	public boolean unequip() {
+		return false;
 	}
 
 }

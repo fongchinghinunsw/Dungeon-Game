@@ -68,4 +68,14 @@ public class Dungeon {
 		}
 		return false;
 	}
+
+	public ArrayList<Entity> getEntity(int x, int y) {
+		ArrayList<Entity> entitieList = new ArrayList<>();
+		for (Entity entity : entities) {
+			if (entity.getX() == x && entity.getY() == y) {
+				entitieList.add(entity);
+			}
+		}
+		return entitieList;
+	}
 }

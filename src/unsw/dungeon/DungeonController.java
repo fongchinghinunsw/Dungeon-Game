@@ -90,6 +90,8 @@ public class DungeonController {
 				player.notifyObservers();
 				lastMoveNanos = now;
 			}
+		} else if (event.getCode().isWhitespaceKey()) {
+			player.equipItem();
 		}
 	}
 

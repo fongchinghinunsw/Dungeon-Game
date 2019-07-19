@@ -1,8 +1,8 @@
 package unsw.dungeon;
 
 public interface EquipState {
-	public void equip();
+	public boolean equip();
 
-	public void unequip();
+	public boolean unequip();
 
 }

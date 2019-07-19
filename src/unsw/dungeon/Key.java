@@ -22,4 +22,5 @@ public class Key extends Equipable implements Observer {
 		System.out.println("Holly crap, the player is now standing on me...");
 
 	}
+
 }

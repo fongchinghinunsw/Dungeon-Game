@@ -37,8 +37,17 @@ public class Player extends Character implements Subject {
 		return this.backpack;
 	}
 
-	public void equipItem(Equipable item) {
-		this.backpack.addItem(item);
+	public void equipItem() {
+		ArrayList<Entity> entities = dungeon.getEntity(getX(), getY());
+		for (Entity entity : entities) {
+			if (entity instanceof Equipable) {
+				Equipable e = (Equipable) entity;
+				if (e.equip()) {
+					backpack.addItem(e);
+					System.out.println("Added item into the backpack");
+				}
+			}
+		}
 	}
 
 	@Override
