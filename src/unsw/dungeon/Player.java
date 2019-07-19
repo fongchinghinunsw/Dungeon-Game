@@ -14,6 +14,7 @@ public class Player extends Character implements Subject {
 	private Backpack backpack;
 	private ArrayList<Observer> observers;
 	private MoveSpeed moveSpeed;
+	private boolean potionEffect;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -27,6 +28,7 @@ public class Player extends Character implements Subject {
 		this.backpack = new Backpack();
 		this.observers = new ArrayList<Observer>();
 		this.moveSpeed = new Normal();
+		this.potionEffect = false;
 	}
 
 	// Here for now, open to modification/deletion
@@ -51,10 +53,19 @@ public class Player extends Character implements Subject {
 
 	// TODO: add useItem logic, now it just discards the item
 	public boolean useItem(String type) {
+		if(type.equals("Potion") && this.potionEffect) {
+			System.out.println("A potion is already in use!");
+			return false;
+		}
 		if (backpack.getItem(type) == null) {
+			String message = "You don't have an item of "+type+" kind!";
+			System.out.println(message);
 			return false;
 		}
 		// Temporary solution, open to modification
+		if(type.equals("Potion")) {
+			this.potionEffect = true;
+		}
 		String message = "An item of type " + type + " is used.";
 		System.out.println(message);
 		return true;

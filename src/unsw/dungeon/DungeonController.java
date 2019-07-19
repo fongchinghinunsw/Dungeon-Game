@@ -62,11 +62,11 @@ public class DungeonController {
 				squares.getChildren().add(entity);
 			}
 		}
+
 	}
 
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
-
 		long now = System.nanoTime();
 		if (event.getCode().isArrowKey()) {
 			event.consume();
