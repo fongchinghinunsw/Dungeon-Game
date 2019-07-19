@@ -69,8 +69,8 @@ public class Player extends Character implements Subject {
 		if (type.equals("Potion")) {
 			this.potionEffect = true;
 			Timer timer = new Timer();
-			PotionTimer task = new PotionTimer((Potion) item,this);
-		    timer.schedule(task, 0, 1000);
+			PotionTimer task = new PotionTimer((Potion) item, this);
+			timer.schedule(task, 0, 1000);
 		}
 		String message = "An item of type " + type + " is used.";
 		System.out.println(message);
@@ -113,7 +113,7 @@ public class Player extends Character implements Subject {
 	public void disablePotion() {
 		this.potionEffect = false;
 	}
-	
+
 	public void setMoveSpeed(MoveSpeed moveSpeed) {
 		this.moveSpeed = moveSpeed;
 	}
