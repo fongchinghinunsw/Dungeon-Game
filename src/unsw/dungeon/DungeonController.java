@@ -124,7 +124,11 @@ public class DungeonController {
 			}
 		} else if (event.getCode() == KeyCode.T) {
 			Bomb bomb = player.getBomb();
-			if (bomb != null) {
+			if (bomb != null && !dungeon.hasBomb(player.getX(), player.getY())) {
+				bomb.setX(player.getX());
+				bomb.setY(player.getY());
+				dungeon.addEntity(bomb);
+				bomb.light();
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				player.useItem("Bomb");
 			}

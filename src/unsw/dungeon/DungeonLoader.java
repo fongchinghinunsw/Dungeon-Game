@@ -103,7 +103,8 @@ public abstract class DungeonLoader {
 			entity = potion;
 			break;
 		case "bomb":
-			Bomb bomb = new Bomb(x, y);
+			Bomb bomb = new Bomb(dungeon, x, y);
+			dungeon.addBomb(bomb);
 			onLoad(bomb);
 			entity = bomb;
 			break;
