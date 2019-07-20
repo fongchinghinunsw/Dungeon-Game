@@ -358,11 +358,6 @@
       "type": "potion"
     },
     {
-      "x": 4,
-      "y": 10,
-      "type": "enemy"
-    },
-    {
       "x": 17,
       "y": 5,
       "type": "wall"
@@ -385,7 +380,7 @@
     {
       "x": 3,
       "y": 3,
-      "type": "key"
+      "type": "enemy"
     },
     {
       "x": 4,

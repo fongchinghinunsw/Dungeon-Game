@@ -69,7 +69,7 @@ public class Player extends Character implements Subject, Observer {
 			System.out.println("A potion is already in use!");
 			return false;
 		}
-		Equipable item = backpack.getItem(type);
+		Equipable item = backpack.removeItem(type);
 		if (item == null) {
 			String message = "You don't have an item of " + type + " kind!";
 			System.out.println(message);
@@ -155,6 +155,7 @@ public class Player extends Character implements Subject, Observer {
 		if (obj instanceof Enemy) {
 			Enemy enemy = (Enemy) obj;
 			if (countSwordInBackPack() > 0) {
+				backpack.reduceSwordDurability();
 				enemy.die();
 			}
 		}

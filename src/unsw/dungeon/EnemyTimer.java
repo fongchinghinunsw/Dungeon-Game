@@ -21,12 +21,13 @@ public class EnemyTimer extends TimerTask {
 	public void run() {
 		if (self.isAlive().getValue()) {
 			this.self.findPlayer();
+			// Prevent the ConcurrentModificationException
 			Platform.runLater(() -> self.notifyObservers());
 		} else {
 			// stop the timer
 			System.out.println("I die.");
 			cancel();
 		}
-		// Prevent the ConcurrentModificationException
+
 	}
 }
