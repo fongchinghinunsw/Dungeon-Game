@@ -22,7 +22,9 @@ public abstract class Movable extends Entity {
 
 	public void moveDown() {
 		if (getY() < dungeon.getHeight() - 1 && !(dungeon.sameClass(getX(), getY() + 1, "Wall")))
-			y().set(getY() + 1);
+			if (dungeon.canStepOn(getX(), getY() + 1)) {
+				y().set(getY() + 1);
+			}
 	}
 
 	public void moveLeft() {

@@ -40,4 +40,8 @@ public class Door extends Entity implements Observer {
 		System.out.println("Something");
 	}
 
+	public boolean isOpen() {
+		return this.state.shallPass();
+	}
+
 }

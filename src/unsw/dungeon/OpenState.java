@@ -6,4 +6,8 @@ public class OpenState implements DoorState {
 	public void standOn() {
 
 	}
+
+	public boolean shallPass() {
+		return true;
+	}
 }

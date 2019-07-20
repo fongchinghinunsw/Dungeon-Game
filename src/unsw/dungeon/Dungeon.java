@@ -162,4 +162,14 @@ public class Dungeon {
 	public boolean hasWin() {
 		return goalExpression.evaluate();
 	}
+
+	public boolean canStepOn(int x, int y) {
+		ArrayList<Entity> list = this.getEntity(x, y);
+		for (Entity e : list) {
+			if (e.getClassName().equals("Door") && !((Door) e).isOpen()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
