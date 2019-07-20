@@ -8,8 +8,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public class Enemy extends Movable implements Subject, Observer {
 
-	private MoveSpeed moveSpeed;
 	private Dungeon dungeon;
+	private MoveSpeed moveSpeed;
 	private ArrayList<Observer> observers;
 	private BooleanProperty alive;
 
@@ -31,15 +31,6 @@ public class Enemy extends Movable implements Subject, Observer {
 	public void die() {
 		alive.set(false);
 		System.out.println("Enemy is dead");
-	}
-
-	public long getSpeed() {
-		return moveSpeed.getSpeed();
-	}
-
-	@Override
-	public String getClassName() {
-		return "Enemy";
 	}
 
 	public void findPlayer() {
@@ -75,6 +66,10 @@ public class Enemy extends Movable implements Subject, Observer {
 				}
 			}
 		}
+	}
+
+	public long getSpeed() {
+		return moveSpeed.getSpeed();
 	}
 
 	@Override
@@ -113,6 +108,10 @@ public class Enemy extends Movable implements Subject, Observer {
 				dungeon.killPlayer();
 			}
 		}
+	}
 
+	@Override
+	public String getClassName() {
+		return "Enemy";
 	}
 }

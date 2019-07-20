@@ -12,16 +12,6 @@ public class Backpack {
 		this.max_size = 9;
 	}
 
-	public Equipable removeItem(String type) {
-		for (Equipable item : this.items) {
-			if (item.getClassName().equals(type)) {
-				this.items.remove(item);
-				return item;
-			}
-		}
-		return null;
-	}
-
 	public boolean addItem(Equipable item) {
 		if (this.items.size() == max_size)
 			return false;
@@ -29,34 +19,41 @@ public class Backpack {
 		return true;
 	}
 
-	public Entity removeSword() {
-		for (Entity entity : items) {
-			if (entity.getClassName().equals("Sword")) {
-				Equipable e = (Equipable) entity;
-				e.unequip();
-				Entity tmp = entity;
-				items.remove(entity);
-				return tmp;
+	public Equipable removeItem(String type) {
+		for (Equipable item : items) {
+			if (item.getClassName().equals(type)) {
+				items.remove(item);
+				return item;
 			}
 		}
 		return null;
 	}
 
-	public Equipable getSword() {
+	public Sword getSword() {
 		for (Equipable entity : items) {
 			if (entity.getClassName().equals("Sword")) {
-				return entity;
+				return (Sword) entity;
 			}
+		}
+		return null;
+	}
+
+	public Sword removeSword() {
+		Sword entity = getSword();
+		if (entity != null) {
+			entity.unequip();
+			items.remove(entity);
+			return entity;
 		}
 		return null;
 	}
 
 	public void reduceSwordDurability() {
-		Equipable sword = getSword();
-		((Sword) sword).reduceDurability();
-		System.out.println(((Sword) sword).getDurability());
+		Sword sword = getSword();
+		sword.reduceDurability();
+		System.out.println(sword.getDurability());
 		System.out.println(countSword());
-		if (((Sword) sword).getDurability() == 0) {
+		if (sword.getDurability() == 0) {
 			items.remove(sword);
 		}
 	}
