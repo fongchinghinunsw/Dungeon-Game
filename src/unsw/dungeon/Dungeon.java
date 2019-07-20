@@ -222,13 +222,13 @@ public class Dungeon {
 		Entity entity;
 		if (className.equals("Sword")) {
 			entity = player.removeSwordInBackPack();
-			addObserver((Observer) entity);
 		} else {
 			return;
 		}
 		entity.setX(x);
 		entity.setY(y);
 		entities.add(entity);
+		addObserver((Observer) entity);
 	}
 
 	public GoalExpression getGoalExpression() {
