@@ -32,7 +32,7 @@ public class Sword extends Equipable implements Observer {
 	}
 
 	@Override
-	public void update(Subject obj, Dungeon dungeon) {
+	public void update(Subject obj) {
 		System.out.println("You see a sword.");
 	}
 

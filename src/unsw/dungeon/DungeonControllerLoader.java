@@ -153,7 +153,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 			enemy.isAlive().addListener((observable, oldValue, newValue) -> {
 				if (!newValue) {
 					// currently just move the image to the back of the pane.
-					// node.toBack();
+					node.toBack();
 				}
 			});
 			;
