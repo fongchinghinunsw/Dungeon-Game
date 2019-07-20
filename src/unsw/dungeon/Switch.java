@@ -1,36 +1,19 @@
 package unsw.dungeon;
 
-public class Switch extends Entity implements Subject, Observer {
+public class Switch extends Entity implements Observer {
 	public Switch(int x, int y) {
 		super(x, y);
 	}
 
 	@Override
+	public void update(Subject obj) {
+		// observing from boulders.
+		System.out.println("I'm triggered");
+
+	}
+
+	@Override
 	public String getClassName() {
 		return "Switch";
-	}
-
-	@Override
-	public void update(Subject obj) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void attach(Observer o) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void detach(Observer o) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-
 	}
 }

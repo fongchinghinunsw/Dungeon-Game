@@ -21,6 +21,7 @@ public class Dungeon {
 	private Player player;
 	private List<Entity> entities;
 	private List<Enemy> enemies;
+	private List<Boulder> boulders;
 	private int nKeys;
 	private int nDoors;
 	private GoalExpression goalExpression;
@@ -31,6 +32,7 @@ public class Dungeon {
 		this.player = null;
 		this.entities = new ArrayList<>();
 		this.enemies = new ArrayList<>();
+		this.boulders = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
 	}
@@ -67,12 +69,24 @@ public class Dungeon {
 		this.player = player;
 	}
 
+	public int getPlayerX() {
+		return player.getX();
+	}
+
+	public int getPlayerY() {
+		return player.getY();
+	}
+
 	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}
 
 	public void addEnemy(Enemy enemy) {
 		enemies.add(enemy);
+	}
+
+	public void addBoulder(Boulder boulder) {
+		boulders.add(boulder);
 	}
 
 	public void killPlayer() {
@@ -101,7 +115,12 @@ public class Dungeon {
 				for (Enemy enemy : enemies) {
 					enemy.attach((Observer) entity);
 				}
-
+			}
+			// Add observer for the switch
+			if (sameClass(entity.getX(), entity.getY(), "Switch")) {
+				for (Boulder boulder : boulders) {
+					boulder.attach((Observer) entity);
+				}
 			}
 		}
 	}
@@ -189,6 +208,29 @@ public class Dungeon {
 		ArrayList<Entity> list = this.getEntities(x, y);
 		for (Entity e : list) {
 			if (e.getClassName().equals("Door") && !((Door) e).isOpen()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean canPush(int x, int y) {
+		ArrayList<Entity> list = this.getEntities(x, y);
+		for (Entity e : list) {
+			if (e.getClassName().equals("Boulder")) {
+				if (player.getX() < x && player.getY() == y) {
+					// the player is pushing from the left side.
+					return !(sameClass(x + 1, y, "Boulder", "Enemy", "Wall"));
+				} else if (player.getX() > x && player.getY() == y) {
+					// the player is pushing from the right side.
+					return !(sameClass(x - 1, y, "Boulder", "Enemy", "Wall"));
+				} else if (player.getX() == x && player.getY() < y) {
+					// the player is pushing from the top side.
+					return !(sameClass(x, y + 1, "Boulder", "Enemy", "Wall"));
+				} else if (player.getX() == x && player.getY() > y) {
+					// the player is pushing from the down side.
+					return !(sameClass(x, y - 1, "Boulder", "Enemy", "Wall"));
+				}
 				return false;
 			}
 		}

@@ -58,6 +58,16 @@
       "type": "switch"
     },
     {
+      "x": 4,
+      "y": 2,
+      "type": "potion"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "type": "sword"
+    },
+    {
       "x": 6,
       "y": 2,
       "type": "wall"
@@ -230,7 +240,7 @@
     {
       "x": 4,
       "y": 4,
-      "type": "boulder"
+      "type": "enemy"
     },
     {
       "x": 1,
