@@ -56,7 +56,8 @@ public class Player extends Movable implements Subject, Observer {
 				}
 				if (e.equip()) {
 					backpack.addItem(e);
-					System.out.println("Added item into the backpack");
+					String message = "Added item of type " + e.getClassName() + " into the backpack.";
+					System.out.println(message);
 					return true;
 				}
 			}
