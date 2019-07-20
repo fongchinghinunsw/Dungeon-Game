@@ -69,6 +69,14 @@ public class Dungeon {
 		this.player = player;
 	}
 
+	public int getPlayerX() {
+		return player.getX();
+	}
+
+	public int getPlayerY() {
+		return player.getY();
+	}
+
 	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}

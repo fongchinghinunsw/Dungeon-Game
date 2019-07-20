@@ -12,6 +12,8 @@ public class Boulder extends Movable implements Subject, Observer {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.observers = new ArrayList<Observer>();
+		this.lastX = dungeon.getPlayerX();
+		this.lastY = dungeon.getPlayerY();
 	}
 
 	@Override
@@ -41,6 +43,7 @@ public class Boulder extends Movable implements Subject, Observer {
 	@Override
 	public void update(Subject obj) {
 		if (obj instanceof Player) {
+			// the player is on the boulder (temporary)
 			if (dungeon.sameClass(getX(), getY(), "Player")) {
 				if (lastX < getX() && lastY == getY()) {
 					// the player is pushing from the left side.
@@ -55,6 +58,10 @@ public class Boulder extends Movable implements Subject, Observer {
 					// the player is pushing from the down side.
 					moveUp();
 				}
+			} else {
+				Player player = (Player) obj;
+				lastX = player.getX();
+				lastY = player.getY();
 			}
 		}
 	}

@@ -131,17 +131,21 @@ public class Player extends Movable implements Subject, Observer {
 	public void notifyObservers() {
 		// this logic is to ensure the entity still exist on the map but not just in the
 		// observers.
-		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy", "Door")) {
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy", "Door",
+				"Boulder")) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
 					o.update(this);
 				}
 			}
-		} 
+		}
 		for (Observer o : observers) {
 			Entity entity = (Entity) o;
 			if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Door")) {
+				o.update(this);
+			}
+			if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Boulder")) {
 				o.update(this);
 			}
 		}
