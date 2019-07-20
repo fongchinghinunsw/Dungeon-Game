@@ -34,6 +34,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image enemyImage;
 	private Image swordImage;
 	private Image switchImage;
+	private Image closedDoorImage;
+	private Image openDoorImage;
 
 	public DungeonControllerLoader(String filename) throws FileNotFoundException {
 		super(filename);
@@ -49,6 +51,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 		enemyImage = new Image("/hound.png");
 		swordImage = new Image("/greatsword_1_new.png");
 		switchImage = new Image("/pressure_plate.png");
+		closedDoorImage = new Image("/closed_door.png");
+		openDoorImage = new Image("/open_door.png");
 	}
 
 	@Override
@@ -114,6 +118,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 	public void onLoad(Switch floorSwitch) {
 		ImageView view = new ImageView(switchImage);
 		addEntity(floorSwitch, view);
+	}
+
+	@Override
+	public void onLoad(Door door) {
+		ImageView view = new ImageView(closedDoorImage);
+		addEntity(door, view);
 	}
 
 	private void addEntity(Entity entity, ImageView view) {

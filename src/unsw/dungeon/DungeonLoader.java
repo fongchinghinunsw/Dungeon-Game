@@ -80,9 +80,16 @@ public abstract class DungeonLoader {
 			entity = boulder;
 			break;
 		case "key":
-			Key key = new Key(x, y);
+			Key key = new Key(x, y, dungeon.numKey());
+			dungeon.addKey();
 			onLoad(key);
 			entity = key;
+			break;
+		case "door":
+			Door door = new Door(x, y, dungeon.numDoor());
+			dungeon.addDoor();
+			onLoad(door);
+			entity = door;
 			break;
 		case "treasure":
 			Treasure treasure = new Treasure(x, y);
@@ -141,6 +148,8 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Enemy enemy);
 
 	public abstract void onLoad(Switch floorSwitch);
+
+	public abstract void onLoad(Door door);
 
 	// TODO Create additional abstract methods for the other entities
 

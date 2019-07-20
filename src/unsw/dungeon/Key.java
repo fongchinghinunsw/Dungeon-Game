@@ -2,10 +2,11 @@ package unsw.dungeon;
 
 public class Key extends Equipable implements Observer {
 
-	private int id;
+	private final int id;
 
-	public Key(int x, int y) {
+	public Key(int x, int y, int id) {
 		super(x, y);
+		this.id = id;
 	}
 
 	public int getId() {

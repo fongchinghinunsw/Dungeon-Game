@@ -22,6 +22,8 @@ public class Dungeon {
 	private GoalExpression goalExpression;
 	private Player player;
 	private List<Enemy> enemies;
+	private int nKeys;
+	private int nDoors;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
@@ -29,10 +31,28 @@ public class Dungeon {
 		this.entities = new ArrayList<>();
 		this.player = null;
 		this.enemies = new ArrayList<>();
+		this.nKeys = 0;
+		this.nDoors = 0;
 	}
 
 	public int getWidth() {
 		return width;
+	}
+
+	public void addKey() {
+		this.nKeys++;
+	}
+
+	public int numKey() {
+		return this.nKeys;
+	}
+
+	public int numDoor() {
+		return this.nDoors;
+	}
+
+	public void addDoor() {
+		this.nDoors++;
 	}
 
 	public int getHeight() {
