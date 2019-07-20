@@ -65,11 +65,14 @@ public class Bomb extends Equipable implements Subject, Observer {
 
 	@Override
 	public void notifyObservers() {
-		if (dungeon.sameClass(getX(), getY(), "Player")) {
-			for (Observer o : observers) {
-				if (o instanceof Player) {
+		for (Observer o : observers) {
+			Entity entity = (Entity) o;
+			if (this.adjacent(entity.getX(), entity.getY())) {
+				String className = ((Entity) o).getClassName();
+				if (className.equals("Player") || className.equals("Boulder") || className.equals("Enemy")) {
 					o.update(this);
-					System.out.println("Bomb here. Just told the player that Imma blow'em up");
+					String message = "Bomb here. Just told the " + className + " that Imma blow'em up";
+					System.out.println(message);
 				}
 			}
 		}

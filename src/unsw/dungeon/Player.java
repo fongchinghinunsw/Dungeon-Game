@@ -180,7 +180,7 @@ public class Player extends Movable implements Subject, Observer {
 			}
 		} else if (obj instanceof Bomb) {
 			Bomb bomb = (Bomb) obj;
-			if (this.getX() == bomb.getX() && this.getY() == bomb.getY() && !this.potionEffect) {
+			if (this.adjacent(bomb.getX(), bomb.getY()) && !this.potionEffect) {
 				die();
 			}
 		}
