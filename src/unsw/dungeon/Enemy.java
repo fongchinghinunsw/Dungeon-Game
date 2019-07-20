@@ -21,7 +21,7 @@ public class Enemy extends Movable implements Subject, Observer {
 		this.observers = new ArrayList<>();
 		Timer timer = new Timer();
 		EnemyTimer task = new EnemyTimer(this, dungeon.getPlayer());
-		timer.schedule(task, 0, 1000 / moveSpeed.getSpeed());
+		timer.schedule(task, 0, 100 / moveSpeed.getSpeed());
 	}
 
 	public BooleanProperty isAlive() {
