@@ -2,6 +2,7 @@
 *.log
 hs_err_pid*
 /bin/
+.metadata
 .gitignore.swp
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.jdt.launching.prefs
