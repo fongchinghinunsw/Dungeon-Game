@@ -7,7 +7,7 @@ import javafx.application.Platform;
 public class EnemyTimer extends TimerTask {
 	private Enemy self;
 	private int tick;
-	private Player player;
+	private Dungeon dungeon;
 
 	/**
 	 * PotionTimer constructor
@@ -15,10 +15,10 @@ public class EnemyTimer extends TimerTask {
 	 * @param potion
 	 * @param player
 	 */
-	public EnemyTimer(Enemy self, Player player) {
+	public EnemyTimer(Enemy self, Dungeon dungeon) {
 		this.self = self;
 		this.tick = 0;
-		this.player = player;
+		this.dungeon = dungeon;
 	}
 
 	@Override
@@ -30,7 +30,6 @@ public class EnemyTimer extends TimerTask {
 					this.self.findPlayer();
 				}
 				self.notifyObservers();
-				player.notifyObservers();
 				tick++;
 			});
 		} else {

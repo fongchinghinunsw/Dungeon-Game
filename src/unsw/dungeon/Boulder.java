@@ -2,11 +2,15 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class Boulder extends Movable implements Subject, Observer {
 
 	private Dungeon dungeon;
 	private ArrayList<Observer> observers;
 	private int lastX, lastY;
+	private BooleanProperty destroyed;
 
 	public Boulder(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
@@ -14,6 +18,11 @@ public class Boulder extends Movable implements Subject, Observer {
 		this.observers = new ArrayList<Observer>();
 		this.lastX = dungeon.getPlayerX();
 		this.lastY = dungeon.getPlayerY();
+		destroyed = new SimpleBooleanProperty(false);
+	}
+
+	public BooleanProperty destroyed() {
+		return destroyed;
 	}
 
 	@Override
@@ -30,14 +39,7 @@ public class Boulder extends Movable implements Subject, Observer {
 
 	@Override
 	public void notifyObservers() {
-		if (dungeon.sameClass(getX(), getY(), "Switch")) {
-			for (Observer o : observers) {
-				if (o instanceof Switch) {
-					o.update(this);
-				}
 
-			}
-		}
 	}
 
 	@Override
@@ -63,6 +65,9 @@ public class Boulder extends Movable implements Subject, Observer {
 				lastX = player.getX();
 				lastY = player.getY();
 			}
+		} else if (obj instanceof Bomb) {
+			dungeon.destroyBoulder(this);
+			destroyed.set(true);
 		}
 	}
 

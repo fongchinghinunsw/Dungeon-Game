@@ -13,12 +13,6 @@ public class Switch extends Entity implements Observer {
 
 	@Override
 	public void update(Subject obj) {
-		// observing from boulders.
-		if (obj instanceof Boulder) {
-			triggered = true;
-			dungeon.minusCountUntriggeredSwitch();
-			System.out.println("I'm triggered");
-		}
 
 	}
 

@@ -55,6 +55,25 @@ public class Backpack {
 		System.out.println(message);
 	}
 
+	public Bomb getBomb() {
+		for (Equipable e : items) {
+			if (e.getClassName().equals("Bomb")) {
+				return (Bomb) e;
+			}
+		}
+		return null;
+	}
+
+	public Bomb removeBomb() {
+		Bomb entity = getBomb();
+		if (entity != null) {
+			entity.unequip();
+			items.remove(entity);
+			return entity;
+		}
+		return null;
+	}
+
 	/**
 	 * gets a sword from the backpack
 	 * 
@@ -126,4 +145,5 @@ public class Backpack {
 		}
 		return keys;
 	}
+
 }
