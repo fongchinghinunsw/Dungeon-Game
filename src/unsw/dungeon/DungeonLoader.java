@@ -80,13 +80,13 @@ public abstract class DungeonLoader {
 			entity = boulder;
 			break;
 		case "key":
-			Key key = new Key(x, y, dungeon.numKey());
+			Key key = new Key(dungeon, x, y);
 			dungeon.addKey();
 			onLoad(key);
 			entity = key;
 			break;
 		case "door":
-			Door door = new Door(x, y, dungeon.numDoor());
+			Door door = new Door(dungeon, x, y);
 			dungeon.addDoor();
 			onLoad(door);
 			entity = door;
