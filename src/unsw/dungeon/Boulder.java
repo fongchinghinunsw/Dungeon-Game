@@ -2,7 +2,6 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-// Extends Character class for now, open to modification later.
 public class Boulder extends Movable implements Subject, Observer {
 
 	private Dungeon dungeon;
