@@ -49,6 +49,7 @@ public class Player extends Movable implements Subject, Observer {
 					}
 				}
 				if (e.equip()) {
+					dungeon.removeObserver((Observer) e);
 					backpack.addItem(e);
 					String message = "Added item of type " + e.getClassName() + " into the backpack.";
 					System.out.println(message);

@@ -39,14 +39,7 @@ public class Boulder extends Movable implements Subject, Observer {
 
 	@Override
 	public void notifyObservers() {
-		if (dungeon.sameClass(getX(), getY(), "Switch")) {
-			for (Observer o : observers) {
-				if (o instanceof Switch) {
-					o.update(this);
-				}
 
-			}
-		}
 	}
 
 	@Override

@@ -22,8 +22,10 @@ public class Dungeon {
 	private List<Entity> entities;
 	private List<Enemy> enemies;
 	private List<Boulder> boulders;
+	private List<Switch> switches;
 	private int nKeys;
 	private int nDoors;
+	private int countUntriggeredSwitch;
 	private GoalExpression goalExpression;
 	private List<Bomb> bombs;
 
@@ -40,9 +42,11 @@ public class Dungeon {
 		this.entities = new ArrayList<>();
 		this.enemies = new ArrayList<>();
 		this.boulders = new ArrayList<>();
+		this.switches = new ArrayList<>();
 		this.bombs = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
+		this.countUntriggeredSwitch = 0;
 	}
 
 	/**
@@ -93,6 +97,27 @@ public class Dungeon {
 	 */
 	public int getHeight() {
 		return height;
+	}
+
+	/**
+	 * increase untriggered switches by 1
+	 */
+	public void addCountUntriggeredSwitch() {
+		this.countUntriggeredSwitch++;
+	}
+
+	/**
+	 * 
+	 * @return number of untriggered switches
+	 */
+	public int countUntriggeredSwitch() {
+		int count = countUntriggeredSwitch;
+		for (Switch floorSwitch : switches) {
+			if (sameClass(floorSwitch.getX(), floorSwitch.getY(), "Boulder")) {
+				count--;
+			}
+		}
+		return count;
 	}
 
 	/**
@@ -168,6 +193,15 @@ public class Dungeon {
 	}
 
 	/**
+	 * adds a switch to switches
+	 * 
+	 * @param floorSwitch to be added
+	 */
+	public void addSwitch(Switch floorSwitch) {
+		switches.add(floorSwitch);
+	}
+
+	/**
 	 * kills the player
 	 */
 	public void killPlayer() {
@@ -222,6 +256,42 @@ public class Dungeon {
 					boulder.attach((Observer) entity);
 				}
 			}
+		}
+	}
+
+	public void addObserver(Observer o) {
+		Entity entity = (Entity) o;
+		if (!(sameClass(entity.getX(), entity.getY(), "Wall"))) {
+			// Add observer for the player
+			player.attach((Observer) entity);
+			// Add observer for the enemy
+			for (Enemy enemy : enemies) {
+				enemy.attach((Observer) entity);
+			}
+		}
+		// Add observer for the switch
+		if (sameClass(entity.getX(), entity.getY(), "Switch")) {
+			for (Boulder boulder : boulders) {
+				boulder.attach((Observer) entity);
+			}
+		}
+	}
+
+	public void removeObserver(Observer o) {
+		for (Entity entity : entities) {
+			if (entity instanceof Subject) {
+				((Subject) entity).detach(o);
+			}
+		}
+	}
+
+	public void notifyPlayerObservers() {
+		player.notifyObservers();
+	}
+
+	public void notifyBoulderObservers() {
+		for (Boulder boulder : boulders) {
+			boulder.notifyObservers();
 		}
 	}
 
@@ -304,6 +374,7 @@ public class Dungeon {
 		entity.setX(x);
 		entity.setY(y);
 		entities.add(entity);
+		addObserver((Observer) entity);
 	}
 
 	public GoalExpression getGoalExpression() {

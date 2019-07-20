@@ -76,6 +76,7 @@ public abstract class DungeonLoader {
 			break;
 		case "boulder":
 			Boulder boulder = new Boulder(dungeon, x, y);
+			dungeon.addBoulder(boulder);
 			onLoad(boulder);
 			entity = boulder;
 			break;
@@ -119,7 +120,9 @@ public abstract class DungeonLoader {
 			entity = sword;
 			break;
 		case "switch":
-			Switch floorSwitch = new Switch(x, y);
+			Switch floorSwitch = new Switch(dungeon, x, y);
+			dungeon.addSwitch(floorSwitch);
+			dungeon.addCountUntriggeredSwitch();
 			onLoad(floorSwitch);
 			entity = floorSwitch;
 			break;
