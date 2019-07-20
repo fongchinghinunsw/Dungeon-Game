@@ -139,6 +139,32 @@ public class Dungeon {
 		}
 	}
 
+	public void addObserver(Observer o) {
+		Entity entity = (Entity) o;
+		if (!(sameClass(entity.getX(), entity.getY(), "Wall"))) {
+			// Add observer for the player
+			player.attach((Observer) entity);
+			// Add observer for the enemy
+			for (Enemy enemy : enemies) {
+				enemy.attach((Observer) entity);
+			}
+		}
+		// Add observer for the switch
+		if (sameClass(entity.getX(), entity.getY(), "Switch")) {
+			for (Boulder boulder : boulders) {
+				boulder.attach((Observer) entity);
+			}
+		}
+	}
+
+	public void removeObserver(Observer o) {
+		for (Entity entity : entities) {
+			if (entity instanceof Subject) {
+				((Subject) entity).detach(o);
+			}
+		}
+	}
+
 	/*
 	 * Check if there exists an object on the grid belongs to one of the specified
 	 * classes.
@@ -196,6 +222,7 @@ public class Dungeon {
 		Entity entity;
 		if (className.equals("Sword")) {
 			entity = player.removeSwordInBackPack();
+			addObserver((Observer) entity);
 		} else {
 			return;
 		}
