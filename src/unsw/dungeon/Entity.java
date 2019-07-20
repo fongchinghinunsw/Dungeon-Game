@@ -27,35 +27,35 @@ public abstract class Entity {
 	}
 
 	/*
-	 * Get the value of x.
+	 * Get the value of x
 	 */
 	public IntegerProperty x() {
 		return x;
 	}
 
 	/*
-	 * Get the value of y.
+	 * Get the value of y
 	 */
 	public IntegerProperty y() {
 		return y;
 	}
 
 	/*
-	 * Set the value of x.
+	 * Set the value of x
 	 */
 	public void setX(int x) {
 		this.x.setValue(x);
 	}
 
 	/*
-	 * Set the value of y.
+	 * Set the value of y
 	 */
 	public void setY(int y) {
 		this.y.setValue(y);
 	}
 
 	/*
-	 * Get integer value of x.
+	 * Get integer value of x
 	 */
 	public int getX() {
 		return x.get();
@@ -68,6 +68,9 @@ public abstract class Entity {
 		return y.get();
 	}
 
+	/*
+	 * Get the name of the class
+	 */
 	public abstract String getClassName();
 
 }
