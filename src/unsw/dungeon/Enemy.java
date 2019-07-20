@@ -3,30 +3,33 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.Timer;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class Enemy extends Character implements Subject, Observer {
 
 	private MoveSpeed moveSpeed;
 	private Dungeon dungeon;
 	private ArrayList<Observer> observers;
-	private boolean alive;
+	private BooleanProperty alive;
 
 	public Enemy(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.moveSpeed = new Slow();
-		this.alive = true;
+		this.alive = new SimpleBooleanProperty(true);
 		this.observers = new ArrayList<>();
 		Timer timer = new Timer();
 		EnemyTimer task = new EnemyTimer(this, dungeon.getPlayer());
 		timer.schedule(task, 0, 1000 / moveSpeed.getSpeed());
 	}
 
-	public boolean isAlive() {
+	public BooleanProperty isAlive() {
 		return this.alive;
 	}
 
 	public void die() {
-		this.alive = false;
+		this.alive = new SimpleBooleanProperty(false);
 		System.out.println("Enemy is dead");
 	}
 
@@ -73,7 +76,9 @@ public class Enemy extends Character implements Subject, Observer {
 			}
 		}
 		if (this.getX() == playerX && this.getY() == playerY) {
-			this.dungeon.killPlayer();
+			if (player.countSwordInBackPack() == 0) {
+				this.dungeon.killPlayer();
+			}
 		}
 
 	}
