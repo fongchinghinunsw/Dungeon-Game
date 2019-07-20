@@ -6,6 +6,7 @@ import javafx.application.Platform;
 
 public class EnemyTimer extends TimerTask {
 	private Enemy self;
+	private int tick;
 
 	/**
 	 * PotionTimer constructor
@@ -15,12 +16,16 @@ public class EnemyTimer extends TimerTask {
 	 */
 	public EnemyTimer(Enemy self, Player player) {
 		this.self = self;
+		this.tick = 0;
 	}
 
 	@Override
 	public void run() {
 		if (self.isAlive().getValue()) {
-			this.self.findPlayer();
+			if (this.tick % 10 == 0)
+				this.self.findPlayer();
+			this.self.checkPlayer();
+			tick++;
 			// Prevent the ConcurrentModificationException
 			Platform.runLater(() -> self.notifyObservers());
 		} else {
