@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
+import java.lang.Math;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -44,6 +45,21 @@ public abstract class Entity {
 
 	public int getX() {
 		return x().get();
+	}
+
+	/**
+	 * checks if entity is next to a given location
+	 * 
+	 * @param x of the given location
+	 * @param y of the given location
+	 * @return true if adjacent to the grid
+	 */
+	public boolean adjacent(int x2, int y2) {
+		if (getX() == x2 && Math.abs(getY() - y2) == 1) {
+			return true;
+		} else if (getY() == y2 && Math.abs(getX() - x2) == 1)
+			return true;
+		return true;
 	}
 
 	public int getY() {

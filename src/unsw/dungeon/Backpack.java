@@ -70,4 +70,14 @@ public class Backpack {
 		}
 		return count;
 	}
+
+	public ArrayList<Key> getKeys() {
+		ArrayList<Key> keys = new ArrayList<Key>();
+		for (Equipable e : this.items) {
+			if (e.getClassName().equals("Key")) {
+				keys.add((Key) e);
+			}
+		}
+		return keys;
+	}
 }

@@ -112,6 +112,8 @@ public class Player extends Movable implements Subject, Observer {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
 					o.update(this, dungeon);
+				} else if (entity.adjacent(getX(), getY())) {
+					o.update(this, dungeon);
 				}
 			}
 		}

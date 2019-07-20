@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public class Door extends Entity implements Observer {
 	private final int id;
 	private DoorState state;
@@ -37,6 +39,14 @@ public class Door extends Entity implements Observer {
 
 	@Override
 	public void update(Subject obj, Dungeon dungeon) {
+		Player player = (Player) obj;
+		ArrayList<Key> keys = player.getBackpack().getKeys();
+		for (Key key : keys) {
+			if (key.getId() == this.getId()) {
+				setState(getOpenState());
+				System.out.println("ID matches. Door opening");
+			}
+		}
 		System.out.println("Something");
 	}
 
