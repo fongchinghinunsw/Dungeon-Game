@@ -113,6 +113,9 @@ public class Enemy extends Movable implements Subject, Observer {
 				die();
 			}
 		}
+		if (obj instanceof Bomb) {
+			die();
+		}
 	}
 
 	@Override

@@ -67,7 +67,7 @@ public class Bomb extends Equipable implements Subject, Observer {
 	public void notifyObservers() {
 		for (Observer o : observers) {
 			Entity entity = (Entity) o;
-			if (this.adjacent(entity.getX(), entity.getY())) {
+			if (this.adjacent(entity.getX(), entity.getY()) || this.samePlace(entity.getX(), entity.getY())) {
 				String className = ((Entity) o).getClassName();
 				if (className.equals("Player") || className.equals("Boulder") || className.equals("Enemy")) {
 					o.update(this);

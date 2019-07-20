@@ -179,8 +179,7 @@ public class Player extends Movable implements Subject, Observer {
 				dungeon.killEnemy(enemy);
 			}
 		} else if (obj instanceof Bomb) {
-			Bomb bomb = (Bomb) obj;
-			if (this.adjacent(bomb.getX(), bomb.getY()) && !this.potionEffect) {
+			if (!this.potionEffect) {
 				die();
 			}
 		}
