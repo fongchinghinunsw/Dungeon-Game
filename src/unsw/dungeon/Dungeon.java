@@ -21,6 +21,7 @@ public class Dungeon {
 	private Player player;
 	private List<Entity> entities;
 	private List<Enemy> enemies;
+	private List<Boulder> boulders;
 	private int nKeys;
 	private int nDoors;
 	private GoalExpression goalExpression;
@@ -31,6 +32,7 @@ public class Dungeon {
 		this.player = null;
 		this.entities = new ArrayList<>();
 		this.enemies = new ArrayList<>();
+		this.boulders = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
 	}
@@ -75,6 +77,10 @@ public class Dungeon {
 		enemies.add(enemy);
 	}
 
+	public void addBoulder(Boulder boulder) {
+		boulders.add(boulder);
+	}
+
 	public void killPlayer() {
 		player.die();
 		entities.remove(player);
@@ -101,7 +107,12 @@ public class Dungeon {
 				for (Enemy enemy : enemies) {
 					enemy.attach((Observer) entity);
 				}
-
+			}
+			// Add observer for the switch
+			if (sameClass(entity.getX(), entity.getY(), "Switch")) {
+				for (Boulder boulder : boulders) {
+					boulder.attach((Observer) entity);
+				}
 			}
 		}
 	}
