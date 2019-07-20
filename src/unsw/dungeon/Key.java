@@ -4,9 +4,9 @@ public class Key extends Equipable implements Observer {
 
 	private final int id;
 
-	public Key(int x, int y, int id) {
+	public Key(Dungeon dungeon, int x, int y) {
 		super(x, y);
-		this.id = id;
+		this.id = dungeon.numKey();
 	}
 
 	public int getId() {
