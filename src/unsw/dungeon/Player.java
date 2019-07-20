@@ -80,14 +80,38 @@ public class Player extends Movable implements Subject, Observer {
 		System.out.println(message);
 		return true;
 	}
-
-	public Entity removeSwordInBackPack() {
-		return backpack.removeSword();
-
+	
+	public boolean isAlive() {
+		return this.alive;
 	}
 
 	public boolean isInvincible() {
 		return this.potionEffect;
+	}
+
+	public boolean die() {
+		if (this.isInvincible()) {
+			return false;
+		}
+		this.alive = false;
+		System.out.println("You're dead lol");
+		return true;
+	}
+
+	public void disablePotion() {
+		this.potionEffect = false;
+	}
+
+	public int countSwordInBackPack() {
+		return backpack.countSword();
+	}
+
+	public Entity removeSwordInBackPack() {
+		return backpack.removeSword();
+	}
+
+	public long getSpeed() {
+		return moveSpeed.getSpeed();
 	}
 
 	@Override
@@ -118,31 +142,6 @@ public class Player extends Movable implements Subject, Observer {
 				}
 			}
 		}
-	}
-
-	public boolean die() {
-		if (this.isInvincible()) {
-			return false;
-		}
-		this.alive = false;
-		System.out.println("You're dead lol");
-		return true;
-	}
-
-	public boolean isAlive() {
-		return this.alive;
-	}
-
-	public int countSwordInBackPack() {
-		return backpack.countSword();
-	}
-
-	public long getSpeed() {
-		return moveSpeed.getSpeed();
-	}
-
-	public void disablePotion() {
-		this.potionEffect = false;
 	}
 
 	@Override
