@@ -17,15 +17,35 @@ import org.junit.jupiter.params.provider.ValueSource;
  *
  */
 public class US6_Test {
+	
 	@Test
-	public void testEquipKey() {
+	public void testClassMethods() {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Key key = new Key(dungeon, 5, 5);
 		dungeon.addKey();
 		dungeon.addEntity(key);
-		Player player1 = new Player(dungeon, 5, 5);
+		assertEquals(key.getX(), 5, "X of key isn't set correctly");
+		assertEquals(key.getY(), 5, "Y of key isn't set correctly");
+		assertEquals(key.getClassName(),"Key","getClassName incorrect");
+		assertEquals(key.getId(),dungeon.numKey()-1, "Generated id incorrect");
+	}
+	
+	@ParameterizedTest
+	@ValueSource(ints = { 1, 2,  4, 5, 6, 7, 8,  10 })
+	public void testEquipKey(int input) {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Key key = new Key(dungeon, input, 5);
+		dungeon.addKey();
+		dungeon.addEntity(key);
+		Player player1 = new Player(dungeon, 3, 5);
+		assertFalse(player1.equipItem(),"Picked up key from far away");
+		assertNull(player1.findKey(),"Key in backpack when it shouldn't be");
+		player1.setX(input);
 		assertTrue(player1.equipItem(), "Can't put key in bag!");
 		assertNotNull(player1.findKey(),"Key isn't added to bag!");
+		assertFalse(player1.equipItem(),"Picked up key when there's no key left");
+		player1.setY(2);
+		assertFalse(player1.equipItem(),"Picked up key when there's no key left");
 	}
 	
 	@Test
