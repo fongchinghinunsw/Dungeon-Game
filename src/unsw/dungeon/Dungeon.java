@@ -59,7 +59,7 @@ public class Dungeon {
 		return player.die();
 	}
 
-	public void kilEnemy(Enemy enemy) {
+	public void killEnemy(Enemy enemy) {
 		entities.remove(enemy);
 		enemies.remove(enemy);
 	}
