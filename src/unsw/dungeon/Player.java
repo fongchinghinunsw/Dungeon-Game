@@ -48,6 +48,12 @@ public class Player extends Movable implements Subject, Observer {
 						return false;
 					}
 				}
+				if (entity instanceof Key) {
+					if (hasKey()) {
+						System.out.println("You're already carrying a key!");
+						return false;
+					}
+				}
 				if (e.equip()) {
 					dungeon.removeObserver((Observer) e);
 					backpack.addItem(e);
@@ -58,6 +64,10 @@ public class Player extends Movable implements Subject, Observer {
 			}
 		}
 		return false;
+	}
+
+	private boolean hasKey() {
+		return (backpack.getKey() != null);
 	}
 
 	public boolean useItem(String type) {
@@ -109,6 +119,10 @@ public class Player extends Movable implements Subject, Observer {
 
 	public Bomb getBomb() {
 		return backpack.getBomb();
+	}
+
+	public Key removeKeyInBackpack() {
+		return backpack.removeKey();
 	}
 
 	public int countSwordInBackPack() {
@@ -187,12 +201,9 @@ public class Player extends Movable implements Subject, Observer {
 	}
 
 	public void useKey(int id) {
-		ArrayList<Key> keys = this.findKeys();
-		for (Key key : keys) {
-			if (key.getId() == id) {
-				this.backpack.removeKey(key);
-				;
-			}
+		Key key = this.findKey();
+		if (key.getId() == id) {
+			this.backpack.removeKey();
 		}
 	}
 
@@ -201,8 +212,8 @@ public class Player extends Movable implements Subject, Observer {
 		return "Player";
 	}
 
-	public ArrayList<Key> findKeys() {
-		return backpack.getKeys();
+	public Key findKey() {
+		return backpack.getKey();
 	}
 
 }

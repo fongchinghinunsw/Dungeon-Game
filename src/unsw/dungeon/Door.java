@@ -40,13 +40,14 @@ public class Door extends Entity implements Observer {
 	@Override
 	public void update(Subject obj) {
 		Player player = (Player) obj;
-		ArrayList<Key> keys = player.findKeys();
-		for (Key key : keys) {
-			if (key.getId() == getId() && !isOpen()) {
-				setState(getOpenState());
-				System.out.println("ID matches. Door opening");
-				player.useKey(getId());
-			}
+		Key key = player.findKey();
+		if (key == null) {
+			return;
+		}
+		if (key.getId() == getId() && !isOpen()) {
+			setState(getOpenState());
+			System.out.println("ID matches. Door opening");
+			player.useKey(getId());
 		}
 	}
 

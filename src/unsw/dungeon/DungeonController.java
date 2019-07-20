@@ -132,6 +132,11 @@ public class DungeonController {
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				player.useItem("Bomb");
 			}
+		} else if (event.getCode() == KeyCode.J) {
+			if (player.findKey() != null && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
+				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+				dungeon.removeEquippedEntity(player.getX(), player.getY(), "Key");
+			}
 		}
 	}
 

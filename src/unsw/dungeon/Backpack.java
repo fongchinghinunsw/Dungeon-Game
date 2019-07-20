@@ -44,15 +44,18 @@ public class Backpack {
 		return null;
 	}
 
-	/**
-	 * removes the given key from backpack
-	 * 
-	 * @param key to be removed
-	 */
-	public void removeKey(Key key) {
-		this.items.remove(key);
-		String message = "Key with id " + key.getId() + " removed from backpack.";
-		System.out.println(message);
+	public Key removeKey() {
+		for (Equipable e : items) {
+			if (e.getClassName().equals("Key")) {
+				Key key = (Key) e;
+				String message = "Key with id " + key.getId() + " removed from backpack.";
+				e.unequip();
+				items.remove(e);
+				System.out.println(message);
+				return key;
+			}
+		}
+		return null;
 	}
 
 	public Bomb getBomb() {
@@ -132,18 +135,17 @@ public class Backpack {
 	}
 
 	/**
-	 * gets the keys in the backpack
+	 * gets the key in the backpack
 	 * 
-	 * @return arraylist of keys
+	 * @return key in bag
 	 */
-	public ArrayList<Key> getKeys() {
-		ArrayList<Key> keys = new ArrayList<Key>();
+	public Key getKey() {
 		for (Equipable e : this.items) {
 			if (e.getClassName().equals("Key")) {
-				keys.add((Key) e);
+				return (Key) e;
 			}
 		}
-		return keys;
+		return null;
 	}
 
 }
