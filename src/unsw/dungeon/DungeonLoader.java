@@ -118,7 +118,7 @@ public abstract class DungeonLoader {
 			entity = sword;
 			break;
 		case "switch":
-			Switch floorSwitch = new Switch(x, y);
+			Switch floorSwitch = new Switch(dungeon, x, y);
 			onLoad(floorSwitch);
 			entity = floorSwitch;
 			break;
