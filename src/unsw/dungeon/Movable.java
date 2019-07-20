@@ -5,7 +5,7 @@ public abstract class Movable extends Entity {
 	private Dungeon dungeon;
 
 	/**
-	 * Create a movable object positioned in square (x,y)
+	 * Create a player positioned in square (x,y)
 	 * 
 	 * @param x
 	 * @param y

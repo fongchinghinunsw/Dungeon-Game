@@ -138,12 +138,11 @@ public class Player extends Movable implements Subject, Observer {
 					o.update(this);
 				}
 			}
-		} else {
-			for (Observer o : observers) {
-				Entity entity = (Entity) o;
-				if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Door")) {
-					o.update(this);
-				}
+		} 
+		for (Observer o : observers) {
+			Entity entity = (Entity) o;
+			if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Door")) {
+				o.update(this);
 			}
 		}
 	}
