@@ -1,15 +1,13 @@
 package unsw.dungeon;
 
-// Extends Character class for now, open to modification later.
-public class Boulder extends Entity implements Subject, Observer {
-
-	public Boulder(int x, int y) {
+public class Switch extends Entity implements Subject, Observer {
+	public Switch(int x, int y) {
 		super(x, y);
 	}
 
 	@Override
 	public String getClassName() {
-		return "Boulder";
+		return "Switch";
 	}
 
 	@Override
@@ -35,5 +33,4 @@ public class Boulder extends Entity implements Subject, Observer {
 		// TODO Auto-generated method stub
 
 	}
-
 }
