@@ -34,15 +34,9 @@ public class Player extends Movable implements Subject, Observer {
 		this.alive = true;
 	}
 
-	public Backpack getBackpack() {
-		return this.backpack;
-	}
-
-	// here for now, open for modification
-	public boolean isInvincible() {
-		return this.potionEffect;
-	}
-
+	/*
+	 * Add the item into the backpack.
+	 */
 	public boolean equipItem() {
 		ArrayList<Entity> entities = dungeon.getEntities(getX(), getY());
 		for (Entity entity : entities) {
@@ -92,6 +86,10 @@ public class Player extends Movable implements Subject, Observer {
 
 	}
 
+	public boolean isInvincible() {
+		return this.potionEffect;
+	}
+
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {
@@ -104,8 +102,14 @@ public class Player extends Movable implements Subject, Observer {
 		observers.remove(o);
 	}
 
+	/*
+	 * Notify the current location of itself to all its observers, this method is
+	 * called in DungeonController after each movement.
+	 */
 	@Override
 	public void notifyObservers() {
+		// this logic is to ensure the entity still exist on the map but not just in the
+		// observers.
 		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy")) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
@@ -114,11 +118,6 @@ public class Player extends Movable implements Subject, Observer {
 				}
 			}
 		}
-	}
-
-	@Override
-	public String getClassName() {
-		return "Player";
 	}
 
 	public boolean die() {
@@ -146,10 +145,6 @@ public class Player extends Movable implements Subject, Observer {
 		this.potionEffect = false;
 	}
 
-	public void setMoveSpeed(MoveSpeed moveSpeed) {
-		this.moveSpeed = moveSpeed;
-	}
-
 	@Override
 	public void update(Subject obj, Dungeon dungeon) {
 		if (obj instanceof Enemy) {
@@ -159,6 +154,10 @@ public class Player extends Movable implements Subject, Observer {
 				enemy.die();
 			}
 		}
+	}
 
+	@Override
+	public String getClassName() {
+		return "Player";
 	}
 }
