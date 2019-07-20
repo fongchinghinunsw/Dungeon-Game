@@ -41,11 +41,11 @@ public class Door extends Entity implements Observer {
 	public void update(Subject obj) {
 		Player player = (Player) obj;
 		ArrayList<Key> keys = player.findKeys();
-		System.out.println("This line is executed.");
 		for (Key key : keys) {
-			if (key.getId() == this.getId()) {
+			if (key.getId() == getId() && !isOpen()) {
 				setState(getOpenState());
 				System.out.println("ID matches. Door opening");
+				player.useKey(getId());
 			}
 		}
 	}

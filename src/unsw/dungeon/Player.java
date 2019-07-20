@@ -167,7 +167,8 @@ public class Player extends Movable implements Subject, Observer {
 		ArrayList<Key> keys = this.findKeys();
 		for (Key key : keys) {
 			if (key.getId() == id) {
-				this.backpack.removeItem("");
+				this.backpack.removeKey(key);
+				;
 			}
 		}
 	}
