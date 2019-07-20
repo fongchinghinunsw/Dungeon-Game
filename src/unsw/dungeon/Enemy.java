@@ -106,7 +106,7 @@ public class Enemy extends Movable implements Subject, Observer {
 			Player player = (Player) obj;
 			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
 				dungeon.killPlayer();
-			} else if (player.isInvincible()) {
+			} else {
 				die();
 			}
 		}
