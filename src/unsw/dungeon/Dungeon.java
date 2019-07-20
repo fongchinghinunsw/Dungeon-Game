@@ -24,6 +24,7 @@ public class Dungeon {
 	private List<Boulder> boulders;
 	private int nKeys;
 	private int nDoors;
+	private int countUntriggeredSwitch;
 	private GoalExpression goalExpression;
 
 	public Dungeon(int width, int height) {
@@ -35,6 +36,7 @@ public class Dungeon {
 		this.boulders = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
+		this.countUntriggeredSwitch = 0;
 	}
 
 	public int getWidth() {
@@ -59,6 +61,18 @@ public class Dungeon {
 
 	public int getHeight() {
 		return height;
+	}
+
+	public int getCountUntriggeredSwitch() {
+		return countUntriggeredSwitch;
+	}
+
+	public void addCountUntriggeredSwitch() {
+		this.countUntriggeredSwitch++;
+	}
+
+	public void minusCountUntriggeredSwitch() {
+		this.countUntriggeredSwitch--;
 	}
 
 	public Player getPlayer() {

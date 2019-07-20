@@ -119,6 +119,7 @@ public abstract class DungeonLoader {
 			break;
 		case "switch":
 			Switch floorSwitch = new Switch(dungeon, x, y);
+			dungeon.addCountUntriggeredSwitch();
 			onLoad(floorSwitch);
 			entity = floorSwitch;
 			break;
