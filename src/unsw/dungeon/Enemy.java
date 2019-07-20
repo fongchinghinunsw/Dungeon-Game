@@ -21,7 +21,7 @@ public class Enemy extends Movable implements Subject, Observer {
 		this.observers = new ArrayList<>();
 		Timer timer = new Timer();
 		EnemyTimer task = new EnemyTimer(this, dungeon.getPlayer());
-		timer.schedule(task, 0, 1000 / moveSpeed.getSpeed());
+		timer.schedule(task, 0, 100 / moveSpeed.getSpeed());
 	}
 
 	public BooleanProperty isAlive() {
@@ -76,6 +76,12 @@ public class Enemy extends Movable implements Subject, Observer {
 				}
 			}
 		}
+	}
+
+	public void checkPlayer() {
+		Player player = this.dungeon.getPlayer();
+		int playerX = player.getX();
+		int playerY = player.getY();
 		if (this.getX() == playerX && this.getY() == playerY) {
 			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
 				this.dungeon.killPlayer();
@@ -83,7 +89,6 @@ public class Enemy extends Movable implements Subject, Observer {
 				this.die();
 			}
 		}
-
 	}
 
 	@Override
