@@ -166,7 +166,15 @@ public class DungeonControllerLoader extends DungeonLoader {
 					node.toBack();
 				}
 			});
-			;
+
+		}
+		if (entity instanceof Boulder) {
+			Boulder boulder = (Boulder) entity;
+			boulder.destroyed().addListener((observable, oldValue, newValue) -> {
+				if (newValue) {
+					node.toBack();
+				}
+			});
 		}
 	}
 

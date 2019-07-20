@@ -109,6 +109,12 @@ public class Dungeon {
 		enemies.remove(enemy);
 	}
 
+	public void destroyBoulder(Boulder boulder) {
+		System.out.println("Boulder destroyed");
+		entities.remove(boulder);
+		boulders.remove(boulder);
+	}
+
 	/*
 	 * Add observers of each subject.
 	 */

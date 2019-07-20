@@ -133,6 +133,11 @@
       "type": "wall"
     },
     {
+      "x": 2,
+      "y": 8,
+      "type": "boulder"
+    },
+    {
       "x": 18,
       "y": 1,
       "type": "wall"
