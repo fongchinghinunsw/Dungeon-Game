@@ -211,4 +211,27 @@ public class Dungeon {
 		}
 		return true;
 	}
+
+	public boolean canPush(int x, int y) {
+		ArrayList<Entity> list = this.getEntities(x, y);
+		for (Entity e : list) {
+			if (e.getClassName().equals("Boulder")) {
+				if (player.getX() < x && player.getY() == y) {
+					// the player is pushing from the left side.
+					return !(sameClass(x + 1, y, "Boulder", "Enemy", "Wall"));
+				} else if (player.getX() > x && player.getY() == y) {
+					// the player is pushing from the right side.
+					return !(sameClass(x - 1, y, "Boulder", "Enemy", "Wall"));
+				} else if (player.getX() == x && player.getY() < y) {
+					// the player is pushing from the top side.
+					return !(sameClass(x, y + 1, "Boulder", "Enemy", "Wall"));
+				} else if (player.getX() == x && player.getY() > y) {
+					// the player is pushing from the down side.
+					return !(sameClass(x, y - 1, "Boulder", "Enemy", "Wall"));
+				}
+				return false;
+			}
+		}
+		return true;
+	}
 }

@@ -17,7 +17,7 @@ public abstract class Movable extends Entity {
 
 	public void moveUp() {
 		if (getY() > 0 && !(dungeon.sameClass(getX(), getY() - 1, "Wall"))) {
-			if (dungeon.canStepOn(getX(), getY() - 1)) {
+			if (dungeon.canStepOn(getX(), getY() - 1) && dungeon.canPush(getX(), getY() - 1)) {
 				y().set(getY() - 1);
 			}
 		}
@@ -25,7 +25,7 @@ public abstract class Movable extends Entity {
 
 	public void moveDown() {
 		if (getY() < dungeon.getHeight() - 1 && !(dungeon.sameClass(getX(), getY() + 1, "Wall"))) {
-			if (dungeon.canStepOn(getX(), getY() + 1)) {
+			if (dungeon.canStepOn(getX(), getY() + 1) && dungeon.canPush(getX(), getY() + 1)) {
 				y().set(getY() + 1);
 			}
 		}
@@ -33,7 +33,7 @@ public abstract class Movable extends Entity {
 
 	public void moveLeft() {
 		if (getX() > 0 && !(dungeon.sameClass(getX() - 1, getY(), "Wall"))) {
-			if (dungeon.canStepOn(getX() - 1, getY())) {
+			if (dungeon.canStepOn(getX() - 1, getY()) && dungeon.canPush(getX() - 1, getY())) {
 				x().set(getX() - 1);
 			}
 		}
@@ -41,7 +41,7 @@ public abstract class Movable extends Entity {
 
 	public void moveRight() {
 		if (getX() < dungeon.getWidth() - 1 && !(dungeon.sameClass(getX() + 1, getY(), "Wall"))) {
-			if (dungeon.canStepOn(getX() + 1, getY())) {
+			if (dungeon.canStepOn(getX() + 1, getY()) && dungeon.canPush(getX() + 1, getY())) {
 				x().set(getX() + 1);
 			}
 		}
