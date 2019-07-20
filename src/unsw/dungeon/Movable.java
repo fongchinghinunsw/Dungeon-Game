@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public abstract class Character extends Entity {
+public abstract class Movable extends Entity {
 
 	private Dungeon dungeon;
 
@@ -10,7 +10,7 @@ public abstract class Character extends Entity {
 	 * @param x
 	 * @param y
 	 */
-	public Character(Dungeon dungeon, int x, int y) {
+	public Movable(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
 	}
