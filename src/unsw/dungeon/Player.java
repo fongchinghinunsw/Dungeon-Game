@@ -80,7 +80,7 @@ public class Player extends Movable implements Subject, Observer {
 		System.out.println(message);
 		return true;
 	}
-	
+
 	public boolean isAlive() {
 		return this.alive;
 	}
@@ -89,13 +89,9 @@ public class Player extends Movable implements Subject, Observer {
 		return this.potionEffect;
 	}
 
-	public boolean die() {
-		if (this.isInvincible()) {
-			return false;
-		}
+	public void die() {
 		this.alive = false;
-		System.out.println("You're dead lol");
-		return true;
+		System.out.println("Player is now dead");
 	}
 
 	public void disablePotion() {
@@ -138,19 +134,23 @@ public class Player extends Movable implements Subject, Observer {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
-					o.update(this, dungeon);
+					o.update(this);
 				}
 			}
 		}
 	}
 
+	/*
+	 * If the player meet the enemy and has a sword, then it kills the enemy, else
+	 * do nothing and the enemy will kill him.
+	 */
 	@Override
-	public void update(Subject obj, Dungeon dungeon) {
+	public void update(Subject obj) {
 		if (obj instanceof Enemy) {
 			Enemy enemy = (Enemy) obj;
 			if (countSwordInBackPack() > 0) {
 				backpack.reduceSwordDurability();
-				enemy.die();
+				dungeon.killEnemy(enemy);
 			}
 		}
 	}

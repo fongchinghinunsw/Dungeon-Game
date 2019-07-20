@@ -12,7 +12,7 @@ public class Bomb extends Equipable implements Observer {
 	}
 
 	@Override
-	public void update(Subject obj, Dungeon dungeon) {
+	public void update(Subject obj) {
 		System.out.println("Player standing on a bomb");
 	}
 

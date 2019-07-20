@@ -55,11 +55,16 @@ public class Dungeon {
 		enemies.add(enemy);
 	}
 
-	public boolean killPlayer() {
-		return player.die();
+	public void killPlayer() {
+		player.die();
+		entities.remove(player);
+		System.out.println("Player get removed from the dungeon.");
+		System.out.println("Game over ~");
 	}
 
 	public void killEnemy(Enemy enemy) {
+		enemy.die();
+		System.out.println("Enemy get removed from the dungeon.");
 		entities.remove(enemy);
 		enemies.remove(enemy);
 	}
