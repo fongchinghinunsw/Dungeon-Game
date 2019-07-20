@@ -43,11 +43,11 @@ public abstract class Entity {
 	}
 
 	public int getX() {
-		return x().get();
+		return x.get();
 	}
 
 	public int getY() {
-		return y().get();
+		return y.get();
 	}
 
 	public abstract String getClassName();
