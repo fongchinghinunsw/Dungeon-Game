@@ -152,7 +152,11 @@ public class Player extends Movable implements Subject, Observer {
 	public void detach(Observer o) {
 		observers.remove(o);
 	}
-
+	
+	public Backpack getBag() {
+		return backpack;
+	}
+	
 	/*
 	 * Notify the current location of itself to all its observers, this method is
 	 * called in DungeonController after each movement.

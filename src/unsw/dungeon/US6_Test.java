@@ -62,6 +62,8 @@ public class US6_Test {
 		Player player = new Player(dungeon, 5, 5);
 		assertTrue(player.equipItem(),"Player cannot pick up the key");
 		player.setY(6);
-		assertFalse(player.equipItem(),"Player picked up a second key");		
+		assertFalse(player.equipItem(),"Player picked up a second key");	
+		player.setY(5);
+		assertFalse(player.equipItem(),"Forget about the key! It's already in your bag!");
 	}
 }
