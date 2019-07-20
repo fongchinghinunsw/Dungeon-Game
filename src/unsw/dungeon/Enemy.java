@@ -106,7 +106,10 @@ public class Enemy extends Movable implements Subject, Observer {
 	public void notifyObservers() {
 		if (dungeon.sameClass(getX(), getY(), "Player")) {
 			for (Observer o : observers) {
-				o.update(this, dungeon);
+				if (o instanceof Player) {
+					o.update(this, dungeon);
+				}
+
 			}
 		}
 	}

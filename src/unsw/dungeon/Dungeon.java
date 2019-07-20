@@ -64,19 +64,27 @@ public class Dungeon {
 		enemies.remove(enemy);
 	}
 
+	/*
+	 * Add observers of each subject.
+	 */
 	public void addObservers() {
 		for (Entity entity : entities) {
-			if (!(sameClass(entity.getX(), entity.getY(), "Wall", "Player"))) {
+			if (!(sameClass(entity.getX(), entity.getY(), "Wall"))) {
+				// Add observer for the player
 				player.attach((Observer) entity);
-			}
-			if (sameClass(entity.getX(), entity.getY(), "Player")) {
+				// Add observer for the enemy
 				for (Enemy enemy : enemies) {
 					enemy.attach((Observer) entity);
 				}
+
 			}
 		}
 	}
 
+	/*
+	 * Check if there exists an object on the grid belongs to one of the specified
+	 * classes.
+	 */
 	public boolean sameClass(int x, int y, String... className) {
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
