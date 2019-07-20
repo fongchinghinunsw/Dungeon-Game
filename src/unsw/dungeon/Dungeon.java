@@ -27,6 +27,12 @@ public class Dungeon {
 	private GoalExpression goalExpression;
 	private List<Bomb> bombs;
 
+	/**
+	 * constructor for dungeon
+	 * 
+	 * @param width
+	 * @param height
+	 */
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -39,62 +45,131 @@ public class Dungeon {
 		this.nDoors = 0;
 	}
 
+	/**
+	 * getter method for width
+	 * 
+	 * @return width
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * increases total number of keys
+	 */
 	public void addKey() {
 		this.nKeys++;
 	}
 
+	/**
+	 * getter method for nKeys
+	 * 
+	 * @return nKeys
+	 */
 	public int numKey() {
 		return this.nKeys;
 	}
 
+	/**
+	 * getter method for nDoors
+	 * 
+	 * @return nDoors
+	 */
 	public int numDoor() {
 		return this.nDoors;
 	}
 
+	/**
+	 * increases total number of doors
+	 */
 	public void addDoor() {
 		this.nDoors++;
 	}
 
+	/**
+	 * getter method for height
+	 * 
+	 * @return height
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * getter method for player
+	 * 
+	 * @return player
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 
+	/**
+	 * setter method for player
+	 * 
+	 * @param player
+	 */
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
 
+	/**
+	 * getter method for player's x
+	 * 
+	 * @return player's x
+	 */
 	public int getPlayerX() {
 		return player.getX();
 	}
 
+	/**
+	 * getter method for player's y
+	 * 
+	 * @return player's y
+	 */
 	public int getPlayerY() {
 		return player.getY();
 	}
 
+	/**
+	 * adds an entity to entities
+	 * 
+	 * @param entity to be added
+	 */
 	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}
 
+	/**
+	 * adds an enemy to enemies
+	 * 
+	 * @param enemy to be added
+	 */
 	public void addEnemy(Enemy enemy) {
 		enemies.add(enemy);
 	}
 
+	/**
+	 * adds a bomb to bombs
+	 * 
+	 * @param bomb to be added
+	 */
 	public void addBomb(Bomb bomb) {
 		bombs.add(bomb);
 	}
 
+	/**
+	 * adds a boulder to boulders
+	 * 
+	 * @param boulder to be added
+	 */
 	public void addBoulder(Boulder boulder) {
 		boulders.add(boulder);
 	}
 
+	/**
+	 * kills the player
+	 */
 	public void killPlayer() {
 		player.die();
 		entities.remove(player);
@@ -102,6 +177,11 @@ public class Dungeon {
 		System.out.println("Game over ~");
 	}
 
+	/**
+	 * kills a given enemy
+	 * 
+	 * @param enemy to be killed
+	 */
 	public void killEnemy(Enemy enemy) {
 		enemy.die();
 		System.out.println("Enemy get removed from the dungeon.");
@@ -109,6 +189,11 @@ public class Dungeon {
 		enemies.remove(enemy);
 	}
 
+	/**
+	 * destroys a given boulder
+	 * 
+	 * @param boulder to be destroyed
+	 */
 	public void destroyBoulder(Boulder boulder) {
 		System.out.println("Boulder destroyed");
 		entities.remove(boulder);
@@ -157,6 +242,13 @@ public class Dungeon {
 		return false;
 	}
 
+	/**
+	 * checks if there's an equipable in given place
+	 * 
+	 * @param x
+	 * @param y
+	 * @return true if found
+	 */
 	public boolean hasEquipable(int x, int y) {
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
@@ -193,6 +285,13 @@ public class Dungeon {
 		}
 	}
 
+	/**
+	 * removes an equipped item of a given class
+	 * 
+	 * @param x         of player
+	 * @param y         of player
+	 * @param className of item-to-remove
+	 */
 	public void removeEquippedEntity(int x, int y, String className) {
 		Entity entity;
 		if (className.equals("Sword")) {
@@ -219,6 +318,13 @@ public class Dungeon {
 		return goalExpression.evaluate();
 	}
 
+	/**
+	 * checks if the player can go through a grid
+	 * 
+	 * @param x of door
+	 * @param y of door
+	 * @return true if door's open
+	 */
 	public boolean canStepOn(int x, int y) {
 		ArrayList<Entity> list = this.getEntities(x, y);
 		for (Entity e : list) {
@@ -229,6 +335,13 @@ public class Dungeon {
 		return true;
 	}
 
+	/**
+	 * checks if the player can push the boulder
+	 * 
+	 * @param x of boulder
+	 * @param y of boulder
+	 * @return true if can be pushed
+	 */
 	public boolean canPush(int x, int y) {
 		ArrayList<Entity> list = this.getEntities(x, y);
 		for (Entity e : list) {
@@ -252,6 +365,13 @@ public class Dungeon {
 		return true;
 	}
 
+	/**
+	 * checks if there's a lit bomb in a given position
+	 * 
+	 * @param x of player
+	 * @param y of player
+	 * @return true if there is already a lit bomb
+	 */
 	public boolean hasBomb(int x, int y) {
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
