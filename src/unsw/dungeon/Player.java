@@ -44,7 +44,7 @@ public class Player extends Movable implements Subject, Observer {
 	}
 
 	public boolean equipItem() {
-		ArrayList<Entity> entities = dungeon.getEntity(getX(), getY());
+		ArrayList<Entity> entities = dungeon.getEntities(getX(), getY());
 		for (Entity entity : entities) {
 			if (entity instanceof Equipable) {
 				Equipable e = (Equipable) entity;

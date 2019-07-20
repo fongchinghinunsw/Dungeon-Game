@@ -18,16 +18,16 @@ import java.util.List;
 public class Dungeon {
 
 	private int width, height;
-	private List<Entity> entities;
-	private GoalExpression goalExpression;
 	private Player player;
+	private List<Entity> entities;
 	private List<Enemy> enemies;
+	private GoalExpression goalExpression;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
-		this.entities = new ArrayList<>();
 		this.player = null;
+		this.entities = new ArrayList<>();
 		this.enemies = new ArrayList<>();
 	}
 
@@ -112,7 +112,7 @@ public class Dungeon {
 	/*
 	 * Returns a list which stores all entities in a grid.
 	 */
-	public ArrayList<Entity> getEntity(int x, int y) {
+	public ArrayList<Entity> getEntities(int x, int y) {
 		ArrayList<Entity> entityList = new ArrayList<>();
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
@@ -122,8 +122,11 @@ public class Dungeon {
 		return entityList;
 	}
 
+	/*
+	 * Remove the entity from the dungeon when it is equipped.
+	 */
 	public void addEquippedEntity(int x, int y) {
-		ArrayList<Entity> entityList = getEntity(x, y);
+		ArrayList<Entity> entityList = getEntities(x, y);
 		for (Entity entity : entityList) {
 			if (entity instanceof Equipable) {
 				entities.remove(entity);
@@ -132,11 +135,15 @@ public class Dungeon {
 	}
 
 	public void removeEquippedEntity(int x, int y, String className) {
-		Entity entity = player.removeSwordInBackPack();
+		Entity entity;
+		if (className.equals("Sword")) {
+			entity = player.removeSwordInBackPack();
+		} else {
+			return;
+		}
 		entity.setX(x);
 		entity.setY(y);
 		entities.add(entity);
-
 	}
 
 	public GoalExpression getGoalExpression() {
