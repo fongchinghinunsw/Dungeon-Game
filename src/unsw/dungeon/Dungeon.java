@@ -25,6 +25,7 @@ public class Dungeon {
 	private int nKeys;
 	private int nDoors;
 	private GoalExpression goalExpression;
+	private List<Bomb> bombs;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
@@ -33,6 +34,7 @@ public class Dungeon {
 		this.entities = new ArrayList<>();
 		this.enemies = new ArrayList<>();
 		this.boulders = new ArrayList<>();
+		this.bombs = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
 	}
@@ -85,6 +87,10 @@ public class Dungeon {
 		enemies.add(enemy);
 	}
 
+	public void addBomb(Bomb bomb) {
+		bombs.add(bomb);
+	}
+
 	public void addBoulder(Boulder boulder) {
 		boulders.add(boulder);
 	}
@@ -114,6 +120,9 @@ public class Dungeon {
 				// Add observer for the enemy
 				for (Enemy enemy : enemies) {
 					enemy.attach((Observer) entity);
+				}
+				for (Bomb bomb : bombs) {
+					bomb.attach((Observer) entity);
 				}
 			}
 			// Add observer for the switch
@@ -235,5 +244,17 @@ public class Dungeon {
 			}
 		}
 		return true;
+	}
+
+	public boolean hasBomb(int x, int y) {
+		for (Entity entity : entities) {
+			if (entity.getX() == x && entity.getY() == y) {
+				if (entity.getClassName().equals("Bomb") && ((Bomb) entity).lit()) {
+					System.out.println("There's already a lit bomb here.");
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

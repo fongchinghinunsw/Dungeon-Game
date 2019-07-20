@@ -178,6 +178,11 @@ public class Player extends Movable implements Subject, Observer {
 				backpack.reduceSwordDurability();
 				dungeon.killEnemy(enemy);
 			}
+		} else if (obj instanceof Bomb) {
+			Bomb bomb = (Bomb) obj;
+			if (this.getX() == bomb.getX() && this.getY() == bomb.getY() && !this.potionEffect) {
+				die();
+			}
 		}
 	}
 

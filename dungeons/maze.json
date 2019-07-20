@@ -418,6 +418,11 @@
       "type": "bomb"
     },
     {
+      "x": 2,
+      "y": 7,
+      "type": "bomb"
+    },
+    {
       "x": 19,
       "y": 5,
       "type": "wall"

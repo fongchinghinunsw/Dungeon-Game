@@ -28,6 +28,8 @@ public class BombTimer extends TimerTask {
 		} else {
 			// stop the timer
 			System.out.println("BOOOOOOM!!!");
+			self.explode();
+			self.notifyObservers();
 			cancel();
 		}
 
