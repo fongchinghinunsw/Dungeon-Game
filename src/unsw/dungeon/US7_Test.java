@@ -2,7 +2,6 @@ package unsw.dungeon;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -82,7 +81,7 @@ public class US7_Test {
 		assertTrue(door1.isOpen(), "Fails to open the door");
 		assertNull(player.findKey(), "Key not removed");
 	}
-	
+
 	@Test
 	public void testPastOpenDoor() {
 		Dungeon dungeon = new Dungeon(10, 10);
@@ -98,9 +97,9 @@ public class US7_Test {
 		player.setY(5);
 		door1.update(player);
 		player.moveRight();
-		assertEquals(player.getX(),5,"Can't walk pass door with right key");
+		assertEquals(player.getX(), 5, "Can't walk pass door with right key");
 	}
-	
+
 	@Test
 	public void testPastClosedDoorNoKey() {
 		Dungeon dungeon = new Dungeon(10, 10);
@@ -113,9 +112,9 @@ public class US7_Test {
 		player.setY(5);
 		door1.update(player);
 		player.moveRight();
-		assertEquals(player.getX(),4,"Walked pass door with no key");
+		assertEquals(player.getX(), 4, "Walked pass door with no key");
 	}
-	
+
 	@Test
 	public void testPastClosedDoorWrongKey() {
 		Dungeon dungeon = new Dungeon(10, 10);
@@ -134,7 +133,63 @@ public class US7_Test {
 		player.setY(5);
 		door1.update(player);
 		player.moveRight();
-		assertEquals(player.getX(),4,"Walked past door with wrong key");
+		assertEquals(player.getX(), 4, "Walked past door with wrong key");
 	}
-	
+
+	@Test
+	public void testThrowAwayKey() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 3, 3);
+		Key key1 = new Key(dungeon, 3, 3);
+		dungeon.addKey();
+		dungeon.addEntity(key1);
+		player.equipItem();
+		assertNotNull(player.removeKeyInBackpack(), "removeKeyInBackpack not functioning properly");
+		assertNull(player.removeKeyInBackpack(), "removeKeyInBackpack returning something weird");
+		assertNull(player.findKey(), "found key after throwing key away");
+	}
+
+	@Test
+	public void testThrowAwayAndPickBackUp() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 3, 3);
+		Door door = new Door(dungeon, 2, 2);
+		dungeon.addDoor();
+		dungeon.addEntity(door);
+		dungeon.setPlayer(player);
+		Key key1 = new Key(dungeon, 3, 3);
+		dungeon.addKey();
+		dungeon.addEntity(key1);
+		player.equipItem();
+		player.setX(1);
+		dungeon.removeEquippedEntity(player.getX(), player.getY(), "Key");
+		assertNull(player.removeKeyInBackpack(), "removeKeyInBackpack returning something weird");
+		assertNull(player.findKey(), "found key after throwing key away");
+		assertTrue(player.equipItem(), "Thrown away key cannot be picked up");
+		player.setY(2);
+		door.update(player);
+		player.moveRight();
+		assertEquals(player.getX(), 2, "Stopped with the right key");
+	}
+
+	@Test
+	public void testThrowAwayAndOpenDoor() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 3, 3);
+		dungeon.setPlayer(player);
+		Door door = new Door(dungeon, 2, 2);
+		dungeon.addDoor();
+		dungeon.addEntity(door);
+		Key key1 = new Key(dungeon, 3, 3);
+		dungeon.addKey();
+		dungeon.addEntity(key1);
+		player.equipItem();
+		player.setX(1);
+		dungeon.removeEquippedEntity(player.getX(), player.getY(), "Key");
+		assertNull(player.removeKeyInBackpack(), "removeKeyInBackpack returning something weird");
+		assertNull(player.findKey(), "found key after throwing key away");
+		player.setY(2);
+		player.moveRight();
+		assertEquals(player.getX(), 1, "Past door after throwing away the key");
+	}
 }
