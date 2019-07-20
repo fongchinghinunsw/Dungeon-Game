@@ -77,6 +77,13 @@ public class Player extends Movable implements Subject, Observer {
 			PotionTimer task = new PotionTimer((Potion) item, this);
 			timer.schedule(task, 0, 1000);
 		}
+
+		if (type.equals("Bomb")) {
+			Timer timer = new Timer();
+			BombTimer task = new BombTimer((Bomb) item, this);
+			timer.schedule(task, 0, 1000);
+		}
+
 		String message = "An item of type " + type + " is used.";
 		System.out.println(message);
 		return true;
@@ -99,8 +106,16 @@ public class Player extends Movable implements Subject, Observer {
 		this.potionEffect = false;
 	}
 
+	public Bomb getBomb() {
+		return backpack.getBomb();
+	}
+
 	public int countSwordInBackPack() {
 		return backpack.countSword();
+	}
+
+	public Entity removeBombInBackpack() {
+		return backpack.removeBomb();
 	}
 
 	public Entity removeSwordInBackPack() {
@@ -138,7 +153,7 @@ public class Player extends Movable implements Subject, Observer {
 					o.update(this);
 				}
 			}
-		} 
+		}
 		for (Observer o : observers) {
 			Entity entity = (Entity) o;
 			if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Door")) {
@@ -180,4 +195,5 @@ public class Player extends Movable implements Subject, Observer {
 	public ArrayList<Key> findKeys() {
 		return backpack.getKeys();
 	}
+
 }

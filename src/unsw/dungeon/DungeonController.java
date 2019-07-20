@@ -120,7 +120,12 @@ public class DungeonController {
 			if (player.countSwordInBackPack() != 0 && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.removeEquippedEntity(player.getX(), player.getY(), "Sword");
-
+			}
+		} else if (event.getCode() == KeyCode.T) {
+			Bomb bomb = player.getBomb();
+			if (bomb != null) {
+				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+				player.useItem("Bomb");
 			}
 		}
 	}
