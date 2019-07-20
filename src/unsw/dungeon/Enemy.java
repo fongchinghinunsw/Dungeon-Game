@@ -30,7 +30,7 @@ public class Enemy extends Movable implements Subject, Observer {
 
 	public void die() {
 		this.alive.set(false);
-		dungeon.kilEnemy(this);
+		dungeon.killEnemy(this);
 		System.out.println("Enemy is dead");
 	}
 
@@ -77,8 +77,10 @@ public class Enemy extends Movable implements Subject, Observer {
 			}
 		}
 		if (this.getX() == playerX && this.getY() == playerY) {
-			if (player.countSwordInBackPack() == 0) {
+			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
 				this.dungeon.killPlayer();
+			} else {
+				this.die();
 			}
 		}
 
