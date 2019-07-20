@@ -240,6 +240,8 @@ public class Dungeon {
 		Entity entity;
 		if (className.equals("Sword")) {
 			entity = player.removeSwordInBackPack();
+		} else if (className.equals("Bomb")) {
+			entity = player.removeBombInBackpack();
 		} else {
 			return;
 		}

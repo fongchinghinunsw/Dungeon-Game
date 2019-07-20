@@ -6,9 +6,9 @@ public class Door extends Entity implements Observer {
 	private final int id;
 	private DoorState state;
 
-	public Door(int x, int y, int id) {
+	public Door(Dungeon dungeon, int x, int y) {
 		super(x, y);
-		this.id = id;
+		this.id = dungeon.numDoor();
 		this.state = new ClosedState();
 	}
 

@@ -32,6 +32,8 @@ public class DungeonController {
 
 	private Image swordImage;
 
+	private Image enemyImage;
+
 	private ImageView playerImageView;
 
 	private Dungeon dungeon;
@@ -42,13 +44,15 @@ public class DungeonController {
 
 	private long lastMoveNanos;
 
-	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Image playerImage, Image swordImage) {
+	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Image playerImage, Image swordImage,
+			Image enemyImage) {
 		this.dungeon = dungeon;
 		this.player = dungeon.getPlayer();
 		this.initialEntities = new ArrayList<>(initialEntities);
 		this.deletedEntities = new ArrayList<>();
 		this.playerImage = playerImage;
 		this.swordImage = swordImage;
+		this.enemyImage = enemyImage;
 	}
 
 	@FXML
@@ -117,7 +121,12 @@ public class DungeonController {
 			if (player.countSwordInBackPack() != 0 && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
 				dungeon.removeEquippedEntity(player.getX(), player.getY(), "Sword");
-
+			}
+		} else if (event.getCode() == KeyCode.T) {
+			Bomb bomb = player.getBomb();
+			if (bomb != null) {
+				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+				player.useItem("Bomb");
 			}
 		}
 	}
@@ -127,7 +136,7 @@ public class DungeonController {
 		for (Node node : initialEntities) {
 			if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
 				ImageView imageView = (ImageView) node;
-				if (imageView.getImage() != playerImage) {
+				if (imageView.getImage() != playerImage && imageView.getImage() != enemyImage) {
 					deletedEntities.add(imageView);
 					gridPane.getChildren().remove(imageView);
 					return true;
