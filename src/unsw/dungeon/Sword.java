@@ -27,13 +27,13 @@ public class Sword extends Equipable implements Observer {
 	}
 
 	@Override
-	public String getClassName() {
-		return "Sword";
+	public void update(Subject obj) {
+		System.out.println("You see a sword.");
 	}
 
 	@Override
-	public void update(Subject obj) {
-		System.out.println("You see a sword.");
+	public String getClassName() {
+		return "Sword";
 	}
 
 }
