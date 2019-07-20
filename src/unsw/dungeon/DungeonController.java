@@ -102,7 +102,8 @@ public class DungeonController {
 				default:
 					break;
 				}
-				player.notifyObservers();
+				dungeon.notifyPlayerObservers();
+				dungeon.notifyBoulderObservers();
 				lastMoveNanos = now;
 			}
 		} else if (event.getCode().isWhitespaceKey()) {

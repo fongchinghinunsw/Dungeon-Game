@@ -22,6 +22,7 @@ public class Dungeon {
 	private List<Entity> entities;
 	private List<Enemy> enemies;
 	private List<Boulder> boulders;
+	private List<Switch> switches;
 	private int nKeys;
 	private int nDoors;
 	private int countUntriggeredSwitch;
@@ -34,6 +35,7 @@ public class Dungeon {
 		this.entities = new ArrayList<>();
 		this.enemies = new ArrayList<>();
 		this.boulders = new ArrayList<>();
+		this.switches = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
 		this.countUntriggeredSwitch = 0;
@@ -63,16 +65,18 @@ public class Dungeon {
 		return height;
 	}
 
-	public int getCountUntriggeredSwitch() {
-		return countUntriggeredSwitch;
-	}
-
 	public void addCountUntriggeredSwitch() {
 		this.countUntriggeredSwitch++;
 	}
 
-	public void minusCountUntriggeredSwitch() {
-		this.countUntriggeredSwitch--;
+	public int countUntriggeredSwitch() {
+		int count = countUntriggeredSwitch;
+		for (Switch floorSwitch : switches) {
+			if (sameClass(floorSwitch.getX(), floorSwitch.getY(), "Boulder")) {
+				count--;
+			}
+		}
+		return count;
 	}
 
 	public Player getPlayer() {
@@ -101,6 +105,10 @@ public class Dungeon {
 
 	public void addBoulder(Boulder boulder) {
 		boulders.add(boulder);
+	}
+
+	public void addSwitch(Switch floorSwitch) {
+		switches.add(floorSwitch);
 	}
 
 	public void killPlayer() {
@@ -162,6 +170,16 @@ public class Dungeon {
 			if (entity instanceof Subject) {
 				((Subject) entity).detach(o);
 			}
+		}
+	}
+
+	public void notifyPlayerObservers() {
+		player.notifyObservers();
+	}
+
+	public void notifyBoulderObservers() {
+		for (Boulder boulder : boulders) {
+			boulder.notifyObservers();
 		}
 	}
 
