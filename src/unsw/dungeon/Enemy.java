@@ -6,7 +6,7 @@ import java.util.Timer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public class Enemy extends Character implements Subject, Observer {
+public class Enemy extends Movable implements Subject, Observer {
 
 	private MoveSpeed moveSpeed;
 	private Dungeon dungeon;

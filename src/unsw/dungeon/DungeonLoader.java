@@ -75,7 +75,7 @@ public abstract class DungeonLoader {
 			entity = exit;
 			break;
 		case "boulder":
-			Boulder boulder = new Boulder(x, y);
+			Boulder boulder = new Boulder(dungeon, x, y);
 			onLoad(boulder);
 			entity = boulder;
 			break;

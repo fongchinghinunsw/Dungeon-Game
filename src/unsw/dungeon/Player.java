@@ -9,7 +9,7 @@ import java.util.Timer;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Character implements Subject, Observer {
+public class Player extends Movable implements Subject, Observer {
 
 	private Dungeon dungeon;
 	private Backpack backpack;
