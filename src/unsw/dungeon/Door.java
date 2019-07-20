@@ -38,9 +38,9 @@ public class Door extends Entity implements Observer {
 	}
 
 	@Override
-	public void update(Subject obj, Dungeon dungeon) {
+	public void update(Subject obj) {
 		Player player = (Player) obj;
-		ArrayList<Key> keys = player.getBackpack().getKeys();
+		ArrayList<Key> keys = player.findKeys();
 		for (Key key : keys) {
 			if (key.getId() == this.getId()) {
 				setState(getOpenState());

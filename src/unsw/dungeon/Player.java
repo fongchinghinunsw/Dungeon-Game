@@ -34,17 +34,11 @@ public class Player extends Movable implements Subject, Observer {
 		this.alive = true;
 	}
 
-	public Backpack getBackpack() {
-		return this.backpack;
-	}
-
-	// here for now, open for modification
-	public boolean isInvincible() {
-		return this.potionEffect;
-	}
-
+	/*
+	 * Add the item into the backpack.
+	 */
 	public boolean equipItem() {
-		ArrayList<Entity> entities = dungeon.getEntity(getX(), getY());
+		ArrayList<Entity> entities = dungeon.getEntities(getX(), getY());
 		for (Entity entity : entities) {
 			if (entity instanceof Equipable) {
 				Equipable e = (Equipable) entity;
@@ -88,9 +82,33 @@ public class Player extends Movable implements Subject, Observer {
 		return true;
 	}
 
+	public boolean isAlive() {
+		return this.alive;
+	}
+
+	public boolean isInvincible() {
+		return this.potionEffect;
+	}
+
+	public void die() {
+		this.alive = false;
+		System.out.println("Player is now dead");
+	}
+
+	public void disablePotion() {
+		this.potionEffect = false;
+	}
+
+	public int countSwordInBackPack() {
+		return backpack.countSword();
+	}
+
 	public Entity removeSwordInBackPack() {
 		return backpack.removeSword();
+	}
 
+	public long getSpeed() {
+		return moveSpeed.getSpeed();
 	}
 
 	@Override
@@ -105,16 +123,37 @@ public class Player extends Movable implements Subject, Observer {
 		observers.remove(o);
 	}
 
+	/*
+	 * Notify the current location of itself to all its observers, this method is
+	 * called in DungeonController after each movement.
+	 */
 	@Override
 	public void notifyObservers() {
+		// this logic is to ensure the entity still exist on the map but not just in the
+		// observers.
 		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy")) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
-					o.update(this, dungeon);
-				} else if (entity.adjacent(getX(), getY())) {
-					o.update(this, dungeon);
+					o.update(this);
+				} else if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Door")) {
+					o.update(this);
 				}
+			}
+		}
+	}
+
+	/*
+	 * If the player meet the enemy and has a sword, then it kills the enemy, else
+	 * do nothing and the enemy will kill him.
+	 */
+	@Override
+	public void update(Subject obj) {
+		if (obj instanceof Enemy) {
+			Enemy enemy = (Enemy) obj;
+			if (countSwordInBackPack() > 0) {
+				backpack.reduceSwordDurability();
+				dungeon.killEnemy(enemy);
 			}
 		}
 	}
@@ -124,44 +163,7 @@ public class Player extends Movable implements Subject, Observer {
 		return "Player";
 	}
 
-	public boolean die() {
-		if (this.isInvincible()) {
-			return false;
-		}
-		this.alive = false;
-		System.out.println("You're dead lol");
-		return true;
-	}
-
-	public boolean isAlive() {
-		return this.alive;
-	}
-
-	public int countSwordInBackPack() {
-		return backpack.countSword();
-	}
-
-	public long getSpeed() {
-		return moveSpeed.getSpeed();
-	}
-
-	public void disablePotion() {
-		this.potionEffect = false;
-	}
-
-	public void setMoveSpeed(MoveSpeed moveSpeed) {
-		this.moveSpeed = moveSpeed;
-	}
-
-	@Override
-	public void update(Subject obj, Dungeon dungeon) {
-		if (obj instanceof Enemy) {
-			Enemy enemy = (Enemy) obj;
-			if (countSwordInBackPack() > 0) {
-				backpack.reduceSwordDurability();
-				enemy.die();
-			}
-		}
-
+	public ArrayList<Key> findKeys() {
+		return backpack.getKeys();
 	}
 }

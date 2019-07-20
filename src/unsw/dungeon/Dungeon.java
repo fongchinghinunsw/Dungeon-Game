@@ -18,18 +18,18 @@ import java.util.List;
 public class Dungeon {
 
 	private int width, height;
-	private List<Entity> entities;
-	private GoalExpression goalExpression;
 	private Player player;
+	private List<Entity> entities;
 	private List<Enemy> enemies;
 	private int nKeys;
 	private int nDoors;
+	private GoalExpression goalExpression;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
-		this.entities = new ArrayList<>();
 		this.player = null;
+		this.entities = new ArrayList<>();
 		this.enemies = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
@@ -75,28 +75,41 @@ public class Dungeon {
 		enemies.add(enemy);
 	}
 
-	public boolean killPlayer() {
-		return player.die();
+	public void killPlayer() {
+		player.die();
+		entities.remove(player);
+		System.out.println("Player get removed from the dungeon.");
+		System.out.println("Game over ~");
 	}
 
 	public void killEnemy(Enemy enemy) {
+		enemy.die();
+		System.out.println("Enemy get removed from the dungeon.");
 		entities.remove(enemy);
 		enemies.remove(enemy);
 	}
 
+	/*
+	 * Add observers of each subject.
+	 */
 	public void addObservers() {
 		for (Entity entity : entities) {
-			if (!(sameClass(entity.getX(), entity.getY(), "Wall", "Player"))) {
+			if (!(sameClass(entity.getX(), entity.getY(), "Wall"))) {
+				// Add observer for the player
 				player.attach((Observer) entity);
-			}
-			if (sameClass(entity.getX(), entity.getY(), "Player")) {
+				// Add observer for the enemy
 				for (Enemy enemy : enemies) {
 					enemy.attach((Observer) entity);
 				}
+
 			}
 		}
 	}
 
+	/*
+	 * Check if there exists an object on the grid belongs to one of the specified
+	 * classes.
+	 */
 	public boolean sameClass(int x, int y, String... className) {
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
@@ -124,7 +137,7 @@ public class Dungeon {
 	/*
 	 * Returns a list which stores all entities in a grid.
 	 */
-	public ArrayList<Entity> getEntity(int x, int y) {
+	public ArrayList<Entity> getEntities(int x, int y) {
 		ArrayList<Entity> entityList = new ArrayList<>();
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
@@ -134,8 +147,11 @@ public class Dungeon {
 		return entityList;
 	}
 
+	/*
+	 * Remove the entity from the dungeon when it is equipped.
+	 */
 	public void addEquippedEntity(int x, int y) {
-		ArrayList<Entity> entityList = getEntity(x, y);
+		ArrayList<Entity> entityList = getEntities(x, y);
 		for (Entity entity : entityList) {
 			if (entity instanceof Equipable) {
 				entities.remove(entity);
@@ -144,11 +160,15 @@ public class Dungeon {
 	}
 
 	public void removeEquippedEntity(int x, int y, String className) {
-		Entity entity = player.removeSwordInBackPack();
+		Entity entity;
+		if (className.equals("Sword")) {
+			entity = player.removeSwordInBackPack();
+		} else {
+			return;
+		}
 		entity.setX(x);
 		entity.setY(y);
 		entities.add(entity);
-
 	}
 
 	public GoalExpression getGoalExpression() {
@@ -164,7 +184,7 @@ public class Dungeon {
 	}
 
 	public boolean canStepOn(int x, int y) {
-		ArrayList<Entity> list = this.getEntity(x, y);
+		ArrayList<Entity> list = this.getEntities(x, y);
 		for (Entity e : list) {
 			if (e.getClassName().equals("Door") && !((Door) e).isOpen()) {
 				return false;

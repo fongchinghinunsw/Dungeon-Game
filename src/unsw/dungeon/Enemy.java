@@ -29,8 +29,7 @@ public class Enemy extends Movable implements Subject, Observer {
 	}
 
 	public void die() {
-		this.alive.set(false);
-		dungeon.killEnemy(this);
+		alive.set(false);
 		System.out.println("Enemy is dead");
 	}
 
@@ -78,25 +77,6 @@ public class Enemy extends Movable implements Subject, Observer {
 		}
 	}
 
-	public void checkPlayer() {
-		Player player = this.dungeon.getPlayer();
-		int playerX = player.getX();
-		int playerY = player.getY();
-		if (this.getX() == playerX && this.getY() == playerY) {
-			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
-				this.dungeon.killPlayer();
-			} else {
-				this.die();
-			}
-		}
-	}
-
-	@Override
-	public void update(Subject obj, Dungeon dungeon) {
-		System.out.println("Enemy meets u");
-
-	}
-
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {
@@ -113,8 +93,28 @@ public class Enemy extends Movable implements Subject, Observer {
 	public void notifyObservers() {
 		if (dungeon.sameClass(getX(), getY(), "Player")) {
 			for (Observer o : observers) {
-				o.update(this, dungeon);
+				if (o instanceof Player) {
+					o.update(this);
+				}
+
 			}
 		}
+	}
+
+	/*
+	 * THe enemy will get updated from the player when the player is on the same
+	 * grid with it.
+	 */
+	@Override
+	public void update(Subject obj) {
+		if (obj instanceof Player) {
+			Player player = (Player) obj;
+			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
+				dungeon.killPlayer();
+			} else if (player.isInvincible()) {
+				die();
+			}
+		}
+
 	}
 }

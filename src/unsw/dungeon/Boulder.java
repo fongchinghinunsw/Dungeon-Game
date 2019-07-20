@@ -13,7 +13,7 @@ public class Boulder extends Movable implements Subject, Observer {
 	}
 
 	@Override
-	public void update(Subject obj, Dungeon dungeon) {
+	public void update(Subject obj) {
 		// TODO Auto-generated method stub
 
 	}
