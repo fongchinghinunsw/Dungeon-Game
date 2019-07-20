@@ -102,6 +102,9 @@ public class Enemy extends Movable implements Subject, Observer {
 	 */
 	@Override
 	public void update(Subject obj) {
+		if (!this.isAlive().getValue()) {
+			return;
+		}
 		if (obj instanceof Player) {
 			Player player = (Player) obj;
 			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
