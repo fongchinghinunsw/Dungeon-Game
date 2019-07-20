@@ -29,7 +29,8 @@ public class Enemy extends Character implements Subject, Observer {
 	}
 
 	public void die() {
-		this.alive = new SimpleBooleanProperty(false);
+		this.alive.set(false);
+		dungeon.kilEnemy(this);
 		System.out.println("Enemy is dead");
 	}
 

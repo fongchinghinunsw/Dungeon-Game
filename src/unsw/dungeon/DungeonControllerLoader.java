@@ -140,6 +140,15 @@ public class DungeonControllerLoader extends DungeonLoader {
 				GridPane.setRowIndex(node, newValue.intValue());
 			}
 		});
+		if (entity instanceof Enemy) {
+			Enemy enemy = (Enemy) entity;
+			enemy.isAlive().addListener((observable, oldValue, newValue) -> {
+				if (!newValue)
+					// currently just move the image to the back of the pane.
+					node.toBack();
+			});
+			;
+		}
 	}
 
 	/**

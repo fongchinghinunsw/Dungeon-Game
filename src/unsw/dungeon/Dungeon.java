@@ -59,6 +59,11 @@ public class Dungeon {
 		return player.die();
 	}
 
+	public void kilEnemy(Enemy enemy) {
+		entities.remove(enemy);
+		enemies.remove(enemy);
+	}
+
 	public void addObservers() {
 		for (Entity entity : entities) {
 			if (!(sameClass(entity.getX(), entity.getY(), "Wall", "Player"))) {
