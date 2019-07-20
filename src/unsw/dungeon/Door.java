@@ -29,7 +29,9 @@ public class Door extends Entity implements Observer {
 	}
 
 	public void setState(DoorState newState) {
-		this.state = newState;
+		if (newState instanceof OpenState) {
+			this.state = newState;
+		}
 	}
 
 	@Override
