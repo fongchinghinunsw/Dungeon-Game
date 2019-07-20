@@ -28,6 +28,12 @@ public class Backpack {
 		}
 		return null;
 	}
+	
+	public void removeKey(Key key) {
+		this.items.remove(key);
+		String message = "Key with id "+key.getId()+" removed from backpack.";
+		System.out.println(message);
+	}
 
 	public Sword getSword() {
 		for (Equipable entity : items) {

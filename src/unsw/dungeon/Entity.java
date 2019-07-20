@@ -72,8 +72,9 @@ public abstract class Entity {
 	public boolean adjacent(int x2, int y2) {
 		if (getX() == x2 && Math.abs(getY() - y2) == 1) {
 			return true;
-		} else if (getY() == y2 && Math.abs(getX() - x2) == 1)
+		} else if (getY() == y2 && Math.abs(getX() - x2) == 1) {
 			return true;
+		}
 		return false;
 	}
 

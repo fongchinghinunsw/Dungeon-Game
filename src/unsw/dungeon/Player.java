@@ -131,12 +131,17 @@ public class Player extends Movable implements Subject, Observer {
 	public void notifyObservers() {
 		// this logic is to ensure the entity still exist on the map but not just in the
 		// observers.
-		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy")) {
+		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy", "Door")) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {
 					o.update(this);
-				} else if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Door")) {
+				}
+			}
+		} else {
+			for (Observer o : observers) {
+				Entity entity = (Entity) o;
+				if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Door")) {
 					o.update(this);
 				}
 			}
@@ -154,6 +159,15 @@ public class Player extends Movable implements Subject, Observer {
 			if (countSwordInBackPack() > 0) {
 				backpack.reduceSwordDurability();
 				dungeon.killEnemy(enemy);
+			}
+		}
+	}
+
+	public void useKey(int id) {
+		ArrayList<Key> keys = this.findKeys();
+		for (Key key : keys) {
+			if (key.getId() == id) {
+				this.backpack.removeItem("");
 			}
 		}
 	}
