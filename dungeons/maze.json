@@ -363,6 +363,11 @@
       "type": "door"
     },
     {
+      "x": 4,
+      "y": 7,
+      "type": "sword"
+    },
+    {
       "x": 11,
       "y": 1,
       "type": "enemy"
