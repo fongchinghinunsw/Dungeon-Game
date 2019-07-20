@@ -12,7 +12,7 @@ public class Backpack {
 		this.max_size = 9;
 	}
 
-	public Equipable getItem(String type) {
+	public Equipable removeItem(String type) {
 		for (Equipable item : this.items) {
 			if (item.getClassName().equals(type)) {
 				this.items.remove(item);
@@ -40,6 +40,25 @@ public class Backpack {
 			}
 		}
 		return null;
+	}
+
+	public Equipable getSword() {
+		for (Equipable entity : items) {
+			if (entity.getClassName().equals("Sword")) {
+				return entity;
+			}
+		}
+		return null;
+	}
+
+	public void reduceSwordDurability() {
+		Equipable sword = getSword();
+		((Sword) sword).reduceDurability();
+		System.out.println(((Sword) sword).getDurability());
+		System.out.println(countSword());
+		if (((Sword) sword).getDurability() == 0) {
+			items.remove(sword);
+		}
 	}
 
 	public int countSword() {

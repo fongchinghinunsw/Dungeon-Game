@@ -1,25 +1,37 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
-public class Enemy extends Character implements Observer {
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
+public class Enemy extends Character implements Subject, Observer {
 
 	private MoveSpeed moveSpeed;
 	private Dungeon dungeon;
-	private boolean alive;
+	private ArrayList<Observer> observers;
+	private BooleanProperty alive;
 
 	public Enemy(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.moveSpeed = new Slow();
-		this.alive = true;
+		this.alive = new SimpleBooleanProperty(true);
+		this.observers = new ArrayList<>();
 		Timer timer = new Timer();
 		EnemyTimer task = new EnemyTimer(this, dungeon.getPlayer());
 		timer.schedule(task, 0, 1000 / moveSpeed.getSpeed());
 	}
 
-	public boolean isAlive() {
+	public BooleanProperty isAlive() {
 		return this.alive;
+	}
+
+	public void die() {
+		this.alive.set(false);
+		dungeon.kilEnemy(this);
+		System.out.println("Enemy is dead");
 	}
 
 	public long getSpeed() {
@@ -65,13 +77,37 @@ public class Enemy extends Character implements Observer {
 			}
 		}
 		if (this.getX() == playerX && this.getY() == playerY) {
-			this.dungeon.killPlayer();
+			if (player.countSwordInBackPack() == 0) {
+				this.dungeon.killPlayer();
+			}
 		}
+
 	}
 
 	@Override
 	public void update(Subject obj, Dungeon dungeon) {
-		System.out.println("Enemy is doing something");
-		
+		System.out.println("Enemy meets u");
+
+	}
+
+	@Override
+	public void attach(Observer o) {
+		if (!(observers.contains(o))) {
+			observers.add(o);
+		}
+	}
+
+	@Override
+	public void detach(Observer o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		if (dungeon.sameClass(getX(), getY(), "Player")) {
+			for (Observer o : observers) {
+				o.update(this, dungeon);
+			}
+		}
 	}
 }

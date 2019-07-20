@@ -9,7 +9,7 @@ import java.util.Timer;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Character implements Subject {
+public class Player extends Character implements Subject, Observer {
 
 	private Dungeon dungeon;
 	private Backpack backpack;
@@ -69,7 +69,7 @@ public class Player extends Character implements Subject {
 			System.out.println("A potion is already in use!");
 			return false;
 		}
-		Equipable item = backpack.getItem(type);
+		Equipable item = backpack.removeItem(type);
 		if (item == null) {
 			String message = "You don't have an item of " + type + " kind!";
 			System.out.println(message);
@@ -148,5 +148,17 @@ public class Player extends Character implements Subject {
 
 	public void setMoveSpeed(MoveSpeed moveSpeed) {
 		this.moveSpeed = moveSpeed;
+	}
+
+	@Override
+	public void update(Subject obj, Dungeon dungeon) {
+		if (obj instanceof Enemy) {
+			Enemy enemy = (Enemy) obj;
+			if (countSwordInBackPack() > 0) {
+				backpack.reduceSwordDurability();
+				enemy.die();
+			}
+		}
+
 	}
 }
