@@ -245,6 +245,7 @@ public class Dungeon {
 	 */
 	public void addSwitch(Switch floorSwitch) {
 		switches.add(floorSwitch);
+		countUntriggeredSwitch++;
 	}
 
 	public void addTreasure(Treasure treasure) {
