@@ -1,30 +1,25 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public class CompositeOperand implements GoalExpression {
 	public enum Operator {
 		AND, OR
 	}
 
 	private Operator operator;
-	private GoalExpression left, right;
+	ArrayList<GoalExpression> children = new ArrayList<GoalExpression>();
 
 	public CompositeOperand(Operator operator, GoalExpression left, GoalExpression right) {
 		this.operator = operator;
-		this.left = left;
-		this.right = right;
 	}
 
 	@Override
 	public boolean evaluate() {
-		boolean l = left.evaluate();
-		boolean r = right.evaluate();
-		switch (operator) {
-		case AND:
-			return l && r;
-		case OR:
-			return l || r;
-		default:
-			return false; // Unreachable unless operator is null
+		boolean result;
+		for (int i = 0; i < children.size(); i++) {
+			// result =
 		}
+		return false;
 	}
 }
