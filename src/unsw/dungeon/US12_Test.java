@@ -56,4 +56,25 @@ public class US12_Test {
 		player.moveRight();
 		assertTrue(player.equipItem(), "Can't pick up sword after dropping");
 	}
+
+	@Test
+	public void testDropAndMeetEnemy() {
+		final JFXPanel fxPanel = new JFXPanel();
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 3, 4);
+		Enemy enemy = new Enemy(dungeon, 4, 4);
+		dungeon.addEnemy(enemy);
+		dungeon.addEntity(enemy);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Sword sword = new Sword(3, 4);
+		dungeon.addEntity(sword);
+		player.equipItem();
+		player.setX(4);
+		dungeon.removeEquippedEntity(4, 4, "Sword");
+		player.update(enemy);
+		enemy.update(player);
+		assertFalse(player.isAlive(), "Stayed alive without sword");
+		assertTrue(enemy.isAlive().getValue(), "Died to player without sword or potion");
+	}
 }
