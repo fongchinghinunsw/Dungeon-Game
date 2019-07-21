@@ -94,7 +94,6 @@ public class US19_Test {
 		Enemy enemy = new Enemy(dungeon, 3, 8);
 		dungeon.addEnemy(enemy);
 		dungeon.addEntity(enemy);
-		enemy.update(player);
 		enemy.findPlayer();
 		assertTrue(enemy.getX() > 3, "enemy isn't running away!");
 	}
