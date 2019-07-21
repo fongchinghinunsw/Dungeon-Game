@@ -2,11 +2,11 @@ package unsw.dungeon;
 
 public class Equipable extends Entity {
 
+	EquipState state;
+
 	EquipState equippedState;
 
 	EquipState unEquippedState;
-
-	EquipState state;
 
 	public Equipable(int x, int y) {
 		super(x, y);

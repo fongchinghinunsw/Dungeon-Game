@@ -3,6 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 public class Backpack {
+
 	private ArrayList<Equipable> items;
 	private int max_size;
 
@@ -44,6 +45,25 @@ public class Backpack {
 		return null;
 	}
 
+	/**
+	 * gets the key in the backpack
+	 * 
+	 * @return key in bag
+	 */
+	public Key getKey() {
+		for (Equipable e : this.items) {
+			if (e.getClassName().equals("Key")) {
+				return (Key) e;
+			}
+		}
+		return null;
+	}
+
+	/*
+	 * removes key from the backpack
+	 * 
+	 * @return key in bag
+	 */
 	public Key removeKey() {
 		for (Equipable e : items) {
 			if (e.getClassName().equals("Key")) {
@@ -58,6 +78,11 @@ public class Backpack {
 		return null;
 	}
 
+	/*
+	 * get the bomb in the backpack
+	 * 
+	 * @return bomb in bag
+	 */
 	public Bomb getBomb() {
 		for (Equipable e : items) {
 			if (e.getClassName().equals("Bomb")) {
@@ -67,6 +92,11 @@ public class Backpack {
 		return null;
 	}
 
+	/*
+	 * remove bomb in the backpack
+	 * 
+	 * @return bomb in bag
+	 */
 	public Bomb removeBomb() {
 		Bomb entity = getBomb();
 		if (entity != null) {
@@ -133,19 +163,4 @@ public class Backpack {
 		}
 		return count;
 	}
-
-	/**
-	 * gets the key in the backpack
-	 * 
-	 * @return key in bag
-	 */
-	public Key getKey() {
-		for (Equipable e : this.items) {
-			if (e.getClassName().equals("Key")) {
-				return (Key) e;
-			}
-		}
-		return null;
-	}
-
 }

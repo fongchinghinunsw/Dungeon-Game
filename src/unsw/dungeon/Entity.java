@@ -1,7 +1,6 @@
 package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
-import java.lang.Math;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -62,6 +61,13 @@ public abstract class Entity {
 		return x.get();
 	}
 
+	/*
+	 * Get integer value of y.
+	 */
+	public int getY() {
+		return y.get();
+	}
+
 	/**
 	 * checks if entity is next to a given location
 	 * 
@@ -80,13 +86,6 @@ public abstract class Entity {
 
 	public boolean samePlace(int x2, int y2) {
 		return (getX() == x2 && getY() == y2);
-	}
-
-	/*
-	 * Get integer value of y.
-	 */
-	public int getY() {
-		return y.get();
 	}
 
 	/*
