@@ -1,17 +1,13 @@
 package unsw.dungeon;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * 1. When a player moves onto a grid with a key and press the space bar, the
- * key is added to the player's backpack and the key vanishes from the map. 2.
- * The player can only carry one key at a time.
- * 
- * @author z5211173
- *
- */
+import javafx.embed.swing.JFXPanel;
+
 public class US3_Test {
 
 	@Test
@@ -47,20 +43,45 @@ public class US3_Test {
 
 	@Test
 	public void testBlockEnemyWay() {
+		final JFXPanel fxPanel = new JFXPanel();
 		// Test player can move towards any locations if there're no walls blocking his
 		// way.
 		Dungeon dungeon = new Dungeon(10, 10);
-		/*
-		 * Enemy enemy = new Enemy(dungeon, 5, 5); Boulder boulder1 = new
-		 * Boulder(dungeon, 5, 4);
-		 * 
-		 * dungeon.addEntity(enemy); dungeon.addEntity(boulder1);
-		 * dungeon.addObserver(boulder1);
-		 * 
-		 * // enemy.moveUp(); assertEquals(enemy.getX(), 5); assertEquals(enemy.getY(),
-		 * 5); assertEquals(boulder1.getX(), 5); assertEquals(boulder1.getY(), 4);
-		 */
-
+		Player player = new Player(dungeon, 2, 2);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Enemy enemy = new Enemy(dungeon, 5, 5);
+		Boulder boulder = new Boulder(dungeon, 5, 4);
+		dungeon.addEnemy(enemy);
+		dungeon.addEntity(enemy);
+		dungeon.addBoulder(boulder);
+		dungeon.addEntity(boulder);
+		enemy.moveUp();
+		assertEquals(enemy.getY(), 5, "Moves through the boulder");
+		enemy.moveDown();
+		assertEquals(enemy.getY(), 6, "Doesn't move even without obstacles");
 	}
 
+	@Test
+	public void testPushToWall() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 0, 0);
+		dungeon.setPlayer(player);
+		Boulder boulder = new Boulder(dungeon, 0, 1);
+		Wall wall = new Wall(0, 2);
+		dungeon.addEntity(wall);
+		dungeon.addObserver(boulder);
+		// notify the boulder the movement of the player so that it can react.
+		dungeon.notifyPlayerObservers();
+
+		dungeon.addEntity(player);
+		dungeon.addEntity(boulder);
+
+		player.moveDown();
+		dungeon.notifyPlayerObservers();
+		assertTrue(player.samePlace(0, 0), "Player moved");
+		assertTrue(boulder.samePlace(0, 1), "Boulder moved");
+		assertTrue(wall.samePlace(0, 2), "WALL MOVED WE'VE GOT A BIG PROBLEM");
+
+	}
 }
