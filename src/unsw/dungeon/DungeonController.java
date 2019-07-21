@@ -108,6 +108,7 @@ public class DungeonController {
 				}
 				dungeon.notifyPlayerObservers();
 				dungeon.notifyBoulderObservers();
+				System.out.println(dungeon.countRemainingTreasure());
 				lastMoveNanos = now;
 			}
 		} else if (event.getCode().isWhitespaceKey()) {

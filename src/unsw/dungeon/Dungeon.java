@@ -23,11 +23,13 @@ public class Dungeon {
 	private List<Enemy> enemies;
 	private List<Boulder> boulders;
 	private List<Switch> switches;
+	private List<Treasure> treasures;
+	private List<Bomb> bombs;
 	private int nKeys;
 	private int nDoors;
 	private int countUntriggeredSwitch;
+	private int countRemainingTreasure;
 	private GoalExpression goalExpression;
-	private List<Bomb> bombs;
 
 	/**
 	 * constructor for dungeon
@@ -43,6 +45,7 @@ public class Dungeon {
 		this.enemies = new ArrayList<>();
 		this.boulders = new ArrayList<>();
 		this.switches = new ArrayList<>();
+		this.treasures = new ArrayList<>();
 		this.bombs = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
@@ -121,6 +124,34 @@ public class Dungeon {
 		int count = countUntriggeredSwitch;
 		for (Switch floorSwitch : switches) {
 			if (sameClass(floorSwitch.getX(), floorSwitch.getY(), "Boulder")) {
+				count--;
+			}
+		}
+		return count;
+	}
+
+	/*
+	 * return true if the treasure goal has been completed
+	 */
+	public boolean completedTreasureGoal() {
+		return countUntriggeredSwitch() == 0 ? true : false;
+	}
+
+	/**
+	 * increase unpicked treasure by 1
+	 */
+	public void addCountRemainingTreasure() {
+		this.countRemainingTreasure++;
+	}
+
+	/**
+	 * 
+	 * @return number of untriggered switches
+	 */
+	public int countRemainingTreasure() {
+		int count = countRemainingTreasure;
+		for (Treasure treasure : treasures) {
+			if (!(sameClass(treasure.getX(), treasure.getY(), "Treasure"))) {
 				count--;
 			}
 		}
@@ -206,6 +237,10 @@ public class Dungeon {
 	 */
 	public void addSwitch(Switch floorSwitch) {
 		switches.add(floorSwitch);
+	}
+
+	public void addTreasure(Treasure treasure) {
+		treasures.add(treasure);
 	}
 
 	/**
@@ -360,6 +395,10 @@ public class Dungeon {
 				entities.remove(entity);
 			}
 		}
+	}
+
+	public void removeEntity(Entity entity) {
+		entities.remove(entity);
 	}
 
 	/**

@@ -94,6 +94,8 @@ public abstract class DungeonLoader {
 			break;
 		case "treasure":
 			Treasure treasure = new Treasure(x, y);
+			dungeon.addTreasure(treasure);
+			dungeon.addCountRemainingTreasure();
 			onLoad(treasure);
 			entity = treasure;
 			break;

@@ -56,6 +56,7 @@ public class Player extends Movable implements Subject, Observer {
 				}
 				if (e.equip()) {
 					dungeon.removeObserver((Observer) e);
+					dungeon.removeEntity(e);
 					backpack.addItem(e);
 					String message = "Added item of type " + e.getClassName() + " into the backpack.";
 					System.out.println(message);
@@ -152,11 +153,11 @@ public class Player extends Movable implements Subject, Observer {
 	public void detach(Observer o) {
 		observers.remove(o);
 	}
-	
+
 	public Backpack getBag() {
 		return backpack;
 	}
-	
+
 	/*
 	 * Notify the current location of itself to all its observers, this method is
 	 * called in DungeonController after each movement.
