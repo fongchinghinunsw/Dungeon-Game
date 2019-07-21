@@ -130,12 +130,12 @@ public class Player extends Movable implements Subject, Observer {
 		return backpack.countSword();
 	}
 
-	public Entity removeBombInBackpack() {
-		return backpack.removeBomb();
-	}
-
 	public Entity removeSwordInBackPack() {
 		return backpack.removeSword();
+	}
+
+	public Entity removeBombInBackpack() {
+		return backpack.removeBomb();
 	}
 
 	public long getSpeed() {
