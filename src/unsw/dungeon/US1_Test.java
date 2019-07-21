@@ -1,9 +1,7 @@
 package unsw.dungeon;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -68,41 +66,62 @@ public class US1_Test {
 	}
 
 	@Test
-	public void testVanishFromMap() {
+	public void testMoveTowardsLocationWithOtherEntities() {
+		// Test player can move towards any locations if there're no walls blocking his
+		// way.
 		Dungeon dungeon = new Dungeon(10, 10);
-		Key key1 = new Key(dungeon, 5, 5);
-		assertNotNull(key1, "Key not created");
-		assertEquals(dungeon.numKey(), 0, "Initial numKey not zero!");
-		dungeon.addKey();
-		assertEquals(dungeon.numKey(), 1, "Key isn't added!");
-		dungeon.addEntity(key1);
 		Player player = new Player(dungeon, 5, 5);
-		player.equipItem();
-		Key keyInBag = player.findKey();
-		assertNotNull(keyInBag, "Key not in bag!");
-		assertEquals(keyInBag.getId(), key1.getId(), "ID of key changed!");
+
+		dungeon.setPlayer(player);
+
+		Sword sword = new Sword(5, 4);
+		Potion potion = new Potion(5, 5);
+		Bomb bomb = new Bomb(dungeon, 5, 6);
+		Exit exit = new Exit(5, 6);
+		Key key = new Key(dungeon, 5, 7);
+		Door door = new Door(dungeon, 5, 8);
+		Treasure treasure = new Treasure(5, 9);
+		Boulder boulder = new Boulder(dungeon, 6, 9);
+		Switch floorSwitch = new Switch(dungeon, 7, 9);
+
+		dungeon.addEntity(player);
+		dungeon.addEntity(sword);
+		dungeon.addEntity(potion);
+		dungeon.addEntity(bomb);
+		dungeon.addEntity(exit);
+		dungeon.addEntity(key);
+		dungeon.addEntity(door);
+		dungeon.addEntity(treasure);
+		dungeon.addEntity(boulder);
+		dungeon.addEntity(floorSwitch);
+
+		player.moveUp();
+		assertEquals(player.getX(), 5);
+		assertEquals(player.getY(), 4);
+		player.moveDown();
+		assertEquals(player.getX(), 5);
+		assertEquals(player.getY(), 5);
+		player.moveDown();
+		assertEquals(player.getX(), 5);
+		assertEquals(player.getY(), 6);
+		player.moveDown();
+		assertEquals(player.getX(), 5);
+		assertEquals(player.getY(), 7);
+		player.moveDown();
+		assertEquals(player.getX(), 5);
+		assertNotEquals(player.getY(), 8);
+		player.moveLeft();
+		player.moveDown();
+		player.moveDown();
+		player.moveRight();
+		assertEquals(player.getX(), 5);
+		assertEquals(player.getY(), 9);
+		player.moveRight();
+		assertEquals(player.getX(), 6);
+		assertEquals(player.getY(), 9);
+		player.moveRight();
+		assertEquals(player.getX(), 7);
+		assertEquals(player.getY(), 9);
 	}
 
-	@Test
-	public void testOneKey() {
-		Dungeon dungeon = new Dungeon(10, 10);
-		Key key1 = new Key(dungeon, 5, 5);
-		assertNotNull(key1, "Key1 not created");
-		assertEquals(dungeon.numKey(), 0, "Initial numKey not zero!");
-		dungeon.addKey();
-		assertEquals(dungeon.numKey(), 1, "Key1 isn't added!");
-		dungeon.addEntity(key1);
-		Key key2 = new Key(dungeon, 5, 6);
-		assertNotNull(key2, "Key2 not created");
-		assertEquals(dungeon.numKey(), 1, "numKey did not increase!");
-		dungeon.addKey();
-		assertEquals(dungeon.numKey(), 2, "Key2 isn't added!");
-		dungeon.addEntity(key2);
-		Player player = new Player(dungeon, 5, 5);
-		assertTrue(player.equipItem(), "Player cannot pick up the key");
-		player.setY(6);
-		assertFalse(player.equipItem(), "Player picked up a second key");
-		player.setY(5);
-		assertFalse(player.equipItem(), "Forget about the key! It's already in your bag!");
-	}
 }
