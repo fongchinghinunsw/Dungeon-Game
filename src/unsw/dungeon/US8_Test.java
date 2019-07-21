@@ -1,11 +1,7 @@
 package unsw.dungeon;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 
 import javafx.embed.swing.JFXPanel;
 
@@ -31,7 +27,7 @@ public class US8_Test {
 		bomb.light();
 		assertTrue(bomb.lit(), "Bomb not lit");
 		player.getBag().removeItem("Bomb");
-		assertNull(player.getBomb(),"Bomb not removed");
+		assertNull(player.getBomb(), "Bomb not removed");
 		bomb.explode();
 		assertTrue(bomb.exploded(), "Bomb didn't explode");
 	}
@@ -59,7 +55,8 @@ public class US8_Test {
 		assertEquals(bomb.getX(), 7, "bomb not placed on right x value");
 		assertEquals(bomb.getY(), 4, "bomb not placed on right y value");
 		assertTrue(bomb.samePlace(player.getX(), player.getY()), "Player not in same place as bomb");
-		assertTrue(bomb.adjacent(enemy.getX(), enemy.getY())||bomb.samePlace(enemy.getX(), enemy.getY()), "Enemy not adjacent to bomb");
+		assertTrue(bomb.adjacent(enemy.getX(), enemy.getY()) || bomb.samePlace(enemy.getX(), enemy.getY()),
+				"Enemy not adjacent to bomb");
 		dungeon.addObservers();
 		dungeon.addEntity(bomb);
 		bomb.light();
