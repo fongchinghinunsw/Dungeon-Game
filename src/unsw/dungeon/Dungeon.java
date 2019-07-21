@@ -134,7 +134,7 @@ public class Dungeon {
 	 * return true if the treasure goal has been completed
 	 */
 	public boolean completedTreasureGoal() {
-		return countUntriggeredSwitch() == 0 ? true : false;
+		return countRemainingTreasure() == 0 ? true : false;
 	}
 
 	/**
