@@ -25,6 +25,7 @@ public class US3_Test {
 		Boulder boulder2 = new Boulder(dungeon, 0, 2);
 		Boulder boulder3 = new Boulder(dungeon, 1, 0);
 		dungeon.addObserver(boulder3);
+		// notify the boulder the movement of the player so that it can react.
 		dungeon.notifyPlayerObservers();
 
 		dungeon.addEntity(player);
@@ -34,10 +35,12 @@ public class US3_Test {
 		dungeon.addEntity(boulder3);
 
 		player.moveDown();
+		dungeon.notifyPlayerObservers();
 		assertEquals(player.getX(), 0);
 		assertEquals(player.getY(), 0);
 
 		player.moveRight();
+		dungeon.notifyPlayerObservers();
 		assertEquals(player.getX(), 1);
 		assertEquals(player.getY(), 0);
 		assertEquals(boulder3.getX(), 2);
