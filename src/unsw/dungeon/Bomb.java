@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Bomb extends Equipable implements Subject, Observer {
 
+	private Dungeon dungeon;
 	private int countdownTime;
 	private boolean exploded;
-	private Dungeon dungeon;
 	private boolean lit;
 	private ArrayList<Observer> observers;
 
@@ -27,21 +27,16 @@ public class Bomb extends Equipable implements Subject, Observer {
 		return exploded;
 	}
 
-	public void light() {
-		lit = true;
-	}
-
 	public boolean lit() {
 		return lit;
 	}
 
-	public void explode() {
-		exploded = true;
+	public void light() {
+		lit = true;
 	}
 
-	@Override
-	public String getClassName() {
-		return "Bomb";
+	public void explode() {
+		exploded = true;
 	}
 
 	@Override
@@ -76,6 +71,11 @@ public class Bomb extends Equipable implements Subject, Observer {
 				}
 			}
 		}
+	}
+
+	@Override
+	public String getClassName() {
+		return "Bomb";
 	}
 
 }

@@ -6,8 +6,8 @@ import javafx.application.Platform;
 
 public class BombTimer extends TimerTask {
 	private Bomb self;
-	private int tick;
 	private Player player;
+	private int tick;
 
 	public BombTimer(Bomb self, Player player) {
 		this.self = self;
