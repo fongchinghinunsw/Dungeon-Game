@@ -62,7 +62,6 @@ public class Boulder extends Movable implements Subject, Observer {
 					moveUp();
 				}
 			} else {
-				System.out.printf("x:%d y:%d", lastX, lastY);
 				Player player = (Player) obj;
 				lastX = player.getX();
 				lastY = player.getY();
