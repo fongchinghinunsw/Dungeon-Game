@@ -1,7 +1,5 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-
 public class Door extends Entity implements Observer {
 	private final int id;
 	private DoorState state;
@@ -16,6 +14,12 @@ public class Door extends Entity implements Observer {
 		return this.state;
 	}
 
+	public void setState(DoorState newState) {
+		if (newState instanceof OpenState) {
+			this.state = newState;
+		}
+	}
+
 	public int getId() {
 		return this.id;
 	}
@@ -28,15 +32,8 @@ public class Door extends Entity implements Observer {
 		return new ClosedState();
 	}
 
-	public void setState(DoorState newState) {
-		if (newState instanceof OpenState) {
-			this.state = newState;
-		}
-	}
-
-	@Override
-	public String getClassName() {
-		return "Door";
+	public boolean isOpen() {
+		return this.state.shallPass();
 	}
 
 	@Override
@@ -53,8 +50,9 @@ public class Door extends Entity implements Observer {
 		}
 	}
 
-	public boolean isOpen() {
-		return this.state.shallPass();
+	@Override
+	public String getClassName() {
+		return "Door";
 	}
 
 }

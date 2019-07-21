@@ -62,6 +62,15 @@ public class Dungeon {
 	}
 
 	/**
+	 * getter method for height
+	 * 
+	 * @return height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
 	 * increases total number of keys
 	 */
 	public void addKey() {
@@ -78,15 +87,6 @@ public class Dungeon {
 	}
 
 	/**
-	 * getter method for nDoors
-	 * 
-	 * @return nDoors
-	 */
-	public int numDoor() {
-		return this.nDoors;
-	}
-
-	/**
 	 * increases total number of doors
 	 */
 	public void addDoor() {
@@ -94,12 +94,12 @@ public class Dungeon {
 	}
 
 	/**
-	 * getter method for height
+	 * getter method for nDoors
 	 * 
-	 * @return height
+	 * @return nDoors
 	 */
-	public int getHeight() {
-		return height;
+	public int numDoor() {
+		return this.nDoors;
 	}
 
 	/*

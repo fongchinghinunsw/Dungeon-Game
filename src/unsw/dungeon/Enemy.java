@@ -20,7 +20,7 @@ public class Enemy extends Movable implements Subject, Observer {
 		this.alive = new SimpleBooleanProperty(true);
 		this.observers = new ArrayList<>();
 		Timer timer = new Timer();
-		EnemyTimer task = new EnemyTimer(this, dungeon);
+		EnemyTimer task = new EnemyTimer(dungeon, this);
 		timer.schedule(task, 0, 100 / moveSpeed.getSpeed());
 	}
 

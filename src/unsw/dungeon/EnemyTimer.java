@@ -5,9 +5,9 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 
 public class EnemyTimer extends TimerTask {
+	private Dungeon dungeon;
 	private Enemy self;
 	private int tick;
-	private Dungeon dungeon;
 
 	/**
 	 * PotionTimer constructor
@@ -15,7 +15,7 @@ public class EnemyTimer extends TimerTask {
 	 * @param potion
 	 * @param player
 	 */
-	public EnemyTimer(Enemy self, Dungeon dungeon) {
+	public EnemyTimer(Dungeon dungeon, Enemy self) {
 		this.self = self;
 		this.tick = 0;
 		this.dungeon = dungeon;
