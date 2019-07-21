@@ -82,6 +82,44 @@ public class US3_Test {
 		assertTrue(player.samePlace(0, 0), "Player moved");
 		assertTrue(boulder.samePlace(0, 1), "Boulder moved");
 		assertTrue(wall.samePlace(0, 2), "WALL MOVED WE'VE GOT A BIG PROBLEM");
+	}
 
+	@Test
+	public void testPushToEquipables() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 0, 0);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Potion potion = new Potion(0, 2);
+		dungeon.addEntity(potion);
+		Sword sword = new Sword(0, 3);
+		dungeon.addEntity(sword);
+		Key key = new Key(dungeon, 0, 4);
+		dungeon.addKey();
+		dungeon.addEntity(key);
+		Bomb bomb = new Bomb(dungeon, 0, 5);
+		dungeon.addBomb(bomb);
+		dungeon.addEntity(bomb);
+		Boulder boulder = new Boulder(dungeon, 0, 1);
+		dungeon.addEntity(boulder);
+		dungeon.addObserver(boulder);
+
+		dungeon.notifyPlayerObservers();
+		for (int i = 0; i < 5; i++) {
+			player.moveDown();
+			dungeon.notifyPlayerObservers();
+		}
+		dungeon.notifyPlayerObservers();
+		assertTrue(player.samePlace(0, 5), "Where's the player?");
+		assertTrue(potion.samePlace(0, 2), "Where's the potion?");
+		assertTrue(sword.samePlace(0, 3), "Where's the sword?");
+		assertTrue(key.samePlace(0, 4), "Where's the key?");
+		assertTrue(bomb.samePlace(0, 5), "Where's the bomb?");
+		assertTrue(boulder.samePlace(0, 6), "Where's the boulder?");
+
+		for (int i = 0; i < 4; i++) {
+			assertTrue(player.equipItem(), "Cannot equip item here");
+			player.moveUp();
+		}
 	}
 }
