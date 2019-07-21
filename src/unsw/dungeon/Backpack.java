@@ -44,6 +44,20 @@ public class Backpack {
 		return null;
 	}
 
+	/**
+	 * gets the key in the backpack
+	 * 
+	 * @return key in bag
+	 */
+	public Key getKey() {
+		for (Equipable e : this.items) {
+			if (e.getClassName().equals("Key")) {
+				return (Key) e;
+			}
+		}
+		return null;
+	}
+
 	public Key removeKey() {
 		for (Equipable e : items) {
 			if (e.getClassName().equals("Key")) {
@@ -133,19 +147,4 @@ public class Backpack {
 		}
 		return count;
 	}
-
-	/**
-	 * gets the key in the backpack
-	 * 
-	 * @return key in bag
-	 */
-	public Key getKey() {
-		for (Equipable e : this.items) {
-			if (e.getClassName().equals("Key")) {
-				return (Key) e;
-			}
-		}
-		return null;
-	}
-
 }
