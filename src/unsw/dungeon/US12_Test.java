@@ -7,16 +7,53 @@ import javafx.embed.swing.JFXPanel;
 public class US12_Test {
 
 	@Test
-	public void testClassMethods() {
+	public void testDropSword() {
 		final JFXPanel fxPanel = new JFXPanel();
 		Dungeon dungeon = new Dungeon(10, 10);
-		Treasure treasure = new Treasure(3, 4);
-		dungeon.addTreasure(treasure);
-		dungeon.addEntity(treasure);
-		assertNotNull(treasure, "Treasure is null");
-		assertEquals(treasure.getX(), 3, "X of treasure isn't set correctly");
-		assertEquals(treasure.getY(), 4, "Y of treasure isn't set correctly");
-		assertEquals(treasure.getClassName(), "Treasure", "getClassName set wrongly");
+		Player player = new Player(dungeon, 3, 4);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Sword sword = new Sword(3, 4);
+		dungeon.addEntity(sword);
+		player.equipItem();
+		dungeon.removeEquippedEntity(3, 4, "Sword");
+		assertNull(player.removeSwordInBackPack(), "Sword not removed");
+		assertEquals(player.countSwordInBackPack(), 0, "Count wasn't updated");
 	}
-	
+
+	@Test
+	public void testDropAndPickUp_Different() {
+		final JFXPanel fxPanel = new JFXPanel();
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 3, 4);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Sword sword = new Sword(3, 4);
+		dungeon.addEntity(sword);
+		Sword sword2 = new Sword(4, 4);
+		dungeon.addEntity(sword2);
+		player.equipItem();
+		dungeon.removeEquippedEntity(3, 4, "Sword");
+		player.setX(4);
+		assertTrue(player.equipItem(), "Can't pick up sword after dropping");
+	}
+
+	@Test
+	public void testDropAndPickUp_Same() {
+		final JFXPanel fxPanel = new JFXPanel();
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 3, 4);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Sword sword = new Sword(3, 4);
+		dungeon.addEntity(sword);
+		player.equipItem();
+		player.setX(4);
+		dungeon.removeEquippedEntity(4, 4, "Sword");
+		player.moveDown();
+		player.moveLeft();
+		player.moveUp();
+		player.moveRight();
+		assertTrue(player.equipItem(), "Can't pick up sword after dropping");
+	}
 }
