@@ -34,4 +34,23 @@ public class US19_Test {
 		assertFalse(player.isInvincible(), "Effect of potion cannot be disabled");
 	}
 
+	@Test
+	public void testOnePotionAtATime() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 2, 8);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Potion potion1 = new Potion(2, 8);
+		dungeon.addEntity(potion1);
+		Potion potion2 = new Potion(3, 8);
+		dungeon.addEntity(potion2);
+		assertTrue(player.equipItem(), "Cannot pickup potion 1");
+		player.setX(3);
+		assertTrue(player.equipItem(), "Cannot pickup potion 2");
+		player.useItem("Potion");
+		assertFalse(player.useItem("Potion"), "Second potion is used");
+		player.disablePotion();
+		assertTrue(player.useItem("Potion"), "Second potion cannot be used after first one wearing out");
+	}
+
 }
