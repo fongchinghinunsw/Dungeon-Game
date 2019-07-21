@@ -47,6 +47,7 @@ public class Boulder extends Movable implements Subject, Observer {
 		if (obj instanceof Player) {
 			// the player is on the boulder (temporary)
 			if (dungeon.sameClass(getX(), getY(), "Player")) {
+
 				if (lastX < getX() && lastY == getY()) {
 					// the player is pushing from the left side.
 					moveRight();
