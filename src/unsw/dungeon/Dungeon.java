@@ -137,6 +137,10 @@ public class Dungeon {
 		return countRemainingTreasure() == 0 ? true : false;
 	}
 
+	public void removeTreasure(Treasure treasure) {
+		treasures.remove(treasure);
+	}
+
 	/**
 	 * increase unpicked treasure by 1
 	 */
@@ -156,6 +160,10 @@ public class Dungeon {
 			}
 		}
 		return count;
+	}
+
+	public void removeRemainingTreasure() {
+		countRemainingTreasure--;
 	}
 
 	/**
@@ -392,6 +400,10 @@ public class Dungeon {
 		ArrayList<Entity> entityList = getEntities(x, y);
 		for (Entity entity : entityList) {
 			if (entity instanceof Equipable) {
+				if (entity instanceof Treasure) {
+					this.removeRemainingTreasure();
+					this.removeTreasure((Treasure) entity);
+				}
 				entities.remove(entity);
 			}
 		}

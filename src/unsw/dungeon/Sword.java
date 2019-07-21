@@ -14,7 +14,9 @@ public class Sword extends Equipable implements Observer {
 	}
 
 	public void reduceDurability() {
-		this.durability--;
+		if (durability > 0) {
+			this.durability--;
+		}
 	}
 
 	@Override
