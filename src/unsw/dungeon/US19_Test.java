@@ -79,4 +79,23 @@ public class US19_Test {
 		assertFalse(player.isAlive(), "player still alive after potion wore off");
 		assertTrue(enemy2.isAlive().getValue(), "Enemy killed by player with no potion");
 	}
+
+	@Test
+	public void testRunAway() {
+		final JFXPanel fxPanel = new JFXPanel();
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 2, 8);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Potion potion1 = new Potion(2, 8);
+		dungeon.addEntity(potion1);
+		player.equipItem();
+		player.useItem("Potion");
+		Enemy enemy = new Enemy(dungeon, 3, 8);
+		dungeon.addEnemy(enemy);
+		dungeon.addEntity(enemy);
+		enemy.update(player);
+		enemy.findPlayer();
+		assertTrue(enemy.getX() > 3, "enemy isn't running away!");
+	}
 }
