@@ -53,11 +53,6 @@
       "type": "wall"
     },
     {
-      "x": 1,
-      "y": 2,
-      "type": "switch"
-    },
-    {
       "x": 4,
       "y": 2,
       "type": "bomb"
