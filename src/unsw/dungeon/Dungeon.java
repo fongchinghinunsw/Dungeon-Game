@@ -99,6 +99,13 @@ public class Dungeon {
 		return height;
 	}
 
+	/*
+	 * return true if the floor switch goal has been completed
+	 */
+	public boolean completedSwitchGoal() {
+		return countUntriggeredSwitch() == 0 ? true : false;
+	}
+
 	/**
 	 * increase untriggered switches by 1
 	 */
