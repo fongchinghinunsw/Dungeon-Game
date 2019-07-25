@@ -142,6 +142,21 @@ public class Player extends Movable implements Subject, Observer {
 		return moveSpeed.getSpeed();
 	}
 
+	public Key findKey() {
+		return backpack.getKey();
+	}
+
+	public void useKey(int id) {
+		Key key = this.findKey();
+		if (key.getId() == id) {
+			this.backpack.removeKey();
+		}
+	}
+
+	public Backpack getBag() {
+		return backpack;
+	}
+
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {
@@ -152,10 +167,6 @@ public class Player extends Movable implements Subject, Observer {
 	@Override
 	public void detach(Observer o) {
 		observers.remove(o);
-	}
-
-	public Backpack getBag() {
-		return backpack;
 	}
 
 	/*
@@ -205,20 +216,8 @@ public class Player extends Movable implements Subject, Observer {
 		}
 	}
 
-	public void useKey(int id) {
-		Key key = this.findKey();
-		if (key.getId() == id) {
-			this.backpack.removeKey();
-		}
-	}
-
 	@Override
 	public String getClassName() {
 		return "Player";
 	}
-
-	public Key findKey() {
-		return backpack.getKey();
-	}
-
 }

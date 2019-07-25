@@ -292,6 +292,7 @@ public class Dungeon {
 		for (Entity entity : entities) {
 			if (!(sameClass(entity.getX(), entity.getY(), "Wall"))) {
 				// Add observer for the player
+				System.out.println(entity.getClassName());
 				player.attach((Observer) entity);
 				// Add observer for the enemy
 				for (Enemy enemy : enemies) {
