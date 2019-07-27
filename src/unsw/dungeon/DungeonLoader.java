@@ -76,7 +76,6 @@ public abstract class DungeonLoader {
 			break;
 		case "boulder":
 			Boulder boulder = new Boulder(dungeon, x, y);
-			dungeon.addBoulder(boulder);
 			onLoad(boulder);
 			entity = boulder;
 			break;
@@ -94,8 +93,6 @@ public abstract class DungeonLoader {
 			break;
 		case "treasure":
 			Treasure treasure = new Treasure(x, y);
-			dungeon.addTreasure(treasure);
-			dungeon.addCountRemainingTreasure();
 			onLoad(treasure);
 			entity = treasure;
 			break;
@@ -106,13 +103,11 @@ public abstract class DungeonLoader {
 			break;
 		case "bomb":
 			Bomb bomb = new Bomb(dungeon, x, y);
-			dungeon.addBomb(bomb);
 			onLoad(bomb);
 			entity = bomb;
 			break;
 		case "enemy":
 			Enemy enemy = new Enemy(dungeon, x, y);
-			dungeon.addEnemy(enemy);
 			onLoad(enemy);
 			entity = enemy;
 			break;
@@ -123,8 +118,6 @@ public abstract class DungeonLoader {
 			break;
 		case "switch":
 			Switch floorSwitch = new Switch(dungeon, x, y);
-			dungeon.addSwitch(floorSwitch);
-			dungeon.addCountUntriggeredSwitch();
 			onLoad(floorSwitch);
 			entity = floorSwitch;
 			break;

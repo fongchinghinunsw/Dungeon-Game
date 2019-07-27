@@ -20,15 +20,8 @@ public class Dungeon {
 	private int width, height;
 	private Player player;
 	private List<Entity> entities;
-	private List<Enemy> enemies;
-	private List<Boulder> boulders;
-	private List<Switch> switches;
-	private List<Treasure> treasures;
-	private List<Bomb> bombs;
 	private int nKeys;
 	private int nDoors;
-	private int countUntriggeredSwitch;
-	private int countRemainingTreasure;
 	private GoalExpression goalExpression;
 
 	/**
@@ -42,14 +35,8 @@ public class Dungeon {
 		this.height = height;
 		this.player = null;
 		this.entities = new ArrayList<>();
-		this.enemies = new ArrayList<>();
-		this.boulders = new ArrayList<>();
-		this.switches = new ArrayList<>();
-		this.treasures = new ArrayList<>();
-		this.bombs = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
-		this.countUntriggeredSwitch = 0;
 	}
 
 	/**
@@ -110,21 +97,15 @@ public class Dungeon {
 	}
 
 	/**
-	 * increase untriggered switches by 1
-	 */
-	public void addCountUntriggeredSwitch() {
-		this.countUntriggeredSwitch++;
-	}
-
-	/**
 	 * 
 	 * @return number of untriggered switches
 	 */
 	public int countUntriggeredSwitch() {
-		int count = countUntriggeredSwitch;
-		for (Switch floorSwitch : switches) {
-			if (sameClass(floorSwitch.getX(), floorSwitch.getY(), "Boulder")) {
-				count--;
+		int count = 0;
+		for (Entity entity : entities) {
+			if (sameClass(entity.getX(), entity.getY(), "Switch")
+					&& !(sameClass(entity.getX(), entity.getY(), "Boulder"))) {
+				count++;
 			}
 		}
 		return count;
@@ -137,33 +118,18 @@ public class Dungeon {
 		return countRemainingTreasure() == 0 ? true : false;
 	}
 
-	public void removeTreasure(Treasure treasure) {
-		treasures.remove(treasure);
-	}
-
-	/**
-	 * increase unpicked treasure by 1
-	 */
-	public void addCountRemainingTreasure() {
-		this.countRemainingTreasure++;
-	}
-
 	/**
 	 * 
 	 * @return number of untriggered switches
 	 */
 	public int countRemainingTreasure() {
-		int count = countRemainingTreasure;
-		for (Treasure treasure : treasures) {
-			if (!(sameClass(treasure.getX(), treasure.getY(), "Treasure"))) {
-				count--;
+		int count = 0;
+		for (Entity entity : entities) {
+			if (sameClass(entity.getX(), entity.getY(), "Treasure")) {
+				count++;
 			}
 		}
 		return count;
-	}
-
-	public void removeRemainingTreasure() {
-		countRemainingTreasure--;
 	}
 
 	/**
@@ -212,47 +178,6 @@ public class Dungeon {
 	}
 
 	/**
-	 * adds an enemy to enemies
-	 * 
-	 * @param enemy to be added
-	 */
-	public void addEnemy(Enemy enemy) {
-		enemies.add(enemy);
-	}
-
-	/**
-	 * adds a bomb to bombs
-	 * 
-	 * @param bomb to be added
-	 */
-	public void addBomb(Bomb bomb) {
-		bombs.add(bomb);
-	}
-
-	/**
-	 * adds a boulder to boulders
-	 * 
-	 * @param boulder to be added
-	 */
-	public void addBoulder(Boulder boulder) {
-		boulders.add(boulder);
-	}
-
-	/**
-	 * adds a switch to switches
-	 * 
-	 * @param floorSwitch to be added
-	 */
-	public void addSwitch(Switch floorSwitch) {
-		switches.add(floorSwitch);
-		countUntriggeredSwitch++;
-	}
-
-	public void addTreasure(Treasure treasure) {
-		treasures.add(treasure);
-	}
-
-	/**
 	 * kills the player
 	 */
 	public void killPlayer() {
@@ -271,7 +196,6 @@ public class Dungeon {
 		enemy.die();
 		System.out.println("Enemy get removed from the dungeon.");
 		entities.remove(enemy);
-		enemies.remove(enemy);
 	}
 
 	/**
@@ -282,7 +206,6 @@ public class Dungeon {
 	public void destroyBoulder(Boulder boulder) {
 		System.out.println("Boulder destroyed");
 		entities.remove(boulder);
-		boulders.remove(boulder);
 	}
 
 	/*
@@ -294,18 +217,21 @@ public class Dungeon {
 				// Add observer for the player
 				player.attach((Observer) entity);
 				// Add observer for the enemy
-				for (Enemy enemy : enemies) {
-					enemy.attach((Observer) entity);
-				}
-				for (Bomb bomb : bombs) {
-					bomb.attach((Observer) entity);
-				}
+				addObserverOfClass("Enemy", (Observer) entity);
+				addObserverOfClass("Bomb", (Observer) entity);
 			}
 			// Add observer for the switch
 			if (sameClass(entity.getX(), entity.getY(), "Switch")) {
-				for (Boulder boulder : boulders) {
-					boulder.attach((Observer) entity);
-				}
+				addObserverOfClass("Boulder", (Observer) entity);
+			}
+		}
+	}
+
+	public void addObserverOfClass(String className, Observer observer) {
+		for (Entity entity : entities) {
+			if (entity.getClassName().equals(className)) {
+				Subject sub = (Subject) entity;
+				sub.attach(observer);
 			}
 		}
 	}
@@ -316,15 +242,11 @@ public class Dungeon {
 			// Add observer for the player
 			player.attach((Observer) entity);
 			// Add observer for the enemy
-			for (Enemy enemy : enemies) {
-				enemy.attach((Observer) entity);
-			}
+			addObserverOfClass("Enemy", (Observer) entity);
 		}
 		// Add observer for the switch
 		if (sameClass(entity.getX(), entity.getY(), "Switch")) {
-			for (Boulder boulder : boulders) {
-				boulder.attach((Observer) entity);
-			}
+			addObserverOfClass("Boulder", (Observer) entity);
 		}
 	}
 
@@ -340,12 +262,6 @@ public class Dungeon {
 		player.notifyObservers();
 	}
 
-	public void notifyBoulderObservers() {
-		for (Boulder boulder : boulders) {
-			boulder.notifyObservers();
-		}
-	}
-
 	/*
 	 * Check if there exists an object on the grid belongs to one of the specified
 	 * classes.
@@ -354,7 +270,7 @@ public class Dungeon {
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
 				for (String name : className) {
-					if (name == entity.getClassName()) {
+					if (name.equals(entity.getClassName())) {
 						return true;
 					}
 				}
@@ -401,10 +317,6 @@ public class Dungeon {
 		ArrayList<Entity> entityList = getEntities(x, y);
 		for (Entity entity : entityList) {
 			if (entity instanceof Equipable) {
-				if (entity instanceof Treasure) {
-					this.removeRemainingTreasure();
-					this.removeTreasure((Treasure) entity);
-				}
 				entities.remove(entity);
 			}
 		}

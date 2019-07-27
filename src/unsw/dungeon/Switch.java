@@ -10,12 +10,13 @@ public class Switch extends Entity implements Observer {
 	}
 
 	@Override
-	public void update(Subject obj) {
-
+	public String getClassName() {
+		return "Switch";
 	}
 
 	@Override
-	public String getClassName() {
-		return "Switch";
+	public void update(Subject obj) {
+		// TODO Auto-generated method stub
+
 	}
 }

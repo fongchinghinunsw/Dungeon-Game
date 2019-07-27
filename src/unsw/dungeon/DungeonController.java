@@ -107,7 +107,6 @@ public class DungeonController {
 					break;
 				}
 				dungeon.notifyPlayerObservers();
-				dungeon.notifyBoulderObservers();
 				lastMoveNanos = now;
 			}
 		} else if (event.getCode().isWhitespaceKey()) {

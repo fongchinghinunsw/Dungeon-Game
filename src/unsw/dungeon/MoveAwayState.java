@@ -28,6 +28,7 @@ public class MoveAwayState implements MoveState {
 	@Override
 	public MoveState transitionAway() {
 		return this;
+
 	}
 
 }

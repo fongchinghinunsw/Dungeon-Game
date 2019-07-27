@@ -14,22 +14,16 @@ public class Door extends Entity implements Observer {
 		return this.state;
 	}
 
-	public void setState(DoorState newState) {
-		if (newState instanceof OpenState) {
-			this.state = newState;
-		}
-	}
-
 	public int getId() {
 		return this.id;
 	}
 
-	public OpenState getOpenState() {
-		return new OpenState();
+	public void changeToOpenState() {
+		this.state = new OpenState();
 	}
 
-	public ClosedState getClosedState() {
-		return new ClosedState();
+	public void changeToCloseState() {
+		this.state = new ClosedState();
 	}
 
 	public boolean isOpen() {
@@ -44,7 +38,7 @@ public class Door extends Entity implements Observer {
 			return;
 		}
 		if (key.getId() == getId() && !isOpen()) {
-			setState(getOpenState());
+			changeToOpenState();
 			System.out.println("ID matches. Door opening");
 			player.useKey(getId());
 		}
