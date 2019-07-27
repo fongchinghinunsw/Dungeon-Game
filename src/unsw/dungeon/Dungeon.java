@@ -392,16 +392,16 @@ public class Dungeon {
 			if (e.getClassName().equals("Boulder")) {
 				if (player.getX() < x && player.getY() == y) {
 					// the player is pushing from the left side.
-					return !(sameClass(x + 1, y, "Boulder", "Enemy", "Wall"));
+					return !(sameClass(x + 1, y, "Boulder", "Enemy", "Wall", "Door"));
 				} else if (player.getX() > x && player.getY() == y) {
 					// the player is pushing from the right side.
-					return !(sameClass(x - 1, y, "Boulder", "Enemy", "Wall"));
+					return !(sameClass(x - 1, y, "Boulder", "Enemy", "Wall", "Door"));
 				} else if (player.getX() == x && player.getY() < y) {
 					// the player is pushing from the top side.
-					return !(sameClass(x, y + 1, "Boulder", "Enemy", "Wall"));
+					return !(sameClass(x, y + 1, "Boulder", "Enemy", "Wall", "Door"));
 				} else if (player.getX() == x && player.getY() > y) {
 					// the player is pushing from the down side.
-					return !(sameClass(x, y - 1, "Boulder", "Enemy", "Wall"));
+					return !(sameClass(x, y - 1, "Boulder", "Enemy", "Wall", "Door"));
 				}
 				return false;
 			}
