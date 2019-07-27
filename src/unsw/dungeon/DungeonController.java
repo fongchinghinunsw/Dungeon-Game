@@ -112,14 +112,14 @@ public class DungeonController {
 		} else if (event.getCode().isWhitespaceKey()) {
 			if (player.equipItem()) {
 				removeNodeByRowColumnIndex(player.getX(), player.getY(), squares);
-				dungeon.addEquippedEntity(player.getX(), player.getY());
+				dungeon.removeEquippedEntityFromDungeon(player.getX(), player.getY());
 			}
 		} else if (event.getCode() == KeyCode.G) {
 			player.useItem("Potion");
 		} else if (event.getCode() == KeyCode.F) {
 			if (player.countSwordInBackPack() != 0 && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
-				dungeon.removeEquippedEntity(player.getX(), player.getY(), "Sword");
+				dungeon.removeEquippedEntityFromBackPack(player.getX(), player.getY(), "Sword");
 			}
 		} else if (event.getCode() == KeyCode.T) {
 			Bomb bomb = player.getBomb();
@@ -134,7 +134,7 @@ public class DungeonController {
 		} else if (event.getCode() == KeyCode.J) {
 			if (player.findKey() != null && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
-				dungeon.removeEquippedEntity(player.getX(), player.getY(), "Key");
+				dungeon.removeEquippedEntityFromBackPack(player.getX(), player.getY(), "Key");
 			}
 		}
 	}

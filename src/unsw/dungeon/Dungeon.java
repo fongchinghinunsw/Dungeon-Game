@@ -313,7 +313,7 @@ public class Dungeon {
 	/*
 	 * Remove the entity from the dungeon when it is equipped.
 	 */
-	public void addEquippedEntity(int x, int y) {
+	public void removeEquippedEntityFromDungeon(int x, int y) {
 		ArrayList<Entity> entityList = getEntities(x, y);
 		for (Entity entity : entityList) {
 			if (entity instanceof Equipable) {
@@ -333,7 +333,7 @@ public class Dungeon {
 	 * @param y         of player
 	 * @param className of item-to-remove
 	 */
-	public void removeEquippedEntity(int x, int y, String className) {
+	public void removeEquippedEntityFromBackPack(int x, int y, String className) {
 		Entity entity;
 		if (className.equals("Sword")) {
 			entity = player.removeSwordInBackPack();
