@@ -12,6 +12,7 @@ public class Enemy extends Movable implements Subject, Observer {
 	private MoveSpeed moveSpeed;
 	private ArrayList<Observer> observers;
 	private BooleanProperty alive;
+	private MoveState moveState;
 
 	public Enemy(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
@@ -22,6 +23,7 @@ public class Enemy extends Movable implements Subject, Observer {
 		Timer timer = new Timer();
 		EnemyTimer task = new EnemyTimer(dungeon, this);
 		timer.schedule(task, 0, 100 / moveSpeed.getSpeed());
+		this.moveState = new MoveTowardsState();
 	}
 
 	public BooleanProperty isAlive() {
@@ -35,36 +37,31 @@ public class Enemy extends Movable implements Subject, Observer {
 
 	public void findPlayer() {
 		Player player = this.dungeon.getPlayer();
-		int playerX = player.getX();
-		int playerY = player.getY();
-		if (this.getY() == playerY) {
-			if (this.getX() > playerX) {
-				if (player.isInvincible()) {
-					this.moveRight();
-				} else {
-					this.moveLeft();
-				}
-			} else if (this.getX() < playerX) {
-				if (player.isInvincible()) {
-					this.moveLeft();
-				} else {
-					this.moveRight();
-				}
-			}
-		} else if (this.getX() == playerX) {
-			if (this.getY() > playerY) {
-				if (player.isInvincible()) {
-					this.moveDown();
-				} else {
-					this.moveUp();
-				}
-			} else if (this.getY() < playerY) {
-				if (player.isInvincible()) {
-					this.moveUp();
-				} else {
-					this.moveDown();
-				}
-			}
+		MoveState newState;
+		if (player.isInvincible()) {
+			newState = this.moveState.transitionAway();
+		} else {
+			newState = this.moveState.transitionTowards();
+		}
+		this.moveState = newState;
+		int pX = player.getX();
+		int pY = player.getY();
+		int direction = this.moveState.getDirection(getX(), getY(), pX, pY);
+		switch (direction) {
+		case MoveState.LEFT:
+			moveLeft();
+			break;
+		case MoveState.RIGHT:
+			moveRight();
+			break;
+		case MoveState.UP:
+			moveUp();
+			break;
+		case MoveState.DOWN:
+			moveDown();
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -105,6 +102,7 @@ public class Enemy extends Movable implements Subject, Observer {
 		if (!this.isAlive().getValue()) {
 			return;
 		}
+
 		if (obj instanceof Player) {
 			Player player = (Player) obj;
 			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
