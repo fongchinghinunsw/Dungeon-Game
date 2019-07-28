@@ -313,7 +313,7 @@ public class Dungeon {
 	/*
 	 * Remove the entity from the dungeon when it is equipped.
 	 */
-	public void addEquippedEntity(int x, int y) {
+	public void removeEquippedEntityFromDungeon(int x, int y) {
 		ArrayList<Entity> entityList = getEntities(x, y);
 		for (Entity entity : entityList) {
 			if (entity instanceof Equipable) {
@@ -333,7 +333,7 @@ public class Dungeon {
 	 * @param y         of player
 	 * @param className of item-to-remove
 	 */
-	public void removeEquippedEntity(int x, int y, String className) {
+	public void removeEquippedEntityFromBackPack(int x, int y, String className) {
 		Entity entity;
 		if (className.equals("Sword")) {
 			entity = player.removeSwordInBackPack();
@@ -392,16 +392,16 @@ public class Dungeon {
 			if (e.getClassName().equals("Boulder")) {
 				if (player.getX() < x && player.getY() == y) {
 					// the player is pushing from the left side.
-					return !(sameClass(x + 1, y, "Boulder", "Enemy", "Wall"));
+					return !(sameClass(x + 1, y, "Boulder", "Enemy", "Wall", "Door"));
 				} else if (player.getX() > x && player.getY() == y) {
 					// the player is pushing from the right side.
-					return !(sameClass(x - 1, y, "Boulder", "Enemy", "Wall"));
+					return !(sameClass(x - 1, y, "Boulder", "Enemy", "Wall", "Door"));
 				} else if (player.getX() == x && player.getY() < y) {
 					// the player is pushing from the top side.
-					return !(sameClass(x, y + 1, "Boulder", "Enemy", "Wall"));
+					return !(sameClass(x, y + 1, "Boulder", "Enemy", "Wall", "Door"));
 				} else if (player.getX() == x && player.getY() > y) {
 					// the player is pushing from the down side.
-					return !(sameClass(x, y - 1, "Boulder", "Enemy", "Wall"));
+					return !(sameClass(x, y - 1, "Boulder", "Enemy", "Wall", "Door"));
 				}
 				return false;
 			}
