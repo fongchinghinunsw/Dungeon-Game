@@ -158,7 +158,17 @@ public class DungeonControllerLoader extends DungeonLoader {
 				GridPane.setRowIndex(node, newValue.intValue());
 			}
 		});
-		if (entity instanceof Enemy) {
+		if (entity.getClassName().equals("Player")) {
+			Player player = (Player) entity;
+			player.isAlive().addListener((observable, oldValue, newValue) -> {
+				if (!newValue) {
+					// currently just move the image to the back of the pane.
+					node.toBack();
+				}
+			});
+
+		}
+		if (entity.getClassName().equals("Enemy")) {
 			Enemy enemy = (Enemy) entity;
 			enemy.isAlive().addListener((observable, oldValue, newValue) -> {
 				if (!newValue) {
@@ -168,7 +178,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 			});
 
 		}
-		if (entity instanceof Boulder) {
+		if (entity.getClassName().equals("Boulder")) {
 			Boulder boulder = (Boulder) entity;
 			boulder.destroyed().addListener((observable, oldValue, newValue) -> {
 				if (newValue) {

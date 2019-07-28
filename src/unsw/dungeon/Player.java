@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Timer;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * The player entity
  * 
@@ -19,7 +22,7 @@ public class Player extends Movable implements Subject, Observer {
 	private ArrayList<Observer> observers;
 	private MoveSpeed moveSpeed;
 	private boolean potionEffect;
-	private boolean alive;
+	private BooleanProperty alive;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -34,7 +37,7 @@ public class Player extends Movable implements Subject, Observer {
 		this.observers = new ArrayList<Observer>();
 		this.moveSpeed = new Normal();
 		this.potionEffect = false;
-		this.alive = true;
+		this.alive = new SimpleBooleanProperty(true);
 	}
 
 	/*
@@ -104,7 +107,7 @@ public class Player extends Movable implements Subject, Observer {
 		return true;
 	}
 
-	public boolean isAlive() {
+	public BooleanProperty isAlive() {
 		return this.alive;
 	}
 
@@ -113,7 +116,7 @@ public class Player extends Movable implements Subject, Observer {
 	}
 
 	public void die() {
-		this.alive = false;
+		this.alive.setValue(false);
 		System.out.println("Player is now dead");
 	}
 
