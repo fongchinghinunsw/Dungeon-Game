@@ -1,6 +1,9 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Timer;
 
 /**
@@ -177,8 +180,9 @@ public class Player extends Movable implements Subject, Observer {
 	public void notifyObservers() {
 		// this logic is to ensure the entity still exist on the map but not just in the
 		// observers.
-		if (dungeon.sameClass(getX(), getY(), "Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy", "Door",
-				"Boulder")) {
+		Set<String> notifySet = new HashSet<String>(
+				Arrays.asList("Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy", "Door", "Boulder"));
+		if (dungeon.sameClass(getX(), getY(), notifySet)) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {

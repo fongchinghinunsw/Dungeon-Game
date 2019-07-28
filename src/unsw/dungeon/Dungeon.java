@@ -4,7 +4,10 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -266,10 +269,14 @@ public class Dungeon {
 	 * Check if there exists an object on the grid belongs to one of the specified
 	 * classes.
 	 */
-	public boolean sameClass(int x, int y, String... className) {
+	public boolean sameClass(int x, int y, String className) {
+		return sameClass(x, y, new HashSet<String>(Arrays.asList(className)));
+	}
+
+	public boolean sameClass(int x, int y, Set<String> classNames) {
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
-				for (String name : className) {
+				for (String name : classNames) {
 					if (name.equals(entity.getClassName())) {
 						return true;
 					}
@@ -390,18 +397,19 @@ public class Dungeon {
 		ArrayList<Entity> list = this.getEntities(x, y);
 		for (Entity e : list) {
 			if (e.getClassName().equals("Boulder")) {
+				Set<String> canPushSet = new HashSet<String>(Arrays.asList("Boulder", "Enemy", "Wall", "Door"));
 				if (player.getX() < x && player.getY() == y) {
 					// the player is pushing from the left side.
-					return !(sameClass(x + 1, y, "Boulder", "Enemy", "Wall", "Door"));
+					return !(sameClass(x + 1, y, canPushSet));
 				} else if (player.getX() > x && player.getY() == y) {
 					// the player is pushing from the right side.
-					return !(sameClass(x - 1, y, "Boulder", "Enemy", "Wall", "Door"));
+					return !(sameClass(x - 1, y, canPushSet));
 				} else if (player.getX() == x && player.getY() < y) {
 					// the player is pushing from the top side.
-					return !(sameClass(x, y + 1, "Boulder", "Enemy", "Wall", "Door"));
+					return !(sameClass(x, y + 1, canPushSet));
 				} else if (player.getX() == x && player.getY() > y) {
 					// the player is pushing from the down side.
-					return !(sameClass(x, y - 1, "Boulder", "Enemy", "Wall", "Door"));
+					return !(sameClass(x, y - 1, canPushSet));
 				}
 				return false;
 			}
