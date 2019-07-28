@@ -106,9 +106,10 @@ public class Dungeon {
 	public int countUntriggeredSwitch() {
 		int count = 0;
 		for (Entity entity : entities) {
-			if (sameClass(entity.getX(), entity.getY(), "Switch")
-					&& !(sameClass(entity.getX(), entity.getY(), "Boulder"))) {
-				count++;
+			if (entity.getClassName().equals("Switch")) {
+				if (!(sameClass(entity.getX(), entity.getY(), "Boulder"))) {
+					count++;
+				}
 			}
 		}
 		return count;
@@ -128,7 +129,7 @@ public class Dungeon {
 	public int countRemainingTreasure() {
 		int count = 0;
 		for (Entity entity : entities) {
-			if (sameClass(entity.getX(), entity.getY(), "Treasure")) {
+			if (entity.getClassName().equals("Treasure")) {
 				count++;
 			}
 		}

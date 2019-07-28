@@ -15,7 +15,6 @@ public class DungeonApplication extends Application {
 
 		startScreen.getController().setDungeonScreen(dungeonScreen);
 		startScreen.start();
-
 	}
 
 	public static void main(String[] args) {
