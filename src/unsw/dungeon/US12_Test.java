@@ -16,7 +16,7 @@ public class US12_Test {
 		Sword sword = new Sword(3, 4);
 		dungeon.addEntity(sword);
 		player.equipItem();
-		dungeon.removeEquippedEntity(3, 4, "Sword");
+		dungeon.removeEquippedEntityFromBackPack(3, 4, "Sword");
 		assertNull(player.removeSwordInBackPack(), "Sword not removed");
 		assertEquals(player.countSwordInBackPack(), 0, "Count wasn't updated");
 	}
@@ -33,7 +33,7 @@ public class US12_Test {
 		Sword sword2 = new Sword(4, 4);
 		dungeon.addEntity(sword2);
 		player.equipItem();
-		dungeon.removeEquippedEntity(3, 4, "Sword");
+		dungeon.removeEquippedEntityFromBackPack(3, 4, "Sword");
 		player.setX(4);
 		assertTrue(player.equipItem(), "Can't pick up sword after dropping");
 	}
@@ -49,7 +49,7 @@ public class US12_Test {
 		dungeon.addEntity(sword);
 		player.equipItem();
 		player.setX(4);
-		dungeon.removeEquippedEntity(4, 4, "Sword");
+		dungeon.removeEquippedEntityFromBackPack(4, 4, "Sword");
 		player.moveDown();
 		player.moveLeft();
 		player.moveUp();
@@ -63,7 +63,6 @@ public class US12_Test {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Player player = new Player(dungeon, 3, 4);
 		Enemy enemy = new Enemy(dungeon, 4, 4);
-		dungeon.addEnemy(enemy);
 		dungeon.addEntity(enemy);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
@@ -71,10 +70,10 @@ public class US12_Test {
 		dungeon.addEntity(sword);
 		player.equipItem();
 		player.setX(4);
-		dungeon.removeEquippedEntity(4, 4, "Sword");
+		dungeon.removeEquippedEntityFromBackPack(4, 4, "Sword");
 		player.update(enemy);
 		enemy.update(player);
-		assertFalse(player.isAlive(), "Stayed alive without sword");
+		assertFalse(player.isAlive().getValue(), "Stayed alive without sword");
 		assertTrue(enemy.isAlive().getValue(), "Died to player without sword or potion");
 	}
 }

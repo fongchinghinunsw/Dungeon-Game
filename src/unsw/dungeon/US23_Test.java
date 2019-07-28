@@ -28,7 +28,6 @@ public class US23_Test {
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
 		Enemy enemy = new Enemy(dungeon, 3, 3);
-		dungeon.addEnemy(enemy);
 		dungeon.addEntity(enemy);
 		enemy.findPlayer();
 		assertTrue(enemy.samePlace(2, 3), "Didn't chase player left");
@@ -51,10 +50,9 @@ public class US23_Test {
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
 		Enemy enemy = new Enemy(dungeon, 3, 3);
-		dungeon.addEnemy(enemy);
 		dungeon.addEntity(enemy);
 		enemy.update(player);
 		assertTrue(enemy.isAlive().getValue(), "Enemy died");
-		assertFalse(player.isAlive(), "Player didn't die");
+		assertFalse(player.isAlive().getValue(), "Player didn't die");
 	}
 }

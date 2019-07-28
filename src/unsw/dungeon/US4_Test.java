@@ -16,7 +16,6 @@ public class US4_Test {
 	public void testClassMethods() {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Switch trigger = new Switch(dungeon, 0, 2);
-		dungeon.addSwitch(trigger);
 		dungeon.addEntity(trigger);
 		assertEquals(trigger.getClassName(), "Switch", "getClassName wrong");
 		assertTrue(trigger.samePlace(0, 2), "Location variables incorrectly intialized");
@@ -30,7 +29,6 @@ public class US4_Test {
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
 		Switch trigger = new Switch(dungeon, 0, 2);
-		dungeon.addSwitch(trigger);
 		dungeon.addEntity(trigger);
 		Boulder boulder = new Boulder(dungeon, 0, 1);
 		dungeon.addEntity(boulder);

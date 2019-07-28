@@ -52,9 +52,7 @@ public class US3_Test {
 		dungeon.addEntity(player);
 		Enemy enemy = new Enemy(dungeon, 5, 5);
 		Boulder boulder = new Boulder(dungeon, 5, 4);
-		dungeon.addEnemy(enemy);
 		dungeon.addEntity(enemy);
-		dungeon.addBoulder(boulder);
 		dungeon.addEntity(boulder);
 		enemy.moveUp();
 		assertEquals(enemy.getY(), 5, "Moves through the boulder");
@@ -98,7 +96,6 @@ public class US3_Test {
 		dungeon.addKey();
 		dungeon.addEntity(key);
 		Bomb bomb = new Bomb(dungeon, 0, 5);
-		dungeon.addBomb(bomb);
 		dungeon.addEntity(bomb);
 		Boulder boulder = new Boulder(dungeon, 0, 1);
 		dungeon.addEntity(boulder);
