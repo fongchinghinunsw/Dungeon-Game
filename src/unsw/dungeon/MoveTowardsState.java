@@ -1,20 +1,20 @@
 package unsw.dungeon;
 
-public class MoveAwayState implements MoveState {
+public class MoveTowardsState implements MoveState {
 
 	@Override
 	public int getDirection(int eX, int eY, int pX, int pY) {
 		if (eX == pX) {
 			if (eY < pY) {
-				return UP;
-			} else if (eY > pY) {
 				return DOWN;
+			} else if (eY > pY) {
+				return UP;
 			}
 		} else if (eY == pY) {
 			if (eX < pX) {
-				return LEFT;
-			} else if (eX > pX) {
 				return RIGHT;
+			} else if (eX > pX) {
+				return LEFT;
 			}
 		}
 		return -1;
@@ -22,13 +22,12 @@ public class MoveAwayState implements MoveState {
 
 	@Override
 	public MoveState transitionTowards() {
-		return new MoveTowardsState();
+		return this;
 	}
 
 	@Override
 	public MoveState transitionAway() {
-		return this;
-
+		return new MoveAwayState();
 	}
 
 }
