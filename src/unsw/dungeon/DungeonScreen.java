@@ -40,13 +40,21 @@ public class DungeonScreen {
 		String style = "-fx-background-color: linear-gradient(#2980B9,#6DD5FA,#FFFFFF);";
 		topMenu.setStyle(style);
 		topMenu.setAlignment(Pos.TOP_RIGHT);
+		Button restartButton = new Button("Restart");
 		Button quitButton = new Button("Quit");
 		Button pauseButton = new Button("Pause");
 
+		restartButton.setOnMouseClicked(e -> {
+			try {
+				handleRestartButton();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
 		quitButton.setOnMouseClicked(e -> handleQuitButton());
 
 		// quitButton.setPadding(new Insets(0, 10, 0, 0));
-		topMenu.getChildren().addAll(quitButton, pauseButton);
+		topMenu.getChildren().addAll(restartButton, quitButton, pauseButton);
 
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(topMenu);
@@ -61,6 +69,10 @@ public class DungeonScreen {
 
 	public void setStartScreen(StartScreen startScreen) {
 		this.startScreen = startScreen;
+	}
+
+	public void handleRestartButton() throws IOException {
+		this.start();
 	}
 
 	public void handleQuitButton() {
