@@ -3,8 +3,11 @@ package unsw.dungeon;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class DungeonScreen {
@@ -28,8 +31,19 @@ public class DungeonScreen {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
 		loader.setController(controller);
-		Parent root = loader.load();
-		scene = new Scene(root);
+
+		GridPane root = loader.load();
+		HBox topMenu = new HBox();
+		Button buttonA = new Button("Quit");
+		Button buttonB = new Button("Edit");
+		Button buttonC = new Button("View");
+		topMenu.getChildren().addAll(buttonA, buttonB, buttonC);
+
+		BorderPane borderPane = new BorderPane();
+		borderPane.setTop(topMenu);
+		borderPane.setCenter(root);
+
+		scene = new Scene(borderPane);
 		root.requestFocus();
 		stage.setTitle(title);
 		stage.setScene(scene);
