@@ -7,23 +7,22 @@ import javafx.application.Platform;
 public class BombTimer extends TimerTask {
 	private Bomb self;
 	private Player player;
-	private int tick;
 
 	public BombTimer(Bomb self, Player player) {
 		this.self = self;
-		this.tick = 3;
 		this.player = player;
 	}
 
 	@Override
 	public void run() {
-		if (tick >= 0) {
+		if (self.getTime() >= 0) {
 			// Prevent the ConcurrentModificationException
 			Platform.runLater(() -> {
-				String message = "Counting down......" + tick;
+				String message = "Counting down......" + self.getTime();
 				System.out.println(message);
 				player.notifyObservers();
-				tick--;
+				self.decrementCountdownTime();
+				;
 			});
 		} else {
 			// stop the timer

@@ -23,6 +23,10 @@ public class Bomb extends Equipable implements Subject, Observer {
 		return countdownTime;
 	}
 
+	public void decrementCountdownTime() {
+		countdownTime--;
+	}
+
 	public boolean exploded() {
 		return exploded;
 	}
