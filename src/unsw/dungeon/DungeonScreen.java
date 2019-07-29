@@ -22,7 +22,6 @@ public class DungeonScreen {
 	public DungeonScreen(Stage stage) throws IOException {
 		this.stage = stage;
 		stage.setTitle("Dungeon");
-
 	}
 
 	public void start() throws IOException {
