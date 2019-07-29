@@ -5,8 +5,11 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class StartScreenController {
+
+	private Stage stage;
 
 	@FXML
 	private Button startButton;
@@ -19,6 +22,10 @@ public class StartScreenController {
 
 	private DungeonScreen dungeonScreen;
 
+	public StartScreenController(Stage stage) {
+		this.stage = stage;
+	}
+
 	@FXML
 	public void handleStartButton(ActionEvent event) throws IOException {
 		dungeonScreen.start();
@@ -26,7 +33,7 @@ public class StartScreenController {
 
 	@FXML
 	public void handleQuitButton(ActionEvent event) {
-
+		stage.close();
 	}
 
 	@FXML

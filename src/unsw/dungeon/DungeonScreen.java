@@ -3,6 +3,7 @@ package unsw.dungeon;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +17,7 @@ public class DungeonScreen {
 	private String title;
 	private DungeonScreenController controller;
 	private Scene scene;
+	private StartScreen startScreen;
 
 	public DungeonScreen(Stage stage) throws IOException {
 		this.stage = stage;
@@ -33,9 +35,17 @@ public class DungeonScreen {
 		loader.setController(controller);
 
 		GridPane root = loader.load();
-		HBox topMenu = new HBox();
+		HBox topMenu = new HBox(5);
+
+		String style = "-fx-background-color: linear-gradient(#2980B9,#6DD5FA,#FFFFFF);";
+		topMenu.setStyle(style);
+		topMenu.setAlignment(Pos.TOP_RIGHT);
 		Button quitButton = new Button("Quit");
 		Button pauseButton = new Button("Pause");
+
+		quitButton.setOnMouseClicked(e -> handleQuitButton());
+
+		// quitButton.setPadding(new Insets(0, 10, 0, 0));
 		topMenu.getChildren().addAll(quitButton, pauseButton);
 
 		BorderPane borderPane = new BorderPane();
@@ -44,9 +54,17 @@ public class DungeonScreen {
 
 		scene = new Scene(borderPane);
 		root.requestFocus();
-		stage.setTitle(title);
+		stage.setTitle("Dungeon");
 		stage.setScene(scene);
 		stage.show();
+	}
+
+	public void setStartScreen(StartScreen startScreen) {
+		this.startScreen = startScreen;
+	}
+
+	public void handleQuitButton() {
+		startScreen.start();
 	}
 
 	public DungeonScreenController getController() {

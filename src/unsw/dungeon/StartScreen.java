@@ -19,7 +19,7 @@ public class StartScreen {
 		this.stage = stage;
 		title = "Dungeon";
 
-		controller = new StartScreenController();
+		controller = new StartScreenController(stage);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("StartScreen.fxml"));
 		loader.setController(controller);
 
