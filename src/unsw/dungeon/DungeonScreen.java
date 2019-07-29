@@ -34,10 +34,9 @@ public class DungeonScreen {
 
 		GridPane root = loader.load();
 		HBox topMenu = new HBox();
-		Button buttonA = new Button("Quit");
-		Button buttonB = new Button("Edit");
-		Button buttonC = new Button("View");
-		topMenu.getChildren().addAll(buttonA, buttonB, buttonC);
+		Button quitButton = new Button("Quit");
+		Button pauseButton = new Button("Pause");
+		topMenu.getChildren().addAll(quitButton, pauseButton);
 
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(topMenu);
