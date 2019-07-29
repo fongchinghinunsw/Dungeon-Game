@@ -10,7 +10,6 @@ public class US20_Test {
 		final JFXPanel fxPanel = new JFXPanel();
 		Dungeon dungeon = new Dungeon(10, 10);
 		Treasure treasure = new Treasure(3, 4);
-		dungeon.addTreasure(treasure);
 		dungeon.addEntity(treasure);
 		assertNotNull(treasure, "Treasure is null");
 		assertEquals(treasure.getX(), 3, "X of treasure isn't set correctly");
@@ -24,13 +23,11 @@ public class US20_Test {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Player player = new Player(dungeon, 3, 4);
 		Treasure treasure = new Treasure(3, 4);
-		dungeon.addTreasure(treasure);
 		dungeon.addEntity(treasure);
-		dungeon.addCountRemainingTreasure();
 		assertEquals(dungeon.countRemainingTreasure(), 1, "Count of remaining treasure wrong");
 		player.equipItem();
 		assertNotNull(player.getBag().removeItem("Treasure"), "Treasure not in bag");
-		dungeon.removeEquippedEntity(3, 4, "Treasure");
+		dungeon.removeEquippedEntityFromBackPack(3, 4, "Treasure");
 		assertEquals(dungeon.countRemainingTreasure(), 0, "Count not updated properly");
 		assertTrue(dungeon.completedTreasureGoal(), "Goal evaluation incorrect");
 

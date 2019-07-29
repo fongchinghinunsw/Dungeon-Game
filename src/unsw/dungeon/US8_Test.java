@@ -12,7 +12,6 @@ public class US8_Test {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Player player = new Player(dungeon, 3, 3);
 		Bomb bomb = new Bomb(dungeon, 3, 3);
-		dungeon.addBomb(bomb);
 		dungeon.addEntity(bomb);
 		player.equipItem();
 		player.setX(7);
@@ -39,13 +38,11 @@ public class US8_Test {
 		Player player = new Player(dungeon, 3, 3);
 		Bomb bomb = new Bomb(dungeon, 3, 3);
 		dungeon.setPlayer(player);
-		dungeon.addBomb(bomb);
 		dungeon.addEntity(bomb);
 		player.equipItem();
 		player.setX(7);
 		player.setY(4);
 		Enemy enemy = new Enemy(dungeon, 7, 3);
-		dungeon.addEnemy(enemy);
 		dungeon.addEntity(player);
 		dungeon.addEntity(enemy);
 		Bomb bombFromBag = player.getBomb();
@@ -60,14 +57,14 @@ public class US8_Test {
 		dungeon.addObservers();
 		dungeon.addEntity(bomb);
 		bomb.light();
-		dungeon.removeEquippedEntity(7, 4, "Bomb");
+		dungeon.removeEquippedEntityFromBackPack(7, 4, "Bomb");
 		assertTrue(bomb.lit(), "Bomb not lit");
 		assertTrue(dungeon.hasBomb(7, 4), "Bomb not in dungeon");
 		player.getBag().removeItem("Bomb");
 		bomb.notifyObservers();
 		bomb.explode();
 		assertFalse(enemy.isAlive().getValue(), "Enemy not killed by bomb");
-		assertFalse(player.isAlive(), "Player not killed by bomb");
+		assertFalse(player.isAlive().getValue(), "Player not killed by bomb");
 		assertTrue(bomb.exploded(), "Bomb didn't explode");
 	}
 
@@ -78,10 +75,8 @@ public class US8_Test {
 		Player player = new Player(dungeon, 3, 3);
 		Bomb bomb = new Bomb(dungeon, 3, 3);
 		dungeon.setPlayer(player);
-		dungeon.addBomb(bomb);
 		dungeon.addEntity(bomb);
 		Bomb bomb1 = new Bomb(dungeon, 7, 4);
-		dungeon.addBomb(bomb1);
 		dungeon.addEntity(bomb1);
 		dungeon.addEntity(player);
 		player.equipItem();
@@ -94,7 +89,7 @@ public class US8_Test {
 		dungeon.addObservers();
 		dungeon.addEntity(bomb);
 		bomb.light();
-		dungeon.removeEquippedEntity(7, 4, "Bomb");
+		dungeon.removeEquippedEntityFromBackPack(7, 4, "Bomb");
 		player.getBag().removeItem("Bomb");
 		bomb.notifyObservers();
 		assertTrue(dungeon.hasBomb(7, 4), "Allowing second bomb in same place");
