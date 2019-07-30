@@ -2,10 +2,13 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Bomb extends Equipable implements Subject, Observer {
 
 	private Dungeon dungeon;
-	private int countdownTime;
+	private IntegerProperty countdownTime;
 	private boolean exploded;
 	private boolean lit;
 	private ArrayList<Observer> observers;
@@ -13,18 +16,19 @@ public class Bomb extends Equipable implements Subject, Observer {
 	public Bomb(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
-		countdownTime = 3;
+		countdownTime = new SimpleIntegerProperty(3);
 		exploded = false;
 		lit = false;
 		observers = new ArrayList<>();
 	}
 
-	public int getTime() {
+	public IntegerProperty getTime() {
 		return countdownTime;
 	}
 
 	public void decrementCountdownTime() {
-		countdownTime--;
+		countdownTime.setValue(countdownTime.getValue() - 1);
+		;
 	}
 
 	public boolean exploded() {

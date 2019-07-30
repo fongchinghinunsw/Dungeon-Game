@@ -2,7 +2,9 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,6 +33,9 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image treasureImage;
 	private Image potionImage;
 	private Image bombImage;
+	private Image bombImageLit1;
+	private Image bombImageLit2;
+	private Image bombImageLit3;
 	private Image enemyImage;
 	private Image swordImage;
 	private Image switchImage;
@@ -48,6 +53,9 @@ public class DungeonControllerLoader extends DungeonLoader {
 		treasureImage = new Image("/gold_pile.png");
 		potionImage = new Image("/brilliant_blue_new.png");
 		bombImage = new Image("/bomb_unlit.png");
+		bombImageLit1 = new Image("/bomb_lit_2.png");
+		bombImageLit2 = new Image("/bomb_lit_3.png");
+		bombImageLit3 = new Image("/bomb_lit_4.png");
 		enemyImage = new Image("/hound.png");
 		swordImage = new Image("/greatsword_1_new.png");
 		switchImage = new Image("/pressure_plate.png");
@@ -186,6 +194,23 @@ public class DungeonControllerLoader extends DungeonLoader {
 				}
 			});
 		}
+
+		if (entity.getClassName().equals("Bomb")) {
+			Bomb bomb = (Bomb) entity;
+			bomb.getTime().addListener((observable, oldValue, newValue) -> {
+				if (newValue.intValue() == 2) {
+					ImageView img = (ImageView) node;
+					img.setImage(bombImageLit1);
+				} else if (newValue.intValue() == 1) {
+					ImageView img = (ImageView) node;
+					img.setImage(bombImageLit2);
+				} else if (newValue.intValue() == 0) {
+					ImageView img = (ImageView) node;
+					img.setImage(bombImageLit3);
+					// img.toBack();
+				}
+			});
+		}
 	}
 
 	/**
@@ -196,7 +221,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 	 * @throws FileNotFoundException
 	 */
 	public DungeonController loadController() throws FileNotFoundException {
-		return new DungeonController(load(), entities, playerImage, swordImage, enemyImage);
+		Map<String, Image> map = new HashMap<String, Image>();
+		map.put("player", playerImage);
+		map.put("sword", swordImage);
+		map.put("enemy", enemyImage);
+		map.put("bomb", bombImage);
+		return new DungeonController(load(), entities, map);
 	}
 
 }

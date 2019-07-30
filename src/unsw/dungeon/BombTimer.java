@@ -15,7 +15,7 @@ public class BombTimer extends TimerTask {
 
 	@Override
 	public void run() {
-		if (self.getTime() >= 0) {
+		if (self.getTime().get() >= 0) {
 			// Prevent the ConcurrentModificationException
 			Platform.runLater(() -> {
 				String message = "Counting down......" + self.getTime();
