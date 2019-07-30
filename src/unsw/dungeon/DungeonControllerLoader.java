@@ -211,6 +211,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 				}
 			});
 		}
+
+		if (entity.getClassName().equals("Potion")) {
+			Potion potion = (Potion) entity;
+			potion.getTime().addListener((observable, oldValue, newValue) -> {
+				System.out.println(newValue);
+				if (newValue.intValue() == 0) {
+					potion.disablePotion();
+				}
+			});
+		}
 	}
 
 	/**
