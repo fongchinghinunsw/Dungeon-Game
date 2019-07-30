@@ -198,16 +198,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 		if (entity.getClassName().equals("Bomb")) {
 			Bomb bomb = (Bomb) entity;
 			bomb.getTime().addListener((observable, oldValue, newValue) -> {
-				if (newValue.intValue() == 2) {
-					ImageView img = (ImageView) node;
+				ImageView img = (ImageView) node;
+				if (newValue.intValue() == 3) {
 					img.setImage(bombImageLit1);
-				} else if (newValue.intValue() == 1) {
-					ImageView img = (ImageView) node;
+				} else if (newValue.intValue() == 2) {
 					img.setImage(bombImageLit2);
-				} else if (newValue.intValue() == 0) {
-					ImageView img = (ImageView) node;
+				} else if (newValue.intValue() == 1) {
 					img.setImage(bombImageLit3);
-					// img.toBack();
+					bomb.notifyObservers();
+				} else if (newValue.intValue() == 0) {
+					img.toBack();
 				}
 			});
 		}

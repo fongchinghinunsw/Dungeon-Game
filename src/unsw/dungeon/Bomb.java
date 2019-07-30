@@ -12,7 +12,7 @@ public class Bomb extends Equipable implements Subject, Observer {
 
 	private Dungeon dungeon;
 	private IntegerProperty countdownTime;
-	private Timeline timeline;
+	private Timeline bombTimer;
 	private boolean exploded;
 	private boolean lit;
 	private ArrayList<Observer> observers;
@@ -20,12 +20,12 @@ public class Bomb extends Equipable implements Subject, Observer {
 	public Bomb(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
-		countdownTime = new SimpleIntegerProperty(3);
+		countdownTime = new SimpleIntegerProperty(4);
 		exploded = false;
 		lit = false;
 		observers = new ArrayList<>();
-		this.timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> this.decrementCountdownTime()));
-		timeline.setCycleCount(3);
+		this.bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> this.decrementCountdownTime()));
+		bombTimer.setCycleCount(4);
 	}
 
 	public IntegerProperty getTime() {
@@ -45,7 +45,7 @@ public class Bomb extends Equipable implements Subject, Observer {
 	}
 
 	public void light() {
-		timeline.play();
+		bombTimer.play();
 		lit = true;
 	}
 
