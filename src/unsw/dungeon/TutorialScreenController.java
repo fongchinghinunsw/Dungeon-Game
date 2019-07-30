@@ -5,11 +5,14 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class TutorialScreenController {
 	private Stage stage;
 
+	@FXML
+	private GridPane squares;
 	@FXML
 	private Button quitButton;
 
