@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Timer;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -91,15 +90,8 @@ public class Player extends Movable implements Subject, Observer {
 		// Temporary solution, open to modification
 		if (type.equals("Potion")) {
 			this.potionEffect = true;
-			Timer timer = new Timer();
-			PotionTimer task = new PotionTimer((Potion) item, this);
-			timer.schedule(task, 0, 1000);
-		}
-
-		if (type.equals("Bomb")) {
-			Timer timer = new Timer();
-			BombTimer task = new BombTimer((Bomb) item, this);
-			timer.schedule(task, 0, 1000);
+			Potion potion = (Potion) item;
+			potion.usePotion();
 		}
 
 		String message = "An item of type " + type + " is used.";

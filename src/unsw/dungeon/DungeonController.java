@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -28,13 +29,9 @@ public class DungeonController {
 
 	private Player player;
 
-	private Image playerImage;
-
-	private Image swordImage;
-
-	private Image enemyImage;
-
 	private ImageView playerImageView;
+
+	private Map<String, Image> images;
 
 	private Dungeon dungeon;
 
@@ -44,15 +41,12 @@ public class DungeonController {
 
 	private long lastMoveNanos;
 
-	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Image playerImage, Image swordImage,
-			Image enemyImage) {
+	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Map<String, Image> images) {
 		this.dungeon = dungeon;
 		this.player = dungeon.getPlayer();
 		this.initialEntities = new ArrayList<>(initialEntities);
 		this.deletedEntities = new ArrayList<>();
-		this.playerImage = playerImage;
-		this.swordImage = swordImage;
-		this.enemyImage = enemyImage;
+		this.images = images;
 	}
 
 	@FXML
@@ -67,13 +61,13 @@ public class DungeonController {
 		}
 
 		for (ImageView entity : initialEntities) {
-			if (entity.getImage() != playerImage) {
+			if (entity.getImage() != images.get("player")) {
 				squares.getChildren().add(entity);
 			}
 		}
 
 		for (ImageView entity : initialEntities) {
-			if (entity.getImage() == playerImage) {
+			if (entity.getImage() == images.get("player")) {
 				playerImageView = entity;
 				squares.getChildren().add(entity);
 			}
@@ -117,7 +111,7 @@ public class DungeonController {
 			player.useItem("Potion");
 		} else if (event.getCode() == KeyCode.F) {
 			if (player.countSwordInBackPack() != 0 && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
-				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+				addNodeByRowColumnIndex(player.getX(), player.getY(), squares, (Image) images.get("sword"));
 				dungeon.removeEquippedEntityFromBackPack(player.getX(), player.getY(), "Sword");
 			}
 		} else if (event.getCode() == KeyCode.T) {
@@ -127,12 +121,12 @@ public class DungeonController {
 				bomb.setY(player.getY());
 				dungeon.addEntity(bomb);
 				bomb.light();
-				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+				addNodeByRowColumnIndex(player.getX(), player.getY(), squares, (Image) images.get("bomb"));
 				player.useItem("Bomb");
 			}
 		} else if (event.getCode() == KeyCode.J) {
 			if (player.findKey() != null && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
-				addNodeByRowColumnIndex(player.getX(), player.getY(), squares);
+				addNodeByRowColumnIndex(player.getX(), player.getY(), squares, (Image) images.get("key"));
 				dungeon.removeEquippedEntityFromBackPack(player.getX(), player.getY(), "Key");
 			}
 		}
@@ -143,7 +137,8 @@ public class DungeonController {
 		for (Node node : initialEntities) {
 			if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
 				ImageView imageView = (ImageView) node;
-				if (imageView.getImage() != playerImage && imageView.getImage() != enemyImage) {
+				if (imageView.getImage() != (Image) images.get("player")
+						&& imageView.getImage() != (Image) images.get("enemy")) {
 					deletedEntities.add(imageView);
 					gridPane.getChildren().remove(imageView);
 					return true;
@@ -154,9 +149,9 @@ public class DungeonController {
 		return false;
 	}
 
-	public boolean addNodeByRowColumnIndex(int column, int row, GridPane gridPane) {
+	public boolean addNodeByRowColumnIndex(int column, int row, GridPane gridPane, Image image) {
 		for (ImageView imageView : deletedEntities) {
-			if (imageView.getImage() == swordImage) {
+			if (imageView.getImage() == image) {
 				Node node = (Node) imageView;
 				GridPane.setColumnIndex(node, player.getX());
 				GridPane.setRowIndex(node, player.getY());
