@@ -84,10 +84,22 @@ public class DungeonScreen {
 			}
 		});
 
+		GridPane backpack = new GridPane();
+		backpack.setStyle(
+				"-fx-background-color: black, -fx-control-inner-background; -fx-background-insets: 0, 2; -fx-padding: 2;");
+		Button button = new Button("FUCCCCCCCK");
+		backpack.add(button, 0, 1);
+
 		bothPressed.addListener((observable, oldValue, newValue) -> {
+
 			if (newValue) {
+				borderPane.setCenter(backpack);
 				System.out.println("Pressing!!!!!");
-				controller.handleSeeBackpackRequest();
+				// controller.handleSeeBackpackRequest();
+			} else {
+				borderPane.setCenter(root);
+				root.requestFocus();
+				System.out.println("You stop holding");
 			}
 		});
 
