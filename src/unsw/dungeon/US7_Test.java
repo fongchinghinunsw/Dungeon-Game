@@ -34,9 +34,9 @@ public class US7_Test {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Door door = new Door(dungeon, 5, 5);
 		assertFalse(door.isOpen(), "r/gatesopencomeonin");
-		door.setState(door.getOpenState());
+		door.changeToOpenState();
 		assertTrue(door.isOpen(), "r/gatekeeping");
-		door.setState(door.getClosedState());
+		door.changeToCloseState();
 		assertTrue(door.isOpen(), "Opened doors shouldn't be closed again");
 	}
 
@@ -162,7 +162,7 @@ public class US7_Test {
 		dungeon.addEntity(key1);
 		player.equipItem();
 		player.setX(1);
-		dungeon.removeEquippedEntity(player.getX(), player.getY(), "Key");
+		dungeon.removeEquippedEntityFromBackPack(player.getX(), player.getY(), "Key");
 		assertNull(player.removeKeyInBackpack(), "removeKeyInBackpack returning something weird");
 		assertNull(player.findKey(), "found key after throwing key away");
 		assertTrue(player.equipItem(), "Thrown away key cannot be picked up");
@@ -185,7 +185,7 @@ public class US7_Test {
 		dungeon.addEntity(key1);
 		player.equipItem();
 		player.setX(1);
-		dungeon.removeEquippedEntity(player.getX(), player.getY(), "Key");
+		dungeon.removeEquippedEntityFromBackPack(player.getX(), player.getY(), "Key");
 		assertNull(player.removeKeyInBackpack(), "removeKeyInBackpack returning something weird");
 		assertNull(player.findKey(), "found key after throwing key away");
 		player.setY(2);

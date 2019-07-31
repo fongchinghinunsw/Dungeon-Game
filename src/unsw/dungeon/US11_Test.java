@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import javafx.embed.swing.JFXPanel;
@@ -19,11 +20,11 @@ public class US11_Test {
 		Enemy enemy = new Enemy(dungeon, 2, 4);
 		player.setX(2);
 		player.update(enemy);
-		assertTrue(player.isAlive(), "Player died");
+		assertTrue("Player died", player.isAlive().getValue());
 		assertFalse(enemy.isAlive().getValue(), "Enemy didn't die");
 		assertEquals(sword.getDurability(), 4, "Durability didn't decrease");
 	}
-	
+
 	@Test
 	void testKillEnemy_EnemyToPlayer() {
 		final JFXPanel fxPanel = new JFXPanel();
@@ -37,7 +38,7 @@ public class US11_Test {
 		Enemy enemy = new Enemy(dungeon, 2, 4);
 		enemy.findPlayer();
 		player.update(enemy);
-		assertTrue(player.isAlive(), "Player died");
+		assertTrue(player.isAlive().getValue(), "Player died");
 		assertFalse(enemy.isAlive().getValue(), "Enemy didn't die");
 		assertEquals(sword.getDurability(), 4, "Durability didn't decrease");
 	}

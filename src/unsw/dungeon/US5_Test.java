@@ -34,10 +34,8 @@ public class US5_Test {
 	public void testEquipBomb() {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Bomb bomb = new Bomb(dungeon, 5, 6);
-		dungeon.addBomb(bomb);
 		dungeon.addEntity(bomb);
 		Bomb bomb1 = new Bomb(dungeon, 3, 6);
-		dungeon.addBomb(bomb1);
 		dungeon.addEntity(bomb1);
 		Player player1 = new Player(dungeon, 5, 6);
 		Player player2 = new Player(dungeon, 1, 6);
@@ -56,13 +54,10 @@ public class US5_Test {
 	public void testMultipleBombs() {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Bomb bomb1 = new Bomb(dungeon, 5, 5);
-		dungeon.addBomb(bomb1);
 		dungeon.addEntity(bomb1);
 		Bomb bomb2 = new Bomb(dungeon, 5, 6);
-		dungeon.addBomb(bomb2);
 		dungeon.addEntity(bomb2);
 		Bomb bomb3 = new Bomb(dungeon, 5, 7);
-		dungeon.addBomb(bomb3);
 		dungeon.addEntity(bomb3);
 		Player player1 = new Player(dungeon, 5, 5);
 		assertTrue(player1.equipItem(), "Can't equip bomb1");
@@ -77,7 +72,6 @@ public class US5_Test {
 	public void testVanishFromMap() {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Bomb bomb1 = new Bomb(dungeon, 5, 5);
-		dungeon.addBomb(bomb1);
 		dungeon.addEntity(bomb1);
 		Player player = new Player(dungeon, 5, 5);
 		player.equipItem();
@@ -88,23 +82,21 @@ public class US5_Test {
 	public void testPickUpPosition() {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Bomb bomb1 = new Bomb(dungeon, 5, 5);
-		dungeon.addBomb(bomb1);
 		dungeon.addEntity(bomb1);
 		Player player = new Player(dungeon, 1, 5);
-		assertFalse(player.equipItem(),"Shouldn't pick up item when not on same grid");
+		assertFalse(player.equipItem(), "Shouldn't pick up item when not on same grid");
 		assertFalse(dungeon.hasBomb(5, 5), "Picked up the bomb from far away");
 	}
-	
+
 	@ParameterizedTest
-	@ValueSource(ints = { 1, 2,  4, 5, 6, 7, 8,  10 })
+	@ValueSource(ints = { 1, 2, 4, 5, 6, 7, 8, 10 })
 	public void testIdempotency(int input) {
 		Dungeon dungeon = new Dungeon(10, 10);
 		Bomb bomb1 = new Bomb(dungeon, input, 5);
-		dungeon.addBomb(bomb1);
 		dungeon.addEntity(bomb1);
 		Player player = new Player(dungeon, 3, 5);
-		assertFalse(player.equipItem(),"Shouldn't pick up item when not on same grid");
-		assertFalse(dungeon.getEntities(input, 5).isEmpty(),"Bomb gone from dungeon entities");
+		assertFalse(player.equipItem(), "Shouldn't pick up item when not on same grid");
+		assertFalse(dungeon.getEntities(input, 5).isEmpty(), "Bomb gone from dungeon entities");
 		assertFalse(dungeon.hasBomb(input, 5), "Bomb shouldn't be lit");
 	}
 

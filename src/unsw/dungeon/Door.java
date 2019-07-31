@@ -23,7 +23,7 @@ public class Door extends Entity implements Observer {
 	}
 
 	public void changeToCloseState() {
-		this.state = new ClosedState();
+		// shouldn't do anything as open doors shouldn't be closed again
 	}
 
 	public boolean isOpen() {
