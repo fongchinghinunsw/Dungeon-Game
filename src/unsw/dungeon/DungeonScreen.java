@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -86,22 +88,25 @@ public class DungeonScreen {
 		});
 
 		GridPane backpack = new GridPane();
+		Button button = new Button("FUCK");
 
 		bothPressed.addListener((observable, oldValue, newValue) -> {
 
 			if (newValue) {
 				borderPane.setCenter(backpack);
-				System.out.println("Pressing!!!!!");
 				Map<String, Integer> map = controller.handleSeeBackpackRequest();
+				int count = 0;
 				for (Map.Entry<String, Integer> entry : map.entrySet()) {
 					String key = entry.getKey();
-					Object value = entry.getValue();
-					System.out.printf("%s : %d\n", key, value);
+					Integer value = entry.getValue();
+					backpack.add(new ImageView(controller.getImages().get(key)), 0, count);
+					backpack.add(new Label(value.toString()), 1, count);
+					count++;
 				}
 			} else {
+				backpack.getChildren().clear();
 				borderPane.setCenter(root);
 				root.requestFocus();
-				System.out.println("You stop holding");
 			}
 		});
 

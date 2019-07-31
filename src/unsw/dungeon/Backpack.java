@@ -169,7 +169,11 @@ public class Backpack {
 	public Map<String, Integer> getNumberOfItems() {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		for (Equipable item : items) {
-			map.put(item.getClassName(), 1);
+			if (map.containsKey(item.getClassName())) {
+				map.put(item.getClassName(), map.get(item.getClassName()) + 1);
+			} else {
+				map.put(item.getClassName(), 1);
+			}
 		}
 		return map;
 	}
