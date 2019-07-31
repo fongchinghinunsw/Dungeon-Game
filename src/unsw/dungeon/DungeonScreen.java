@@ -88,7 +88,6 @@ public class DungeonScreen {
 		});
 
 		GridPane backpack = new GridPane();
-		Button button = new Button("FUCK");
 
 		bothPressed.addListener((observable, oldValue, newValue) -> {
 
