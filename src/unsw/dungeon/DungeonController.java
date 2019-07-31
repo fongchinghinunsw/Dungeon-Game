@@ -74,6 +74,10 @@ public class DungeonController {
 		}
 	}
 
+	public void handleSeeBackpackRequest() {
+
+	}
+
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
 
