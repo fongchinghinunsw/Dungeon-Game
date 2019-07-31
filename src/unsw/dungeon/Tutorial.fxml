@@ -18,7 +18,7 @@
    <children>
       <VBox alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="40.0">
    	     <children>
-            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="20.0" prefWidth="40.0" styleClass="button" text="Quit">
+            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="20.0" prefWidth="40.0" minWidth="60" styleClass="button" text="Quit">
                <VBox.margin>
                   <Insets bottom="1.0" left="2.0" right="1.0" top="2.0" />
                </VBox.margin>
