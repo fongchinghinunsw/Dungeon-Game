@@ -221,6 +221,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 				}
 			});
 		}
+
+		if (entity.getClassName().equals("Door")) {
+			Door door = (Door) entity;
+			door.getOpen().addListener((observable, oldValue, newValue) -> {
+				if (newValue) {
+					ImageView img = (ImageView) node;
+					img.setImage(openDoorImage);
+				}
+			});
+		}
 	}
 
 	/**

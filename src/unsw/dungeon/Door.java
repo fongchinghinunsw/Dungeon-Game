@@ -1,13 +1,18 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class Door extends Entity implements Observer {
 	private final int id;
 	private DoorState state;
+	BooleanProperty open;
 
 	public Door(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.id = dungeon.numDoor();
 		this.state = new ClosedState();
+		open = new SimpleBooleanProperty(false);
 	}
 
 	public DoorState getState() {
@@ -18,8 +23,13 @@ public class Door extends Entity implements Observer {
 		return this.id;
 	}
 
+	public BooleanProperty getOpen() {
+		return this.open;
+	}
+
 	public void changeToOpenState() {
 		this.state = new OpenState();
+		open.setValue(true);
 	}
 
 	public void changeToCloseState() {
