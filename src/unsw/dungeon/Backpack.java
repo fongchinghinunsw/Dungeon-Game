@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Backpack {
 
@@ -162,5 +164,13 @@ public class Backpack {
 			}
 		}
 		return count;
+	}
+
+	public Map<String, Integer> getNumberOfItems() {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for (Equipable item : items) {
+			map.put(item.getClassName(), 1);
+		}
+		return map;
 	}
 }

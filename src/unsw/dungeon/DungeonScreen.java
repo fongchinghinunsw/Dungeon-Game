@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -85,17 +86,18 @@ public class DungeonScreen {
 		});
 
 		GridPane backpack = new GridPane();
-		backpack.setStyle(
-				"-fx-background-color: black, -fx-control-inner-background; -fx-background-insets: 0, 2; -fx-padding: 2;");
-		Button button = new Button("FUCCCCCCCK");
-		backpack.add(button, 0, 1);
 
 		bothPressed.addListener((observable, oldValue, newValue) -> {
 
 			if (newValue) {
 				borderPane.setCenter(backpack);
 				System.out.println("Pressing!!!!!");
-				// controller.handleSeeBackpackRequest();
+				Map<String, Integer> map = controller.handleSeeBackpackRequest();
+				for (Map.Entry<String, Integer> entry : map.entrySet()) {
+					String key = entry.getKey();
+					Object value = entry.getValue();
+					System.out.printf("%s : %d\n", key, value);
+				}
 			} else {
 				borderPane.setCenter(root);
 				root.requestFocus();

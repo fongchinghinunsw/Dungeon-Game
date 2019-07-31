@@ -74,8 +74,8 @@ public class DungeonController {
 		}
 	}
 
-	public void handleSeeBackpackRequest() {
-
+	public Map<String, Integer> handleSeeBackpackRequest() {
+		return dungeon.getItemsInBackpack();
 	}
 
 	@FXML
