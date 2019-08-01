@@ -38,9 +38,12 @@ public abstract class DungeonLoader {
 		JSONArray jsonEntities = json.getJSONArray("entities");
 
 		JSONObject goal = json.getJSONObject("goal-condition");
-		if (goal.getString("goal").equals("exit")) {
-			dungeon.setGoalExpression(new SingleGoal("exit", dungeon));
-		}
+
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+
+		expr.print();
+		dungeon.setGoalExpression(expr);
 
 		for (int i = 0; i < jsonEntities.length(); i++) {
 			loadEntity(dungeon, jsonEntities.getJSONObject(i));
@@ -48,9 +51,9 @@ public abstract class DungeonLoader {
 
 		dungeon.addObservers();
 
-		for (String edge : dungeon.dungeonGraph()) {
-			System.out.println(edge);
-		}
+		/*
+		 * for (String edge : dungeon.dungeonGraph()) { System.out.println(edge); }
+		 */
 		return dungeon;
 	}
 

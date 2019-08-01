@@ -21,4 +21,6 @@ public interface GoalExpression {
 	 * @return
 	 */
 	public boolean isSatisfied();
+
+	public void print();
 }

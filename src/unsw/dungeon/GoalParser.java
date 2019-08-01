@@ -7,12 +7,9 @@ import unsw.dungeon.CompositeGoal.Operator;
 
 public class GoalParser {
 	private Dungeon dungeon;
-	private JSONObject input;
-	private GoalExpression expr;
 
-	public GoalParser(JSONObject obj, Dungeon dungeon) {
+	public GoalParser(Dungeon dungeon) {
 		this.dungeon = dungeon;
-		this.input = input;
 	}
 
 	public CompositeGoal parse(JSONObject obj, CompositeGoal c_0) {
@@ -39,8 +36,16 @@ public class GoalParser {
 		} else {
 			c_1 = new CompositeGoal(Operator.NULL);
 			SingleGoal s_1 = new SingleGoal(obj.getString("goal"), this.dungeon);
+			System.out.println("Added SingleGoal");
 			c_1.add(s_1);
 		}
-		return c_1;
+		if (c_0 != null) {
+			c_0.add(c_1);
+		}
+		if (c_0 == null) {
+			return c_1;
+		}
+		// System.out.println("Should not reach here");
+		return c_0;
 	}
 }

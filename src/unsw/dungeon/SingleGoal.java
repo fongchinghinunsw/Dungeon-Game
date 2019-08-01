@@ -10,11 +10,17 @@ public class SingleGoal implements GoalExpression {
 		this.goal = goal;
 	}
 
+	public void print() {
+		System.out.printf("Single goal: %s\n", goal);
+	}
+
 	@Override
 	public boolean isSatisfied() {
 		switch (goal) {
 		case "exit":
-			return dungeon.sameClass(dungeon.getPlayerX(), dungeon.getPlayerX(), "Exit");
+			// System.out.println(dungeon.sameClass(dungeon.getPlayerX(),
+			// dungeon.getPlayerY(), "Exit"));
+			return dungeon.sameClass(dungeon.getPlayerX(), dungeon.getPlayerY(), "Exit");
 		case "treasure":
 			return dungeon.completedTreasureGoal();
 		case "boulders":

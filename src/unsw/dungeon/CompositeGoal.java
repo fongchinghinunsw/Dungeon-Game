@@ -19,10 +19,19 @@ public class CompositeGoal implements GoalExpression {
 		return true;
 	}
 
+	public void print() {
+		for (int i = 0; i < children.size(); i++) {
+			System.out.printf("The operator is %s\n", operator);
+			children.get(i).print();
+		}
+	}
+
 	@Override
 	public boolean isSatisfied() {
 		boolean result;
 		result = children.get(0).isSatisfied();
+		children.get(0).print();
+		System.out.printf("In CompositeGoal it is %b\n", result);
 		for (int i = 1; i < children.size(); i++) {
 			switch (operator) {
 			case AND:
