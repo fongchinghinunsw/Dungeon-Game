@@ -21,9 +21,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.timerTick = 0;
-		if (this.moveSpeed == null) {
-			this.moveSpeed = new Slow();
-		}
+		this.moveSpeed = new Slow();
 		this.alive = new SimpleBooleanProperty(true);
 		this.observers = new ArrayList<>();
 		this.moveState = new MoveTowardsState();
