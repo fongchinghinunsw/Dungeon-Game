@@ -2,10 +2,17 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.util.Duration;
+
 public class Bomb extends Equipable implements Subject, Observer {
 
 	private Dungeon dungeon;
-	private int countdownTime;
+	private IntegerProperty countdownTime;
+	private Timeline bombTimer;
 	private boolean exploded;
 	private boolean lit;
 	private ArrayList<Observer> observers;
@@ -13,14 +20,20 @@ public class Bomb extends Equipable implements Subject, Observer {
 	public Bomb(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
-		countdownTime = 3;
+		countdownTime = new SimpleIntegerProperty(4);
 		exploded = false;
 		lit = false;
 		observers = new ArrayList<>();
+		this.bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> this.decrementCountdownTime()));
+		bombTimer.setCycleCount(4);
 	}
 
-	public int getTime() {
+	public IntegerProperty getTime() {
 		return countdownTime;
+	}
+
+	public void decrementCountdownTime() {
+		countdownTime.setValue(countdownTime.getValue() - 1);
 	}
 
 	public boolean exploded() {
@@ -32,6 +45,7 @@ public class Bomb extends Equipable implements Subject, Observer {
 	}
 
 	public void light() {
+		bombTimer.play();
 		lit = true;
 	}
 

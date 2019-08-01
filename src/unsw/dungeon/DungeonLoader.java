@@ -97,7 +97,7 @@ public abstract class DungeonLoader {
 			entity = treasure;
 			break;
 		case "potion":
-			Potion potion = new Potion(x, y);
+			Potion potion = new Potion(dungeon, x, y);
 			onLoad(potion);
 			entity = potion;
 			break;
