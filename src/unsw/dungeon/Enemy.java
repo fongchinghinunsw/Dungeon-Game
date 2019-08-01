@@ -26,13 +26,13 @@ public class Enemy extends Movable implements Subject, Observer {
 		this.observers = new ArrayList<>();
 		this.moveState = new MoveTowardsState();
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
-			if (timerTick % 100 == 0) {
+			if (timerTick*this.moveSpeed.getSpeed() % 100 == 0) {
 				this.findPlayer();
 			}
 			this.notifyObservers();
 			this.timerTick++;
 		}));
-		enemyTimer.setCycleCount(999);
+		enemyTimer.setCycleCount(Timeline.INDEFINITE);
 		enemyTimer.play();
 	}
 
