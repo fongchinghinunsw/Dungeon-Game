@@ -36,16 +36,12 @@ public class GoalParser {
 		} else {
 			c_1 = new CompositeGoal(Operator.NULL);
 			SingleGoal s_1 = new SingleGoal(obj.getString("goal"), this.dungeon);
-			System.out.println("Added SingleGoal");
 			c_1.add(s_1);
 		}
 		if (c_0 != null) {
 			c_0.add(c_1);
 		}
-		if (c_0 == null) {
-			return c_1;
-		}
 		// System.out.println("Should not reach here");
-		return c_0;
+		return c_1;
 	}
 }
