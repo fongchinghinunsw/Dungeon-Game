@@ -208,7 +208,7 @@ public class Player extends Movable implements Subject, Observer {
 				backpack.reduceSwordDurability();
 				dungeon.killEnemy(enemy);
 			} else {
-				dungeon.killPlayer();
+//				dungeon.killPlayer();
 			}
 		} else if (obj instanceof Bomb) {
 			if (!this.potionEffect) {

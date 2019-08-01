@@ -18,8 +18,10 @@ public class US11_Test {
 		dungeon.addEntity(sword);
 		player.equipItem();
 		Enemy enemy = new Enemy(dungeon, 2, 4);
-		player.setX(2);
+		dungeon.addEntity(enemy);
+		player.moveLeft();
 		player.update(enemy);
+		System.out.printf("%d...", sword.getDurability());
 		assertTrue("Player died", player.isAlive().getValue());
 		assertFalse(enemy.isAlive().getValue(), "Enemy didn't die");
 		assertEquals(sword.getDurability(), 4, "Durability didn't decrease");
@@ -37,7 +39,7 @@ public class US11_Test {
 		player.equipItem();
 		Enemy enemy = new Enemy(dungeon, 2, 4);
 		enemy.findPlayer();
-		player.update(enemy);
+//		player.update(enemy);
 		assertTrue(player.isAlive().getValue(), "Player died");
 		assertFalse(enemy.isAlive().getValue(), "Enemy didn't die");
 		assertEquals(sword.getDurability(), 4, "Durability didn't decrease");

@@ -36,6 +36,10 @@ public class Enemy extends Movable implements Subject, Observer {
 	}
 
 	public void findPlayer() {
+		if (!alive.getValue()) {
+			return;
+		}
+//		System.out.println("Trying to find the player......");
 		Player player = this.dungeon.getPlayer();
 		MoveState newState;
 		if (player.isInvincible()) {
@@ -63,6 +67,7 @@ public class Enemy extends Movable implements Subject, Observer {
 		default:
 			break;
 		}
+//		this.notifyObservers();
 	}
 
 	public long getSpeed() {
@@ -104,7 +109,7 @@ public class Enemy extends Movable implements Subject, Observer {
 			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
 				dungeon.killPlayer();
 			} else {
-				die();
+//				dungeon.killEnemy(this);
 			}
 		}
 		if (obj instanceof Bomb) {

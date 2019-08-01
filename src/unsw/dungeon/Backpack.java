@@ -143,7 +143,6 @@ public class Backpack {
 		Sword sword = getSword();
 		sword.reduceDurability();
 		System.out.println(sword.getDurability());
-		System.out.println(countSword());
 		if (sword.getDurability() == 0) {
 			items.remove(sword);
 		}

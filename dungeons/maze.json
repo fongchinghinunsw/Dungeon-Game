@@ -383,6 +383,26 @@
       "type": "enemy"
     },
     {
+      "x": 5,
+      "y": 1,
+      "type": "enemy"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "type": "enemy"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "type": "enemy"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "type": "enemy"
+    },
+    {
       "x": 17,
       "y": 5,
       "type": "wall"
@@ -408,8 +428,8 @@
       "type": "sword"
     },
     {
-      "x": 3,
-      "y": 3,
+      "x": 2,
+      "y": 8,
       "type": "enemy"
     },
     {
