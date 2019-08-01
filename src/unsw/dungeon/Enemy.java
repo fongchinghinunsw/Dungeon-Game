@@ -3,8 +3,11 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.Timer;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.util.Duration;
 
 public class Enemy extends Movable implements Subject, Observer {
 
@@ -13,17 +16,29 @@ public class Enemy extends Movable implements Subject, Observer {
 	private ArrayList<Observer> observers;
 	private BooleanProperty alive;
 	private MoveState moveState;
+	private Timeline enemyTimer;
+	private int timerTick;
 
 	public Enemy(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
+		this.timerTick = 0;
 		this.moveSpeed = new Slow();
 		this.alive = new SimpleBooleanProperty(true);
 		this.observers = new ArrayList<>();
-		Timer timer = new Timer();
-		EnemyTimer task = new EnemyTimer(dungeon, this);
-		timer.schedule(task, 0, 100 / moveSpeed.getSpeed());
+//		Timer timer = new Timer();
+//		EnemyTimer task = new EnemyTimer(dungeon, this);
+//		timer.schedule(task, 0, 100 / moveSpeed.getSpeed());
 		this.moveState = new MoveTowardsState();
+		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> {
+			if(timerTick%10 == 0) {
+				this.findPlayer();
+			}
+			this.notifyObservers();
+			this.timerTick++;
+		}));
+		enemyTimer.setCycleCount(999);
+		enemyTimer.play();
 	}
 
 	public BooleanProperty isAlive() {
@@ -88,6 +103,9 @@ public class Enemy extends Movable implements Subject, Observer {
 
 	@Override
 	public void notifyObservers() {
+		if(!this.isAlive().getValue()) {
+			return;
+		}
 		Player p = dungeon.getPlayer();
 		if (this.samePlace(p.getX(), p.getY())) {
 			p.update(this);
