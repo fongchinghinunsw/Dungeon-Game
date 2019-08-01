@@ -48,6 +48,9 @@ public abstract class DungeonLoader {
 
 		dungeon.addObservers();
 
+		for (String edge : dungeon.dungeonGraph()) {
+			System.out.println(edge);
+		}
 		return dungeon;
 	}
 
