@@ -10,12 +10,12 @@ public class US19_Test {
 	@Test
 	public void testClassMethods() {
 		Dungeon dungeon = new Dungeon(10, 10);
-		Potion potion = new Potion(2, 8);
+		Potion potion = new Potion(dungeon, 2, 8);
 		assertNotNull(potion, "Potion is null");
 		assertEquals(potion.getX(), 2, "X of potion isn't set correctly");
 		assertEquals(potion.getY(), 8, "Y of potion isn't set correctly");
 		assertEquals(potion.getClassName(), "Potion", "getClassName incorrect");
-		assertEquals(potion.getTime(), 5, "Countdown time incorrect");
+		assertEquals(potion.getTime().getValue(), 5, "Countdown time incorrect");
 		Player player = new Player(dungeon, 2, 8);
 		assertFalse(player.isInvincible(), "Player born invincible");
 	}
@@ -26,7 +26,7 @@ public class US19_Test {
 		Player player = new Player(dungeon, 2, 8);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Potion potion = new Potion(2, 8);
+		Potion potion = new Potion(dungeon, 2, 8);
 		dungeon.addEntity(potion);
 		assertTrue(player.equipItem(), "Cannot pickup potion");
 		assertTrue(player.useItem("Potion"), "Cannot use potion");
@@ -41,9 +41,9 @@ public class US19_Test {
 		Player player = new Player(dungeon, 2, 8);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Potion potion1 = new Potion(2, 8);
+		Potion potion1 = new Potion(dungeon, 2, 8);
 		dungeon.addEntity(potion1);
-		Potion potion2 = new Potion(3, 8);
+		Potion potion2 = new Potion(dungeon, 3, 8);
 		dungeon.addEntity(potion2);
 		assertTrue(player.equipItem(), "Cannot pickup potion 1");
 		player.setX(3);
@@ -61,7 +61,7 @@ public class US19_Test {
 		Player player = new Player(dungeon, 2, 8);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Potion potion1 = new Potion(2, 8);
+		Potion potion1 = new Potion(dungeon, 2, 8);
 		dungeon.addEntity(potion1);
 		player.equipItem();
 		player.useItem("Potion");
@@ -85,7 +85,7 @@ public class US19_Test {
 		Player player = new Player(dungeon, 2, 8);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Potion potion1 = new Potion(2, 8);
+		Potion potion1 = new Potion(dungeon, 2, 8);
 		dungeon.addEntity(potion1);
 		player.equipItem();
 		player.useItem("Potion");

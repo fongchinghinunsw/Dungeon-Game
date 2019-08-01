@@ -75,7 +75,7 @@ public class US1_Test {
 		dungeon.setPlayer(player);
 
 		Sword sword = new Sword(5, 4);
-		Potion potion = new Potion(5, 5);
+		Potion potion = new Potion(dungeon, 5, 5);
 		Bomb bomb = new Bomb(dungeon, 5, 6);
 		Exit exit = new Exit(5, 6);
 		Key key = new Key(dungeon, 5, 7);
