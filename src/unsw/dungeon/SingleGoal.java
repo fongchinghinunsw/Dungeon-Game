@@ -14,7 +14,13 @@ public class SingleGoal implements GoalExpression {
 	public boolean isSatisfied() {
 		switch (goal) {
 		case "exit":
-			return true;
+			return dungeon.sameClass(dungeon.getPlayerX(), dungeon.getPlayerX(), "Exit");
+		case "treasure":
+			return dungeon.completedTreasureGoal();
+		case "boulders":
+			return dungeon.completedSwitchGoal();
+		case "enemies":
+			return dungeon.completedEnemyGoal();
 		default:
 			// unreachable
 			return false;

@@ -136,6 +136,23 @@ public class Dungeon {
 		return count;
 	}
 
+	public boolean completedEnemyGoal() {
+		return countRemainingEnemy() == 0 ? true : false;
+	}
+
+	public int countRemainingEnemy() {
+		int count = 0;
+		for (Entity entity : entities) {
+			if (entity.getClassName().equals("Enemy")) {
+				Enemy enemy = (Enemy) entity;
+				if (enemy.isAlive().getValue()) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
 	/**
 	 * getter method for player
 	 * 
@@ -367,7 +384,7 @@ public class Dungeon {
 	}
 
 	public boolean hasWin() {
-		return goalExpression.evaluate();
+		return goalExpression.isSatisfied();
 	}
 
 	/**
