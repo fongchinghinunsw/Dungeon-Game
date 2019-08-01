@@ -36,6 +36,7 @@ public class Enemy extends Movable implements Subject, Observer {
 	}
 
 	public void findPlayer() {
+		dungeon.towardsPlayerPath(this.getX(), this.getY(), dungeon.getPlayerX(), dungeon.getPlayerY());
 		Player player = this.dungeon.getPlayer();
 		MoveState newState;
 		if (player.isInvincible()) {

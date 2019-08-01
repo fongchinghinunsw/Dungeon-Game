@@ -5,8 +5,10 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -465,20 +467,49 @@ public class Dungeon {
 		return edges;
 	}
 
-	private List<String> edges = dungeonGraph();
+	public void towardsPlayerPath(int x, int y, int destX, int destY) {
+		List<String> movements = new ArrayList<>();
+		List<String> edges = dungeonGraph();
+		Map<String, Boolean> hasVisited = new HashMap<>();
 
-	public void towardsPlayerPath(List<String[]> path) {
-		for (String edge : edges) {
-			String[] locations = edge.split("->"); // ["[17,2]","[16,2]"]
-			String[] toLocation = locations[1].split(","); // ["16","2"]
-			if (toLocation[0] == Integer.toString(player.getX()) && toLocation[1] == Integer.toString(player.getY())) {
-				path.add(toLocation);
-			} else {
-				for (String[] location : path) {
-
+		for (int i = 0; i < this.height; i++) {
+			for (int j = 0; j < this.width; j++) {
+				if (!(sameClass(i, j, "Wall"))) {
+					System.out.println(String.format("%d,%d", i, j));
+					hasVisited.put(String.format("%d,%d", i, j), false);
 				}
 			}
 		}
-		path.remove(path.size() - 1);
+
+		System.out.println("==================");
+
+		boolean found = findPath(edges, movements, hasVisited, String.format("%d,%d", x, y),
+				String.format("%d,%d", destX, destY));
+
+		if (found) {
+			System.out.println("There exists a path!!!");
+		}
+
+	}
+
+	public boolean findPath(List<String> edges, List<String> movements, Map<String, Boolean> hasVisited, String curr,
+			String dest) {
+		hasVisited.replace(curr, true);
+		for (String edge : edges) {
+			String[] locations = edge.split("->");
+			if (locations[0].equals(curr)) {
+				System.out.printf("%s\n", locations[1]);
+				if (locations[1].equals(dest)) {
+					return true;
+				} else if (hasVisited.get(locations[1]) == false) {
+					if (findPath(edges, movements, hasVisited, locations[1], dest)) {
+						return true;
+					} else {
+						// movements.remove(movements.size() - 1);
+					}
+				}
+			}
+		}
+		return false;
 	}
 }
