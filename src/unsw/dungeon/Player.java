@@ -87,7 +87,6 @@ public class Player extends Movable implements Subject, Observer {
 			System.out.println(message);
 			return false;
 		}
-		// Temporary solution, open to modification
 		if (type.equals("Potion")) {
 			this.potionEffect = true;
 			Potion potion = (Potion) item;
@@ -207,8 +206,6 @@ public class Player extends Movable implements Subject, Observer {
 			if (countSwordInBackPack() > 0 || isInvincible()) {
 				backpack.reduceSwordDurability();
 				dungeon.killEnemy(enemy);
-			} else {
-//				dungeon.killPlayer();
 			}
 		} else if (obj instanceof Bomb) {
 			if (!this.potionEffect) {

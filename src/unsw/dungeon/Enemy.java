@@ -31,7 +31,7 @@ public class Enemy extends Movable implements Subject, Observer {
 //		timer.schedule(task, 0, 100 / moveSpeed.getSpeed());
 		this.moveState = new MoveTowardsState();
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> {
-			if(timerTick%10 == 0) {
+			if (timerTick % 10 == 0) {
 				this.findPlayer();
 			}
 			this.notifyObservers();
@@ -103,7 +103,7 @@ public class Enemy extends Movable implements Subject, Observer {
 
 	@Override
 	public void notifyObservers() {
-		if(!this.isAlive().getValue()) {
+		if (!this.isAlive().getValue()) {
 			return;
 		}
 		Player p = dungeon.getPlayer();
@@ -126,8 +126,6 @@ public class Enemy extends Movable implements Subject, Observer {
 			Player player = (Player) obj;
 			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
 				dungeon.killPlayer();
-			} else {
-//				dungeon.killEnemy(this);
 			}
 		}
 		if (obj instanceof Bomb) {
