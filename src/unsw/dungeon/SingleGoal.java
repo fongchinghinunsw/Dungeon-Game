@@ -23,7 +23,7 @@ public class SingleGoal implements GoalExpression {
 			return dungeon.completedEnemyGoal();
 		default:
 			// unreachable
-			return false;
+			return true;
 		}
 	}
 
