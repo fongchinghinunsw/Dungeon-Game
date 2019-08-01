@@ -3,6 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javafx.beans.property.BooleanProperty;
@@ -152,6 +153,10 @@ public class Player extends Movable implements Subject, Observer {
 
 	public Backpack getBag() {
 		return backpack;
+	}
+
+	public Map<String, Integer> getNumberOfItemsInBackpack() {
+		return backpack.getNumberOfItems();
 	}
 
 	@Override

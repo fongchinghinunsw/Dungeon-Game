@@ -221,6 +221,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 				}
 			});
 		}
+
+		if (entity.getClassName().equals("Door")) {
+			Door door = (Door) entity;
+			door.getOpen().addListener((observable, oldValue, newValue) -> {
+				if (newValue) {
+					ImageView img = (ImageView) node;
+					img.setImage(openDoorImage);
+				}
+			});
+		}
 	}
 
 	/**
@@ -232,10 +242,13 @@ public class DungeonControllerLoader extends DungeonLoader {
 	 */
 	public DungeonController loadController() throws FileNotFoundException {
 		Map<String, Image> map = new HashMap<String, Image>();
-		map.put("player", playerImage);
-		map.put("sword", swordImage);
-		map.put("enemy", enemyImage);
-		map.put("bomb", bombImage);
+		map.put("Player", playerImage);
+		map.put("Sword", swordImage);
+		map.put("Enemy", enemyImage);
+		map.put("Bomb", bombImage);
+		map.put("Key", keyImage);
+		map.put("Treasure", treasureImage);
+		map.put("Potion", potionImage);
 		return new DungeonController(load(), entities, map);
 	}
 
