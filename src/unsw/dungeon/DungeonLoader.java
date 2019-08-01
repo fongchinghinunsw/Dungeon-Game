@@ -107,9 +107,19 @@ public abstract class DungeonLoader {
 			entity = bomb;
 			break;
 		case "enemy":
-			Enemy enemy = new Enemy(dungeon, x, y);
+			Enemy enemy = new Hound(dungeon, x, y);
 			onLoad(enemy);
 			entity = enemy;
+			break;
+		case "hound":
+			Hound hound = new Hound(dungeon, x, y);
+			onLoad(hound);
+			entity = hound;
+			break;
+		case "mage":
+			Mage mage = new Mage(dungeon, x, y);
+			onLoad(mage);
+			entity = mage;
 			break;
 		case "sword":
 			Sword sword = new Sword(x, y);
@@ -144,7 +154,9 @@ public abstract class DungeonLoader {
 
 	public abstract void onLoad(Potion potion);
 
-	public abstract void onLoad(Enemy enemy);
+	public abstract void onLoad(Hound hound);
+	
+	public abstract void onLoad(Mage mage);
 
 	public abstract void onLoad(Switch floorSwitch);
 

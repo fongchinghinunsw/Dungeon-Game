@@ -17,7 +17,7 @@ public class US11_Test {
 		Sword sword = new Sword(3, 4);
 		dungeon.addEntity(sword);
 		player.equipItem();
-		Enemy enemy = new Enemy(dungeon, 2, 4);
+		Enemy enemy = new Hound(dungeon, 2, 4);
 		dungeon.addEntity(enemy);
 		player.moveLeft();
 		player.update(enemy);
@@ -37,7 +37,7 @@ public class US11_Test {
 		Sword sword = new Sword(3, 4);
 		dungeon.addEntity(sword);
 		player.equipItem();
-		Enemy enemy = new Enemy(dungeon, 2, 4);
+		Enemy enemy = new Hound(dungeon, 2, 4);
 		enemy.findPlayer();
 //		player.update(enemy);
 		assertTrue(player.isAlive().getValue(), "Player died");

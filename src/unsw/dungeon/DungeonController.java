@@ -142,12 +142,12 @@ public class DungeonController {
 			if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
 				ImageView imageView = (ImageView) node;
 				if (imageView.getImage() != (Image) images.get("Player")
-						&& imageView.getImage() != (Image) images.get("Enemy")) {
+						&& imageView.getImage() != (Image) images.get("Hound")
+						&& imageView.getImage() != (Image) images.get("Mage")) {
 					deletedEntities.add(imageView);
 					gridPane.getChildren().remove(imageView);
 					return true;
 				}
-
 			}
 		}
 		return false;

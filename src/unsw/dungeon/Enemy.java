@@ -7,7 +7,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.util.Duration;
 
-public class Enemy extends Movable implements Subject, Observer {
+public abstract class Enemy extends Movable implements Subject, Observer {
 
 	private Dungeon dungeon;
 	private MoveSpeed moveSpeed;
@@ -21,12 +21,15 @@ public class Enemy extends Movable implements Subject, Observer {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
 		this.timerTick = 0;
-		this.moveSpeed = new Slow();
+		if (this.moveSpeed == null) {
+			this.moveSpeed = new Slow();
+		}
 		this.alive = new SimpleBooleanProperty(true);
 		this.observers = new ArrayList<>();
 		this.moveState = new MoveTowardsState();
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
-			if (timerTick*this.moveSpeed.getSpeed() % 100 == 0) {
+			// the higher the speed is the more frequent the enemy moves
+			if (timerTick * this.moveSpeed.getSpeed() % 100 == 0) {
 				this.findPlayer();
 			}
 			this.notifyObservers();
@@ -36,6 +39,10 @@ public class Enemy extends Movable implements Subject, Observer {
 		enemyTimer.play();
 	}
 
+	public void setSpeed(MoveSpeed newSpeed) {
+		this.moveSpeed = newSpeed;
+	}
+	
 	public BooleanProperty isAlive() {
 		return this.alive;
 	}

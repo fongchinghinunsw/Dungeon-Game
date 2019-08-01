@@ -42,7 +42,7 @@ public class US8_Test {
 		player.equipItem();
 		player.setX(7);
 		player.setY(4);
-		Enemy enemy = new Enemy(dungeon, 7, 3);
+		Enemy enemy = new Hound(dungeon, 7, 3);
 		dungeon.addEntity(player);
 		dungeon.addEntity(enemy);
 		Bomb bombFromBag = player.getBomb();

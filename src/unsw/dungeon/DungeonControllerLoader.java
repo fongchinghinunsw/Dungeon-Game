@@ -36,11 +36,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image bombImageLit1;
 	private Image bombImageLit2;
 	private Image bombImageLit3;
-	private Image enemyImage;
+	private Image houndImage;
 	private Image swordImage;
 	private Image switchImage;
 	private Image closedDoorImage;
 	private Image openDoorImage;
+	private Image mageImage;
 
 	public DungeonControllerLoader(String filename) throws FileNotFoundException {
 		super(filename);
@@ -56,11 +57,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 		bombImageLit1 = new Image("/bomb_lit_2.png");
 		bombImageLit2 = new Image("/bomb_lit_3.png");
 		bombImageLit3 = new Image("/bomb_lit_4.png");
-		enemyImage = new Image("/hound.png");
+		houndImage = new Image("/hound.png");
 		swordImage = new Image("/greatsword_1_new.png");
 		switchImage = new Image("/pressure_plate.png");
 		closedDoorImage = new Image("/closed_door.png");
 		openDoorImage = new Image("/open_door.png");
+		mageImage = new Image("/gnome.png");
 	}
 
 	@Override
@@ -111,11 +113,17 @@ public class DungeonControllerLoader extends DungeonLoader {
 	}
 
 	@Override
-	public void onLoad(Enemy enemy) {
-		ImageView view = new ImageView(enemyImage);
-		addEntity(enemy, view);
+	public void onLoad(Hound hound) {
+		ImageView view = new ImageView(houndImage);
+		addEntity(hound, view);
 	}
 
+	@Override
+	public void onLoad(Mage mage) {
+		ImageView view = new ImageView(mageImage);
+		addEntity(mage, view);
+	}
+	
 	@Override
 	public void onLoad(Sword sword) {
 		ImageView view = new ImageView(swordImage);
@@ -244,7 +252,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 		Map<String, Image> map = new HashMap<String, Image>();
 		map.put("Player", playerImage);
 		map.put("Sword", swordImage);
-		map.put("Enemy", enemyImage);
+		map.put("Hound", houndImage);
+		map.put("Mage", mageImage);
 		map.put("Bomb", bombImage);
 		map.put("Key", keyImage);
 		map.put("Treasure", treasureImage);

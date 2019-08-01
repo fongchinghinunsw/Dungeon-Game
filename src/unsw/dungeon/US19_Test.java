@@ -65,13 +65,13 @@ public class US19_Test {
 		dungeon.addEntity(potion1);
 		player.equipItem();
 		player.useItem("Potion");
-		Enemy enemy = new Enemy(dungeon, 2, 8);
+		Enemy enemy = new Hound(dungeon, 2, 8);
 		dungeon.addEntity(enemy);
 		enemy.update(player);
 		assertTrue(player.isAlive().getValue(), "Player got killed");
 		assertFalse(enemy.isAlive().getValue(), "Enemy still alive");
 		player.disablePotion();
-		Enemy enemy2 = new Enemy(dungeon, 2, 8);
+		Enemy enemy2 = new Hound(dungeon, 2, 8);
 		dungeon.addEntity(enemy2);
 		enemy2.update(player);
 		assertFalse(player.isAlive().getValue(), "player still alive after potion wore off");
@@ -89,7 +89,7 @@ public class US19_Test {
 		dungeon.addEntity(potion1);
 		player.equipItem();
 		player.useItem("Potion");
-		Enemy enemy = new Enemy(dungeon, 3, 8);
+		Enemy enemy = new Hound(dungeon, 3, 8);
 		dungeon.addEntity(enemy);
 		enemy.findPlayer();
 		assertTrue(enemy.getX() > 3, "enemy isn't running away!");
