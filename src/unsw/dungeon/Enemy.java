@@ -1,8 +1,6 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
-import java.util.Timer;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
@@ -26,12 +24,9 @@ public class Enemy extends Movable implements Subject, Observer {
 		this.moveSpeed = new Slow();
 		this.alive = new SimpleBooleanProperty(true);
 		this.observers = new ArrayList<>();
-//		Timer timer = new Timer();
-//		EnemyTimer task = new EnemyTimer(dungeon, this);
-//		timer.schedule(task, 0, 100 / moveSpeed.getSpeed());
 		this.moveState = new MoveTowardsState();
-		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> {
-			if (timerTick % 10 == 0) {
+		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
+			if (timerTick % 100 == 0) {
 				this.findPlayer();
 			}
 			this.notifyObservers();
