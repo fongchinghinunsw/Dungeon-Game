@@ -39,7 +39,7 @@ public abstract class DungeonLoader {
 
 		JSONObject goal = json.getJSONObject("goal-condition");
 		if (goal.getString("goal").equals("exit")) {
-			dungeon.setGoalExpression(new SingleOperand("exit"));
+			dungeon.setGoalExpression(new SingleGoal("exit", dungeon));
 		}
 
 		for (int i = 0; i < jsonEntities.length(); i++) {

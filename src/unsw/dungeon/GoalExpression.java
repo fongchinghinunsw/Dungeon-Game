@@ -1,14 +1,14 @@
 package unsw.dungeon;
 
-import unsw.dungeon.CompositeOperand.Operator;
+import unsw.dungeon.CompositeGoal.Operator;
 
 public interface GoalExpression {
 	public default GoalExpression and(GoalExpression rightOperand) {
-		return new CompositeOperand(Operator.AND, this, rightOperand);
+		return new CompositeGoal(Operator.AND, this, rightOperand);
 	}
 
 	public default GoalExpression or(GoalExpression rightOperand) {
-		return new CompositeOperand(Operator.OR, this, rightOperand);
+		return new CompositeGoal(Operator.OR, this, rightOperand);
 	}
 
 	/**
@@ -16,5 +16,5 @@ public interface GoalExpression {
 	 * 
 	 * @return
 	 */
-	public boolean evaluate();
+	public boolean isSatisfied();
 }
