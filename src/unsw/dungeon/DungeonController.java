@@ -173,4 +173,11 @@ public class DungeonController {
 		return this.images;
 	}
 
+	public void pauseGame() {
+		dungeon.pauseGame();
+	}
+
+	public void resumeGame() {
+		dungeon.resumeGame();
+	}
 }

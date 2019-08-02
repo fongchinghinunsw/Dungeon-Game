@@ -537,4 +537,22 @@ public class Dungeon {
 		return player.getNumberOfItemsInBackpack();
 
 	}
+
+	public void pauseGame() {
+		for (Entity entity : entities) {
+			if (entity instanceof Enemy) {
+				Enemy enemy = (Enemy) entity;
+				enemy.pause();
+			}
+		}
+	}
+
+	public void resumeGame() {
+		for (Entity entity : entities) {
+			if (entity instanceof Enemy) {
+				Enemy enemy = (Enemy) entity;
+				enemy.resume();
+			}
+		}
+	}
 }
