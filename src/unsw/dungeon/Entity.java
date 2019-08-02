@@ -84,10 +84,6 @@ public abstract class Entity {
 		return false;
 	}
 
-	public boolean samePlace(int x2, int y2) {
-		return (getX() == x2 && getY() == y2);
-	}
-
 	/*
 	 * Get the name of the class
 	 */
