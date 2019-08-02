@@ -445,8 +445,6 @@ public class Dungeon {
 		cantMoveSet.add("Wall");
 		cantMoveSet.add("Boulder");
 
-		System.out.println(this.height);
-		System.out.println(this.width);
 		for (int i = 0; i < this.width; i++) {
 			for (int j = 0; j < this.height; j++) {
 				String from = Integer.toString(i) + "," + Integer.toString(j);
