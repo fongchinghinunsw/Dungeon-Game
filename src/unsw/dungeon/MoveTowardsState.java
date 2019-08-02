@@ -16,7 +16,9 @@ public class MoveTowardsState implements MoveState {
 
 	@Override
 	public String getDirection(List<String> path) {
-		return path.get(0);
+		String direction = path.get(path.size() - 1);
+		path.remove(path.size() - 1);
+		return direction;
 	}
 
 }

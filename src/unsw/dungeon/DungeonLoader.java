@@ -155,7 +155,7 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Potion potion);
 
 	public abstract void onLoad(Hound hound);
-	
+
 	public abstract void onLoad(Mage mage);
 
 	public abstract void onLoad(Switch floorSwitch);

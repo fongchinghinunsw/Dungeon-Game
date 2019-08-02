@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,6 +18,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 	private MoveState moveState;
 	private Timeline enemyTimer;
 	private int timerTick;
+	private List<String> pathToPlayer;
 
 	public Enemy(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
@@ -26,6 +28,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		this.alive = new SimpleBooleanProperty(true);
 		this.observers = new ArrayList<>();
 		this.moveState = new MoveTowardsState();
+		this.pathToPlayer = null;
 
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
 			// the higher the speed is the more frequent the enemy moves
@@ -53,6 +56,11 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 	}
 
 	public void findPlayer() {
+		if (this.pathToPlayer == null) {
+			this.pathToPlayer = dungeon.towardsPlayerPath(this.getX(), this.getY(), dungeon.getPlayerX(),
+					dungeon.getPlayerY());
+		}
+
 		if (!alive.getValue()) {
 			return;
 		}
@@ -65,10 +73,14 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 			newState = this.moveState.transitionTowards();
 		}
 		this.moveState = newState;
-		int pX = player.getX();
-		int pY = player.getY();
-		String direction = this.moveState.getDirection(
-				dungeon.towardsPlayerPath(this.getX(), this.getY(), dungeon.getPlayerX(), dungeon.getPlayerY()));
+
+		String direction;
+		if (pathToPlayer.size() > 0) {
+			direction = this.moveState.getDirection(this.pathToPlayer);
+		} else {
+			System.out.println("No more direction");
+			direction = "";
+		}
 
 		if (direction.equals("LEFT")) {
 			moveLeft();
@@ -122,9 +134,15 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 
 		if (obj instanceof Player) {
 			Player player = (Player) obj;
-			if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
-				dungeon.killPlayer();
+			if (dungeon.sameClass(getX(), getY(), "Player")) {
+				if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
+					dungeon.killPlayer();
+				}
+			} else {
+				// regenerate the path once the player moves.
+				this.pathToPlayer = dungeon.towardsPlayerPath(getX(), getY(), player.getX(), player.getY());
 			}
+
 		}
 		if (obj instanceof Bomb) {
 			die();

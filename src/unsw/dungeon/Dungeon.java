@@ -441,23 +441,32 @@ public class Dungeon {
 
 	public List<String> dungeonGraph() {
 		List<String> edges = new ArrayList<>();
+		Set<String> cantMoveSet = new HashSet<>();
+		cantMoveSet.add("Wall");
+		cantMoveSet.add("Boulder");
+		cantMoveSet.add("Door");
+
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
-				String from = i + "," + j;
-				if (!(sameClass(i, j, "Wall"))) {
-					if (i - 1 >= 0 && !(sameClass(i - 1, j, "Wall"))) {
+				String from = Integer.toString(i) + "," + Integer.toString(j);
+				if (!(sameClass(i, j, cantMoveSet))) {
+					if (i == 0 && j == 8) {
+						System.out.println(!(sameClass(i, j, cantMoveSet)));
+						System.out.println("\n\n\n\n\n\n\n\n\n");
+					}
+					if (i - 1 >= 0 && !(sameClass(i - 1, j, cantMoveSet))) {
 						String to = Integer.toString(i - 1) + "," + Integer.toString(j);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (i + 1 < this.height && !(sameClass(i + 1, j, "Wall"))) {
+					if (i + 1 < this.height && !(sameClass(i + 1, j, cantMoveSet))) {
 						String to = Integer.toString(i + 1) + "," + Integer.toString(j);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (j - 1 >= 0 && !(sameClass(i, j - 1, "Wall"))) {
+					if (j - 1 >= 0 && !(sameClass(i, j - 1, cantMoveSet))) {
 						String to = Integer.toString(i) + "," + Integer.toString(j - 1);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (j + 1 < this.width && !(sameClass(i, j + 1, "Wall"))) {
+					if (j + 1 < this.width && !(sameClass(i, j + 1, cantMoveSet))) {
 						String to = Integer.toString(i) + "," + Integer.toString(j + 1);
 						edges.add(String.format("%s->%s", from, to));
 					}
@@ -468,28 +477,23 @@ public class Dungeon {
 	}
 
 	public List<String> towardsPlayerPath(int x, int y, int destX, int destY) {
-		List<String> movements = new ArrayList<>();
 		List<String> edges = dungeonGraph();
+		List<String> movements = new ArrayList<>();
 		Map<String, Boolean> hasVisited = new HashMap<>();
+		Set<String> cantMoveSet = new HashSet<>();
+		cantMoveSet.add("Wall");
+		cantMoveSet.add("Boulder");
+		cantMoveSet.add("Door");
 
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
-				if (!(sameClass(i, j, "Wall"))) {
+				if (!(sameClass(i, j, cantMoveSet))) {
 					hasVisited.put(String.format("%d,%d", i, j), false);
 				}
 			}
 		}
+		findPath(edges, movements, hasVisited, String.format("%d,%d", x, y), String.format("%d,%d", destX, destY));
 
-		boolean found = findPath(edges, movements, hasVisited, String.format("%d,%d", x, y),
-				String.format("%d,%d", destX, destY));
-
-		if (found) {
-			System.out.println("There exists a path!!!");
-			System.out.printf("Enemy starts from %d,%d. Moving towards %d,%d\n", x, y, destX, destY);
-			for (String move : movements) {
-				System.out.println(move);
-			}
-		}
 		return movements;
 
 	}
@@ -516,19 +520,18 @@ public class Dungeon {
 					}
 					return true;
 				} else if (hasVisited.get(locations[1]) == false) {
-					if (fromX < toX) {
-						movements.add("RIGHT");
-					} else if (fromY < toY) {
-						movements.add("DOWN");
-					} else if (fromX > toX) {
-						movements.add("LEFT");
-					} else if (fromY > toY) {
-						movements.add("UP");
-					}
+
 					if (findPath(edges, movements, hasVisited, locations[1], dest)) {
+						if (fromX < toX) {
+							movements.add("RIGHT");
+						} else if (fromY < toY) {
+							movements.add("DOWN");
+						} else if (fromX > toX) {
+							movements.add("LEFT");
+						} else if (fromY > toY) {
+							movements.add("UP");
+						}
 						return true;
-					} else {
-						movements.remove(movements.size() - 1);
 					}
 				}
 			}

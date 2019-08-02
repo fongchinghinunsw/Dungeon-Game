@@ -188,6 +188,13 @@ public class Player extends Movable implements Subject, Observer {
 					o.update(this);
 				}
 			}
+		} else {
+			for (Observer o : observers) {
+				// notify enemy when the player make any moves.
+				if (o instanceof Enemy) {
+					o.update(this);
+				}
+			}
 		}
 		for (Observer o : observers) {
 			Entity entity = (Entity) o;
@@ -211,7 +218,7 @@ public class Player extends Movable implements Subject, Observer {
 			if (countSwordInBackPack() > 0 || isInvincible()) {
 				backpack.reduceSwordDurability();
 				dungeon.killEnemy(enemy);
-			}else {
+			} else {
 				this.notifyObservers();
 			}
 		} else if (obj instanceof Bomb) {
