@@ -137,6 +137,27 @@ public class Dungeon {
 		return count;
 	}
 
+	public boolean completedEnemyGoal() {
+		// cannot win the game if player's dead
+		if(!player.isAlive().getValue()) {
+			return false;
+		}
+		return countRemainingEnemy() == 0 ? true : false;
+	}
+
+	public int countRemainingEnemy() {
+		int count = 0;
+		for (Entity entity : entities) {
+			if (entity.getClassName().equals("Enemy")) {
+				Enemy enemy = (Enemy) entity;
+				if (enemy.isAlive().getValue()) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
 	/**
 	 * getter method for player
 	 * 
@@ -368,7 +389,7 @@ public class Dungeon {
 	}
 
 	public boolean hasWin() {
-		return goalExpression.evaluate();
+		return goalExpression.isSatisfied();
 	}
 
 	/**
@@ -440,5 +461,50 @@ public class Dungeon {
 
 	public Map<String, Integer> getItemsInBackpack() {
 		return player.getNumberOfItemsInBackpack();
+	}
+
+	public List<String> dungeonGraph() {
+		List<String> edges = new ArrayList<>();
+		for (int i = 0; i < this.height; i++) {
+			for (int j = 0; j < this.width; j++) {
+				String from = i + "," + j;
+				if (!(sameClass(i, j, "Wall"))) {
+					if (i - 1 >= 0 && !(sameClass(i - 1, j, "Wall"))) {
+						String to = Integer.toString(i - 1) + "," + Integer.toString(j);
+						edges.add(String.format("%s->%s", from, to));
+					}
+					if (i + 1 < this.height && !(sameClass(i + 1, j, "Wall"))) {
+						String to = Integer.toString(i + 1) + "," + Integer.toString(j);
+						edges.add(String.format("%s->%s", from, to));
+					}
+					if (j - 1 >= 0 && !(sameClass(i, j - 1, "Wall"))) {
+						String to = Integer.toString(i) + "," + Integer.toString(j - 1);
+						edges.add(String.format("%s->%s", from, to));
+					}
+					if (j + 1 < this.width && !(sameClass(i, j + 1, "Wall"))) {
+						String to = Integer.toString(i) + "," + Integer.toString(j + 1);
+						edges.add(String.format("%s->%s", from, to));
+					}
+				}
+			}
+		}
+		return edges;
+	}
+
+	private List<String> edges = dungeonGraph();
+
+	public void towardsPlayerPath(List<String[]> path) {
+		for (String edge : edges) {
+			String[] locations = edge.split("->"); // ["[17,2]","[16,2]"]
+			String[] toLocation = locations[1].split(","); // ["16","2"]
+			if (toLocation[0] == Integer.toString(player.getX()) && toLocation[1] == Integer.toString(player.getY())) {
+				path.add(toLocation);
+			} else {
+				for (String[] location : path) {
+
+				}
+			}
+		}
+		path.remove(path.size() - 1);
 	}
 }
