@@ -117,12 +117,9 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 			return;
 		}
 
-		if (dungeon.sameClass(getX(), getY(), "Player")) {
-			for (Observer o : observers) {
-				if (o instanceof Player) {
-					o.update(this);
-				}
-			}
+		Player player = dungeon.getPlayer();
+		if (this.samePlace(player.getX(), player.getY())) {
+			player.update(this);
 		}
 	}
 
