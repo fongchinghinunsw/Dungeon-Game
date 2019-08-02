@@ -118,4 +118,111 @@ public class US2_Test_Composite {
 		player.moveRight();
 		assertTrue(dungeon.hasWin(), "Goal checker error");
 	}
+
+	// testing (a and (b or c))
+	void testComposite1() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 8, 8);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Hound hound = new Hound(dungeon, 4, 5);
+		dungeon.addEntity(hound);
+		Mage mage = new Mage(dungeon, 2, 6);
+		dungeon.addEntity(mage);
+		Switch switch1 = new Switch(dungeon, 2, 7);
+		dungeon.addEntity(switch1);
+		Switch switch2 = new Switch(dungeon, 3, 6);
+		dungeon.addEntity(switch2);
+		Boulder boulder1 = new Boulder(dungeon, 2, 6);
+		dungeon.addEntity(boulder1);
+		Boulder boulder2 = new Boulder(dungeon, 3, 5);
+		dungeon.addEntity(boulder2);
+		Treasure gold1 = new Treasure(8, 7);
+		dungeon.addEntity(gold1);
+		Treasure gold2 = new Treasure(8, 6);
+		dungeon.addEntity(gold2);
+		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
+		SingleGoal goal2 = new SingleGoal("treasure", dungeon);
+		CompositeGoal subGoal1 = new CompositeGoal(Operator.OR);
+		subGoal1.add(goal1);
+		subGoal1.add(goal2);
+		SingleGoal subGoal2 = new SingleGoal("boulders", dungeon);
+		// BOULDER && (ENEMY || TREASURE)
+		CompositeGoal mainGoal = new CompositeGoal(Operator.AND);
+		mainGoal.add(subGoal1);
+		mainGoal.add(subGoal2);
+		dungeon.setGoalExpression(mainGoal);
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		// Boulder only
+		boulder1.moveDown();
+		boulder2.moveDown();
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		boulder1.moveUp();
+		// Treasure Only
+		player.moveUp();
+		player.equipItem();
+		player.moveUp();
+		player.equipItem();
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		// Boulder and treasure
+		boulder1.moveDown();
+		assertTrue(dungeon.hasWin(), "Goal checker error");
+		// Boulder, treasure and enemy
+		dungeon.killEnemy(hound);
+		dungeon.killEnemy(mage);
+		assertTrue(dungeon.hasWin(), "Goal checker error");
+	}
+
+	// testing (a or (b and c))
+	void testComposite2() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 8, 8);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Hound hound = new Hound(dungeon, 4, 5);
+		dungeon.addEntity(hound);
+		Mage mage = new Mage(dungeon, 2, 6);
+		dungeon.addEntity(mage);
+		Switch switch1 = new Switch(dungeon, 2, 7);
+		dungeon.addEntity(switch1);
+		Switch switch2 = new Switch(dungeon, 3, 6);
+		dungeon.addEntity(switch2);
+		Boulder boulder1 = new Boulder(dungeon, 2, 6);
+		dungeon.addEntity(boulder1);
+		Boulder boulder2 = new Boulder(dungeon, 3, 5);
+		dungeon.addEntity(boulder2);
+		Treasure gold1 = new Treasure(8, 7);
+		dungeon.addEntity(gold1);
+		Treasure gold2 = new Treasure(8, 6);
+		dungeon.addEntity(gold2);
+		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
+		SingleGoal goal2 = new SingleGoal("treasure", dungeon);
+		CompositeGoal subGoal1 = new CompositeGoal(Operator.AND);
+		subGoal1.add(goal1);
+		subGoal1.add(goal2);
+		SingleGoal subGoal2 = new SingleGoal("boulders", dungeon);
+		// BOULDER || (ENEMY && TREASURE)
+		CompositeGoal mainGoal = new CompositeGoal(Operator.OR);
+		mainGoal.add(subGoal1);
+		mainGoal.add(subGoal2);
+		dungeon.setGoalExpression(mainGoal);
+		// Boulder only
+		boulder1.moveDown();
+		boulder2.moveDown();
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		boulder1.moveUp();
+		// Enemy only
+		dungeon.killEnemy(hound);
+		dungeon.killEnemy(mage);
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		// Enemy and Treasure only
+		player.moveUp();
+		player.equipItem();
+		player.moveUp();
+		player.equipItem();
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		// enemy and treasure and boulder
+		boulder1.moveDown();
+		assertTrue(dungeon.hasWin(), "Goal checker error");
+	}
 }
