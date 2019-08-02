@@ -123,7 +123,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 		ImageView view = new ImageView(mageImage);
 		addEntity(mage, view);
 	}
-	
+
 	@Override
 	public void onLoad(Sword sword) {
 		ImageView view = new ImageView(swordImage);
@@ -144,7 +144,6 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	private void addEntity(Entity entity, ImageView view) {
 		trackPosition(entity, view);
-
 		entities.add(view);
 	}
 

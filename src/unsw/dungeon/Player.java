@@ -189,6 +189,14 @@ public class Player extends Movable implements Subject, Observer {
 				}
 			}
 		}
+		if (!(dungeon.sameClass(getX(), getY(), "Enemy"))) {
+			for (Observer o : observers) {
+				// notify enemy when the player make any moves.
+				if (o instanceof Enemy) {
+					o.update(this);
+				}
+			}
+		}
 		for (Observer o : observers) {
 			Entity entity = (Entity) o;
 			if (entity.adjacent(getX(), getY()) && entity.getClassName().equals("Door")) {
@@ -208,6 +216,7 @@ public class Player extends Movable implements Subject, Observer {
 	public void update(Subject obj) {
 		if (obj instanceof Enemy) {
 			Enemy enemy = (Enemy) obj;
+
 			if (isInvincible()) {
 				dungeon.killEnemy(enemy);
 			} else if (countSwordInBackPack() > 0) {

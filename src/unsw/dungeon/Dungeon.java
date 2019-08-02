@@ -5,6 +5,7 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -139,7 +140,7 @@ public class Dungeon {
 
 	public boolean completedEnemyGoal() {
 		// cannot win the game if player's dead
-		if(!player.isAlive().getValue()) {
+		if (!player.isAlive().getValue()) {
 			return false;
 		}
 		return countRemainingEnemy() == 0 ? true : false;
@@ -459,29 +460,31 @@ public class Dungeon {
 		return false;
 	}
 
-	public Map<String, Integer> getItemsInBackpack() {
-		return player.getNumberOfItemsInBackpack();
-	}
-
 	public List<String> dungeonGraph() {
 		List<String> edges = new ArrayList<>();
+		Set<String> cantMoveSet = new HashSet<>();
+		cantMoveSet.add("Wall");
+		cantMoveSet.add("Boulder");
+
+		System.out.println(this.height);
+		System.out.println(this.width);
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
-				String from = i + "," + j;
-				if (!(sameClass(i, j, "Wall"))) {
-					if (i - 1 >= 0 && !(sameClass(i - 1, j, "Wall"))) {
+				String from = Integer.toString(i) + "," + Integer.toString(j);
+				if (!(sameClass(i, j, cantMoveSet)) && canStepOn(i, j)) {
+					if (i - 1 >= 0 && !(sameClass(i - 1, j, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i - 1) + "," + Integer.toString(j);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (i + 1 < this.height && !(sameClass(i + 1, j, "Wall"))) {
+					if (i + 1 < this.height && !(sameClass(i + 1, j, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i + 1) + "," + Integer.toString(j);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (j - 1 >= 0 && !(sameClass(i, j - 1, "Wall"))) {
+					if (j - 1 >= 0 && !(sameClass(i, j - 1, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i) + "," + Integer.toString(j - 1);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (j + 1 < this.width && !(sameClass(i, j + 1, "Wall"))) {
+					if (j + 1 < this.width && !(sameClass(i, j + 1, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i) + "," + Integer.toString(j + 1);
 						edges.add(String.format("%s->%s", from, to));
 					}
@@ -491,20 +494,69 @@ public class Dungeon {
 		return edges;
 	}
 
-	private List<String> edges = dungeonGraph();
+	public List<String> towardsPlayerPath(int x, int y, int destX, int destY) {
+		List<String> edges = dungeonGraph();
+		List<String> movements = new ArrayList<>();
+		Map<String, Boolean> hasVisited = new HashMap<>();
+		Set<String> cantMoveSet = new HashSet<>();
+		cantMoveSet.add("Wall");
+		cantMoveSet.add("Boulder");
 
-	public void towardsPlayerPath(List<String[]> path) {
-		for (String edge : edges) {
-			String[] locations = edge.split("->"); // ["[17,2]","[16,2]"]
-			String[] toLocation = locations[1].split(","); // ["16","2"]
-			if (toLocation[0] == Integer.toString(player.getX()) && toLocation[1] == Integer.toString(player.getY())) {
-				path.add(toLocation);
-			} else {
-				for (String[] location : path) {
-
+		for (int i = 0; i < this.height; i++) {
+			for (int j = 0; j < this.width; j++) {
+				if (!(sameClass(i, j, cantMoveSet) && canStepOn(i, j))) {
+					hasVisited.put(String.format("%d,%d", i, j), false);
 				}
 			}
 		}
-		path.remove(path.size() - 1);
+		findPath(edges, movements, hasVisited, String.format("%d,%d", x, y), String.format("%d,%d", destX, destY));
+
+		return movements;
+
+	}
+
+	public boolean findPath(List<String> edges, List<String> movements, Map<String, Boolean> hasVisited, String curr,
+			String dest) {
+		hasVisited.replace(curr, true);
+		for (String edge : edges) {
+			String[] locations = edge.split("->");
+			if (locations[0].equals(curr)) {
+				int fromX = Integer.parseInt(locations[0].split(",")[0]);
+				int fromY = Integer.parseInt(locations[0].split(",")[1]);
+				int toX = Integer.parseInt(locations[1].split(",")[0]);
+				int toY = Integer.parseInt(locations[1].split(",")[1]);
+				if (locations[1].equals(dest)) {
+					if (fromX < toX) {
+						movements.add("RIGHT");
+					} else if (fromY < toY) {
+						movements.add("DOWN");
+					} else if (fromX > toX) {
+						movements.add("LEFT");
+					} else if (fromY > toY) {
+						movements.add("UP");
+					}
+					return true;
+				} else if (hasVisited.get(locations[1]) == false) {
+
+					if (findPath(edges, movements, hasVisited, locations[1], dest)) {
+						if (fromX < toX) {
+							movements.add("RIGHT");
+						} else if (fromY < toY) {
+							movements.add("DOWN");
+						} else if (fromX > toX) {
+							movements.add("LEFT");
+						} else if (fromY > toY) {
+							movements.add("UP");
+						}
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	public Map<String, Integer> getItemsInBackpack() {
+		return player.getNumberOfItemsInBackpack();
 	}
 }

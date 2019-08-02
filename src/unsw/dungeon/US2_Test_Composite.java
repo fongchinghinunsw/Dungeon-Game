@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import javafx.embed.swing.JFXPanel;
 import unsw.dungeon.CompositeGoal.Operator;
@@ -26,12 +28,11 @@ public class US2_Test_Composite {
 		dungeon.addEntity(boulder1);
 		Boulder boulder2 = new Boulder(dungeon, 3, 5);
 		dungeon.addEntity(boulder2);
-		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
-		SingleGoal goal2 = new SingleGoal("boulders", dungeon);
-		CompositeGoal mainGoal = new CompositeGoal(Operator.AND);
-		mainGoal.add(goal1);
-		mainGoal.add(goal2);
-		dungeon.setGoalExpression(mainGoal);
+		JSONObject goal = new JSONObject("{ \"goal\": \"AND\", \"subgoals\":\n" + "  [ { \"goal\": \"enemies\" },\n"
+				+ "    { \"goal\": \"boulders\"}\n" + "  ]\n" + "}");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		dungeon.killEnemy(hound);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
@@ -61,12 +62,11 @@ public class US2_Test_Composite {
 		dungeon.addEntity(boulder1);
 		Boulder boulder2 = new Boulder(dungeon, 3, 5);
 		dungeon.addEntity(boulder2);
-		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
-		SingleGoal goal2 = new SingleGoal("boulders", dungeon);
-		CompositeGoal mainGoal = new CompositeGoal(Operator.OR);
-		mainGoal.add(goal1);
-		mainGoal.add(goal2);
-		dungeon.setGoalExpression(mainGoal);
+		JSONObject goal = new JSONObject("{ \"goal\": \"OR\", \"subgoals\":\n" + "  [ { \"goal\": \"enemies\" },\n"
+				+ "    { \"goal\": \"boulders\"}\n" + "  ]\n" + "}");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		boulder1.moveDown();
 		assertFalse(dungeon.hasWin(), "Goal checker error");
@@ -95,12 +95,11 @@ public class US2_Test_Composite {
 		dungeon.addEntity(gold3);
 		Exit exit = new Exit(3, 6);
 		dungeon.addEntity(exit);
-		SingleGoal goal1 = new SingleGoal("treasure", dungeon);
-		SingleGoal goal2 = new SingleGoal("exit", dungeon);
-		CompositeGoal mainGoal = new CompositeGoal(Operator.AND);
-		mainGoal.add(goal1);
-		mainGoal.add(goal2);
-		dungeon.setGoalExpression(mainGoal);
+		JSONObject goal = new JSONObject("{ \"goal\": \"AND\", \"subgoals\":\n" + "  [ { \"goal\": \"exit\" },\n"
+				+ "    { \"goal\": \"treasure\"}\n" + "  ]\n" + "}\n" + "");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		// Go to exit first to 'complete exit goal
 		player.moveDown();
@@ -141,17 +140,13 @@ public class US2_Test_Composite {
 		dungeon.addEntity(gold1);
 		Treasure gold2 = new Treasure(8, 6);
 		dungeon.addEntity(gold2);
-		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
-		SingleGoal goal2 = new SingleGoal("treasure", dungeon);
-		CompositeGoal subGoal1 = new CompositeGoal(Operator.OR);
-		subGoal1.add(goal1);
-		subGoal1.add(goal2);
-		SingleGoal subGoal2 = new SingleGoal("boulders", dungeon);
 		// BOULDER && (ENEMY || TREASURE)
-		CompositeGoal mainGoal = new CompositeGoal(Operator.AND);
-		mainGoal.add(subGoal1);
-		mainGoal.add(subGoal2);
-		dungeon.setGoalExpression(mainGoal);
+		JSONObject goal = new JSONObject("{ \"goal\": \"AND\", \"subgoals\":\n" + "  [ { \"goal\": \"boulders\" },\n"
+				+ "    { \"goal\": \"OR\", \"subgoals\":\n" + "  [ { \"goal\": \"enemies\"},\n"
+				+ "  	{ \"goal\": \"treasure\"}\n" + "  ]\n" + "  }\n" + "}\n" + "");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		// Boulder only
 		boulder1.moveDown();
@@ -195,17 +190,14 @@ public class US2_Test_Composite {
 		dungeon.addEntity(gold1);
 		Treasure gold2 = new Treasure(8, 6);
 		dungeon.addEntity(gold2);
-		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
-		SingleGoal goal2 = new SingleGoal("treasure", dungeon);
-		CompositeGoal subGoal1 = new CompositeGoal(Operator.AND);
-		subGoal1.add(goal1);
-		subGoal1.add(goal2);
-		SingleGoal subGoal2 = new SingleGoal("boulders", dungeon);
 		// BOULDER || (ENEMY && TREASURE)
-		CompositeGoal mainGoal = new CompositeGoal(Operator.OR);
-		mainGoal.add(subGoal1);
-		mainGoal.add(subGoal2);
-		dungeon.setGoalExpression(mainGoal);
+		JSONObject goal = new JSONObject("{ \"goal\": \"AND\", \"subgoals\":\n" + "  [ { \"goal\": \"boulders\" },\n"
+				+ "    { \"goal\": \"OR\", \"subgoals\":\n" + "  [ { \"goal\": \"enemies\"},\n"
+				+ "  	{ \"goal\": \"treasure\"}]\n" + "  }]\n" + "}");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
+		assertFalse(dungeon.hasWin(), "Goal checker error");
 		// Boulder only
 		boulder1.moveDown();
 		boulder2.moveDown();
@@ -250,16 +242,13 @@ public class US2_Test_Composite {
 		dungeon.addEntity(gold2);
 		Exit exit = new Exit(8, 5);
 		dungeon.addEntity(exit);
-		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
-		SingleGoal goal2 = new SingleGoal("treasure", dungeon);
-		SingleGoal goal3 = new SingleGoal("boulders", dungeon);
-		SingleGoal goal4 = new SingleGoal("exit", dungeon);
 		// (Enemies && Treasure && Boulders && Exit)
-		CompositeGoal subGoal1 = new CompositeGoal(Operator.AND);
-		subGoal1.add(goal1);
-		subGoal1.add(goal2);
-		subGoal1.add(goal3);
-		subGoal1.add(goal4);
+		JSONObject goal = new JSONObject("{ \"goal\": \"AND\", \"subgoals\":\n" + "  [ { \"goal\": \"boulders\" },\n"
+				+ "    { \"goal\": \"exit\"},\n" + "    { \"goal\": \"enemies\"},\n"
+				+ "  	{ \"goal\": \"treasure\"}]\n" + "}");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		// enemies only
 		dungeon.killEnemy(mage);
@@ -296,13 +285,12 @@ public class US2_Test_Composite {
 		dungeon.addEntity(mage);
 		Exit exit = new Exit(2, 4);
 		dungeon.addEntity(exit);
-		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
-		SingleGoal goal2 = new SingleGoal("exit", dungeon);
 		// Enemies && Exit
-		CompositeGoal mainGoal = new CompositeGoal(Operator.AND);
-		mainGoal.add(goal1);
-		mainGoal.add(goal2);
-		dungeon.setGoalExpression(mainGoal);
+		JSONObject goal = new JSONObject("{ \"goal\": \"AND\", \"subgoals\":\n" + "  [ { \"goal\": \"exit\" },\n"
+				+ "    { \"goal\": \"enemies\"},\n" + "]}");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		// Get to exit first
 		player.moveLeft();
@@ -337,33 +325,30 @@ public class US2_Test_Composite {
 		dungeon.addEntity(gold2);
 		Exit exit = new Exit(8, 5);
 		dungeon.addEntity(exit);
-		SingleGoal goal1 = new SingleGoal("enemies", dungeon);
-		SingleGoal goal2 = new SingleGoal("treasure", dungeon);
-		SingleGoal goal3 = new SingleGoal("boulders", dungeon);
-		SingleGoal goal4 = new SingleGoal("exit", dungeon);
 		// (Enemies && Treasure && Boulders && Exit)
-		CompositeGoal subGoal1 = new CompositeGoal(Operator.OR);
-		subGoal1.add(goal1);
-		subGoal1.add(goal2);
-		subGoal1.add(goal3);
-		subGoal1.add(goal4);
+		JSONObject goal = new JSONObject("{ \"goal\": \"OR\", \"subgoals\":\n" + "  [ { \"goal\": \"boulders\" },\n"
+				+ "    { \"goal\": \"exit\"},\n" + "    { \"goal\": \"enemies\"},\n"
+				+ "  	{ \"goal\": \"treasure\"}]\n" + "}");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		// enemies only
 		dungeon.killEnemy(mage);
 		dungeon.killEnemy(hound);
 		assertTrue(dungeon.hasWin(), "Goal checker error");
 		// add one enemy back
-		Hound hound1 = new Hound(dungeon,1,1);
+		Hound hound1 = new Hound(dungeon, 1, 1);
 		dungeon.addEntity(hound1);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
-		//treasure only
+		// treasure only
 		player.moveUp();
 		player.equipItem();
 		player.moveUp();
 		player.equipItem();
 		assertTrue(dungeon.hasWin(), "Goal checker error");
 		// add treasure back
-		Treasure gold3 = new Treasure(10,10);
+		Treasure gold3 = new Treasure(10, 10);
 		dungeon.addEntity(gold3);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		// exit only
@@ -373,5 +358,61 @@ public class US2_Test_Composite {
 		boulder1.moveDown();
 		boulder2.moveDown();
 		assertTrue(dungeon.hasWin(), "Goal checker error");
+	}
+
+	// Testing ((a || b) || (a || c))
+	@Test
+	void testComposite6() {
+		Dungeon dungeon = new Dungeon(10, 10);
+		Player player = new Player(dungeon, 8, 8);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		Hound hound = new Hound(dungeon, 4, 5);
+		dungeon.addEntity(hound);
+		Mage mage = new Mage(dungeon, 2, 6);
+		dungeon.addEntity(mage);
+		Switch switch1 = new Switch(dungeon, 2, 7);
+		dungeon.addEntity(switch1);
+		Switch switch2 = new Switch(dungeon, 3, 6);
+		dungeon.addEntity(switch2);
+		Boulder boulder1 = new Boulder(dungeon, 2, 6);
+		dungeon.addEntity(boulder1);
+		Boulder boulder2 = new Boulder(dungeon, 3, 5);
+		dungeon.addEntity(boulder2);
+		Treasure gold1 = new Treasure(8, 7);
+		dungeon.addEntity(gold1);
+		Treasure gold2 = new Treasure(8, 6);
+		dungeon.addEntity(gold2);
+		// ((Enemies || Boulders) && (Treasure || Boulders)
+		JSONObject goal = new JSONObject(
+				"{ \"goal\": \"AND\", \"subgoals\":\n" + "  [ { \"goal\": \"OR\", \"subgoals\":[\n"
+						+ "  	{ \"goal\": \"enemies\" },\n" + "  	{ \"goal\": \"boulders\" }\n" + "  ]},\n"
+						+ "  	{ \"goal\": \"OR\", \"subgoals\":[\n" + "  	{ \"goal\": \"treasure\" },\n"
+						+ "  	{ \"goal\": \"boulders\" }\n" + "  	]\n" + "  	}]\n" + "}");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		// treasure only
+		player.moveUp();
+		player.equipItem();
+		player.moveUp();
+		player.equipItem();
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		// treasure and boulders
+		boulder1.moveDown();
+		boulder2.moveDown();
+		assertTrue(dungeon.hasWin(), "Goal checker error");
+		// undo boulders
+		boulder1.moveUp();
+		assertFalse(dungeon.hasWin(), "Goal checker error");
+		// treasure and enemy
+		dungeon.killEnemy(hound);
+		dungeon.killEnemy(mage);
+		assertTrue(dungeon.hasWin(), "Goal checker error");
+		// all 3 goals
+		boulder1.moveDown();
+		assertTrue(dungeon.hasWin(), "Goal checker error");
+
 	}
 }

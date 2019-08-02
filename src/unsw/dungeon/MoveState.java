@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.util.List;
+
 public interface MoveState {
 
 	final int LEFT = 0;
@@ -11,6 +13,6 @@ public interface MoveState {
 
 	public abstract MoveState transitionAway();
 
-	public abstract int getDirection(int eX, int eY, int pX, int pY);
+	public abstract String getDirection(List<String> path);
 
 }

@@ -378,24 +378,9 @@
       "type": "sword"
     },
     {
-      "x": 11,
-      "y": 1,
-      "type": "hound"
-    },
-    {
       "x": 5,
       "y": 1,
       "type": "mage"
-    },
-    {
-      "x": 9,
-      "y": 1,
-      "type": "hound"
-    },
-    {
-      "x": 7,
-      "y": 5,
-      "type": "hound"
     },
     {
       "x": 10,

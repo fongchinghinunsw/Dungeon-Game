@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import javafx.embed.swing.JFXPanel;
 
@@ -17,7 +19,10 @@ public class US2_Test_Single {
 		dungeon.addEntity(hound);
 		Mage mage = new Mage(dungeon, 2, 6);
 		dungeon.addEntity(mage);
-		dungeon.setGoalExpression(new SingleGoal("enemies", dungeon));
+		JSONObject goal = new JSONObject("{\"goal\": \"enemies\" }");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		dungeon.killEnemy(hound);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
@@ -43,7 +48,10 @@ public class US2_Test_Single {
 		dungeon.addEntity(boulder2);
 		Boulder boulder3 = new Boulder(dungeon, 5, 5);
 		dungeon.addEntity(boulder3);
-		dungeon.setGoalExpression(new SingleGoal("boulders", dungeon));
+		JSONObject goal = new JSONObject("{\"goal\": \"boulders\" }");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		boulder1.moveDown();
 		assertFalse(dungeon.hasWin(), "Goal checker error");
@@ -61,7 +69,10 @@ public class US2_Test_Single {
 		dungeon.addEntity(player);
 		Exit exit = new Exit(2, 4);
 		dungeon.addEntity(exit);
-		dungeon.setGoalExpression(new SingleGoal("exit", dungeon));
+		JSONObject goal = new JSONObject("{\"goal\": \"exit\" }");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(), "Goal checker error");
 		player.moveLeft();
 		assertTrue(dungeon.hasWin(), "Goal checker error");
@@ -79,7 +90,10 @@ public class US2_Test_Single {
 		dungeon.addEntity(treasure2);
 		Treasure treasure3 = new Treasure(3, 5);
 		dungeon.addEntity(treasure3);
-		dungeon.setGoalExpression(new SingleGoal("treasure", dungeon));
+		JSONObject goal = new JSONObject("{\"goal\": \"treasure\" }");
+		GoalParser parser = new GoalParser(dungeon);
+		GoalExpression expr = parser.parse(goal, null);
+		dungeon.setGoalExpression(expr);
 		assertFalse(dungeon.hasWin(),"Goal checker error");
 		player.moveDown();
 		player.equipItem();
