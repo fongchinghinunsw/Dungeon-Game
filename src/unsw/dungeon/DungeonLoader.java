@@ -109,7 +109,7 @@ public abstract class DungeonLoader {
 			entity = bomb;
 			break;
 		case "enemy":
-			Enemy enemy = new Hound(dungeon, x, y);
+			Hound enemy = new Hound(dungeon, x, y);
 			onLoad(enemy);
 			entity = enemy;
 			break;
