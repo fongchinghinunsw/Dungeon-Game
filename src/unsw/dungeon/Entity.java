@@ -84,8 +84,8 @@ public abstract class Entity {
 		return false;
 	}
 
-	public boolean samePlace(int x2, int y2) {
-		return (getX() == x2 && getY() == y2);
+	public boolean samePlace(int x, int y) {
+		return (getX() == x && getY() == y);
 	}
 
 	/*
