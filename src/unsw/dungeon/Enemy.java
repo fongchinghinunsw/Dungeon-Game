@@ -91,8 +91,6 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		} else if (direction.equals("DOWN")) {
 			moveDown();
 		}
-
-//		this.notifyObservers();
 	}
 
 	public long getSpeed() {
