@@ -116,6 +116,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		if (!this.isAlive().getValue()) {
 			return;
 		}
+
 		Player p = dungeon.getPlayer();
 		if (this.samePlace(p.getX(), p.getY())) {
 			p.update(this);
@@ -139,7 +140,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 					dungeon.killPlayer();
 				}
 			} else {
-				System.out.println("Get notified");
+				System.out.println("Enemy get notified");
 				// regenerate the path once the player moves.
 				this.pathToPlayer = dungeon.towardsPlayerPath(getX(), getY(), player.getX(), player.getY());
 			}

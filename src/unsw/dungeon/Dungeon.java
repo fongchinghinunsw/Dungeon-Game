@@ -444,29 +444,24 @@ public class Dungeon {
 		Set<String> cantMoveSet = new HashSet<>();
 		cantMoveSet.add("Wall");
 		cantMoveSet.add("Boulder");
-		cantMoveSet.add("Door");
 
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
 				String from = Integer.toString(i) + "," + Integer.toString(j);
-				if (!(sameClass(i, j, cantMoveSet))) {
-					if (i == 0 && j == 8) {
-						System.out.println(!(sameClass(i, j, cantMoveSet)));
-						System.out.println("\n\n\n\n\n\n\n\n\n");
-					}
-					if (i - 1 >= 0 && !(sameClass(i - 1, j, cantMoveSet))) {
+				if (!(sameClass(i, j, cantMoveSet)) && canStepOn(i, j)) {
+					if (i - 1 >= 0 && !(sameClass(i - 1, j, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i - 1) + "," + Integer.toString(j);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (i + 1 < this.height && !(sameClass(i + 1, j, cantMoveSet))) {
+					if (i + 1 < this.height && !(sameClass(i + 1, j, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i + 1) + "," + Integer.toString(j);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (j - 1 >= 0 && !(sameClass(i, j - 1, cantMoveSet))) {
+					if (j - 1 >= 0 && !(sameClass(i, j - 1, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i) + "," + Integer.toString(j - 1);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (j + 1 < this.width && !(sameClass(i, j + 1, cantMoveSet))) {
+					if (j + 1 < this.width && !(sameClass(i, j + 1, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i) + "," + Integer.toString(j + 1);
 						edges.add(String.format("%s->%s", from, to));
 					}
@@ -483,11 +478,10 @@ public class Dungeon {
 		Set<String> cantMoveSet = new HashSet<>();
 		cantMoveSet.add("Wall");
 		cantMoveSet.add("Boulder");
-		cantMoveSet.add("Door");
 
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
-				if (!(sameClass(i, j, cantMoveSet))) {
+				if (!(sameClass(i, j, cantMoveSet) && canStepOn(i, j))) {
 					hasVisited.put(String.format("%d,%d", i, j), false);
 				}
 			}
