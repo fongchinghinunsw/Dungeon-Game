@@ -22,6 +22,8 @@ public class StartScreenController {
 
 	private DungeonScreen dungeonScreen;
 
+	private TutorialScreen tutorialScreen;
+
 	public StartScreenController(Stage stage) {
 		this.stage = stage;
 	}
@@ -37,8 +39,8 @@ public class StartScreenController {
 	}
 
 	@FXML
-	public void handleTutButton(ActionEvent event) {
-
+	public void handleTutButton(ActionEvent event) throws IOException {
+		tutorialScreen.start();
 	}
 
 	@FXML
@@ -50,4 +52,7 @@ public class StartScreenController {
 		this.dungeonScreen = dungeonScreen;
 	}
 
+	public void setTutorialScreen(TutorialScreen tutorialScreen) {
+		this.tutorialScreen = tutorialScreen;
+	}
 }

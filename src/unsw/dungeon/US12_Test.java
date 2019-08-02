@@ -62,7 +62,7 @@ public class US12_Test {
 		final JFXPanel fxPanel = new JFXPanel();
 		Dungeon dungeon = new Dungeon(10, 10);
 		Player player = new Player(dungeon, 3, 4);
-		Enemy enemy = new Enemy(dungeon, 4, 4);
+		Enemy enemy = new Hound(dungeon, 4, 4);
 		dungeon.addEntity(enemy);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);

@@ -3,6 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javafx.beans.property.BooleanProperty;
@@ -87,7 +88,6 @@ public class Player extends Movable implements Subject, Observer {
 			System.out.println(message);
 			return false;
 		}
-		// Temporary solution, open to modification
 		if (type.equals("Potion")) {
 			this.potionEffect = true;
 			Potion potion = (Potion) item;
@@ -155,6 +155,10 @@ public class Player extends Movable implements Subject, Observer {
 		return backpack;
 	}
 
+	public Map<String, Integer> getNumberOfItemsInBackpack() {
+		return backpack.getNumberOfItems();
+	}
+
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {
@@ -207,8 +211,8 @@ public class Player extends Movable implements Subject, Observer {
 			if (countSwordInBackPack() > 0 || isInvincible()) {
 				backpack.reduceSwordDurability();
 				dungeon.killEnemy(enemy);
-			} else {
-				dungeon.killPlayer();
+			}else {
+				this.notifyObservers();
 			}
 		} else if (obj instanceof Bomb) {
 			if (!this.potionEffect) {

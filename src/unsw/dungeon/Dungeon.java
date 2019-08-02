@@ -467,7 +467,7 @@ public class Dungeon {
 		return edges;
 	}
 
-	public void towardsPlayerPath(int x, int y, int destX, int destY) {
+	public List<String> towardsPlayerPath(int x, int y, int destX, int destY) {
 		List<String> movements = new ArrayList<>();
 		List<String> edges = dungeonGraph();
 		Map<String, Boolean> hasVisited = new HashMap<>();
@@ -490,6 +490,7 @@ public class Dungeon {
 				System.out.println(move);
 			}
 		}
+		return movements;
 
 	}
 
@@ -533,5 +534,10 @@ public class Dungeon {
 			}
 		}
 		return false;
+	}
+
+	public Map<String, Integer> getItemsInBackpack() {
+		return player.getNumberOfItemsInBackpack();
+
 	}
 }

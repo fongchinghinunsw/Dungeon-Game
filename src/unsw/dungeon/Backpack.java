@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Backpack {
 
@@ -143,7 +145,6 @@ public class Backpack {
 		Sword sword = getSword();
 		sword.reduceDurability();
 		System.out.println(sword.getDurability());
-		System.out.println(countSword());
 		if (sword.getDurability() == 0) {
 			items.remove(sword);
 		}
@@ -162,5 +163,17 @@ public class Backpack {
 			}
 		}
 		return count;
+	}
+
+	public Map<String, Integer> getNumberOfItems() {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for (Equipable item : items) {
+			if (map.containsKey(item.getClassName())) {
+				map.put(item.getClassName(), map.get(item.getClassName()) + 1);
+			} else {
+				map.put(item.getClassName(), 1);
+			}
+		}
+		return map;
 	}
 }

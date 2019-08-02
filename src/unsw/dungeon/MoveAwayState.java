@@ -1,24 +1,8 @@
 package unsw.dungeon;
 
-public class MoveAwayState implements MoveState {
+import java.util.List;
 
-	@Override
-	public int getDirection(int eX, int eY, int pX, int pY) {
-		if (eX == pX) {
-			if (eY < pY) {
-				return UP;
-			} else if (eY > pY) {
-				return DOWN;
-			}
-		} else if (eY == pY) {
-			if (eX < pX) {
-				return LEFT;
-			} else if (eX > pX) {
-				return RIGHT;
-			}
-		}
-		return -1;
-	}
+public class MoveAwayState implements MoveState {
 
 	@Override
 	public MoveState transitionTowards() {
@@ -29,6 +13,11 @@ public class MoveAwayState implements MoveState {
 	public MoveState transitionAway() {
 		return this;
 
+	}
+
+	@Override
+	public String getDirection(List<String> path) {
+		return path.get(0);
 	}
 
 }

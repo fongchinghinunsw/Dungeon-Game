@@ -1,0 +1,11 @@
+.stack {
+    -fx-background-image:url('/Blackboard.png');
+}
+
+.button {
+	-fx-background-color: linear-gradient(#1D4350,#A43931);
+	-fx-background-radius: 2;
+	-fx-background-color: transparent;
+	-fx-text-fill: white;
+}
+

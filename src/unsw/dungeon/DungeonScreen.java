@@ -1,11 +1,18 @@
 package unsw.dungeon;
 
 import java.io.IOException;
+import java.util.Map;
 
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -14,14 +21,17 @@ import javafx.stage.Stage;
 public class DungeonScreen {
 
 	private Stage stage;
-	private String title;
-	private DungeonScreenController controller;
+	private DungeonController controller;
 	private Scene scene;
 	private StartScreen startScreen;
+	private BooleanProperty ctrlPressed = new SimpleBooleanProperty();
+	private BooleanProperty QPressed = new SimpleBooleanProperty();
+	private BooleanBinding bothPressed = ctrlPressed.and(QPressed);
 
 	public DungeonScreen(Stage stage) throws IOException {
 		this.stage = stage;
 		stage.setTitle("Dungeon");
+
 	}
 
 	public void start() throws IOException {
@@ -51,8 +61,6 @@ public class DungeonScreen {
 			}
 		});
 		quitButton.setOnMouseClicked(e -> handleQuitButton());
-
-		// quitButton.setPadding(new Insets(0, 10, 0, 0));
 		topMenu.getChildren().addAll(restartButton, quitButton, pauseButton);
 
 		BorderPane borderPane = new BorderPane();
@@ -60,6 +68,47 @@ public class DungeonScreen {
 		borderPane.setCenter(root);
 
 		scene = new Scene(borderPane);
+
+		scene.setOnKeyPressed(e -> {
+			if (e.getCode() == KeyCode.CONTROL) {
+				ctrlPressed.set(true);
+			}
+			if (e.getCode() == KeyCode.Q) {
+				QPressed.set(true);
+			}
+		});
+
+		scene.setOnKeyReleased(e -> {
+			if (e.getCode() == KeyCode.CONTROL) {
+				ctrlPressed.set(false);
+			}
+			if (e.getCode() == KeyCode.Q) {
+				QPressed.set(false);
+			}
+		});
+
+		GridPane backpack = new GridPane();
+
+		bothPressed.addListener((observable, oldValue, newValue) -> {
+
+			if (newValue) {
+				borderPane.setCenter(backpack);
+				Map<String, Integer> map = controller.handleSeeBackpackRequest();
+				int count = 0;
+				for (Map.Entry<String, Integer> entry : map.entrySet()) {
+					String key = entry.getKey();
+					Integer value = entry.getValue();
+					backpack.add(new ImageView(controller.getImages().get(key)), 0, count);
+					backpack.add(new Label(value.toString()), 1, count);
+					count++;
+				}
+			} else {
+				backpack.getChildren().clear();
+				borderPane.setCenter(root);
+				root.requestFocus();
+			}
+		});
+
 		root.requestFocus();
 		stage.setTitle("Dungeon");
 		stage.setScene(scene);
@@ -78,7 +127,7 @@ public class DungeonScreen {
 		startScreen.start();
 	}
 
-	public DungeonScreenController getController() {
+	public DungeonController getController() {
 		return controller;
 	}
 }

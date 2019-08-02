@@ -12,7 +12,7 @@ public class US23_Test {
 		Player player = new Player(dungeon, 2, 8);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Enemy enemy = new Enemy(dungeon, 3, 3);
+		Enemy enemy = new Hound(dungeon, 3, 3);
 		assertEquals(enemy.getClassName(), "Enemy", "getClassName set wrongly");
 		assertTrue(enemy.getSpeed() == 1, "Speed set wrongly");
 		assertTrue(enemy.isAlive().getValue(), "Enemy initialized to be dead");
@@ -27,7 +27,7 @@ public class US23_Test {
 		Player player = new Player(dungeon, 2, 3);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Enemy enemy = new Enemy(dungeon, 3, 3);
+		Enemy enemy = new Hound(dungeon, 3, 3);
 		dungeon.addEntity(enemy);
 		enemy.findPlayer();
 		assertTrue(enemy.samePlace(2, 3), "Didn't chase player left");
@@ -49,7 +49,7 @@ public class US23_Test {
 		Player player = new Player(dungeon, 3, 3);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Enemy enemy = new Enemy(dungeon, 3, 3);
+		Enemy enemy = new Hound(dungeon, 3, 3);
 		dungeon.addEntity(enemy);
 		enemy.update(player);
 		assertTrue(enemy.isAlive().getValue(), "Enemy died");

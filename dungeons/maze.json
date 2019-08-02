@@ -380,7 +380,27 @@
     {
       "x": 11,
       "y": 1,
-      "type": "enemy"
+      "type": "hound"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "type": "mage"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "type": "hound"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "type": "hound"
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "type": "mage"
     },
     {
       "x": 17,
@@ -408,9 +428,9 @@
       "type": "sword"
     },
     {
-      "x": 3,
-      "y": 3,
-      "type": "enemy"
+      "x": 2,
+      "y": 8,
+      "type": "mage"
     },
     {
       "x": 4,

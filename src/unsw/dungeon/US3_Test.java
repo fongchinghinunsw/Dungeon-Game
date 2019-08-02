@@ -50,7 +50,7 @@ public class US3_Test {
 		Player player = new Player(dungeon, 2, 2);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Enemy enemy = new Enemy(dungeon, 5, 5);
+		Enemy enemy = new Hound(dungeon, 5, 5);
 		Boulder boulder = new Boulder(dungeon, 5, 4);
 		dungeon.addEntity(enemy);
 		dungeon.addEntity(boulder);
@@ -88,7 +88,7 @@ public class US3_Test {
 		Player player = new Player(dungeon, 0, 0);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		Potion potion = new Potion(0, 2);
+		Potion potion = new Potion(dungeon, 0, 2);
 		dungeon.addEntity(potion);
 		Sword sword = new Sword(0, 3);
 		dungeon.addEntity(sword);
