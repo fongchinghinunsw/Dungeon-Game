@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import javafx.embed.swing.JFXPanel;
 
-public class US2_Test {
+public class US2_Test_Single {
 
 	@Test
 	void testEnemySingleGoal() {
