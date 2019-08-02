@@ -475,19 +475,20 @@ public class Dungeon {
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
 				if (!(sameClass(i, j, "Wall"))) {
-					System.out.println(String.format("%d,%d", i, j));
 					hasVisited.put(String.format("%d,%d", i, j), false);
 				}
 			}
 		}
-
-		System.out.println("==================");
 
 		boolean found = findPath(edges, movements, hasVisited, String.format("%d,%d", x, y),
 				String.format("%d,%d", destX, destY));
 
 		if (found) {
 			System.out.println("There exists a path!!!");
+			System.out.printf("Enemy starts from %d,%d. Moving towards %d,%d\n", x, y, destX, destY);
+			for (String move : movements) {
+				System.out.println(move);
+			}
 		}
 
 	}
@@ -498,14 +499,35 @@ public class Dungeon {
 		for (String edge : edges) {
 			String[] locations = edge.split("->");
 			if (locations[0].equals(curr)) {
-				System.out.printf("%s\n", locations[1]);
+				int fromX = Integer.parseInt(locations[0].split(",")[0]);
+				int fromY = Integer.parseInt(locations[0].split(",")[1]);
+				int toX = Integer.parseInt(locations[1].split(",")[0]);
+				int toY = Integer.parseInt(locations[1].split(",")[1]);
 				if (locations[1].equals(dest)) {
+					if (fromX < toX) {
+						movements.add("RIGHT");
+					} else if (fromY < toY) {
+						movements.add("DOWN");
+					} else if (fromX > toX) {
+						movements.add("LEFT");
+					} else if (fromY > toY) {
+						movements.add("UP");
+					}
 					return true;
 				} else if (hasVisited.get(locations[1]) == false) {
+					if (fromX < toX) {
+						movements.add("RIGHT");
+					} else if (fromY < toY) {
+						movements.add("DOWN");
+					} else if (fromX > toX) {
+						movements.add("LEFT");
+					} else if (fromY > toY) {
+						movements.add("UP");
+					}
 					if (findPath(edges, movements, hasVisited, locations[1], dest)) {
 						return true;
 					} else {
-						// movements.remove(movements.size() - 1);
+						movements.remove(movements.size() - 1);
 					}
 				}
 			}
