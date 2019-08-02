@@ -216,7 +216,9 @@ public class Player extends Movable implements Subject, Observer {
 	public void update(Subject obj) {
 		if (obj instanceof Enemy) {
 			Enemy enemy = (Enemy) obj;
-			if (countSwordInBackPack() > 0 || isInvincible()) {
+			if (isInvincible()) {
+				dungeon.killEnemy(enemy);
+			} else if (countSwordInBackPack() > 0) {
 				backpack.reduceSwordDurability();
 				dungeon.killEnemy(enemy);
 			} else {
