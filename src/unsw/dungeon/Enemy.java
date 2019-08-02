@@ -139,6 +139,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 					dungeon.killPlayer();
 				}
 			} else {
+				System.out.println("Get notified");
 				// regenerate the path once the player moves.
 				this.pathToPlayer = dungeon.towardsPlayerPath(getX(), getY(), player.getX(), player.getY());
 			}

@@ -188,7 +188,8 @@ public class Player extends Movable implements Subject, Observer {
 					o.update(this);
 				}
 			}
-		} else {
+		}
+		if (!(dungeon.sameClass(getX(), getY(), "Enemy"))) {
 			for (Observer o : observers) {
 				// notify enemy when the player make any moves.
 				if (o instanceof Enemy) {
