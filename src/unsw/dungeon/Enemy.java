@@ -27,8 +27,6 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		this.observers = new ArrayList<>();
 		this.moveState = new MoveTowardsState();
 
-		dungeon.towardsPlayerPath(this.getX(), this.getY(), dungeon.getPlayerX(), dungeon.getPlayerY());
-
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
 			// the higher the speed is the more frequent the enemy moves
 			if (timerTick * this.moveSpeed.getSpeed() % 100 == 0) {
@@ -69,23 +67,19 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		this.moveState = newState;
 		int pX = player.getX();
 		int pY = player.getY();
-		int direction = this.moveState.getDirection(getX(), getY(), pX, pY);
-		switch (direction) {
-		case MoveState.LEFT:
+		String direction = this.moveState.getDirection(
+				dungeon.towardsPlayerPath(this.getX(), this.getY(), dungeon.getPlayerX(), dungeon.getPlayerY()));
+
+		if (direction.equals("LEFT")) {
 			moveLeft();
-			break;
-		case MoveState.RIGHT:
+		} else if (direction.equals("RIGHT")) {
 			moveRight();
-			break;
-		case MoveState.UP:
+		} else if (direction.equals("UP")) {
 			moveUp();
-			break;
-		case MoveState.DOWN:
+		} else if (direction.equals("DOWN")) {
 			moveDown();
-			break;
-		default:
-			break;
 		}
+
 //		this.notifyObservers();
 	}
 
