@@ -136,8 +136,8 @@ public class Player extends Movable implements Subject, Observer {
 		return backpack.removeBomb();
 	}
 
-	public long getSpeed() {
-		return moveSpeed.getSpeed();
+	public long getSpeedFactor() {
+		return moveSpeed.getSpeedFactor();
 	}
 
 	public Key findKey() {

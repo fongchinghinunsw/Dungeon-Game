@@ -37,7 +37,7 @@ public class DungeonController {
 
 	DungeonControllerLoader loader;
 
-	private static final long THRESHOLD = 100_000_000L;
+	private static final long THRESHOLD = 10_000_000_000L; // 10 seconds
 
 	private long lastMoveNanos;
 
@@ -85,7 +85,7 @@ public class DungeonController {
 		if (event.getCode().isArrowKey()) {
 			event.consume();
 
-			if (lastMoveNanos <= 0L || now - lastMoveNanos >= (THRESHOLD / player.getSpeed())) {
+			if (lastMoveNanos <= 0L || now - lastMoveNanos >= (THRESHOLD / player.getSpeedFactor())) {
 
 				switch (event.getCode()) {
 				case UP:

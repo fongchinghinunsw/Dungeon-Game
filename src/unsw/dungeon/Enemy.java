@@ -32,7 +32,8 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
 			// the higher the speed is the more frequent the enemy moves
-			if (timerTick * this.moveSpeed.getSpeed() % 100 == 0) {
+			if (timerTick * this.moveSpeed.getSpeedFactor() % 100 == 0) {
+
 				this.findPlayer();
 			}
 			this.notifyObservers();
@@ -42,7 +43,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		enemyTimer.play();
 	}
 
-	public void setSpeed(MoveSpeed newSpeed) {
+	public void setSpeedFactor(MoveSpeed newSpeed) {
 		this.moveSpeed = newSpeed;
 	}
 
@@ -66,6 +67,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		}
 //		System.out.println("Trying to find the player......");
 		Player player = this.dungeon.getPlayer();
+
 		MoveState newState;
 		if (player.isInvincible()) {
 			newState = this.moveState.transitionAway();
@@ -91,12 +93,10 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		} else if (direction.equals("DOWN")) {
 			moveDown();
 		}
-
-//		this.notifyObservers();
 	}
 
-	public long getSpeed() {
-		return moveSpeed.getSpeed();
+	public long getSpeedFactor() {
+		return moveSpeed.getSpeedFactor();
 	}
 
 	@Override
@@ -140,7 +140,6 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 					dungeon.killPlayer();
 				}
 			} else {
-//				System.out.println("Enemy get notified");
 				// regenerate the path once the player moves.
 				this.pathToPlayer = dungeon.towardsPlayerPath(getX(), getY(), player.getX(), player.getY());
 			}
