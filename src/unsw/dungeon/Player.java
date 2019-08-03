@@ -181,7 +181,7 @@ public class Player extends Movable implements Subject, Observer {
 		// observers.
 		Set<String> notifySet = new HashSet<String>(
 				Arrays.asList("Key", "Exit", "Bomb", "Potion", "Treasure", "Sword", "Enemy", "Door", "Boulder"));
-		if (dungeon.sameClass(getX(), getY(), notifySet)) {
+		if (alive.getValue() && dungeon.sameClass(getX(), getY(), notifySet)) {
 			for (Observer o : observers) {
 				Entity entity = (Entity) o;
 				if (entity.getX() == getX() && entity.getY() == getY()) {

@@ -36,8 +36,11 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 			// the higher the speed is the more frequent the enemy moves
 
 			if (timerTick * this.moveSpeed.getSpeedFactor() % 100 == 0 && pause.getValue() == false) {
-
 				this.findPlayer();
+			}
+			if (!alive.getValue()) {
+				// stop the timer once the enemy is dead.
+				enemyTimer.stop();
 			}
 			this.notifyObservers();
 			this.timerTick++;
@@ -116,12 +119,12 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 
 	@Override
 	public void notifyObservers() {
-		if (!this.isAlive().getValue()) {
+		if (!this.alive.getValue()) {
 			return;
 		}
 
 		Player player = dungeon.getPlayer();
-		if (this.samePlace(player.getX(), player.getY())) {
+		if (player.isAlive().getValue() && samePlace(player.getX(), player.getY())) {
 			player.update(this);
 		}
 	}
@@ -140,6 +143,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 			Player player = (Player) obj;
 			if (dungeon.sameClass(getX(), getY(), "Player")) {
 				if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
+					System.out.println("Player get killed");
 					dungeon.killPlayer();
 				}
 			} else {

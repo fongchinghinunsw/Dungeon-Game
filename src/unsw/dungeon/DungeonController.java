@@ -183,4 +183,8 @@ public class DungeonController {
 	public void resumeGame() {
 		dungeon.resumeGame();
 	}
+
+	public void deleteGame() {
+		dungeon.pauseGame();
+	}
 }
