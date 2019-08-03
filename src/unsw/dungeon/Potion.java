@@ -75,6 +75,7 @@ public class Potion extends Equipable implements Observer, Runnable {
 		}
 		Timeline newTimer = createTimer(this.getTime().getValue());
 		newTimer.play();
+		return;
 	}
 
 }
