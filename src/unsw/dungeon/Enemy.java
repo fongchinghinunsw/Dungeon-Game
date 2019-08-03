@@ -33,6 +33,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
 			// the higher the speed is the more frequent the enemy moves
 			if (timerTick * this.moveSpeed.getSpeed() % 100 == 0) {
+
 				this.findPlayer();
 			}
 			this.notifyObservers();
@@ -66,6 +67,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		}
 //		System.out.println("Trying to find the player......");
 		Player player = this.dungeon.getPlayer();
+
 		MoveState newState;
 		if (player.isInvincible()) {
 			newState = this.moveState.transitionAway();
@@ -138,7 +140,6 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 					dungeon.killPlayer();
 				}
 			} else {
-				System.out.println("Enemy get notified");
 				// regenerate the path once the player moves.
 				this.pathToPlayer = dungeon.towardsPlayerPath(getX(), getY(), player.getX(), player.getY());
 			}
