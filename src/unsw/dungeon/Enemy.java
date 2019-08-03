@@ -19,7 +19,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 	private Timeline enemyTimer;
 	private int timerTick;
 	private List<String> pathToPlayer;
-	private boolean pause;
+	private BooleanProperty pause;
 
 	public Enemy(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
@@ -30,11 +30,11 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		this.observers = new ArrayList<>();
 		this.moveState = new MoveTowardsState();
 		this.pathToPlayer = null;
-		this.pause = false;
+		this.pause = new SimpleBooleanProperty(false);
 
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
 			// the higher the speed is the more frequent the enemy moves
-			if (timerTick * this.moveSpeed.getSpeed() % 100 == 0 && pause == false) {
+			if (timerTick * this.moveSpeed.getSpeed() % 100 == 0 && pause.getValue() == false) {
 				this.findPlayer();
 			}
 			this.notifyObservers();
@@ -153,12 +153,8 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		}
 	}
 
-	public void pause() {
-		this.pause = true;
-	}
-
-	public void resume() {
-		this.pause = false;
+	public BooleanProperty isPause() {
+		return this.pause;
 	}
 
 	@Override
