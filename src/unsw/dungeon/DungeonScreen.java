@@ -25,6 +25,7 @@ public class DungeonScreen {
 	private DungeonController controller;
 	private Scene scene;
 	private StartScreen startScreen;
+	private WinScreen winScreen;
 	private GameOverScreen gameOverScreen;
 	private BooleanProperty ctrlPressed = new SimpleBooleanProperty();
 	private BooleanProperty QPressed = new SimpleBooleanProperty();
@@ -42,8 +43,9 @@ public class DungeonScreen {
 		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json");
 
 		DungeonController controller = dungeonLoader.loadController();
-		
+
 		controller.listenPlayerStatus(this);
+		controller.listenWinStatus(this);
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
 		loader.setController(controller);
@@ -130,6 +132,10 @@ public class DungeonScreen {
 		this.gameOverScreen = gameOverScreen;
 	}
 
+	public void setWinScreen(WinScreen winScreen) {
+		this.winScreen = winScreen;
+	}
+
 	public void handleRestartButton() throws IOException {
 		this.start();
 	}
@@ -156,5 +162,9 @@ public class DungeonScreen {
 
 	public DungeonController getController() {
 		return controller;
+	}
+
+	public void gameWon() {
+		winScreen.start();
 	}
 }

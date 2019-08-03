@@ -23,11 +23,11 @@ public class US2_Test_Single {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		dungeon.killEnemy(hound);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		dungeon.killEnemy(mage);
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	@Test
@@ -52,13 +52,13 @@ public class US2_Test_Single {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder1.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder2.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder3.moveLeft();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	@Test
@@ -73,9 +73,9 @@ public class US2_Test_Single {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		player.moveLeft();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	@Test
@@ -94,16 +94,16 @@ public class US2_Test_Single {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(),"Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(),"Goal checker error");
 		player.moveDown();
 		player.equipItem();
-		assertFalse(dungeon.hasWin(),"Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(),"Goal checker error");
 		player.moveDown();
 		player.equipItem();
-		assertFalse(dungeon.hasWin(),"Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(),"Goal checker error");
 		player.moveDown();
 		player.equipItem();
-		assertTrue(dungeon.hasWin(),"Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(),"Goal checker error");
 		
 	}
 

@@ -58,7 +58,16 @@ public class DungeonController {
 			}
 		});
 	}
-	
+
+	public void listenWinStatus(DungeonScreen dungeonScreen) {
+		getWinStatus().addListener((observable, oldValue, newValue) -> {
+			if (newValue) {
+				dungeonScreen.gameWon();
+			} else {
+			}
+		});
+	}
+
 	@FXML
 	public void initialize() {
 		Image ground = new Image("/dirt_0_new.png");
@@ -114,7 +123,7 @@ public class DungeonController {
 					break;
 				}
 				dungeon.notifyPlayerObservers();
-				if (dungeon.hasWin()) {
+				if (dungeon.hasWin().getValue()) {
 					System.out.println("You have win the game sucker");
 				}
 				lastMoveNanos = now;
@@ -189,12 +198,13 @@ public class DungeonController {
 	public void pauseGame() {
 		dungeon.pauseGame();
 	}
-	
+
 	public BooleanProperty getPlayerStatus() {
-		if(player == null) {
-			return null;
-		}
 		return player.isAlive();
+	}
+
+	public BooleanProperty getWinStatus() {
+		return dungeon.hasWin();
 	}
 
 	public void resumeGame() {

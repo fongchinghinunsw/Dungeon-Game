@@ -1,0 +1,11 @@
+.stack {
+    -fx-background-image:url('/Win.png');
+    -fx-background-size: cover, auto;
+}
+
+.button {
+	-fx-background-color: linear-gradient(#1D4350,#A43931);
+	-fx-background-radius: 4;
+	-fx-background-color: transparent;
+	-fx-text-fill: white;
+}

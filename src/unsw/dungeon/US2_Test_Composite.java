@@ -29,15 +29,15 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		dungeon.killEnemy(hound);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		dungeon.killEnemy(mage);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder1.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder2.moveDown();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	@Test
@@ -63,17 +63,17 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder1.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder2.moveDown();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder2.moveUp();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		dungeon.killEnemy(hound);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		dungeon.killEnemy(mage);
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	@Test
@@ -96,11 +96,11 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// Go to exit first to 'complete exit goal
 		player.moveDown();
 		player.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// complete treasure goal but shouldn't win after that
 		player.moveUp();
 		player.equipItem();
@@ -108,10 +108,10 @@ public class US2_Test_Composite {
 		player.equipItem();
 		player.moveDown();
 		player.equipItem();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// go to exit and finally win
 		player.moveRight();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	// testing (a and (b or c))
@@ -143,25 +143,25 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// Boulder only
 		boulder1.moveDown();
 		boulder2.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder1.moveUp();
 		// Treasure Only
 		player.moveUp();
 		player.equipItem();
 		player.moveUp();
 		player.equipItem();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// Boulder and treasure
 		boulder1.moveDown();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 		// Boulder, treasure and enemy
 		dungeon.killEnemy(hound);
 		dungeon.killEnemy(mage);
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	// testing (a or (b and c))
@@ -193,25 +193,25 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// Boulder only
 		boulder1.moveDown();
 		boulder2.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		boulder1.moveUp();
 		// Enemy only
 		dungeon.killEnemy(hound);
 		dungeon.killEnemy(mage);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// Enemy and Treasure only
 		player.moveUp();
 		player.equipItem();
 		player.moveUp();
 		player.equipItem();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// enemy and treasure and boulder
 		boulder1.moveDown();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	// Testing (a and b and c and d) i.e. all goals satisfied
@@ -245,28 +245,28 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// enemies only
 		dungeon.killEnemy(mage);
 		dungeon.killEnemy(hound);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// enemies and treasure
 		player.moveUp();
 		player.equipItem();
 		player.moveUp();
 		player.equipItem();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// enemies and treasure and exit
 		player.moveUp();
 		player.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// enemies and treasure and boulders
 		boulder1.moveDown();
 		boulder2.moveDown();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// and finally all 4 satisfied, exit being last
 		player.moveUp();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	// Testing what happens when player stands on exit while completing other goals
@@ -287,14 +287,14 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// Get to exit first
 		player.moveLeft();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// Enemies die while player still standing on exit
 		dungeon.killEnemy(mage);
 		dungeon.killEnemy(hound);
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	// only one goal satisfied
@@ -328,32 +328,32 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// enemies only
 		dungeon.killEnemy(mage);
 		dungeon.killEnemy(hound);
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 		// add one enemy back
 		Hound hound1 = new Hound(dungeon, 1, 1);
 		dungeon.addEntity(hound1);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// treasure only
 		player.moveUp();
 		player.equipItem();
 		player.moveUp();
 		player.equipItem();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 		// add treasure back
 		Treasure gold3 = new Treasure(10, 10);
 		dungeon.addEntity(gold3);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// exit only
 		player.moveUp();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 		// boulders and exit
 		boulder1.moveDown();
 		boulder2.moveDown();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 
 	// Testing ((a || b) || (a || c))
@@ -388,26 +388,26 @@ public class US2_Test_Composite {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 		dungeon.setGoalExpression(expr);
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// treasure only
 		player.moveUp();
 		player.equipItem();
 		player.moveUp();
 		player.equipItem();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// treasure and boulders
 		boulder1.moveDown();
 		boulder2.moveDown();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 		// undo boulders
 		boulder1.moveUp();
-		assertFalse(dungeon.hasWin(), "Goal checker error");
+		assertFalse(dungeon.hasWin().getValue(), "Goal checker error");
 		// treasure and enemy
 		dungeon.killEnemy(hound);
 		dungeon.killEnemy(mage);
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 		// all 3 goals
 		boulder1.moveDown();
-		assertTrue(dungeon.hasWin(), "Goal checker error");
+		assertTrue(dungeon.hasWin().getValue(), "Goal checker error");
 	}
 }

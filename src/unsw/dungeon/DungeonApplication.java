@@ -12,6 +12,7 @@ public class DungeonApplication extends Application {
 
 		StartScreen startScreen = new StartScreen(primaryStage);
 		DungeonScreen dungeonScreen = new DungeonScreen(primaryStage);
+		WinScreen winScreen = new WinScreen(primaryStage);
 		dungeonScreen.setStartScreen(startScreen);
 		TutorialScreen tutorialScreen = new TutorialScreen(primaryStage);
 		tutorialScreen.getController().setStartScreen(startScreen);
@@ -24,6 +25,9 @@ public class DungeonApplication extends Application {
 		loadScreen.getController().setLoadScreen(loadScreen);
 		startScreen.getController().setLoadScreen(loadScreen);
 		dungeonScreen.setGameOverScreen(gameOverScreen);
+		dungeonScreen.setWinScreen(winScreen);
+		winScreen.getController().setDungeonScreen(dungeonScreen);
+		winScreen.getController().setStartScreen(startScreen);
 		startScreen.start();
 	}
 

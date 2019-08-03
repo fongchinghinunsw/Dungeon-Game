@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
 import unsw.dungeon.CompositeGoal.Operator;
 
 public interface GoalExpression {
@@ -20,7 +21,7 @@ public interface GoalExpression {
 	 * 
 	 * @return
 	 */
-	public boolean isSatisfied();
+	public BooleanProperty isSatisfied();
 
 	public void print();
 }

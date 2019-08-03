@@ -1,13 +1,18 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class SingleGoal implements GoalExpression {
 
 	private Dungeon dungeon;
 	private String goal;
+	private BooleanProperty satisfied;
 
 	public SingleGoal(String goal, Dungeon dungeon) {
 		this.dungeon = dungeon;
 		this.goal = goal;
+		satisfied = new SimpleBooleanProperty(false);
 	}
 
 	public void print() {
@@ -15,22 +20,25 @@ public class SingleGoal implements GoalExpression {
 	}
 
 	@Override
-	public boolean isSatisfied() {
+	public BooleanProperty isSatisfied() {
 		switch (goal) {
 		case "exit":
-			// System.out.println(dungeon.sameClass(dungeon.getPlayerX(),
-			// dungeon.getPlayerY(), "Exit"));
-			return dungeon.sameClass(dungeon.getPlayerX(), dungeon.getPlayerY(), "Exit");
+			satisfied.set(dungeon.sameClass(dungeon.getPlayerX(), dungeon.getPlayerY(), "Exit"));
+			break;
 		case "treasure":
-			return dungeon.completedTreasureGoal();
+			satisfied.set(dungeon.completedTreasureGoal());
+			break;
 		case "boulders":
-			return dungeon.completedSwitchGoal();
+			satisfied.set(dungeon.completedSwitchGoal());
+			break;
 		case "enemies":
-			return dungeon.completedEnemyGoal();
+			satisfied.set(dungeon.completedEnemyGoal());
+			break;
 		default:
 			// unreachable
-			return true;
+			return null;
 		}
+		return satisfied;
 	}
 
 }

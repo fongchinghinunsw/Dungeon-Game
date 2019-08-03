@@ -391,7 +391,7 @@ public class Dungeon {
 		this.goalExpression = goalExpression;
 	}
 
-	public boolean hasWin() {
+	public BooleanProperty hasWin() {
 		return goalExpression.isSatisfied();
 	}
 
