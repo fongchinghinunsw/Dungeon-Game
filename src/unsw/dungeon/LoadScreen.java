@@ -75,6 +75,10 @@ public class LoadScreen {
 		introBox.setMaxWidth(600);
 		introBox.setPadding(new Insets(30,30,0,0));
 		layout.getChildren().add(introBox);
+		introBox.toBack();
+		tipsBox.toBack();
+		loadBox.toBack();
+		
 		
 	}
 
