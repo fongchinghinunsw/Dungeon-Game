@@ -70,8 +70,6 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		if (player.isInvincible()) {
 			newState = this.moveState.transitionAway();
 		} else {
-			this.pathToPlayer = dungeon.towardsPlayerPath(this.getX(), this.getY(), dungeon.getPlayerX(),
-					dungeon.getPlayerY());
 			newState = this.moveState.transitionTowards();
 		}
 		this.moveState = newState;
@@ -143,6 +141,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 					dungeon.killPlayer();
 				}
 			} else {
+				System.out.println("Enemy get notified");
 				// regenerate the path once the player moves.
 				this.pathToPlayer = dungeon.towardsPlayerPath(getX(), getY(), player.getX(), player.getY());
 			}
