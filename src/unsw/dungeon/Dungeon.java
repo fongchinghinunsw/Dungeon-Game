@@ -548,6 +548,7 @@ public class Dungeon {
 	}
 
 	public void resumeGame() {
+
 		this.pause.setValue(false);
 	}
 

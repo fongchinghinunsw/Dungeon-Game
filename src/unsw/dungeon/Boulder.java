@@ -73,7 +73,7 @@ public class Boulder extends Movable implements Subject, Observer {
 	}
 
 	@Override
-	public long getSpeed() {
+	public long getSpeedFactor() {
 		return 0;
 	}
 

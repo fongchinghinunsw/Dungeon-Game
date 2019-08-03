@@ -47,7 +47,7 @@ public abstract class Movable extends Entity {
 		}
 	}
 
-	public abstract long getSpeed();
+	public abstract long getSpeedFactor();
 
 	@Override
 	public abstract String getClassName();

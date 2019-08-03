@@ -18,13 +18,8 @@ public class Potion extends Equipable implements Observer {
 	public Potion(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		countdownTime = new SimpleIntegerProperty(5);
-		this.pause = new SimpleBooleanProperty();
-		this.potionTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-			if (isPause().getValue() == false) {
-				this.decrementCountdownTime();
-			}
-		}));
-		potionTimer.setCycleCount(5);
+		pause = new SimpleBooleanProperty();
+		this.potionTimer = createTimer(countdownTime.getValue());
 		this.dungeon = dungeon;
 	}
 
@@ -46,6 +41,24 @@ public class Potion extends Equipable implements Observer {
 
 	public BooleanProperty isPause() {
 		return this.pause;
+	}
+
+	public Timeline createTimer(int cycle) {
+		Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+			if (pause.getValue() == false) {
+				this.decrementCountdownTime();
+			} else {
+				potionTimer.stop();
+
+				while (pause.getValue() == true) {
+					continue;
+				}
+				Timeline newTimer = createTimer(this.getTime().getValue());
+				newTimer.play();
+			}
+		}));
+		timer.setCycleCount(cycle);
+		return timer;
 	}
 
 	@Override

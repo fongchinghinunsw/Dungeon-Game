@@ -3,6 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ public class Player extends Movable implements Subject, Observer {
 	private MoveSpeed moveSpeed;
 	private boolean potionEffect;
 	private BooleanProperty alive;
+	private List<Equipable> usingItems;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -38,6 +40,7 @@ public class Player extends Movable implements Subject, Observer {
 		this.moveSpeed = new Normal();
 		this.potionEffect = false;
 		this.alive = new SimpleBooleanProperty(true);
+		this.usingItems = new ArrayList<>();
 	}
 
 	/*
@@ -136,8 +139,8 @@ public class Player extends Movable implements Subject, Observer {
 		return backpack.removeBomb();
 	}
 
-	public long getSpeed() {
-		return moveSpeed.getSpeed();
+	public long getSpeedFactor() {
+		return moveSpeed.getSpeedFactor();
 	}
 
 	public Key findKey() {

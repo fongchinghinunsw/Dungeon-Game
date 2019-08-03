@@ -104,7 +104,7 @@ public abstract class DungeonLoader {
 			break;
 		case "bomb":
 			Bomb bomb = new Bomb(dungeon, x, y);
-			bomb.isPause().bind(dungeon.isPause());
+			// bomb.isPause().bind(dungeon.isPause());
 			onLoad(bomb);
 			entity = bomb;
 			break;
