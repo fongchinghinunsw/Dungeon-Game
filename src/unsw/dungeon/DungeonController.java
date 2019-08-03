@@ -104,6 +104,9 @@ public class DungeonController {
 					break;
 				}
 				dungeon.notifyPlayerObservers();
+				if (dungeon.hasWin()) {
+					System.out.println("You have win the game sucker");
+				}
 				lastMoveNanos = now;
 			}
 		} else if (event.getCode().isWhitespaceKey()) {

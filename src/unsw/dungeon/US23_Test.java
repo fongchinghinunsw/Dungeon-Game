@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import javafx.embed.swing.JFXPanel;
 
+// Not correct anymore as pathfinding algorithm implemented
 public class US23_Test {
 	@Test
 	public void testClassMethods() {
@@ -14,7 +15,7 @@ public class US23_Test {
 		dungeon.addEntity(player);
 		Enemy enemy = new Hound(dungeon, 3, 3);
 		assertEquals(enemy.getClassName(), "Enemy", "getClassName set wrongly");
-		assertTrue(enemy.getSpeed() == 1, "Speed set wrongly");
+		assertTrue(enemy.getSpeedFactor() == 1, "Speed set wrongly");
 		assertTrue(enemy.isAlive().getValue(), "Enemy initialized to be dead");
 		enemy.die();
 		assertFalse(enemy.isAlive().getValue(), "Enemy can't die");

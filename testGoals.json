@@ -1,0 +1,111 @@
+// Enemy only
+{ "goal": "enemies" }
+// Exit only
+{ "goal": "exit" }
+// Boulders only
+{ "goal": "boulders" }
+// Treasure only
+{ "goal": "treasure" }
+
+
+// (Enemy || Boulders) && (treasure || boulders)
+{ "goal": "AND", "subgoals":
+  [ { "goal": "OR", "subgoals":[
+  	{ "goal": "enemies" },
+  	{ "goal": "boulders" }
+  ]},
+  	{ "goal": "OR", "subgoals":[
+  	{ "goal": "treasure" },
+  	{ "goal": "boulders" }
+  	]
+  	}]
+}
+
+// (Enemy && Exit) && (Treasure || Boulders)
+{ "goal": "AND", "subgoals":
+  [ { "goal": "AND", "subgoals":[
+  	{ "goal": "enemies" },
+  	{ "goal": "exit" }
+  ]},
+  	{ "goal": "OR", "subgoals":[
+  	{ "goal": "treasure" },
+  	{ "goal": "boulders" }
+  	]
+  	}]
+}
+
+// (Enemy && Exit) || (treasure && boulders)
+{ "goal": "OR", "subgoals":
+  [ { "goal": "AND", "subgoals":[
+  	{ "goal": "enemies" },
+  	{ "goal": "exit" }
+  ]},
+  	{ "goal": "AND", "subgoals":[
+  	{ "goal": "treasure" },
+  	{ "goal": "boulders" }
+  	]
+  	}]
+}
+
+// All goals
+{ "goal": "AND", "subgoals":
+	[{ "goal": "enemies" },
+	{ "goal": "boulders" },
+	{ "goal": "exit" },
+	{ "goal": "treasure" }]
+}
+
+// Any goal
+{ "goal": "OR", "subgoals":
+	[{ "goal": "enemies" },
+	{ "goal": "boulders" },
+	{ "goal": "exit" },
+	{ "goal": "treasure" }]
+}
+
+
+// Simple goals unnecessarily long ---> any goal
+{ "goal": "OR", "subgoals":
+	{ "goal": "OR", "subgoals":
+		[{ "goal": "boulders" },
+		{ "goal": "treasure" }]
+	},
+	{ "goal": "OR", "subgoals":
+		[{ "goal": "boulders" },
+		{ "goal": "enemies" }]
+	},
+	{ "goal": "OR", "subgoals":
+		[{ "goal": "boulders" },
+		{ "goal": "exit" }]
+	}
+}
+
+
+// 3 level tree:  
+// (boulders || (enemies && treasure)) && exit
+{ "goal": "AND", "subgoals":
+	{ "goal": "OR", "subgoals":
+		[{ "goal": "boulders" },
+		{ "goal": "AND", "subgoals":
+		[{ "goal": "enemies"},
+		{ "goal": "treasure"}]
+		 }]
+	},
+	{ "goal": "exit"}
+}
+
+// 3 level tree:  
+// ((boulders && treasure)  || (enemies && treasure)) && exit
+{ "goal": "AND", "subgoals":
+	{ "goal": "OR", "subgoals":
+		[{ "goal": "AND", "subgoals":
+		[{ "goal": "boulders" },
+		{ "goal": "treasure" }]},
+		{ "goal": "AND", "subgoals":
+		[{ "goal": "enemies" },
+		{ "goal": "treasure" }]
+		 }]
+	},
+	{ "goal": "exit"}
+}
+

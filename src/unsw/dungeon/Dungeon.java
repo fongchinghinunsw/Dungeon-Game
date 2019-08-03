@@ -143,6 +143,27 @@ public class Dungeon {
 		return count;
 	}
 
+	public boolean completedEnemyGoal() {
+		// cannot win the game if player's dead
+		if (!player.isAlive().getValue()) {
+			return false;
+		}
+		return countRemainingEnemy() == 0 ? true : false;
+	}
+
+	public int countRemainingEnemy() {
+		int count = 0;
+		for (Entity entity : entities) {
+			if (entity.getClassName().equals("Enemy")) {
+				Enemy enemy = (Enemy) entity;
+				if (enemy.isAlive().getValue()) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
 	/**
 	 * getter method for player
 	 * 
@@ -374,7 +395,7 @@ public class Dungeon {
 	}
 
 	public boolean hasWin() {
-		return goalExpression.evaluate();
+		return goalExpression.isSatisfied();
 	}
 
 	/**
@@ -449,7 +470,6 @@ public class Dungeon {
 		Set<String> cantMoveSet = new HashSet<>();
 		cantMoveSet.add("Wall");
 		cantMoveSet.add("Boulder");
-
 		for (int i = 0; i < this.width; i++) {
 			for (int j = 0; j < this.height; j++) {
 				String from = Integer.toString(i) + "," + Integer.toString(j);
@@ -540,7 +560,6 @@ public class Dungeon {
 
 	public Map<String, Integer> getItemsInBackpack() {
 		return player.getNumberOfItemsInBackpack();
-
 	}
 
 	public void pauseGame() {
