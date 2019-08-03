@@ -413,6 +413,5 @@ public class US2_Test_Composite {
 		// all 3 goals
 		boulder1.moveDown();
 		assertTrue(dungeon.hasWin(), "Goal checker error");
-
 	}
 }
