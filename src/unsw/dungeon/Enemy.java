@@ -78,7 +78,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		if (pathToPlayer.size() > 0) {
 			direction = this.moveState.getDirection(this.pathToPlayer);
 		} else {
-			System.out.println("No more direction");
+//			System.out.println("No more direction");
 			direction = "";
 		}
 
@@ -140,7 +140,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 					dungeon.killPlayer();
 				}
 			} else {
-				System.out.println("Enemy get notified");
+//				System.out.println("Enemy get notified");
 				// regenerate the path once the player moves.
 				this.pathToPlayer = dungeon.towardsPlayerPath(getX(), getY(), player.getX(), player.getY());
 			}

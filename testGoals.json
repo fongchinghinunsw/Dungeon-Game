@@ -35,12 +35,12 @@
 }
 
 // (Enemy && Exit) || (treasure && boulders)
-{ "goal": "AND", "subgoals":
-  [ { "goal": "OR", "subgoals":[
+{ "goal": "OR", "subgoals":
+  [ { "goal": "AND", "subgoals":[
   	{ "goal": "enemies" },
-  	{ "goal": "boulders" }
+  	{ "goal": "exit" }
   ]},
-  	{ "goal": "OR", "subgoals":[
+  	{ "goal": "AND", "subgoals":[
   	{ "goal": "treasure" },
   	{ "goal": "boulders" }
   	]

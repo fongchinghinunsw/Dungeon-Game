@@ -47,6 +47,16 @@ public class LoadScreen {
 		loadScreenTimer.play();
 		stage.show();
 	}
+	public void startTimer() {
+		this.loadScreenTimer = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> {
+			// the higher the speed is the more frequent the enemy moves
+			if (timerTick == 5) {
+				controller.handleSkipButton();
+			}
+			timerTick++;
+		}));
+		loadScreenTimer.play();
+	}
 	public LoadScreenController getController() {
 		return controller;
 	}
