@@ -122,4 +122,8 @@ public class LoadScreen {
 	public LoadScreenController getController() {
 		return controller;
 	}
+
+	public void stopTimer() {
+		loadScreenTimer.stop();
+	}
 }

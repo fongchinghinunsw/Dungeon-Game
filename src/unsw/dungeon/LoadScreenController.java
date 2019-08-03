@@ -15,6 +15,7 @@ public class LoadScreenController {
 	@FXML
 	private StackPane layout;
 	private DungeonScreen dungeonScreen;
+	private LoadScreen loadScreen;
 
 	public LoadScreenController(Stage stage) {
 		this.stage = stage;
@@ -23,12 +24,17 @@ public class LoadScreenController {
 	@FXML
 	public void handleSkipButton() throws IOException {
 		dungeonScreen.start();
+		loadScreen.stopTimer();
 	}
 
 	public void setDungeonScreen(DungeonScreen dungeonScreen) {
 		this.dungeonScreen = dungeonScreen;
 	}
 
+	public void setLoadScreen(LoadScreen loadScreen) {
+		this.loadScreen = loadScreen;
+	}
+	
 	@FXML
 	public void initialize() {
 	}
