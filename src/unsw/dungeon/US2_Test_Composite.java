@@ -1,12 +1,8 @@
 package unsw.dungeon;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-import javafx.embed.swing.JFXPanel;
-import unsw.dungeon.CompositeGoal.Operator;
 
 public class US2_Test_Composite {
 
