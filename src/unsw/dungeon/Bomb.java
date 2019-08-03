@@ -10,7 +10,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.util.Duration;
 
-public class Bomb extends Equipable implements Subject, Observer {
+public class Bomb extends Equipable implements Subject, Observer, Runnable {
 
 	private Dungeon dungeon;
 	private IntegerProperty countdownTime;
@@ -28,7 +28,7 @@ public class Bomb extends Equipable implements Subject, Observer {
 		exploded = false;
 		lit = false;
 		observers = new ArrayList<>();
-		this.bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> this.decrementCountdownTime()));
+		this.bombTimer = createTimer(countdownTime.getValue());
 		bombTimer.setCycleCount(4);
 	}
 
@@ -95,9 +95,33 @@ public class Bomb extends Equipable implements Subject, Observer {
 		return this.pause;
 	}
 
+	public Timeline createTimer(int cycle) {
+		Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+			if (pause.getValue() == false) {
+				this.decrementCountdownTime();
+			} else {
+				bombTimer.stop();
+				Thread t = new Thread(this);
+				t.start();
+			}
+		}));
+		timer.setCycleCount(cycle);
+		return timer;
+	}
+
 	@Override
 	public String getClassName() {
 		return "Bomb";
+	}
+
+	@Override
+	public void run() {
+		while (pause.getValue() == true) {
+			continue;
+		}
+		Timeline newTimer = createTimer(this.getTime().getValue());
+		newTimer.play();
+		return;
 	}
 
 }
