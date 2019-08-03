@@ -31,7 +31,6 @@ public class CompositeGoal implements GoalExpression {
 	public boolean isSatisfied() {
 		boolean result;
 		result = children.get(0).isSatisfied();
-		children.get(0).print();
 		for (int i = 1; i < children.size(); i++) {
 			switch (operator) {
 			case AND:
