@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.util.Duration;
 
-public class Potion extends Equipable implements Observer {
+public class Potion extends Equipable implements Observer, Runnable {
 
 	Dungeon dungeon;
 	private IntegerProperty countdownTime;
@@ -49,12 +49,8 @@ public class Potion extends Equipable implements Observer {
 				this.decrementCountdownTime();
 			} else {
 				potionTimer.stop();
-
-				while (pause.getValue() == true) {
-					continue;
-				}
-				Timeline newTimer = createTimer(this.getTime().getValue());
-				newTimer.play();
+				Thread t = new Thread(this);
+				t.start();
 			}
 		}));
 		timer.setCycleCount(cycle);
@@ -70,6 +66,15 @@ public class Potion extends Equipable implements Observer {
 	public void update(Subject obj) {
 		System.out.println("Player standing on a potion");
 
+	}
+
+	@Override
+	public void run() {
+		while (pause.getValue() == true) {
+			continue;
+		}
+		Timeline newTimer = createTimer(this.getTime().getValue());
+		newTimer.play();
 	}
 
 }
