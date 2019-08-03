@@ -17,7 +17,18 @@ public class MoveAwayState implements MoveState {
 
 	@Override
 	public String getDirection(List<String> path) {
-		return path.get(0);
+
+		String nextMove = path.get(path.size() - 1);
+		if (nextMove.equals("TOP")) {
+			return "DOWN";
+		} else if (nextMove.equals("DOWN")) {
+			return "TOP";
+		} else if (nextMove.equals("LEFT")) {
+			return "RIGHT";
+		} else if (nextMove.equals("RIGHT")) {
+			return "LEFT";
+		}
+		return "";
 	}
 
 }

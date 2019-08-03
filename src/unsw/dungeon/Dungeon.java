@@ -445,17 +445,15 @@ public class Dungeon {
 		cantMoveSet.add("Wall");
 		cantMoveSet.add("Boulder");
 
-		System.out.println(this.height);
-		System.out.println(this.width);
-		for (int i = 0; i < this.height; i++) {
-			for (int j = 0; j < this.width; j++) {
+		for (int i = 0; i < this.width; i++) {
+			for (int j = 0; j < this.height; j++) {
 				String from = Integer.toString(i) + "," + Integer.toString(j);
 				if (!(sameClass(i, j, cantMoveSet)) && canStepOn(i, j)) {
 					if (i - 1 >= 0 && !(sameClass(i - 1, j, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i - 1) + "," + Integer.toString(j);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (i + 1 < this.height && !(sameClass(i + 1, j, cantMoveSet) && canStepOn(i, j))) {
+					if (i + 1 < this.width && !(sameClass(i + 1, j, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i + 1) + "," + Integer.toString(j);
 						edges.add(String.format("%s->%s", from, to));
 					}
@@ -463,7 +461,7 @@ public class Dungeon {
 						String to = Integer.toString(i) + "," + Integer.toString(j - 1);
 						edges.add(String.format("%s->%s", from, to));
 					}
-					if (j + 1 < this.width && !(sameClass(i, j + 1, cantMoveSet) && canStepOn(i, j))) {
+					if (j + 1 < this.height && !(sameClass(i, j + 1, cantMoveSet) && canStepOn(i, j))) {
 						String to = Integer.toString(i) + "," + Integer.toString(j + 1);
 						edges.add(String.format("%s->%s", from, to));
 					}
@@ -481,8 +479,8 @@ public class Dungeon {
 		cantMoveSet.add("Wall");
 		cantMoveSet.add("Boulder");
 
-		for (int i = 0; i < this.height; i++) {
-			for (int j = 0; j < this.width; j++) {
+		for (int i = 0; i < this.width; i++) {
+			for (int j = 0; j < this.height; j++) {
 				if (!(sameClass(i, j, cantMoveSet) && canStepOn(i, j))) {
 					hasVisited.put(String.format("%d,%d", i, j), false);
 				}
