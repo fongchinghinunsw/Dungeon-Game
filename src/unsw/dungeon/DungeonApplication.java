@@ -19,6 +19,7 @@ public class DungeonApplication extends Application {
 		startScreen.getController().setDungeonScreen(dungeonScreen);
 		LoadScreen loadScreen = new LoadScreen(primaryStage);
 		loadScreen.getController().setStartScreen(startScreen);
+		loadScreen.getController().setLoadScreen(loadScreen);
 		loadScreen.start();
 	}
 
