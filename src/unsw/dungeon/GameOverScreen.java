@@ -24,13 +24,13 @@ public class GameOverScreen {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
 		loader.setController(controller);
 		layout = loader.load();
-		FadeTransition ft = new FadeTransition(Duration.millis(3000), layout);
+		FadeTransition ft = new FadeTransition(Duration.millis(10000), layout);
 		ft.setFromValue(0.0);
 		ft.setToValue(1.0);
 		ft.play();
 		scene = new Scene(layout, 750, 400);
 	}
-	
+
 	public GameOverScreenController getController() {
 		return controller;
 	}

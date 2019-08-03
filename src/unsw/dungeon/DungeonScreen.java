@@ -42,7 +42,7 @@ public class DungeonScreen {
 		// load the game only after the player press the start button.
 		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json");
 
-		DungeonController controller = dungeonLoader.loadController();
+		controller = dungeonLoader.loadController();
 
 		controller.listenPlayerStatus(this);
 		controller.listenWinStatus(this);
@@ -153,6 +153,7 @@ public class DungeonScreen {
 	}
 
 	public void handleQuitButton() {
+		controller.deleteGame();
 		startScreen.start();
 	}
 

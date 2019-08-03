@@ -60,13 +60,13 @@ public class LoadScreen {
 		tipsBox.setPadding(new Insets(0, 0, -75, 0));
 		tipsBox.setAlignment(Pos.BOTTOM_CENTER);
 		layout.getChildren().add(tipsBox);
-		String intro = "You fell asleep while writing articles criticising the \n"
-				+ "trimester system. When you wake up, you see yourself in a\n"
-				+ "dungeon. Inside the dungeon lies the most fearsome monster\n"
-				+ "Trimestaurus. This monster has shape resembling the \n"
-				+ "nonexistent creature called giraffe(r/Giraffesdontexist) \n"
-				+ "and it roars like a kazoo. You must fight your way through \n"
-				+ "the dungeon and defeat Trimestaurus, or you'll keep sleeping \n" + "and your coffee will get cold.";
+		String intro = "You fell asleep while writing articles criticising the trimester\n"
+				+ "system. When you wake up, you see yourself in a dungeon.\n"
+				+ "Inside the dungeon lies the most fearsome monsters HomeWork,\n"
+				+ "ClassTest and Exam. These monster constantly approaching you \n"
+				+ "and are ready to kill you if you are not well-prepared \n"
+				+ "and they roar like a kazoo. You must fight your way through \n"
+				+ "the dungeon and defeat them, or you'll keep sleeping \n" + "and your coffee will get cold.";
 		Label introLabel = new Label(intro);
 		introLabel.setStyle(
 				"-fx-font-family: \"Georgia, Serif\"; -fx-font-size: 14; -fx-text-fill: white;-fx-line-spacing: 1em;");
@@ -97,7 +97,7 @@ public class LoadScreen {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				System.out.println("An attempt has been made");
+
 				loadScreenTimer.stop();
 			}
 			switch (timerTick % 3) {

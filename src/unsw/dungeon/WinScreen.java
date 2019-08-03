@@ -18,7 +18,7 @@ public class WinScreen {
 	private WinScreenController controller;
 	private Scene scene;
 	private StackPane layout;
-	
+
 	public WinScreen(Stage stage) throws IOException {
 		this.stage = stage;
 		title = "You Win!";
@@ -36,16 +36,16 @@ public class WinScreen {
 		congratBox.setAlignment(Pos.TOP_CENTER);
 		congratBox.setPadding(new Insets(20, 0, 30, 0));
 		layout.getChildren().add(congratBox);
-		Label messageLabel = new Label("You put a sword through the Trimestaurus' heart, and as you \n" + 
-				"walked away you heard it utter with its last breath, 'But UNSW \n" + 
-				"has conducted comprehensive student surveys to measure \n" + 
-				"preferences on different calendar models and to obtain \n" + 
-				"feedback on the UNSW3+ calendar.[sic]'\n" + 
-				"You've slain the beast and brought peace to this land,\n" + 
-				"everyone lived happily ever after.\n\n"+
-				"THE END.");
+		Label messageLabel = new Label("You put a sword through the Trimestaurus' heart, and as you \n"
+				+ "walked away you heard it utter with its last breath, 'But UNSW \n"
+				+ "has conducted comprehensive student surveys to measure \n"
+				+ "preferences on different calendar models and to obtain \n"
+				+ "feedback on the UNSW3+ calendar.[sic]'\n"
+				+ "You've slain the beast and brought peace to this land,\n" + "everyone lived happily ever after.\n\n"
+				+ "THE END.");
 		messageLabel.setWrapText(true);
-		messageLabel.setStyle("-fx-font-family: \"Ariel\"; -fx-font-size: 15; -fx-text-fill: white;-fx-line-spacing: 1em;");
+		messageLabel
+				.setStyle("-fx-font-family: \"Ariel\"; -fx-font-size: 15; -fx-text-fill: white;-fx-line-spacing: 1em;");
 		VBox messageBox = new VBox(messageLabel);
 		messageBox.setMaxWidth(500);
 		messageBox.setAlignment(Pos.CENTER);
@@ -57,11 +57,10 @@ public class WinScreen {
 		stage.setTitle(title);
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.show();		
+		stage.show();
 	}
-	
+
 	public WinScreenController getController() {
 		return controller;
 	}
-
 }

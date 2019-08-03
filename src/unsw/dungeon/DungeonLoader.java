@@ -42,7 +42,6 @@ public abstract class DungeonLoader {
 		GoalParser parser = new GoalParser(dungeon);
 		GoalExpression expr = parser.parse(goal, null);
 
-		expr.print();
 		dungeon.setGoalExpression(expr);
 
 		for (int i = 0; i < jsonEntities.length(); i++) {

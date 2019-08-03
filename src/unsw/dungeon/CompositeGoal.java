@@ -9,7 +9,7 @@ public class CompositeGoal implements GoalExpression {
 	public enum Operator {
 		AND, OR, NULL
 	}
-	
+
 	private BooleanProperty satisfied;
 	private Operator operator;
 	ArrayList<GoalExpression> children = new ArrayList<GoalExpression>();
@@ -35,8 +35,9 @@ public class CompositeGoal implements GoalExpression {
 	@Override
 	public BooleanProperty isSatisfied() {
 		boolean result;
+
 		result = children.get(0).isSatisfied().getValue();
-		children.get(0).print();
+
 		for (int i = 1; i < children.size(); i++) {
 			switch (operator) {
 			case AND:
