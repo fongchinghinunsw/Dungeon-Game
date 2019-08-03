@@ -16,11 +16,11 @@ public class DungeonApplication extends Application {
 		TutorialScreen tutorialScreen = new TutorialScreen(primaryStage);
 		tutorialScreen.getController().setStartScreen(startScreen);
 		startScreen.getController().setTutorialScreen(tutorialScreen);
-		startScreen.getController().setDungeonScreen(dungeonScreen);
 		LoadScreen loadScreen = new LoadScreen(primaryStage);
-		loadScreen.getController().setStartScreen(startScreen);
+		loadScreen.getController().setDungeonScreen(dungeonScreen);
+		startScreen.getController().setLoadScreen(loadScreen);
 		loadScreen.getController().setLoadScreen(loadScreen);
-		loadScreen.start();
+		startScreen.start();
 	}
 
 	public static void main(String[] args) {

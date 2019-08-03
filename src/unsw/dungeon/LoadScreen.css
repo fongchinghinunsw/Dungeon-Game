@@ -1,5 +1,6 @@
 .stack {
     -fx-background-image:url('/LoadingPage.png');
+    -fx-background-size: contain, auto;
 }
 
 .button {

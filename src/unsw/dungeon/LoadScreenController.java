@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -15,7 +17,7 @@ public class LoadScreenController {
 	@FXML
 	private Button refreshButton;
 
-	private StartScreen startScreen;
+	private DungeonScreen dungeonScreen;
 
 	private LoadScreen loadScreen;
 
@@ -24,8 +26,8 @@ public class LoadScreenController {
 	}
 
 	@FXML
-	public void handleSkipButton() {
-		startScreen.start();
+	public void handleSkipButton() throws IOException {
+		dungeonScreen.start();
 	}
 
 	@FXML
@@ -33,8 +35,8 @@ public class LoadScreenController {
 		loadScreen.start();
 	}
 
-	public void setStartScreen(StartScreen startScreen) {
-		this.startScreen = startScreen;
+	public void setDungeonScreen(DungeonScreen dungeonScreen) {
+		this.dungeonScreen = dungeonScreen;
 	}
 
 	public void setLoadScreen(LoadScreen loadScreen) {

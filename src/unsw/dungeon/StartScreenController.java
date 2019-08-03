@@ -20,7 +20,7 @@ public class StartScreenController {
 	@FXML
 	private Button tutButton;
 
-	private DungeonScreen dungeonScreen;
+	private LoadScreen loadScreen;
 
 	private TutorialScreen tutorialScreen;
 
@@ -30,7 +30,7 @@ public class StartScreenController {
 
 	@FXML
 	public void handleStartButton(ActionEvent event) throws IOException {
-		dungeonScreen.start();
+		loadScreen.start();
 	}
 
 	@FXML
@@ -48,8 +48,8 @@ public class StartScreenController {
 
 	}
 
-	public void setDungeonScreen(DungeonScreen dungeonScreen) {
-		this.dungeonScreen = dungeonScreen;
+	public void setLoadScreen(LoadScreen loadScreen) {
+		this.loadScreen = loadScreen;
 	}
 
 	public void setTutorialScreen(TutorialScreen tutorialScreen) {
