@@ -37,7 +37,7 @@ public class DungeonController {
 
 	DungeonControllerLoader loader;
 
-	private static final long THRESHOLD = 100_000_000L;
+	private static final long THRESHOLD = 10_000_000_000L;
 
 	private long lastMoveNanos;
 
