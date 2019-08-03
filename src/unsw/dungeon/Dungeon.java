@@ -215,8 +215,6 @@ public class Dungeon {
 	public void killPlayer() {
 		player.die();
 		entities.remove(player);
-		System.out.println("Player get removed from the dungeon.");
-		System.out.println("Game over ~");
 	}
 
 	/**
@@ -226,7 +224,6 @@ public class Dungeon {
 	 */
 	public void killEnemy(Enemy enemy) {
 		enemy.die();
-		System.out.println("Enemy get removed from the dungeon.");
 		entities.remove(enemy);
 	}
 

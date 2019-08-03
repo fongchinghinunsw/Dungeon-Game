@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -49,6 +50,15 @@ public class DungeonController {
 		this.images = images;
 	}
 
+	public void listenPlayerStatus(DungeonScreen dungeonScreen) {
+		getPlayerStatus().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				dungeonScreen.gameOver();
+			} else {
+			}
+		});
+	}
+	
 	@FXML
 	public void initialize() {
 		Image ground = new Image("/dirt_0_new.png");
@@ -178,6 +188,13 @@ public class DungeonController {
 
 	public void pauseGame() {
 		dungeon.pauseGame();
+	}
+	
+	public BooleanProperty getPlayerStatus() {
+		if(player == null) {
+			return null;
+		}
+		return player.isAlive();
 	}
 
 	public void resumeGame() {

@@ -23,7 +23,8 @@ public class DungeonApplication extends Application {
 		loadScreen.getController().setDungeonScreen(dungeonScreen);
 		loadScreen.getController().setLoadScreen(loadScreen);
 		startScreen.getController().setLoadScreen(loadScreen);
-		gameOverScreen.start();
+		dungeonScreen.setGameOverScreen(gameOverScreen);
+		startScreen.start();
 	}
 
 	public static void main(String[] args) {
