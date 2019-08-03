@@ -14,12 +14,7 @@ public class LoadScreenController {
 	private Button skipButton;
 	@FXML
 	private StackPane layout;
-	@FXML
-	private Button refreshButton;
-
 	private DungeonScreen dungeonScreen;
-
-	private LoadScreen loadScreen;
 
 	public LoadScreenController(Stage stage) {
 		this.stage = stage;
@@ -30,17 +25,8 @@ public class LoadScreenController {
 		dungeonScreen.start();
 	}
 
-	@FXML
-	public void handleRefreshButton() {
-		loadScreen.start();
-	}
-
 	public void setDungeonScreen(DungeonScreen dungeonScreen) {
 		this.dungeonScreen = dungeonScreen;
-	}
-
-	public void setLoadScreen(LoadScreen loadScreen) {
-		this.loadScreen = loadScreen;
 	}
 
 	@FXML

@@ -57,29 +57,28 @@ public class LoadScreen {
 		VBox tipsBox = new VBox(dykLabel);
 		tipsBox.setMaxWidth(300);
 		tipsBox.setMaxHeight(120);
-		tipsBox.setPadding(new Insets(0,0,-75,0));
+		tipsBox.setPadding(new Insets(0, 0, -75, 0));
 		tipsBox.setAlignment(Pos.BOTTOM_CENTER);
 		layout.getChildren().add(tipsBox);
-		String intro = "You fell asleep while writing articles criticising the \n" + 
-				"trimester system. When you wake up, you see yourself in a\n" + 
-				"dungeon. Inside the dungeon lies the most fearsome monster\n" + 
-				"Trimestaurus. This monster has shape resembling the \n" + 
-				"nonexistent creature called giraffe(r/Giraffesdontexist) \n" + 
-				"and it roars like a kazoo. You must fight your way through \n" + 
-				"the dungeon and defeat Trimestaurus, or you'll keep sleeping \n" + 
-				"and your coffee will get cold.";
+		String intro = "You fell asleep while writing articles criticising the \n"
+				+ "trimester system. When you wake up, you see yourself in a\n"
+				+ "dungeon. Inside the dungeon lies the most fearsome monster\n"
+				+ "Trimestaurus. This monster has shape resembling the \n"
+				+ "nonexistent creature called giraffe(r/Giraffesdontexist) \n"
+				+ "and it roars like a kazoo. You must fight your way through \n"
+				+ "the dungeon and defeat Trimestaurus, or you'll keep sleeping \n" + "and your coffee will get cold.";
 		Label introLabel = new Label(intro);
-		introLabel.setStyle("-fx-font-family: \"Georgia, Serif\"; -fx-font-size: 14; -fx-text-fill: white;-fx-line-spacing: 1em;");
+		introLabel.setStyle(
+				"-fx-font-family: \"Georgia, Serif\"; -fx-font-size: 14; -fx-text-fill: white;-fx-line-spacing: 1em;");
 		VBox introBox = new VBox(introLabel);
 		introBox.setAlignment(Pos.TOP_LEFT);
 		introBox.setMaxWidth(600);
-		introBox.setPadding(new Insets(30,30,0,0));
+		introBox.setPadding(new Insets(30, 30, 0, 0));
 		layout.getChildren().add(introBox);
 		introBox.toBack();
 		tipsBox.toBack();
 		loadBox.toBack();
-		
-		
+
 	}
 
 	public void start() {
@@ -92,7 +91,7 @@ public class LoadScreen {
 			loadScreenTimer.stop();
 		}
 		this.loadScreenTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-			if (timerTick == 6) {
+			if (timerTick == 5) {
 				try {
 					controller.handleSkipButton();
 				} catch (IOException e1) {
@@ -122,9 +121,5 @@ public class LoadScreen {
 
 	public LoadScreenController getController() {
 		return controller;
-	}
-
-	public void stopTimer() {
-		this.loadScreenTimer.stop();
 	}
 }
