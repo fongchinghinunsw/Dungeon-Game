@@ -100,26 +100,31 @@ public abstract class DungeonLoader {
 			break;
 		case "potion":
 			Potion potion = new Potion(dungeon, x, y);
+			potion.isPause().bind(dungeon.isPause());
 			onLoad(potion);
 			entity = potion;
 			break;
 		case "bomb":
 			Bomb bomb = new Bomb(dungeon, x, y);
+			// bomb.isPause().bind(dungeon.isPause());
 			onLoad(bomb);
 			entity = bomb;
 			break;
 		case "enemy":
 			Hound enemy = new Hound(dungeon, x, y);
+			enemy.isPause().bind(dungeon.isPause());
 			onLoad(enemy);
 			entity = enemy;
 			break;
 		case "hound":
 			Hound hound = new Hound(dungeon, x, y);
+			hound.isPause().bind(dungeon.isPause());
 			onLoad(hound);
 			entity = hound;
 			break;
 		case "mage":
 			Mage mage = new Mage(dungeon, x, y);
+			mage.isPause().bind(dungeon.isPause());
 			onLoad(mage);
 			entity = mage;
 			break;

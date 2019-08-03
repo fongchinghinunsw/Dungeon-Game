@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.util.Duration;
 
@@ -15,11 +17,13 @@ public class Bomb extends Equipable implements Subject, Observer {
 	private Timeline bombTimer;
 	private boolean exploded;
 	private boolean lit;
+	private BooleanProperty pause;
 	private ArrayList<Observer> observers;
 
 	public Bomb(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
+		pause = new SimpleBooleanProperty(false);
 		countdownTime = new SimpleIntegerProperty(4);
 		exploded = false;
 		lit = false;
@@ -85,6 +89,10 @@ public class Bomb extends Equipable implements Subject, Observer {
 				}
 			}
 		}
+	}
+
+	public BooleanProperty isPause() {
+		return this.pause;
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 public class DungeonScreen {
 
+	GridPane root;
 	private Stage stage;
 	private DungeonController controller;
 	private Scene scene;
@@ -27,6 +28,7 @@ public class DungeonScreen {
 	private BooleanProperty ctrlPressed = new SimpleBooleanProperty();
 	private BooleanProperty QPressed = new SimpleBooleanProperty();
 	private BooleanBinding bothPressed = ctrlPressed.and(QPressed);
+	private int countPauseButtonPressed = 0;
 
 	public DungeonScreen(Stage stage) throws IOException {
 		this.stage = stage;
@@ -43,7 +45,7 @@ public class DungeonScreen {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
 		loader.setController(controller);
 
-		GridPane root = loader.load();
+		root = loader.load();
 		HBox topMenu = new HBox(5);
 
 		String style = "-fx-background-color: linear-gradient(#2980B9,#6DD5FA,#FFFFFF);";
@@ -61,6 +63,8 @@ public class DungeonScreen {
 			}
 		});
 		quitButton.setOnMouseClicked(e -> handleQuitButton());
+		pauseButton.setOnMouseClicked(e -> handlePauseButton(pauseButton, controller));
+
 		topMenu.getChildren().addAll(restartButton, quitButton, pauseButton);
 
 		BorderPane borderPane = new BorderPane();
@@ -121,6 +125,18 @@ public class DungeonScreen {
 
 	public void handleRestartButton() throws IOException {
 		this.start();
+	}
+
+	void handlePauseButton(Button pauseButton, DungeonController controller) {
+		countPauseButtonPressed++;
+		if (countPauseButtonPressed % 2 == 0) {
+			root.requestFocus();
+			controller.resumeGame();
+			pauseButton.setText("Pause");
+		} else {
+			controller.pauseGame();
+			pauseButton.setText("Resume");
+		}
 	}
 
 	public void handleQuitButton() {

@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -28,6 +31,7 @@ public class Dungeon {
 	private int nKeys;
 	private int nDoors;
 	private GoalExpression goalExpression;
+	private BooleanProperty pause;
 
 	/**
 	 * constructor for dungeon
@@ -42,6 +46,7 @@ public class Dungeon {
 		this.entities = new ArrayList<>();
 		this.nKeys = 0;
 		this.nDoors = 0;
+		this.pause = new SimpleBooleanProperty(false);
 	}
 
 	/**
@@ -555,5 +560,18 @@ public class Dungeon {
 
 	public Map<String, Integer> getItemsInBackpack() {
 		return player.getNumberOfItemsInBackpack();
+	}
+
+	public void pauseGame() {
+		this.pause.setValue(true);
+	}
+
+	public void resumeGame() {
+
+		this.pause.setValue(false);
+	}
+
+	public BooleanProperty isPause() {
+		return this.pause;
 	}
 }
