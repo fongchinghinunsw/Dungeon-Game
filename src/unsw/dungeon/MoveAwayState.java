@@ -2,19 +2,31 @@ package unsw.dungeon;
 
 import java.util.List;
 
+/*
+ * Representation of the move away state of the enemy.
+ */
 public class MoveAwayState implements MoveState {
 
+	/*
+	 * change to MoveTowardsState
+	 */
 	@Override
 	public MoveState transitionTowards() {
 		return new MoveTowardsState();
 	}
 
+	/*
+	 * change to MoveAwayState
+	 */
 	@Override
 	public MoveState transitionAway() {
 		return this;
 
 	}
 
+	/*
+	 * Get the director of the player.
+	 */
 	@Override
 	public String getDirection(List<String> path) {
 

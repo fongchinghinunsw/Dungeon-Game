@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+/*
+ * Movable class, all entities that can move are extended from this class.
+ */
 public abstract class Movable extends Entity {
 
 	private Dungeon dungeon;
@@ -15,6 +18,9 @@ public abstract class Movable extends Entity {
 		this.dungeon = dungeon;
 	}
 
+	/*
+	 * Move upward.
+	 */
 	public void moveUp() {
 		if (getY() > 0 && !(dungeon.sameClass(getX(), getY() - 1, "Wall"))) {
 			if (dungeon.canStepOn(getX(), getY() - 1) && dungeon.canPush(getX(), getY() - 1)) {
@@ -23,6 +29,9 @@ public abstract class Movable extends Entity {
 		}
 	}
 
+	/*
+	 * Move downward.
+	 */
 	public void moveDown() {
 		if (getY() < dungeon.getHeight() - 1 && !(dungeon.sameClass(getX(), getY() + 1, "Wall"))) {
 			if (dungeon.canStepOn(getX(), getY() + 1) && dungeon.canPush(getX(), getY() + 1)) {
@@ -31,6 +40,9 @@ public abstract class Movable extends Entity {
 		}
 	}
 
+	/*
+	 * Move leftward.
+	 */
 	public void moveLeft() {
 		if (getX() > 0 && !(dungeon.sameClass(getX() - 1, getY(), "Wall"))) {
 			if (dungeon.canStepOn(getX() - 1, getY()) && dungeon.canPush(getX() - 1, getY())) {
@@ -39,6 +51,9 @@ public abstract class Movable extends Entity {
 		}
 	}
 
+	/*
+	 * Move rightward.
+	 */
 	public void moveRight() {
 		if (getX() < dungeon.getWidth() - 1 && !(dungeon.sameClass(getX() + 1, getY(), "Wall"))) {
 			if (dungeon.canStepOn(getX() + 1, getY()) && dungeon.canPush(getX() + 1, getY())) {
@@ -47,8 +62,14 @@ public abstract class Movable extends Entity {
 		}
 	}
 
+	/*
+	 * Get the speed factor.
+	 */
 	public abstract long getSpeedFactor();
 
+	/*
+	 * Get the class name.
+	 */
 	@Override
 	public abstract String getClassName();
 }
