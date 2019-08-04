@@ -11,6 +11,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Screen for winning the game
+ *
+ * A basic prototype to serve as the representation of a winning screen. Have
+ * various methods that can set up the screen.
+ *
+ * @author Stephen Fong
+ *
+ */
 public class WinScreen {
 
 	private Stage stage;
@@ -19,6 +28,9 @@ public class WinScreen {
 	private Scene scene;
 	private StackPane layout;
 
+	/*
+	 * Construct a win screen.
+	 */
 	public WinScreen(Stage stage) throws IOException {
 		this.stage = stage;
 		title = "You Win!";
@@ -36,11 +48,10 @@ public class WinScreen {
 		congratBox.setAlignment(Pos.TOP_CENTER);
 		congratBox.setPadding(new Insets(20, 0, 30, 0));
 		layout.getChildren().add(congratBox);
-		Label messageLabel = new Label("You put a sword through the Trimestaurus' heart, and as you \n"
+		Label messageLabel = new Label("You put a sword through the Trimester's heart, and as you \n"
 				+ "walked away you heard it utter with its last breath, 'But UNSW \n"
 				+ "has conducted comprehensive student surveys to measure \n"
-				+ "preferences on different calendar models and to obtain \n"
-				+ "feedback on the UNSW3+ calendar.[sic]'\n"
+				+ "preferences on different calendar models and to obtain \n" + "feedback on the UNSW3+ calendar.'\n"
 				+ "You've slain the beast and brought peace to this land,\n" + "everyone lived happily ever after.\n\n"
 				+ "THE END.");
 		messageLabel.setWrapText(true);
@@ -53,6 +64,9 @@ public class WinScreen {
 		layout.getChildren().add(messageBox);
 	}
 
+	/*
+	 * start loading the page.
+	 */
 	public void start() {
 		stage.setTitle(title);
 		stage.setScene(scene);
@@ -60,6 +74,9 @@ public class WinScreen {
 		stage.show();
 	}
 
+	/*
+	 * get the controller of the winning screen.
+	 */
 	public WinScreenController getController() {
 		return controller;
 	}

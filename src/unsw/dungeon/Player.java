@@ -73,10 +73,16 @@ public class Player extends Movable implements Subject, Observer {
 		return false;
 	}
 
+	/*
+	 * Check if the player has a key.
+	 */
 	private boolean hasKey() {
 		return (backpack.getKey() != null);
 	}
 
+	/*
+	 * Use an item in the player's backpack.
+	 */
 	public boolean useItem(String type) {
 		if (type.equals("Potion") && this.potionEffect) {
 			System.out.println("A potion is already in use!");
@@ -99,51 +105,87 @@ public class Player extends Movable implements Subject, Observer {
 		return true;
 	}
 
+	/*
+	 * Check if the player is alive.
+	 */
 	public BooleanProperty isAlive() {
 		return this.alive;
 	}
 
+	/*
+	 * Check if the player is invincible.
+	 */
 	public boolean isInvincible() {
 		return this.potionEffect;
 	}
 
+	/*
+	 * Set the player as dead.
+	 */
 	public void die() {
 		this.alive.setValue(false);
 		System.out.println("Player is now dead");
 	}
 
+	/*
+	 * Set the potion effect on the player as false.
+	 */
 	public void disablePotion() {
 		this.potionEffect = false;
 	}
 
+	/*
+	 * Get the bomb from the player's backpack.
+	 */
 	public Bomb getBomb() {
 		return backpack.getBomb();
 	}
 
+	/*
+	 * Remove the key from the backpack.
+	 */
 	public Key removeKeyInBackpack() {
 		return backpack.removeKey();
 	}
 
+	/*
+	 * Count number of sword in the backpack.
+	 */
 	public int countSwordInBackPack() {
 		return backpack.countSword();
 	}
 
+	/*
+	 * Remove sword in the backpack.
+	 */
 	public Entity removeSwordInBackPack() {
 		return backpack.removeSword();
 	}
 
+	/*
+	 * Remove bomb in the backpack.
+	 */
 	public Entity removeBombInBackpack() {
 		return backpack.removeBomb();
 	}
 
+	/*
+	 * Get speed factor of the player.
+	 */
 	public long getSpeedFactor() {
 		return moveSpeed.getSpeedFactor();
 	}
 
+	/*
+	 * Get the key in the backpack.
+	 */
 	public Key findKey() {
 		return backpack.getKey();
 	}
 
+	/*
+	 * Use the key.
+	 */
 	public void useKey(int id) {
 		Key key = this.findKey();
 		if (key.getId() == id) {
@@ -151,14 +193,23 @@ public class Player extends Movable implements Subject, Observer {
 		}
 	}
 
+	/*
+	 * Get the backpack.
+	 */
 	public Backpack getBag() {
 		return backpack;
 	}
 
+	/*
+	 * Count number of different items in the backpack.
+	 */
 	public Map<String, Integer> getNumberOfItemsInBackpack() {
 		return backpack.getNumberOfItems();
 	}
 
+	/*
+	 * Attach an observer.
+	 */
 	@Override
 	public void attach(Observer o) {
 		if (!(observers.contains(o))) {
@@ -166,6 +217,9 @@ public class Player extends Movable implements Subject, Observer {
 		}
 	}
 
+	/*
+	 * Detach an observer.
+	 */
 	@Override
 	public void detach(Observer o) {
 		observers.remove(o);
@@ -232,6 +286,9 @@ public class Player extends Movable implements Subject, Observer {
 		}
 	}
 
+	/*
+	 * Get the class name of the player.
+	 */
 	@Override
 	public String getClassName() {
 		return "Player";
