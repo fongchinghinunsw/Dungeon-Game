@@ -35,7 +35,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		this.enemyTimer = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
 			// the higher the speed is the more frequent the enemy moves
 
-			if (timerTick * this.moveSpeed.getSpeedFactor() % 100 == 0 && pause.getValue() == false) {
+			if (timerTick % this.moveSpeed.getSpeedFactor() == 0 && pause.getValue() == false) {
 				this.findPlayer();
 			}
 			if (!alive.getValue()) {

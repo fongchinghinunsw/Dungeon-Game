@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 public class Fast implements MoveSpeed {
-	private long speedFactor = 10;
+	private long speedFactor = 25;
 
 	@Override
 	public long getSpeedFactor() {
