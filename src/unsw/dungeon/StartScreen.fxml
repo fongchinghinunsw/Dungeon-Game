@@ -15,12 +15,12 @@
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="40.0" prefWidth="150.0" text="Quit">
+            <Button fx:id="tutButton" mnemonicParsing="false" onAction="#handleTutButton" prefHeight="40.0" prefWidth="150.0" text="Tutorial">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="tutButton" mnemonicParsing="false" onAction="#handleTutButton" prefHeight="40.0" prefWidth="150.0" text="Tutorial">
+            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#handleQuitButton" prefHeight="40.0" prefWidth="150.0" text="Quit">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
