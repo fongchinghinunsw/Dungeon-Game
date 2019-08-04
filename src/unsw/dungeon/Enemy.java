@@ -135,10 +135,9 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 	 */
 	@Override
 	public void update(Subject obj) {
-		if (!this.isAlive().getValue()) {
+		if (!this.isAlive().getValue() || this.isPause().getValue()) {
 			return;
 		}
-
 		if (obj instanceof Player) {
 			Player player = (Player) obj;
 			if (dungeon.sameClass(getX(), getY(), "Player")) {

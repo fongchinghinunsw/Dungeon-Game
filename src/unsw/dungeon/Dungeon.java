@@ -11,8 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.util.Duration;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -32,6 +35,7 @@ public class Dungeon {
 	private int nDoors;
 	private GoalExpression goalExpression;
 	private BooleanProperty pause;
+	private Timeline goalChecker;
 
 	/**
 	 * constructor for dungeon
@@ -47,6 +51,16 @@ public class Dungeon {
 		this.nKeys = 0;
 		this.nDoors = 0;
 		this.pause = new SimpleBooleanProperty(false);
+		this.goalChecker = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> {
+			if (!pause.getValue()) {
+				if (this.hasWin().getValue()) {
+					System.out.println("You have win the game sucker");
+					goalChecker.stop();
+				}
+			}
+		}));
+		goalChecker.setCycleCount(Timeline.INDEFINITE);
+		goalChecker.play();
 	}
 
 	/**

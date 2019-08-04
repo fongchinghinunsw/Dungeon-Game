@@ -3,6 +3,8 @@ package unsw.dungeon;
 import java.io.IOException;
 import java.util.Map;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -17,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class DungeonScreen {
 
@@ -137,6 +140,7 @@ public class DungeonScreen {
 	}
 
 	public void handleRestartButton() throws IOException {
+		controller.pauseGame();
 		this.start();
 	}
 
@@ -153,12 +157,14 @@ public class DungeonScreen {
 	}
 
 	public void handleQuitButton() {
-		controller.deleteGame();
+		controller.pauseGame();
 		startScreen.start();
 	}
 
 	public void gameOver() {
-		gameOverScreen.start();
+		Timeline timeline = new Timeline(
+			new KeyFrame(Duration.seconds(1),e->gameOverScreen.start()));
+		timeline.play();
 	}
 
 	public DungeonController getController() {

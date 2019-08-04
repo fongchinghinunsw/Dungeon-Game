@@ -48,6 +48,7 @@ public class DungeonController {
 		this.initialEntities = new ArrayList<>(initialEntities);
 		this.deletedEntities = new ArrayList<>();
 		this.images = images;
+
 	}
 
 	public void listenPlayerStatus(DungeonScreen dungeonScreen) {
@@ -151,7 +152,7 @@ public class DungeonController {
 				// remove bomb from player's backpack.
 				player.useItem("Bomb");
 			}
-		} else if (event.getCode() == KeyCode.J) {
+		} else if (event.getCode() == KeyCode.V) {
 			if (player.findKey() != null && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares, (Image) images.get("Key"));
 				dungeon.removeEquippedEntityFromBackPack(player.getX(), player.getY(), "Key");
@@ -164,10 +165,18 @@ public class DungeonController {
 		for (Node node : initialEntities) {
 			if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
 				ImageView imageView = (ImageView) node;
+				ImageView possibleBomb = getExplodedBomb(column, row, gridPane);
+				if (possibleBomb != null) {
+					deletedEntities.add(possibleBomb);
+					initialEntities.remove(possibleBomb);
+					gridPane.getChildren().remove(possibleBomb);
+					return true;
+				}
 				if (imageView.getImage() != (Image) images.get("Player")
 						&& imageView.getImage() != (Image) images.get("Hound")
 						&& imageView.getImage() != (Image) images.get("Mage")) {
 					deletedEntities.add(imageView);
+					initialEntities.remove(imageView);
 					gridPane.getChildren().remove(imageView);
 					return true;
 				}
@@ -212,7 +221,20 @@ public class DungeonController {
 		dungeon.resumeGame();
 	}
 
-	public void deleteGame() {
-		dungeon.pauseGame();
+	public GridPane getPane() {
+		return squares;
+	}
+
+	public ImageView getExplodedBomb(int column, int row, GridPane gridPane) {
+		for (Node node : initialEntities) {
+			if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+				ImageView imageView = (ImageView) node;
+				if (((LocatedImage) imageView.getImage()).getUrl().equals("/bomb_lit_4.png")) {
+					return imageView;
+				}
+			}
+		}
+		return null;
+
 	}
 }

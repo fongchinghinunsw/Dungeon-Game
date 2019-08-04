@@ -110,20 +110,6 @@ public class Backpack {
 	}
 
 	/**
-	 * gets the sword from the backpack
-	 * 
-	 * @return the sword
-	 */
-	public Sword getSword() {
-		for (Equipable entity : items) {
-			if (entity.getClassName().equals("Sword")) {
-				return (Sword) entity;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * removes the sword from the backpack
 	 * 
 	 * @return removed sword
@@ -180,5 +166,19 @@ public class Backpack {
 			}
 		}
 		return map;
+	}
+
+	/**
+	 * gets the sword from the backpack
+	 * 
+	 * @return the sword
+	 */
+	public Sword getSword() {
+		for (Equipable entity : items) {
+			if (entity.getClassName().equals("Sword")) {
+				return (Sword) entity;
+			}
+		}
+		return null;
 	}
 }
