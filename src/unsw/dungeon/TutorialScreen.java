@@ -105,7 +105,7 @@ public class TutorialScreen {
 		potionLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		potionLabel2.setTextFill(Paint.valueOf("White"));
 
-		Label swordLabel1 = new Label("Sword lasts 5 hits.");
+		Label swordLabel1 = new Label("Sword lasts 5 hits. Press F to drop.");
 		root.add(swordLabel1, 8, 42);
 		swordLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		swordLabel1.setMaxWidth(Region.USE_PREF_SIZE);
@@ -117,13 +117,13 @@ public class TutorialScreen {
 		swordLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		swordLabel2.setTextFill(Paint.valueOf("White"));
 
-		Label keyLabel = new Label("Key can open doors. Carry one key at a time.");
+		Label keyLabel = new Label("Key open a specific door and disappears.");
 		root.add(keyLabel, 8, 54);
 		keyLabel.setMinWidth(Region.USE_PREF_SIZE);
 		keyLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		keyLabel.setTextFill(Paint.valueOf("White"));
 		
-		Label keyLabel1 = new Label("Key disappears after opening door.");
+		Label keyLabel1 = new Label("Carry one key at a time. Press J to drop.");
 		root.add(keyLabel1, 8, 58);
 		keyLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		keyLabel1.setMaxWidth(Region.USE_PREF_SIZE);
