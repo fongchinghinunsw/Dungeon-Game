@@ -136,72 +136,72 @@ public class TutorialScreen {
 		treasureLabel.setTextFill(Paint.valueOf("White"));
 		
 		Label wallLabel = new Label("Going through the wall is not an option.");
-		root.add(wallLabel, 78, 6);
+		root.add(wallLabel, 74, 6);
 		wallLabel.setMinWidth(Region.USE_PREF_SIZE);
 		wallLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		wallLabel.setTextFill(Paint.valueOf("White"));
 		
 		Label boulderLabel = new Label("Boulders can be pushed.");
-		root.add(boulderLabel, 78, 18);
+		root.add(boulderLabel, 74, 18);
 		boulderLabel.setMinWidth(Region.USE_PREF_SIZE);
 		boulderLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		boulderLabel.setTextFill(Paint.valueOf("White"));
 		
 		Label boulderLabel1 = new Label("You can only push one boulder at a time.");
-		root.add(boulderLabel1, 78, 22);
+		root.add(boulderLabel1, 74, 22);
 		boulderLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		boulderLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		boulderLabel1.setTextFill(Paint.valueOf("White"));
 
 		Label enemyLabel1 = new Label("Enemy moves towards you.");
-		root.add(enemyLabel1, 78, 30);
+		root.add(enemyLabel1, 74, 30);
 		enemyLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		enemyLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		enemyLabel1.setTextFill(Paint.valueOf("White"));
 		
 		Label enemyLabel2 = new Label("Turning into Hulk scares it away.");
-		root.add(enemyLabel2, 78, 34);
+		root.add(enemyLabel2, 74, 34);
 		enemyLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		enemyLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		enemyLabel2.setTextFill(Paint.valueOf("White"));
 		
 		Label doorLabel1 = new Label("Closed doors stop you.");
-		root.add(doorLabel1, 78, 42);
+		root.add(doorLabel1, 74, 42);
 		doorLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		doorLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		doorLabel1.setTextFill(Paint.valueOf("White"));
 		
 		Label doorLabel2 = new Label("Doors can be opened by a specific key.");
-		root.add(doorLabel2, 78, 46);
+		root.add(doorLabel2, 74, 46);
 		doorLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		doorLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		doorLabel2.setTextFill(Paint.valueOf("White"));
 		
 		Label triggerLabel1 = new Label("Trigger the trigger with a boulder.");
-		root.add(triggerLabel1, 78, 54);
+		root.add(triggerLabel1, 74, 54);
 		triggerLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		triggerLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		triggerLabel1.setTextFill(Paint.valueOf("White"));
 		
 		Label triggerLabel2 = new Label("Trigger all triggers to fulfill the goal.");
-		root.add(triggerLabel2, 78, 58);
+		root.add(triggerLabel2, 74, 58);
 		triggerLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		triggerLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		triggerLabel2.setTextFill(Paint.valueOf("White"));
 		
 		Label exitLabel1 = new Label("Move to the exit to fulfill the goal.");
-		root.add(exitLabel1, 78, 66);
+		root.add(exitLabel1, 74, 66);
 		exitLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		exitLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		exitLabel1.setTextFill(Paint.valueOf("White"));
 		
 		Label exitLabel2 = new Label("Finish the other tasks first though!");
-		root.add(exitLabel2, 78, 70);
+		root.add(exitLabel2, 74, 70);
 		exitLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		exitLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		exitLabel2.setTextFill(Paint.valueOf("White"));
 		
-		scene = new Scene(root, 750, 500);
+		scene = new Scene(root, 715, 450);
 	}
 
 	public void start() {
