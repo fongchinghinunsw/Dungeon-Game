@@ -251,8 +251,8 @@ public class Dungeon {
 		entities.remove(boulder);
 	}
 
-	/*
-	 * Add observers of each subject.
+	/**
+	 * adds observer for everyone
 	 */
 	public void addObservers() {
 		for (Entity entity : entities) {
@@ -270,6 +270,12 @@ public class Dungeon {
 		}
 	}
 
+	/**
+	 * adds observer of a specific class
+	 * 
+	 * @param className
+	 * @param observer  to be added
+	 */
 	public void addObserverOfClass(String className, Observer observer) {
 		for (Entity entity : entities) {
 			if (entity.getClassName().equals(className)) {
@@ -279,6 +285,11 @@ public class Dungeon {
 		}
 	}
 
+	/**
+	 * Adds a specific observer for every entity(except walls)
+	 * 
+	 * @param o observer to be added
+	 */
 	public void addObserver(Observer o) {
 		Entity entity = (Entity) o;
 		if (!(sameClass(entity.getX(), entity.getY(), "Wall"))) {
@@ -293,6 +304,11 @@ public class Dungeon {
 		}
 	}
 
+	/**
+	 * removes a given observer
+	 * 
+	 * @param observer to be removed
+	 */
 	public void removeObserver(Observer o) {
 		for (Entity entity : entities) {
 			if (entity instanceof Subject) {
@@ -301,13 +317,20 @@ public class Dungeon {
 		}
 	}
 
+	/**
+	 * notifies all observers of player
+	 */
 	public void notifyPlayerObservers() {
 		player.notifyObservers();
 	}
 
-	/*
-	 * Check if there exists an object on the grid belongs to one of the specified
-	 * classes.
+	/**
+	 * checks if there is an object in a given grid that is of a given class
+	 * 
+	 * @param x         coordinate of given grid
+	 * @param y         coordinate of given grid
+	 * @param className to search
+	 * @return true if found
 	 */
 	public boolean sameClass(int x, int y, String className) {
 		return sameClass(x, y, new HashSet<String>(Arrays.asList(className)));
@@ -344,8 +367,12 @@ public class Dungeon {
 		return false;
 	}
 
-	/*
-	 * Returns a list which stores all entities in a grid.
+	/**
+	 * gets a list of all entities in a given grid
+	 * 
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @return list
 	 */
 	public ArrayList<Entity> getEntities(int x, int y) {
 		ArrayList<Entity> entityList = new ArrayList<>();
@@ -357,8 +384,11 @@ public class Dungeon {
 		return entityList;
 	}
 
-	/*
-	 * Remove the entity from the dungeon when it is equipped.
+	/**
+	 * removes a equipable from the dungeon when its equipped
+	 * 
+	 * @param x coordinate to look for
+	 * @param y coordinate to look for
 	 */
 	public void removeEquippedEntityFromDungeon(int x, int y) {
 		ArrayList<Entity> entityList = getEntities(x, y);
@@ -369,12 +399,17 @@ public class Dungeon {
 		}
 	}
 
+	/**
+	 * removes an entity from the list of entities
+	 * 
+	 * @param entity to be removed
+	 */
 	public void removeEntity(Entity entity) {
 		entities.remove(entity);
 	}
 
 	/**
-	 * removes an equipped item of a given class
+	 * removes an equipped item of a given class from the backpack
 	 * 
 	 * @param x         of player
 	 * @param y         of player
@@ -397,14 +432,29 @@ public class Dungeon {
 		addObserver((Observer) entity);
 	}
 
+	/**
+	 * getter for goalExpression
+	 * 
+	 * @return goalExpression
+	 */
 	public GoalExpression getGoalExpression() {
 		return goalExpression;
 	}
 
+	/**
+	 * setter for goalExpression
+	 * 
+	 * @param goalExpression to be set
+	 */
 	public void setGoalExpression(GoalExpression goalExpression) {
 		this.goalExpression = goalExpression;
 	}
 
+	/**
+	 * checks if player has satisfied all goals
+	 * 
+	 * @return BooleanProperty containing goal status
+	 */
 	public BooleanProperty hasWin() {
 		return goalExpression.isSatisfied();
 	}
@@ -476,6 +526,12 @@ public class Dungeon {
 		return false;
 	}
 
+	/**
+	 * Sets up a graph for the dungeon(To be used by towardsPlayerPath, in a DFS
+	 * pathfinding algo)
+	 * 
+	 * @return List of edges
+	 */
 	public List<String> dungeonGraph() {
 		List<String> edges = new ArrayList<>();
 		Set<String> cantMoveSet = new HashSet<>();
