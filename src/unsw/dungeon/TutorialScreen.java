@@ -2,10 +2,7 @@ package unsw.dungeon;
 
 import java.io.IOException;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,12 +14,23 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+/**
+ * Screen of the tutorial, contains representation of the screen.
+ *
+ * A basic prototype to serve as the representation of tutorial screen.
+ *
+ * @author Stephen Fong
+ *
+ */
 public class TutorialScreen {
 	private Stage stage;
 	private String title;
 	private TutorialScreenController controller;
 	private Scene scene;
 
+	/*
+	 * Constructor of the screen.
+	 */
 	public TutorialScreen(Stage stage) throws IOException {
 		this.stage = stage;
 		title = "Tutorial";
@@ -73,13 +81,13 @@ public class TutorialScreen {
 		playerLabel.setMinWidth(Region.USE_PREF_SIZE);
 		playerLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		playerLabel.setTextFill(Paint.valueOf("White"));
-		
+
 		Label playerLabel2 = new Label("Use arrow keys to move yourself around :)");
 		root.add(playerLabel2, 8, 10);
 		playerLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		playerLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		playerLabel2.setTextFill(Paint.valueOf("White"));
-		
+
 		Label bombLabel1 = new Label("Press T to use Bomb. Explodes in 3 seconds.");
 		root.add(bombLabel1, 8, 18);
 		bombLabel1.setMinWidth(Region.USE_PREF_SIZE);
@@ -91,14 +99,13 @@ public class TutorialScreen {
 		bombLabel3.setMinWidth(Region.USE_PREF_SIZE);
 		bombLabel3.setMaxWidth(Region.USE_PREF_SIZE);
 		bombLabel3.setTextFill(Paint.valueOf("White"));
-		
-		
+
 		Label potionLabel1 = new Label("Press G to use Potion. Lasts for 5 seconds.");
 		root.add(potionLabel1, 8, 30);
 		potionLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		potionLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		potionLabel1.setTextFill(Paint.valueOf("White"));
-		
+
 		Label potionLabel2 = new Label("Enemy on the same grid with you gets killed");
 		root.add(potionLabel2, 8, 34);
 		potionLabel2.setMinWidth(Region.USE_PREF_SIZE);
@@ -110,7 +117,7 @@ public class TutorialScreen {
 		swordLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		swordLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		swordLabel1.setTextFill(Paint.valueOf("White"));
-		
+
 		Label swordLabel2 = new Label("Sword kills enemy when on the same grid.");
 		root.add(swordLabel2, 8, 46);
 		swordLabel2.setMinWidth(Region.USE_PREF_SIZE);
@@ -122,7 +129,7 @@ public class TutorialScreen {
 		keyLabel.setMinWidth(Region.USE_PREF_SIZE);
 		keyLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		keyLabel.setTextFill(Paint.valueOf("White"));
-		
+
 		Label keyLabel1 = new Label("Carry one key at a time. Press J to drop.");
 		root.add(keyLabel1, 8, 58);
 		keyLabel1.setMinWidth(Region.USE_PREF_SIZE);
@@ -134,19 +141,19 @@ public class TutorialScreen {
 		treasureLabel.setMinWidth(Region.USE_PREF_SIZE);
 		treasureLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		treasureLabel.setTextFill(Paint.valueOf("White"));
-		
+
 		Label wallLabel = new Label("Going through the wall is not an option.");
 		root.add(wallLabel, 74, 6);
 		wallLabel.setMinWidth(Region.USE_PREF_SIZE);
 		wallLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		wallLabel.setTextFill(Paint.valueOf("White"));
-		
+
 		Label boulderLabel = new Label("Boulders can be pushed.");
 		root.add(boulderLabel, 74, 18);
 		boulderLabel.setMinWidth(Region.USE_PREF_SIZE);
 		boulderLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		boulderLabel.setTextFill(Paint.valueOf("White"));
-		
+
 		Label boulderLabel1 = new Label("You can only push one boulder at a time.");
 		root.add(boulderLabel1, 74, 22);
 		boulderLabel1.setMinWidth(Region.USE_PREF_SIZE);
@@ -158,52 +165,55 @@ public class TutorialScreen {
 		enemyLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		enemyLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		enemyLabel1.setTextFill(Paint.valueOf("White"));
-		
+
 		Label enemyLabel2 = new Label("Turning into Hulk scares it away.");
 		root.add(enemyLabel2, 74, 34);
 		enemyLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		enemyLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		enemyLabel2.setTextFill(Paint.valueOf("White"));
-		
+
 		Label doorLabel1 = new Label("Closed doors stop you.");
 		root.add(doorLabel1, 74, 42);
 		doorLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		doorLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		doorLabel1.setTextFill(Paint.valueOf("White"));
-		
+
 		Label doorLabel2 = new Label("Doors can be opened by a specific key.");
 		root.add(doorLabel2, 74, 46);
 		doorLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		doorLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		doorLabel2.setTextFill(Paint.valueOf("White"));
-		
+
 		Label triggerLabel1 = new Label("Trigger the trigger with a boulder.");
 		root.add(triggerLabel1, 74, 54);
 		triggerLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		triggerLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		triggerLabel1.setTextFill(Paint.valueOf("White"));
-		
+
 		Label triggerLabel2 = new Label("Trigger all triggers to fulfill the goal.");
 		root.add(triggerLabel2, 74, 58);
 		triggerLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		triggerLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		triggerLabel2.setTextFill(Paint.valueOf("White"));
-		
+
 		Label exitLabel1 = new Label("Move to the exit to fulfill the goal.");
 		root.add(exitLabel1, 74, 66);
 		exitLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		exitLabel1.setMaxWidth(Region.USE_PREF_SIZE);
 		exitLabel1.setTextFill(Paint.valueOf("White"));
-		
+
 		Label exitLabel2 = new Label("Finish the other tasks first though!");
 		root.add(exitLabel2, 74, 70);
 		exitLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		exitLabel2.setMaxWidth(Region.USE_PREF_SIZE);
 		exitLabel2.setTextFill(Paint.valueOf("White"));
-		
+
 		scene = new Scene(root, 715, 450);
 	}
 
+	/*
+	 * loading the screen.
+	 */
 	public void start() {
 		stage.setTitle(title);
 		stage.setScene(scene);
@@ -211,6 +221,9 @@ public class TutorialScreen {
 		stage.show();
 	}
 
+	/*
+	 * Get the controller of the tutorial screen.
+	 */
 	public TutorialScreenController getController() {
 		return controller;
 	}
