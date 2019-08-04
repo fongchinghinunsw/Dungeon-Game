@@ -48,6 +48,7 @@ public class DungeonController {
 		this.initialEntities = new ArrayList<>(initialEntities);
 		this.deletedEntities = new ArrayList<>();
 		this.images = images;
+		
 	}
 
 	public void listenPlayerStatus(DungeonScreen dungeonScreen) {
@@ -217,10 +218,6 @@ public class DungeonController {
 
 	public void resumeGame() {
 		dungeon.resumeGame();
-	}
-
-	public void deleteGame() {
-		dungeon.pauseGame();
 	}
 
 	public GridPane getPane() {
