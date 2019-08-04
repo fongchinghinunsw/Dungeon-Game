@@ -43,26 +43,28 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image openDoorImage;
 	private Image mageImage;
 
+	private DungeonController controller;
+
 	public DungeonControllerLoader(String filename) throws FileNotFoundException {
 		super(filename);
 		entities = new ArrayList<>();
-		playerImage = new Image("/human_new.png");
-		wallImage = new Image("/brick_brown_0.png");
-		exitImage = new Image("/exit.png");
-		boulderImage = new Image("/boulder.png");
-		keyImage = new Image("/key.png");
-		treasureImage = new Image("/gold_pile.png");
-		potionImage = new Image("/brilliant_blue_new.png");
-		bombImage = new Image("/bomb_unlit.png");
-		bombImageLit1 = new Image("/bomb_lit_2.png");
-		bombImageLit2 = new Image("/bomb_lit_3.png");
-		bombImageLit3 = new Image("/bomb_lit_4.png");
-		houndImage = new Image("/hound.png");
-		swordImage = new Image("/greatsword_1_new.png");
-		switchImage = new Image("/pressure_plate.png");
-		closedDoorImage = new Image("/closed_door.png");
-		openDoorImage = new Image("/open_door.png");
-		mageImage = new Image("/gnome.png");
+		playerImage = new LocatedImage("/human_new.png");
+		wallImage = new LocatedImage("/brick_brown_0.png");
+		exitImage = new LocatedImage("/exit.png");
+		boulderImage = new LocatedImage("/boulder.png");
+		keyImage = new LocatedImage("/key.png");
+		treasureImage = new LocatedImage("/gold_pile.png");
+		potionImage = new LocatedImage("/brilliant_blue_new.png");
+		bombImage = new LocatedImage("/bomb_unlit.png");
+		bombImageLit1 = new LocatedImage("/bomb_lit_2.png");
+		bombImageLit2 = new LocatedImage("/bomb_lit_3.png");
+		bombImageLit3 = new LocatedImage("/bomb_lit_4.png");
+		houndImage = new LocatedImage("/hound.png");
+		swordImage = new LocatedImage("/greatsword_1_new.png");
+		switchImage = new LocatedImage("/pressure_plate.png");
+		closedDoorImage = new LocatedImage("/closed_door.png");
+		openDoorImage = new LocatedImage("/open_door.png");
+		mageImage = new LocatedImage("/gnome.png");
 	}
 
 	@Override
@@ -197,7 +199,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 			Boulder boulder = (Boulder) entity;
 			boulder.destroyed().addListener((observable, oldValue, newValue) -> {
 				if (newValue) {
-					node.toBack();
+					this.getController().removeNodeByRowColumnIndex(entity.getX(), entity.getY(), controller.getPane());
 				}
 			});
 		}
@@ -214,7 +216,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 					img.setImage(bombImageLit3);
 					bomb.notifyObservers();
 				} else if (newValue.intValue() == 0) {
-					img.toBack();
+					this.getController().removeNodeByRowColumnIndex(entity.getX(), entity.getY(), controller.getPane());
 				}
 			});
 		}
@@ -257,7 +259,13 @@ public class DungeonControllerLoader extends DungeonLoader {
 		map.put("Key", keyImage);
 		map.put("Treasure", treasureImage);
 		map.put("Potion", potionImage);
-		return new DungeonController(load(), entities, map);
+		map.put("Exploded_Bomb",bombImageLit3);
+		this.controller = new DungeonController(load(), entities, map);
+		return controller;
+	}
+	
+	public DungeonController getController() {
+		return controller;
 	}
 
 }

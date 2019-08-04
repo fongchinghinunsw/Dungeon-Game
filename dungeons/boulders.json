@@ -233,6 +233,11 @@
       "type": "bomb"
     },
     {
+      "x": 3,
+      "y": 2,
+      "type": "bomb"
+    },
+    {
       "x": 5,
       "y": 2,
       "type": "sword"
