@@ -63,8 +63,6 @@ public class Player extends Movable implements Subject, Observer {
 					dungeon.removeObserver((Observer) e);
 					dungeon.removeEntity(e);
 					backpack.addItem(e);
-					String message = "Added item of type " + e.getClassName() + " into the backpack.";
-					System.out.println(message);
 					return true;
 				}
 			}
@@ -83,14 +81,12 @@ public class Player extends Movable implements Subject, Observer {
 	 * Use an item in the player's backpack.
 	 */
 	public boolean useItem(String type) {
+		// a potion is already in use.
 		if (type.equals("Potion") && this.potionEffect) {
-			System.out.println("A potion is already in use!");
 			return false;
 		}
 		Equipable item = backpack.removeItem(type);
 		if (item == null) {
-			String message = "You don't have an item of " + type + " kind!";
-			System.out.println(message);
 			return false;
 		}
 		if (type.equals("Potion")) {
@@ -99,8 +95,6 @@ public class Player extends Movable implements Subject, Observer {
 			potion.usePotion();
 		}
 
-		String message = "An item of type " + type + " is used.";
-		System.out.println(message);
 		return true;
 	}
 
@@ -123,7 +117,6 @@ public class Player extends Movable implements Subject, Observer {
 	 */
 	public void die() {
 		this.alive.setValue(false);
-		System.out.println("Player is now dead");
 	}
 
 	/*

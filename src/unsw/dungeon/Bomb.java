@@ -115,8 +115,6 @@ public class Bomb extends Equipable implements Subject, Observer, Runnable {
 				String className = ((Entity) o).getClassName();
 				if (className.equals("Player") || className.equals("Boulder") || className.equals("Enemy")) {
 					o.update(this);
-					String message = "Bomb here. Just told the " + className + " that Imma blow'em up";
-					System.out.println(message);
 				}
 			}
 		}
