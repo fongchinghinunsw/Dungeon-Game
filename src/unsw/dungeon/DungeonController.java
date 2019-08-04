@@ -48,7 +48,7 @@ public class DungeonController {
 		this.initialEntities = new ArrayList<>(initialEntities);
 		this.deletedEntities = new ArrayList<>();
 		this.images = images;
-		
+
 	}
 
 	public void listenPlayerStatus(DungeonScreen dungeonScreen) {
@@ -152,7 +152,7 @@ public class DungeonController {
 				// remove bomb from player's backpack.
 				player.useItem("Bomb");
 			}
-		} else if (event.getCode() == KeyCode.J) {
+		} else if (event.getCode() == KeyCode.V) {
 			if (player.findKey() != null && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares, (Image) images.get("Key"));
 				dungeon.removeEquippedEntityFromBackPack(player.getX(), player.getY(), "Key");
