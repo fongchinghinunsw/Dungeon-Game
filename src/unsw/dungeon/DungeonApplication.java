@@ -5,6 +5,12 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Sets up the screens and controllers and launches the game
+ * 
+ * @author z5211173
+ *
+ */
 public class DungeonApplication extends Application {
 
 	@Override
@@ -31,6 +37,11 @@ public class DungeonApplication extends Application {
 		startScreen.start();
 	}
 
+	/**
+	 * launches game
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -42,6 +42,13 @@ public class DungeonController {
 
 	private long lastMoveNanos;
 
+	/**
+	 * constructor for dungeon controller
+	 * 
+	 * @param dungeon
+	 * @param initialEntities
+	 * @param images
+	 */
 	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, Map<String, Image> images) {
 		this.dungeon = dungeon;
 		this.player = dungeon.getPlayer();
@@ -51,15 +58,24 @@ public class DungeonController {
 
 	}
 
+	/**
+	 * listens to player's isAlive attribute
+	 * 
+	 * @param dungeonScreen to end game
+	 */
 	public void listenPlayerStatus(DungeonScreen dungeonScreen) {
 		getPlayerStatus().addListener((observable, oldValue, newValue) -> {
 			if (!newValue) {
 				dungeonScreen.gameOver();
-			} else {
 			}
 		});
 	}
 
+	/**
+	 * listens to dungeon's hasWin status
+	 * 
+	 * @param dungeonScreen to end game
+	 */
 	public void listenWinStatus(DungeonScreen dungeonScreen) {
 		getWinStatus().addListener((observable, oldValue, newValue) -> {
 			if (newValue) {
@@ -94,6 +110,11 @@ public class DungeonController {
 		}
 	}
 
+	/**
+	 * handles player's request to look at backpack
+	 * 
+	 * @return mapping of item names to amounts
+	 */
 	public Map<String, Integer> handleSeeBackpackRequest() {
 		return dungeon.getItemsInBackpack();
 	}
@@ -160,6 +181,14 @@ public class DungeonController {
 		}
 	}
 
+	/**
+	 * removes an item by its column and row
+	 * 
+	 * @param column   of item
+	 * @param row      of item
+	 * @param gridPane containing items
+	 * @return true if removed successfully
+	 */
 	public boolean removeNodeByRowColumnIndex(int column, int row, GridPane gridPane) {
 
 		for (Node node : initialEntities) {
@@ -185,6 +214,15 @@ public class DungeonController {
 		return false;
 	}
 
+	/**
+	 * adds a node to a given row and column
+	 * 
+	 * @param column   to put item
+	 * @param row      to put item
+	 * @param gridPane to put item
+	 * @param image    to put
+	 * @return true if put successfully
+	 */
 	public boolean addNodeByRowColumnIndex(int column, int row, GridPane gridPane, Image image) {
 		for (ImageView imageView : deletedEntities) {
 			if (imageView.getImage() == image) {
@@ -201,30 +239,64 @@ public class DungeonController {
 		return false;
 	}
 
+	/**
+	 * gets mapping of items to amounts
+	 * 
+	 * @return
+	 */
 	public Map<String, Image> getImages() {
 		return this.images;
 	}
 
+	/**
+	 * pauses the game
+	 */
 	public void pauseGame() {
 		dungeon.pauseGame();
 	}
 
+	/**
+	 * gets the isAlive attribute from player
+	 * 
+	 * @return
+	 */
 	public BooleanProperty getPlayerStatus() {
 		return player.isAlive();
 	}
 
+	/**
+	 * gets the hasWin from dungeon
+	 * 
+	 * @return
+	 */
 	public BooleanProperty getWinStatus() {
 		return dungeon.hasWin();
 	}
 
+	/**
+	 * resumes the game
+	 */
 	public void resumeGame() {
 		dungeon.resumeGame();
 	}
 
+	/**
+	 * gets the pane
+	 * 
+	 * @return
+	 */
 	public GridPane getPane() {
 		return squares;
 	}
 
+	/**
+	 * gets the image of an exploded bomb if there is one
+	 * 
+	 * @param column   to look for
+	 * @param row      to look for
+	 * @param gridPane to go to
+	 * @return bomb if found, null otherwise
+	 */
 	public ImageView getExplodedBomb(int column, int row, GridPane gridPane) {
 		for (Node node : initialEntities) {
 			if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
