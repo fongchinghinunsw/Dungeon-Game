@@ -28,6 +28,10 @@ public class Boulder extends Movable implements Subject, Observer {
 		destroyed = new SimpleBooleanProperty(false);
 	}
 
+	/**
+	 * checks if boulder is destroyed
+	 * @return true BoolPpty if destroyed
+	 */
 	public BooleanProperty destroyed() {
 		return destroyed;
 	}

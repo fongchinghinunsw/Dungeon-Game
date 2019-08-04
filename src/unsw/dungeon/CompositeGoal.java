@@ -14,22 +14,23 @@ public class CompositeGoal implements GoalExpression {
 	private Operator operator;
 	ArrayList<GoalExpression> children = new ArrayList<GoalExpression>();
 
+	/**
+	 * composite goal constructor
+	 * @param operator, AND,OR or NULL
+	 */
 	public CompositeGoal(Operator operator) {
 		this.operator = operator;
 		this.satisfied = new SimpleBooleanProperty(false);
 	}
 
+	/**
+	 * adds a child into the subgoals
+	 * @param child to be added
+	 * @return true no matter what happens
+	 */
 	public boolean add(GoalExpression child) {
 		children.add(child);
 		return true;
-	}
-
-	public void print() {
-		System.out.println(children.size());
-		for (int i = 0; i < children.size(); i++) {
-			System.out.printf("The operator is %s\n", operator);
-			children.get(i).print();
-		}
 	}
 
 	@Override

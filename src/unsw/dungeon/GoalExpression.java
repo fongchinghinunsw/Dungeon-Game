@@ -23,5 +23,4 @@ public interface GoalExpression {
 	 */
 	public BooleanProperty isSatisfied();
 
-	public void print();
 }
