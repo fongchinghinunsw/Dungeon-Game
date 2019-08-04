@@ -9,6 +9,13 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.util.Duration;
 
+/**
+ * Enemy that moves towards the player when player is not invincible, and runs
+ * away when the player is.
+ * 
+ * @author z5211173
+ *
+ */
 public abstract class Enemy extends Movable implements Subject, Observer {
 
 	private Dungeon dungeon;
@@ -21,6 +28,13 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 	private List<String> pathToPlayer;
 	private BooleanProperty pause;
 
+	/**
+	 * Constructor for enemy class
+	 * 
+	 * @param dungeon
+	 * @param x
+	 * @param y
+	 */
 	public Enemy(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
@@ -49,19 +63,34 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		enemyTimer.play();
 	}
 
+	/**
+	 * setter for movespeed
+	 * 
+	 * @param newSpeed
+	 */
 	public void setSpeedFactor(MoveSpeed newSpeed) {
 		this.moveSpeed = newSpeed;
 	}
 
+	/**
+	 * checks if enemy is alive
+	 * 
+	 * @return true BoolPpty if enemy alive
+	 */
 	public BooleanProperty isAlive() {
 		return this.alive;
 	}
 
+	/**
+	 * kills the player
+	 */
 	public void die() {
 		alive.set(false);
-		System.out.println("Enemy is dead");
 	}
 
+	/**
+	 * looks for the player
+	 */
 	public void findPlayer() {
 		if (this.pathToPlayer == null) {
 			this.pathToPlayer = dungeon.towardsPlayerPath(this.getX(), this.getY(), dungeon.getPlayerX(),
@@ -71,7 +100,6 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		if (!alive.getValue()) {
 			return;
 		}
-//		System.out.println("Trying to find the player......");
 		Player player = this.dungeon.getPlayer();
 
 		MoveState newState;
@@ -101,6 +129,9 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		}
 	}
 
+	/**
+	 * gets the speed factor
+	 */
 	public long getSpeedFactor() {
 		return moveSpeed.getSpeedFactor();
 	}
@@ -129,10 +160,6 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		}
 	}
 
-	/*
-	 * THe enemy will get updated from the player when the player is on the same
-	 * grid with it.
-	 */
 	@Override
 	public void update(Subject obj) {
 		if (!this.isAlive().getValue() || this.isPause().getValue()) {
@@ -142,7 +169,6 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 			Player player = (Player) obj;
 			if (dungeon.sameClass(getX(), getY(), "Player")) {
 				if (player.countSwordInBackPack() == 0 && !player.isInvincible()) {
-					System.out.println("Player get killed");
 					dungeon.killPlayer();
 				}
 			} else {
@@ -156,6 +182,11 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 		}
 	}
 
+	/**
+	 * checks if the game is paused
+	 * 
+	 * @return true boolPpty if game paused
+	 */
 	public BooleanProperty isPause() {
 		return this.pause;
 	}

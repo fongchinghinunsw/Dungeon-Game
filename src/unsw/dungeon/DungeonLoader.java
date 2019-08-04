@@ -52,6 +52,12 @@ public abstract class DungeonLoader {
 		return dungeon;
 	}
 
+	/**
+	 * loads all entities in json file
+	 * 
+	 * @param dungeon to add entities
+	 * @param json    to read
+	 */
 	private void loadEntity(Dungeon dungeon, JSONObject json) {
 		String type = json.getString("type");
 		int x = json.getInt("x");
@@ -167,7 +173,5 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Switch floorSwitch);
 
 	public abstract void onLoad(Door door);
-
-	// TODO Create additional abstract methods for the other entities
 
 }

@@ -1,7 +1,19 @@
 package unsw.dungeon;
 
+/**
+ * Player can stand on exit and walk through the exit
+ * 
+ * @author z5211173
+ *
+ */
 public class Exit extends Entity implements Observer {
 
+	/**
+	 * constructor for exit
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public Exit(int x, int y) {
 		super(x, y);
 	}

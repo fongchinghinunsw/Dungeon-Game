@@ -563,6 +563,15 @@ public class Dungeon {
 		return edges;
 	}
 
+	/**
+	 * finds a path towards the player
+	 * 
+	 * @param x     coordinate of enemy
+	 * @param y     coordinate of enemy
+	 * @param destX coordinate of player
+	 * @param destY coordinate of player
+	 * @return List containing the paths(Strings like "Left","Up", etc.)
+	 */
 	public List<String> towardsPlayerPath(int x, int y, int destX, int destY) {
 		List<String> edges = dungeonGraph();
 		List<String> movements = new ArrayList<>();
@@ -570,7 +579,6 @@ public class Dungeon {
 		Set<String> cantMoveSet = new HashSet<>();
 		cantMoveSet.add("Wall");
 		cantMoveSet.add("Boulder");
-
 		for (int i = 0; i < this.width; i++) {
 			for (int j = 0; j < this.height; j++) {
 				if (!(sameClass(i, j, cantMoveSet) && canStepOn(i, j))) {
@@ -579,11 +587,20 @@ public class Dungeon {
 			}
 		}
 		findPath(edges, movements, hasVisited, String.format("%d,%d", x, y), String.format("%d,%d", destX, destY));
-
 		return movements;
 
 	}
 
+	/**
+	 * Finds a path towards the player
+	 * 
+	 * @param edges      in the graph
+	 * @param movements  to execute
+	 * @param hasVisited records history of visited nodes
+	 * @param curr       current location in a string, e.g. "3,4"
+	 * @param dest       location of player in a string
+	 * @return true if path can be found
+	 */
 	public boolean findPath(List<String> edges, List<String> movements, Map<String, Boolean> hasVisited, String curr,
 			String dest) {
 		hasVisited.replace(curr, true);
@@ -625,19 +642,35 @@ public class Dungeon {
 		return false;
 	}
 
+	/**
+	 * get number of items in the backpack
+	 * 
+	 * @return mapping of items to amounts
+	 */
 	public Map<String, Integer> getItemsInBackpack() {
 		return player.getNumberOfItemsInBackpack();
 	}
 
+	/**
+	 * pauses the game
+	 */
 	public void pauseGame() {
 		this.pause.setValue(true);
 	}
 
+	/**
+	 * resumes the game
+	 */
 	public void resumeGame() {
 
 		this.pause.setValue(false);
 	}
 
+	/**
+	 * checks if is paused
+	 * 
+	 * @return true BoolPpty if paused
+	 */
 	public BooleanProperty isPause() {
 		return this.pause;
 	}

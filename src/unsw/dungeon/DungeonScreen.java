@@ -21,6 +21,12 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Sets up the display in the dungeon.
+ * 
+ * @author z5211173
+ *
+ */
 public class DungeonScreen {
 
 	GridPane root;
@@ -35,12 +41,23 @@ public class DungeonScreen {
 	private BooleanBinding bothPressed = ctrlPressed.and(QPressed);
 	private int countPauseButtonPressed = 0;
 
+	/**
+	 * Constructor for dungeonScreen
+	 * 
+	 * @param stage to set ip
+	 * @throws IOException
+	 */
 	public DungeonScreen(Stage stage) throws IOException {
 		this.stage = stage;
 		stage.setTitle("Dungeon");
 
 	}
 
+	/**
+	 * start the screen
+	 * 
+	 * @throws IOException
+	 */
 	public void start() throws IOException {
 		// load the game only after the player press the start button.
 		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json");
@@ -127,23 +144,49 @@ public class DungeonScreen {
 		stage.show();
 	}
 
+	/**
+	 * setter for startscreen
+	 * 
+	 * @param startScreen
+	 */
 	public void setStartScreen(StartScreen startScreen) {
 		this.startScreen = startScreen;
 	}
 
+	/**
+	 * setter for gameoverScreen
+	 * 
+	 * @param gameOverScreen
+	 */
 	public void setGameOverScreen(GameOverScreen gameOverScreen) {
 		this.gameOverScreen = gameOverScreen;
 	}
 
+	/**
+	 * setter for winscreen
+	 * 
+	 * @param winScreen
+	 */
 	public void setWinScreen(WinScreen winScreen) {
 		this.winScreen = winScreen;
 	}
 
+	/**
+	 * starts this screen again when restart is pressed
+	 * 
+	 * @throws IOException
+	 */
 	public void handleRestartButton() throws IOException {
 		controller.pauseGame();
 		this.start();
 	}
 
+	/**
+	 * stops everything when pause is pressed
+	 * 
+	 * @param pauseButton
+	 * @param controller
+	 */
 	void handlePauseButton(Button pauseButton, DungeonController controller) {
 		countPauseButtonPressed++;
 		if (countPauseButtonPressed % 2 == 0) {
@@ -156,21 +199,34 @@ public class DungeonScreen {
 		}
 	}
 
+	/**
+	 * goes back to start screen when quit is pressed
+	 */
 	public void handleQuitButton() {
 		controller.pauseGame();
 		startScreen.start();
 	}
 
+	/**
+	 * go to the gameover screen when player dies
+	 */
 	public void gameOver() {
-		Timeline timeline = new Timeline(
-			new KeyFrame(Duration.seconds(1),e->gameOverScreen.start()));
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> gameOverScreen.start()));
 		timeline.play();
 	}
 
+	/**
+	 * getter for controllers
+	 * 
+	 * @return controller
+	 */
 	public DungeonController getController() {
 		return controller;
 	}
 
+	/**
+	 * go to the win screen when the player wins the games
+	 */
 	public void gameWon() {
 		winScreen.start();
 	}
