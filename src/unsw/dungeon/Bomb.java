@@ -20,6 +20,13 @@ public class Bomb extends Equipable implements Subject, Observer, Runnable {
 	private BooleanProperty pause;
 	private ArrayList<Observer> observers;
 
+	/**
+	 * Constructor for bomb
+	 * 
+	 * @param dungeon the bomb is in
+	 * @param x       coordinate of the bomb
+	 * @param y       coordinate of the bomb
+	 */
 	public Bomb(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
@@ -32,27 +39,51 @@ public class Bomb extends Equipable implements Subject, Observer, Runnable {
 		bombTimer.setCycleCount(4);
 	}
 
+	/**
+	 * gets the countdown time
+	 * 
+	 * @return countdown time
+	 */
 	public IntegerProperty getTime() {
 		return countdownTime;
 	}
 
+	/**
+	 * decreases the countdown time after one second passes
+	 */
 	public void decrementCountdownTime() {
 		countdownTime.setValue(countdownTime.getValue() - 1);
 	}
 
+	/**
+	 * check if the bomb has exploded
+	 * 
+	 * @return true if exploded
+	 */
 	public boolean exploded() {
 		return exploded;
 	}
 
+	/**
+	 * checks if the bomb is lit
+	 * 
+	 * @return true if lit
+	 */
 	public boolean lit() {
 		return lit;
 	}
 
+	/**
+	 * lights the bomb
+	 */
 	public void light() {
 		bombTimer.play();
 		lit = true;
 	}
 
+	/**
+	 * sets exploded to true
+	 */
 	public void explode() {
 		exploded = true;
 	}
@@ -91,10 +122,22 @@ public class Bomb extends Equipable implements Subject, Observer, Runnable {
 		}
 	}
 
+	/**
+	 * checks if game is paused
+	 * 
+	 * @return BooleanProperty with true if game paused
+	 */
 	public BooleanProperty isPause() {
 		return this.pause;
 	}
 
+	/**
+	 * creates a timer for the bomb. Useful when game pauses while a bomb is lit
+	 * Re-initializes a timer counting down the remaining seconds
+	 * 
+	 * @param cycle countdown time
+	 * @return timer created
+	 */
 	public Timeline createTimer(int cycle) {
 		Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 			if (pause.getValue() == false) {

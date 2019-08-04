@@ -8,8 +8,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class GameOverScreenController {
+	
 	private Stage stage;
-
 	@FXML
 	private Button retryButton;
 	@FXML

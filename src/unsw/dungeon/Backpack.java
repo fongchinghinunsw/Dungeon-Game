@@ -61,10 +61,10 @@ public class Backpack {
 		return null;
 	}
 
-	/*
-	 * removes key from the backpack
+	/**
+	 * removes a key from the bag
 	 * 
-	 * @return key in bag
+	 * @return the key removed
 	 */
 	public Key removeKey() {
 		for (Equipable e : items) {
@@ -80,8 +80,8 @@ public class Backpack {
 		return null;
 	}
 
-	/*
-	 * get the bomb in the backpack
+	/**
+	 * gets the bomb in the backpack
 	 * 
 	 * @return bomb in bag
 	 */
@@ -94,10 +94,10 @@ public class Backpack {
 		return null;
 	}
 
-	/*
-	 * remove bomb in the backpack
+	/**
+	 * removes a bomb from the backpack (doesn't matter which one)
 	 * 
-	 * @return bomb in bag
+	 * @return bomb removed
 	 */
 	public Bomb removeBomb() {
 		Bomb entity = getBomb();
@@ -110,7 +110,7 @@ public class Backpack {
 	}
 
 	/**
-	 * gets a sword from the backpack
+	 * gets the sword from the backpack
 	 * 
 	 * @return the sword
 	 */
@@ -124,7 +124,7 @@ public class Backpack {
 	}
 
 	/**
-	 * removes a sword from the backpack
+	 * removes the sword from the backpack
 	 * 
 	 * @return removed sword
 	 */
@@ -165,6 +165,11 @@ public class Backpack {
 		return count;
 	}
 
+	/**
+	 * Counts the number of each item in the bag
+	 * 
+	 * @return mapping of items to their respective numbers
+	 */
 	public Map<String, Integer> getNumberOfItems() {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		for (Equipable item : items) {
