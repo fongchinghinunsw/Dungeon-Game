@@ -99,6 +99,9 @@ public class Bomb extends Equipable implements Subject, Observer, Runnable {
 		Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 			if (pause.getValue() == false) {
 				this.decrementCountdownTime();
+				if (countdownTime.getValue() == 1) {
+					dungeon.removeEntity(this);
+				}
 			} else {
 				bombTimer.stop();
 				Thread t = new Thread(this);

@@ -124,10 +124,13 @@ public class DungeonController {
 		} else if (event.getCode() == KeyCode.T) {
 			Bomb bomb = player.getBomb();
 			if (bomb != null && !dungeon.hasBomb(player.getX(), player.getY())) {
+				dungeon.addEntity(bomb);
 				bomb.setX(player.getX());
 				bomb.setY(player.getY());
 				bomb.light();
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares, (Image) images.get("Bomb"));
+				// remove bomb from player's backpack.
+				player.useItem("Bomb");
 			}
 		} else if (event.getCode() == KeyCode.J) {
 			if (player.findKey() != null && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
