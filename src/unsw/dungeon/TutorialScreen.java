@@ -82,7 +82,7 @@ public class TutorialScreen {
 		playerLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		playerLabel.setTextFill(Paint.valueOf("White"));
 
-		Label playerLabel2 = new Label("Use arrow keys to move yourself around :)");
+		Label playerLabel2 = new Label("Arrow keys to move, Ctrl + Q to see the backpack");
 		root.add(playerLabel2, 8, 10);
 		playerLabel2.setMinWidth(Region.USE_PREF_SIZE);
 		playerLabel2.setMaxWidth(Region.USE_PREF_SIZE);
@@ -130,7 +130,7 @@ public class TutorialScreen {
 		keyLabel.setMaxWidth(Region.USE_PREF_SIZE);
 		keyLabel.setTextFill(Paint.valueOf("White"));
 
-		Label keyLabel1 = new Label("Carry one key at a time. Press J to drop.");
+		Label keyLabel1 = new Label("Carry one key at a time. Press V to drop.");
 		root.add(keyLabel1, 8, 58);
 		keyLabel1.setMinWidth(Region.USE_PREF_SIZE);
 		keyLabel1.setMaxWidth(Region.USE_PREF_SIZE);

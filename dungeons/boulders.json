@@ -254,6 +254,6 @@
     }
   ],
   "goal-condition": 
-{ "goal": "treasure" }
+{ "goal": "boulders" }
 
 }
