@@ -55,6 +55,7 @@ public class Dungeon {
 			if (!pause.getValue()) {
 				if (this.hasWin().getValue()) {
 					System.out.println("You have win the game sucker");
+					goalChecker.stop();
 				}
 			}
 		}));

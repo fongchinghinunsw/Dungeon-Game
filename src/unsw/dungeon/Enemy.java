@@ -135,8 +135,7 @@ public abstract class Enemy extends Movable implements Subject, Observer {
 	 */
 	@Override
 	public void update(Subject obj) {
-		if (!this.isAlive().getValue()) {
-			
+		if (!this.isAlive().getValue() || this.isPause().getValue()) {
 			return;
 		}
 		System.out.println(this.isAlive().getValue());
