@@ -12,6 +12,13 @@ public class Boulder extends Movable implements Subject, Observer {
 	private int lastX, lastY;
 	private BooleanProperty destroyed;
 
+	/**
+	 * constructor for boulder class
+	 * 
+	 * @param dungeon the boulder is in
+	 * @param x       coordinate of the boulder
+	 * @param y       coordinate of the boulder
+	 */
 	public Boulder(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		this.dungeon = dungeon;
