@@ -45,6 +45,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	private DungeonController controller;
 
+	/**
+	 * constructor for loader
+	 * 
+	 * @param filename to open
+	 * @throws FileNotFoundException
+	 */
 	public DungeonControllerLoader(String filename) throws FileNotFoundException {
 		super(filename);
 		entities = new ArrayList<>();
@@ -144,6 +150,12 @@ public class DungeonControllerLoader extends DungeonLoader {
 		addEntity(door, view);
 	}
 
+	/**
+	 * adds an entity to the display
+	 * 
+	 * @param entity to track position
+	 * @param view   of image to be added
+	 */
 	private void addEntity(Entity entity, ImageView view) {
 		trackPosition(entity, view);
 		entities.add(view);
@@ -259,11 +271,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 		map.put("Key", keyImage);
 		map.put("Treasure", treasureImage);
 		map.put("Potion", potionImage);
-		map.put("Exploded_Bomb",bombImageLit3);
+		map.put("Exploded_Bomb", bombImageLit3);
 		this.controller = new DungeonController(load(), entities, map);
 		return controller;
 	}
-	
+
+	/**
+	 * getter method for controller
+	 * 
+	 * @return controller
+	 */
 	public DungeonController getController() {
 		return controller;
 	}

@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class GameOverScreenController {
-	
+
 	private Stage stage;
 	@FXML
 	private Button retryButton;
@@ -19,6 +19,11 @@ public class GameOverScreenController {
 	private DungeonScreen dungeonScreen;
 	private StartScreen startScreen;
 
+	/**
+	 * constructor for cntroller
+	 * 
+	 * @param stage
+	 */
 	public GameOverScreenController(Stage stage) {
 		this.stage = stage;
 	}
@@ -27,16 +32,26 @@ public class GameOverScreenController {
 	public void handleRetryButton() throws IOException {
 		dungeonScreen.start();
 	}
-	
+
 	@FXML
 	public void handleQuitButton() throws IOException {
 		startScreen.start();
 	}
 
+	/**
+	 * setter for dungeon screen
+	 * 
+	 * @param dungeonScreen
+	 */
 	public void setDungeonScreen(DungeonScreen dungeonScreen) {
 		this.dungeonScreen = dungeonScreen;
 	}
-	
+
+	/**
+	 * setter for start screen
+	 * 
+	 * @param startScreen
+	 */
 	public void setStartScreen(StartScreen startScreen) {
 		this.startScreen = startScreen;
 	}

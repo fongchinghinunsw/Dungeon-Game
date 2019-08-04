@@ -9,6 +9,13 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Game over screen contains retry button, quit button Fades in when the player
+ * dies, with a delay of 0.8 seconds
+ * 
+ * @author z5211173
+ *
+ */
 public class GameOverScreen {
 	private Stage stage;
 	private String title;
@@ -16,6 +23,12 @@ public class GameOverScreen {
 	private Scene scene;
 	private StackPane layout;
 
+	/**
+	 * Constructor for game over screen
+	 * 
+	 * @param stage
+	 * @throws IOException
+	 */
 	public GameOverScreen(Stage stage) throws IOException {
 		this.stage = stage;
 		title = "Game Over";
@@ -27,10 +40,18 @@ public class GameOverScreen {
 		scene = new Scene(layout, 750, 400);
 	}
 
+	/**
+	 * getter for controller
+	 * 
+	 * @return controller
+	 */
 	public GameOverScreenController getController() {
 		return controller;
 	}
 
+	/**
+	 * starts the screen
+	 */
 	public void start() {
 		FadeTransition ft = new FadeTransition(Duration.millis(8000), layout);
 		ft.setFromValue(0.0);
