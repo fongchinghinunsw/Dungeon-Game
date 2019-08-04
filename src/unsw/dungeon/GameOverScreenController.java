@@ -7,6 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+/**
+ * controller for game over screen. handles quit and restart button
+ * 
+ * @author z5211173
+ *
+ */
 public class GameOverScreenController {
 
 	private Stage stage;

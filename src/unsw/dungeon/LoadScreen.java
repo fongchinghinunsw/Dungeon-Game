@@ -17,6 +17,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Load screen contains skip button and background stories goes for 5 seconds to
+ * pretend that we're loading something
+ * 
+ * @author z5211173
+ *
+ */
 public class LoadScreen {
 
 	@FXML
@@ -29,6 +36,12 @@ public class LoadScreen {
 	private int timerTick;
 	private StringProperty loadMessage;
 
+	/**
+	 * constructor for the screen
+	 * 
+	 * @param stage
+	 * @throws IOException
+	 */
 	public LoadScreen(Stage stage) throws IOException {
 		this.stage = stage;
 		title = "Loading Screen";
@@ -81,6 +94,9 @@ public class LoadScreen {
 
 	}
 
+	/**
+	 * starts the screen
+	 */
 	public void start() {
 		stage.setTitle(title);
 		stage.setScene(scene);
@@ -119,10 +135,18 @@ public class LoadScreen {
 		loadScreenTimer.play();
 	}
 
+	/**
+	 * getter for controller
+	 * 
+	 * @return
+	 */
 	public LoadScreenController getController() {
 		return controller;
 	}
 
+	/**
+	 * stops the timer when skip is pressed
+	 */
 	public void stopTimer() {
 		loadScreenTimer.stop();
 	}
