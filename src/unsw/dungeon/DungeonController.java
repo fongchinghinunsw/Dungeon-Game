@@ -201,6 +201,9 @@ public class DungeonController {
 				if (imageView.getImage() != (Image) images.get("Player")
 						&& imageView.getImage() != (Image) images.get("Hound")
 						&& imageView.getImage() != (Image) images.get("Mage")) {
+					if (((LocatedImage) imageView.getImage()).getUrl().equals("/pressure_plate.png")) {
+						continue;
+					}
 					deletedEntities.add(imageView);
 					initialEntities.remove(imageView);
 					gridPane.getChildren().remove(imageView);

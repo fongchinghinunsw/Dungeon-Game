@@ -60,7 +60,7 @@ public class DungeonScreen {
 	 */
 	public void start() throws IOException {
 		// load the game only after the player press the start button.
-		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("maze.json");
+		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("boulders.json");
 
 		controller = dungeonLoader.loadController();
 
