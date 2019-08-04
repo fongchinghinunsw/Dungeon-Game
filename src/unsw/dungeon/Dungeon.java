@@ -54,7 +54,6 @@ public class Dungeon {
 		this.goalChecker = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> {
 			if (!pause.getValue()) {
 				if (this.hasWin().getValue()) {
-					System.out.println("You have win the game sucker");
 					goalChecker.stop();
 				}
 			}
@@ -247,7 +246,6 @@ public class Dungeon {
 	 * @param boulder to be destroyed
 	 */
 	public void destroyBoulder(Boulder boulder) {
-		System.out.println("Boulder destroyed");
 		entities.remove(boulder);
 	}
 
@@ -518,7 +516,6 @@ public class Dungeon {
 		for (Entity entity : entities) {
 			if (entity.getX() == x && entity.getY() == y) {
 				if (entity.getClassName().equals("Bomb") && ((Bomb) entity).lit()) {
-					System.out.println("There's already a lit bomb here.");
 					return true;
 				}
 			}

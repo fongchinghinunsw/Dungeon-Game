@@ -56,7 +56,6 @@ public class Player extends Movable implements Subject, Observer {
 				}
 				if (entity instanceof Key) {
 					if (hasKey()) {
-						System.out.println("You're already carrying a key!");
 						return false;
 					}
 				}

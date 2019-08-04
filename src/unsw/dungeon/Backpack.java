@@ -70,10 +70,8 @@ public class Backpack {
 		for (Equipable e : items) {
 			if (e.getClassName().equals("Key")) {
 				Key key = (Key) e;
-				String message = "Key with id " + key.getId() + " removed from backpack.";
 				e.unequip();
 				items.remove(e);
-				System.out.println(message);
 				return key;
 			}
 		}
@@ -130,7 +128,6 @@ public class Backpack {
 	public void reduceSwordDurability() {
 		Sword sword = getSword();
 		sword.reduceDurability();
-		System.out.printf("Sword's durability is %d\n", sword.getDurability());
 		if (sword.getDurability() == 0) {
 			items.remove(sword);
 		}

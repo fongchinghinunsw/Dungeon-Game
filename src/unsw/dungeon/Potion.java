@@ -104,7 +104,6 @@ public class Potion extends Equipable implements Observer, Runnable {
 	 */
 	@Override
 	public void update(Subject obj) {
-		System.out.println("Player standing on a potion");
 
 	}
 

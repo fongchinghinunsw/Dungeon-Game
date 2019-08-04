@@ -84,7 +84,6 @@ public class Door extends Entity implements Observer {
 		}
 		if (key.getId() == getId() && !isOpen()) {
 			changeToOpenState();
-			System.out.println("ID matches. Door opening");
 			player.useKey(getId());
 		}
 	}
