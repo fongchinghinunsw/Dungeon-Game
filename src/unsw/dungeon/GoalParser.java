@@ -5,13 +5,32 @@ import org.json.JSONObject;
 
 import unsw.dungeon.CompositeGoal.Operator;
 
+/**
+ * Goal parser processes the json object of goal and records it into recursive
+ * GoalExpression objects
+ * 
+ * @author z5211173
+ *
+ */
 public class GoalParser {
 	private Dungeon dungeon;
 
+	/**
+	 * constructor for goal parser
+	 * 
+	 * @param dungeon
+	 */
 	public GoalParser(Dungeon dungeon) {
 		this.dungeon = dungeon;
 	}
 
+	/**
+	 * parses the json object to construct goal expression tree
+	 * 
+	 * @param obj
+	 * @param c_0
+	 * @return
+	 */
 	public CompositeGoal parse(JSONObject obj, CompositeGoal c_0) {
 		CompositeGoal c_1;
 		if (obj.getString("goal").equals("AND") || obj.getString("goal").equals("OR")) {
@@ -41,7 +60,6 @@ public class GoalParser {
 		if (c_0 != null) {
 			c_0.add(c_1);
 		}
-		// System.out.println("Should not reach here");
 		return c_1;
 	}
 }
