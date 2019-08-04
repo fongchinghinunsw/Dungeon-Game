@@ -126,10 +126,8 @@ public class DungeonController {
 			if (bomb != null && !dungeon.hasBomb(player.getX(), player.getY())) {
 				bomb.setX(player.getX());
 				bomb.setY(player.getY());
-				dungeon.addEntity(bomb);
 				bomb.light();
 				addNodeByRowColumnIndex(player.getX(), player.getY(), squares, (Image) images.get("Bomb"));
-				player.useItem("Bomb");
 			}
 		} else if (event.getCode() == KeyCode.J) {
 			if (player.findKey() != null && !(dungeon.hasEquipable(player.getX(), player.getY()))) {
